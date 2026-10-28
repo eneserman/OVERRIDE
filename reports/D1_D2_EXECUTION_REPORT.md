@@ -12,17 +12,19 @@ Source: official SGD pinned at `e852981ae34990f4358979625854259302feaa78` (CC BY
 
 ### 1.1 Train candidate scan (D1) — 164,982 user turns scanned, heuristic buckets (NOT labels)
 
-| Mining bucket | Observed in train | Selected (per-bucket 50, seed 42) |
-|---|---|---|
-| HARD_NEGATIVE (no cue, has history) | 142,670 | 50 |
-| NO_CONTEXT (no cue, no history) | 16,068 | 50 |
-| UPDATE (actually/instead/change/switch/rather/make it/i meant…) | **3,457** | 50 |
-| REFERENCE (that one/the first/the previous/what i said…) | 1,087 | 46 → D3 |
-| CANCEL (cancel/not now/never mind/forget it/don't book…) | 880 | 29 → D3 |
-| KEEP (keep/same/don't change/leave as is/retain…) | 498 | 50 |
-| RESTORE (go back/back to/restore/first option/original/earlier choice) | **230** | 50 |
-| MIXED (≥2 cue families in one turn) | 92 | 50 |
-| **Total scanned / selected** | 164,982 | **400 mined → 373 in D3 packets** |
+| Mining bucket | Observed in train | Mined (50/bucket) | In D3 packets (after exclusion) |
+|---|---|---|---|
+| HARD_NEGATIVE (no cue, has history) | 142,670 | 50 | 48 |
+| NO_CONTEXT (no cue, no history) | 16,068 | 50 | 50 |
+| UPDATE (actually/instead/change/switch/rather/make it/i meant…) | **3,457** | 50 | 50 |
+| REFERENCE (that one/the first/the previous/what i said…) | 1,087 | 50 | 46 |
+| CANCEL (cancel/not now/never mind/forget it/don't book…) | 880 | 50 | 29 |
+| KEEP (keep/same/don't change/leave as is/retain…) | 498 | 50 | 50 |
+| RESTORE (go back/back to/restore/first option/original/earlier choice) | **230** | 50 | 50 |
+| MIXED (≥2 cue families in one turn) | 92 | 50 | 50 |
+| **Total** | 164,982 | **400** | **373** (−27 holdout-text-overlap exclusions, see `reports/D3_COUNT_RECONCILIATION.md`) |
+
+> **Correction (2026-10-28, CTO review):** the first version of this table mixed pre-exclusion and post-exclusion columns and summed to 375 instead of 373. The chain is 400 mined − 27 excluded = 373; full per-record reconciliation is in `reports/D3_COUNT_RECONCILIATION.md`.
 
 Selected set: 26 services represented (largest: Events_2 71, Flights_1 41, Movies_33, Restaurants_1 22), **one example per dialogue** (miner-enforced), deterministic under seed 42 (`blind_reviewer_sha256 d0fab930490c1ddabd18d8ff741f4ce6d55e3bbc88787a7649319c14067e8c3e`).
 

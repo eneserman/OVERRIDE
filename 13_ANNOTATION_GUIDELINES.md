@@ -81,6 +81,33 @@ These rules come from inspecting real unreviewed SGD train text (examples below 
 | R11 | First-observed slot fill for a service — 29,642 frames | `ADD` transition, `NEW_VALUE` span; **not** a correction, no `UPDATE_CUE` | `[1_00000 t2] "I would like for it to be in San Jose."` |
 | R12 | "previous X" inside a *new* specification is a revision, not a restore | `UPDATE_CUE` on the cue phrase; value is `NEW_VALUE` | `[1_00093 t12] "Instead of the previous time, can you make it at 18:00?"` |
 
+## Decision procedures for the two hardest distinctions (CTO check 3, 2026-10-28)
+
+### DP-1: refusal / deferral ≠ CANCEL (mined evidence: the CANCEL pool is dominated by refusals)
+
+Ask: **is the user withdrawing or stopping a previously given instruction?**
+- "Not now." / "No, not now. Thanks." / "Yes but not now" → **deferral/refusal of a system offer** → NO `CANCEL_CUE`, no transition (or `UNRESOLVED` if a pending instruction is left ambiguous). `[126_00002 t10]`, `[14_00023 t14]`, `[46_00077 t6]`
+- "Cancel the hotel booking." / "Forget that, don't book it" → withdraws a prior instruction → `CANCEL_CUE` on the minimal cue + transition `CANCEL_INTENT` (rare in SGD — expect few)
+- Third-party cancellation ("my kids cancelled, I only need 2") → the *consequence* is a value change (`party_size` → `NEW_VALUE` if re-stated), NOT a `CANCEL_CUE` (R5)
+- Hypothetical/policy questions ("if I decide to cancel…") → nothing to label (R4)
+- Negated cancel ("Don't cancel the flight") → `cue_polarity=NEGATED`; zero natural corpus support — diagnostic only (R6)
+
+### DP-2: topic return ≠ value restore (mined evidence: the RESTORE pool is dominated by topic return)
+
+Ask: **is the user reverting a slot/entity to a previously mentioned value, or merely resuming an earlier task/topic?**
+- "Back to the bus tickets, I'll need 4 tickets." / "go back and book 3 tickets" / "go back to getting tickets for this" → **task/topic resumption** → NO `RESTORE_CUE`; the values stated are `NEW_VALUE` (or `ADD` if first fill). `[70_00006 t18]`, `[73_00069 t16]`, `[101_00093 t8]`
+- "Go back to the earlier flight." / "Actually the first one was better." → re-selects a **previously mentioned value** → `RESTORE_CUE` + transition `RESTORE` (genuine L4 — rare)
+- Rule of thumb: restore = the **object of the sentence is a slot value being reverted**; topic return = the object is a **task** ("tickets", "reserving rooms"). If in doubt, label neither and write `UNCERTAIN:` in `uncertainty_notes`.
+
+### Uncertainty marking convention (all cases)
+When a case is genuinely ambiguous: annotate your best judgment, set `difficulty`, and start `uncertainty_notes` with **`UNCERTAIN:`** plus the reason. Do this instead of skipping. Post-annotation triage will collect these flags; pre-annotation case flagging is deliberately avoided in blind packets because it would bias reviewers.
+
+### Additional data (Frames) — evaluated, not yet acquired
+Microsoft Frames (see `24_EXTERNAL_DATASET_RESEARCH.md`) is the planned external source for enriching true L4/L5 RESTORE cases. Acquisition requires the official portal agreement (`LICENSE_REVIEW_REQUIRED` until then) and any imported examples form a **separate frozen pool** (`lock_prospective_holdout.py --source-release-id`, never mixed with the SGD lock). **Adding new data must never modify the existing locked holdout** (`real_sgd_heldout_lock.json` is immutable).
+
+### Scope note on the two-annotator standard
+Two genuinely independent human annotators + adjudication is **our own research standard** (data-quality bar for this project). It is **not** a verified, instructor-mandated P2 requirement — we have no confirmed P2 guideline text to that effect. We keep the standard because annotation quality is the core of the contribution.
+
 ## Annotating cases (source language: English)
 - `Actually, Paris instead of Berlin`: `Paris` NEW, `Berlin` OLD, `instead of` UPDATE_CUE. Antecedent slot needs prior context; if missing, target unknown.
 - `keep Friday`: `keep` KEEP_CUE, `Friday` KEPT_VALUE only if it refers to old date.

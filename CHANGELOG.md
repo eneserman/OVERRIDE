@@ -2,6 +2,13 @@
 
 # Project change history (design, not model training)
 
+## D3-prep — 2026-10-28 (CTO review checks 1-4, executed)
+- Check 1 reconciliation: full chain 400 mined − 27 exact-text − 10 near-dup − 2 in-train = **361 final D3**; all 39 exclusions recorded with source IDs/hashes/reasons (`reports/D3_COUNT_RECONCILIATION.md/.json`); corrected the earlier 375/373 presentation error.
+- Check 2 deep leakage: 0 identical dialogues/user-sequences across official splits (full-fingerprint SHA-256); punctuation-variant near-dups removed train-side; 12 similar pairs listed; 62 shared history strings classified (56 system templates); 7 pilot-vs-mining family collisions resolved by split plan (`reports/D3_LEAKAGE_AUDIT.md/.json`).
+- Check 3: DP-1 (refusal≠CANCEL) and DP-2 (topic-return≠value-restore) decision procedures added to `13_ANNOTATION_GUIDELINES.md` with mined evidence; Frames enrichment path documented (separate pool, lock untouched); two-annotator standard scoped as OUR research bar, not a verified P2 mandate.
+- Check 4: frozen train-side dev plan (454 families → 409 train_gold / 45 dev_gold, pre-committed before annotation, `reports/D3_TRAIN_DEV_SPLIT_PLAN.json`); locked holdout untouched, `--verify` still RAW_POOL_LOCK_VALID.
+- `reports/D3_READINESS_REPORT.md` consolidates deliverables, tests (68/68) and provenance. Gold stays 0; D5 not started.
+
 ## D1/D2 — 2026-10-28 (test lock first, then train mining; executed)
 - **D2 lock:** prospective real-test pool mined from official SGD dev+test (seed 20261028) and frozen: 363 candidates / 358 families, manifest SHA-256 `b42299f8…0581`, `--verify` → `RAW_POOL_LOCK_VALID`. Fail-closed exclusions logged (14). Evaluation protocol locked (`EVALUATION_PROTOCOL_LOCK.md`): dev/test forbidden for training/prompt/hyperparameter work; selection immutable; one final evaluation.
 - **D1 mining:** 164,982 train user turns scanned; 400 candidates (50/bucket) mined deterministically (seed 42) with per-category inspection (UPDATE clean; RESTORE bucket dominated by topic-return; CANCEL bucket by refusals — both confirmed diagnostic-weak).

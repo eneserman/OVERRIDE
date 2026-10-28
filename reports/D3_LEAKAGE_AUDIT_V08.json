@@ -1,0 +1,280 @@
+{
+  "status": "LEAKAGE_AUDIT_EVIDENCE_NOT_GOLD",
+  "full_dialogue_fingerprint_collisions_across_official_splits": {
+    "train_dev": 0,
+    "train_test": 0,
+    "dev_test": 0
+  },
+  "exact_normalized_current_text_overlap_d3_vs_locked_holdout": 0,
+  "near_duplicate_ge_0_9_d3_vs_holdout_after_removal": 0,
+  "near_duplicate_0_8_to_0_9_retained_inspected": [
+    {
+      "train_id": "SGD-69ad35e174050802c8",
+      "holdout_id": "SGD-05ad0c19c430456aa6",
+      "jaccard": 0.8
+    },
+    {
+      "train_id": "SGD-4723091db35b186a60",
+      "holdout_id": "SGD-d3acd9401d90da49c5",
+      "jaccard": 0.875
+    },
+    {
+      "train_id": "SGD-4407aa1b81e05bddca",
+      "holdout_id": "SGD-dc04784966bfb2cc68",
+      "jaccard": 0.8
+    },
+    {
+      "train_id": "SGD-66eaf15b2d66970cb6",
+      "holdout_id": "SGD-05ad0c19c430456aa6",
+      "jaccard": 0.8
+    },
+    {
+      "train_id": "SGD-50ccdd60cd4492fac7",
+      "holdout_id": "SGD-1837b1c1d082769d85",
+      "jaccard": 0.8
+    },
+    {
+      "train_id": "SGD-50ccdd60cd4492fac7",
+      "holdout_id": "SGD-8e387ed1670cda82a7",
+      "jaccard": 0.8
+    },
+    {
+      "train_id": "SGD-54833601312a83e012",
+      "holdout_id": "SGD-b663cbdf8c52ae4967",
+      "jaccard": 0.8
+    },
+    {
+      "train_id": "SGD-9c87f1030ff4092b34",
+      "holdout_id": "SGD-86c09a16f616ed7b18",
+      "jaccard": 0.8
+    },
+    {
+      "train_id": "SGD-9c87f1030ff4092b34",
+      "holdout_id": "SGD-62daf5814b5e0319af",
+      "jaccard": 0.8
+    },
+    {
+      "train_id": "SGD-3f5d23178a43f33127",
+      "holdout_id": "SGD-6b0372615e4d2d052a",
+      "jaccard": 0.833
+    },
+    {
+      "train_id": "SGD-fac5a2ab70f48783d8",
+      "holdout_id": "SGD-6b0372615e4d2d052a",
+      "jaccard": 0.833
+    },
+    {
+      "train_id": "SGD-17d953c6c5195296c1",
+      "holdout_id": "SGD-05ad0c19c430456aa6",
+      "jaccard": 0.8
+    }
+  ],
+  "removed_near_duplicates_L2": [
+    {
+      "train_id": "SGD-f3c55a3f88bb862aef",
+      "matching_holdout_ids": [
+        "SGD-8065e8cad6794de1c5"
+      ]
+    },
+    {
+      "train_id": "SGD-7d7f11c19f29b396d2",
+      "matching_holdout_ids": [
+        "SGD-1a46a6c209d6c8a425"
+      ]
+    },
+    {
+      "train_id": "SGD-c75b7af0fb3069da4a",
+      "matching_holdout_ids": [
+        "SGD-5e63505fcf241cd2f4"
+      ]
+    },
+    {
+      "train_id": "SGD-e06711f97684881f2b",
+      "matching_holdout_ids": [
+        "SGD-af4a7c56cb9c36e698"
+      ]
+    },
+    {
+      "train_id": "SGD-ed05dc37a6c00d2923",
+      "matching_holdout_ids": [
+        "SGD-b4c670ee485e0aca31",
+        "SGD-216e1e59b51e979e4f",
+        "SGD-941310099ee80c5d93"
+      ]
+    },
+    {
+      "train_id": "SGD-7f2dcd02c5c905712b",
+      "matching_holdout_ids": [
+        "SGD-1a46a6c209d6c8a425"
+      ]
+    },
+    {
+      "train_id": "SGD-195ef55c4b22368705",
+      "matching_holdout_ids": [
+        "SGD-a675f4477db171542a",
+        "SGD-10df2808f4d68af50b"
+      ]
+    },
+    {
+      "train_id": "SGD-70fd1332cf4f9d880f",
+      "matching_holdout_ids": [
+        "SGD-c4bdec3512377b3304",
+        "SGD-f7ab6501367660a014"
+      ]
+    },
+    {
+      "train_id": "SGD-1cc6b4e42e6c1c492f",
+      "matching_holdout_ids": [
+        "SGD-e604a41ac1a2857168"
+      ]
+    },
+    {
+      "train_id": "SGD-52be5aa73f9a495bc6",
+      "matching_holdout_ids": [
+        "SGD-563325e921bb71504f"
+      ]
+    }
+  ],
+  "shared_history_texts_d3_vs_holdout": {
+    "count": 62,
+    "system_template_like": 47,
+    "user_like": 15,
+    "detail_top20": [
+      {
+        "text": "alright, thank you.",
+        "in_d3_hist": 1,
+        "in_holdout_hist": 1,
+        "looks_system_template": true
+      },
+      {
+        "text": "can you help me find a rental car?",
+        "in_d3_hist": 1,
+        "in_holdout_hist": 1,
+        "looks_system_template": false
+      },
+      {
+        "text": "do you need help with anything else?",
+        "in_d3_hist": 1,
+        "in_holdout_hist": 1,
+        "looks_system_template": true
+      },
+      {
+        "text": "do you want to make a reservation?",
+        "in_d3_hist": 1,
+        "in_holdout_hist": 3,
+        "looks_system_template": true
+      },
+      {
+        "text": "do you want to purchase tickets?",
+        "in_d3_hist": 1,
+        "in_holdout_hist": 1,
+        "looks_system_template": true
+      },
+      {
+        "text": "good to know.",
+        "in_d3_hist": 3,
+        "in_holdout_hist": 2,
+        "looks_system_template": true
+      },
+      {
+        "text": "how can i assist you further?",
+        "in_d3_hist": 1,
+        "in_holdout_hist": 1,
+        "looks_system_template": false
+      },
+      {
+        "text": "how can i help you further?",
+        "in_d3_hist": 2,
+        "in_holdout_hist": 1,
+        "looks_system_template": false
+      },
+      {
+        "text": "how long will you need the car?",
+        "in_d3_hist": 1,
+        "in_holdout_hist": 1,
+        "looks_system_template": true
+      },
+      {
+        "text": "how much does it cost?",
+        "in_d3_hist": 2,
+        "in_holdout_hist": 1,
+        "looks_system_template": true
+      },
+      {
+        "text": "i like that one.",
+        "in_d3_hist": 1,
+        "in_holdout_hist": 1,
+        "looks_system_template": false
+      },
+      {
+        "text": "i need to find a bus.",
+        "in_d3_hist": 2,
+        "in_holdout_hist": 1,
+        "looks_system_template": false
+      },
+      {
+        "text": "in which city?",
+        "in_d3_hist": 3,
+        "in_holdout_hist": 2,
+        "looks_system_template": true
+      },
+      {
+        "text": "is it free?",
+        "in_d3_hist": 1,
+        "in_holdout_hist": 1,
+        "looks_system_template": true
+      },
+      {
+        "text": "is there anything else i can assist you with?",
+        "in_d3_hist": 1,
+        "in_holdout_hist": 1,
+        "looks_system_template": false
+      },
+      {
+        "text": "is there anything else?",
+        "in_d3_hist": 3,
+        "in_holdout_hist": 1,
+        "looks_system_template": true
+      },
+      {
+        "text": "is there something else i can help you with?",
+        "in_d3_hist": 1,
+        "in_holdout_hist": 1,
+        "looks_system_template": false
+      },
+      {
+        "text": "it is good.",
+        "in_d3_hist": 1,
+        "in_holdout_hist": 1,
+        "looks_system_template": true
+      },
+      {
+        "text": "no, it's not.",
+        "in_d3_hist": 1,
+        "in_holdout_hist": 1,
+        "looks_system_template": true
+      },
+      {
+        "text": "no, not right now.",
+        "in_d3_hist": 2,
+        "in_holdout_hist": 2,
+        "looks_system_template": true
+      }
+    ]
+  },
+  "pilot_vs_d3_dialogue_family_collisions": [
+    "101_00093",
+    "107_00055",
+    "74_00030",
+    "79_00098",
+    "85_00063",
+    "98_00086",
+    "99_00039"
+  ],
+  "interpretation": {
+    "full_dialogue": "No identical or user-sequence-identical dialogues exist across official SGD splits (canonical turn-sequence SHA-256).",
+    "near_duplicates": "All L2 matches were punctuation/case/word-order variants of boilerplate (\"Not now, thanks\" vs \"Not now. Thanks.\"); removed from train side. The 0.8-0.9 tier is listed for human inspection and retained.",
+    "history_repeats": "Shared history strings are mostly system templates; context overlap is corpus-inherent and low-risk because targets are current user turns. Residual risk disclosed.",
+    "pilot_vs_d3_families": "7 train dialogues appear in both the 100-example pilot and the mining pool (different turns). Mitigated by the frozen family-grouped train/dev plan: all turns of a dialogue land in the same partition."
+  }
+}
