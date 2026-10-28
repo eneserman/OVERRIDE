@@ -18,7 +18,7 @@
 | State resolver / actual L4–L5 performance | **NOT IMPLEMENTED** | dependent on gold and sufficient context |
 | PPTX with real results | **NOT CREATED** | dependent on experiments |
 | Public GitHub + student contribution diffs | **REPO LIVE (2026-10-28), contributions pending** | https://github.com/eneserman/OVERRIDE (public, CI green); real per-student contribution files still template-only |
-| P2 collision check | **NOT VERIFIED LIVE** | last user screenshots show different chosen tasks |
+| P2 collision check | **CHECKED 2026-10-28 (live sheet): no collision** | Avengers=LID, Group8=punctuation, LucidAI=PII, Ultron=event args; SGD unclaimed. Re-check before submission (10 rows empty) |
 
 **Handoff rule:** All design files and downstream phase prompts are now present; the training code, actual human gold, measured models and numerical PPTX must still be produced after real evidence. Agent can receive all files together, but execute prompts D0 → D1/D2 → D3 → D4 → D5 → D6 → D7 only when previous gate is evidenced. Do not fabricate missing artifacts to make inventory green.
 

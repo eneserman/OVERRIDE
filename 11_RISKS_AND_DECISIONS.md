@@ -25,6 +25,9 @@
 
 ## Decision log (dated entries: `old decision -> evidence -> new decision`)
 
+- **2026-10-28 — P2 collision check (live sheet) passed.**
+  `old decision:` A0 acceptance check pending; topic/dataset uniqueness unverified (screenshot from 2026-10-27 showed row 17 blank). `evidence:` live Blackboard P2 sheet reviewed 2026-10-28 — registered topics: TR-EN code-switching LID (Avengers), punctuation restoration on FOMC transcripts (Group 8), financial PII BIO (LucidAI), cybersecurity event-argument extraction on CASIE (Ultron), OVERRIDE (Developers, row 17). No task or dataset overlap with OVERRIDE; Google SGD unclaimed by any group. `new decision:` **A0 satisfied for now — GO on topic;** mandatory re-check before submission (10 rows still empty). Sheet maintenance actions: put Google SGD + upstream URL into the Datasets/Raw Data Source URL cells of row 17; keep Downstream Task text brief (instructor feedback to Ultron warns that unclear tasks get graded as plain NER — keep the cue/value-vs-entity distinction rehearsed).
+
 - **2026-10-28 — Code license adopted.**
   `old decision:` MIT template only in `legal_templates/`, adoption pending copyright-holder approval; root LICENSE absent. `evidence:` project owner approval given 2026-10-28 (course P1 rubric expects a LICENSE in a public repo). `new decision:` **root `LICENSE` published = unmodified standard MIT text, code only**; SGD data remains CC BY-SA 4.0 and must never be described as MIT-licensed (`15_DATA_LICENSE_AND_ATTRIBUTION.md` governs data).
 
