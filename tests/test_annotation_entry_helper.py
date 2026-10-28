@@ -5,7 +5,9 @@ These tests cover the mechanical layer (offsets, vocabulary, overlap, contract
 compatibility) on synthetic fixtures only.
 """
 
+import json
 import os
+import subprocess
 import sys
 import tempfile
 import unittest
@@ -137,6 +139,34 @@ class WriteSafetyTest(unittest.TestCase):
             write_jsonl(path, [packet_record()])
             with self.assertRaises(EntryError):
                 write_jsonl(path, [packet_record()])
+
+
+class CliEndToEndTest(unittest.TestCase):
+    """Runs the actual CLI with scripted stdin (regression: --packet/--out must be Paths)."""
+
+    def test_cli_walks_packet_and_saves(self):
+        scripts_dir = os.path.join(os.path.dirname(__file__), "..", "scripts")
+        with tempfile.TemporaryDirectory() as tmp:
+            packet = os.path.join(tmp, "packet.jsonl")
+            rows = [packet_record(), packet_record()]
+            rows[1]["example_id"] = "syn-002"
+            rows[1]["source"]["dialogue_id"] = "synthetic-family-2"
+            rows[1]["dialogue_family_id"] = "synthetic-family-2"
+            with open(packet, "w", encoding="utf-8") as fh:
+                for r in rows:
+                    fh.write(json.dumps(r, ensure_ascii=False) + "\n")
+            out = os.path.join(tmp, "filled.jsonl")
+            r = subprocess.run(
+                [sys.executable, os.path.join(scripts_dir, "annotation_entry_helper.py"),
+                 "--packet", packet, "--reviewer-id", "reviewer_A_test",
+                 "--out", out],
+                input="k\nq\n", capture_output=True, text=True, encoding="utf-8")
+            self.assertEqual(r.returncode, 0, r.stdout + r.stderr)
+            self.assertTrue(os.path.exists(out))
+            saved = [json.loads(x) for x in open(out, encoding="utf-8").read().splitlines() if x.strip()]
+            self.assertEqual(len(saved), 1)  # one reviewed-negative saved, then quit
+            self.assertEqual(saved[0]["annotation"]["status"], "ANNOTATED")
+            self.assertEqual(saved[0]["annotation"]["value_spans"], [])
 
 
 if __name__ == "__main__":

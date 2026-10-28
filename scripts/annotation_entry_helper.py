@@ -32,6 +32,7 @@ import argparse
 import json
 import os
 import sys
+from pathlib import Path
 
 from validate_annotations import read_jsonl, validate_rows
 from normalize_review_packet import normalize
@@ -291,9 +292,9 @@ def main() -> int:
     except Exception:
         pass
     ap = argparse.ArgumentParser(description="Human annotation entry helper (labels come from the human only)")
-    ap.add_argument("--packet", required=True, help="UNLABELED blind packet jsonl")
+    ap.add_argument("--packet", required=True, type=Path, help="UNLABELED blind packet jsonl")
     ap.add_argument("--reviewer-id", required=True, help="real reviewer identifier")
-    ap.add_argument("--out", required=True, help="filled output jsonl (must not exist unless --resume)")
+    ap.add_argument("--out", required=True, type=Path, help="filled output jsonl (must not exist unless --resume)")
     ap.add_argument("--resume", action="store_true", help="append to --out, skipping already recorded example ids")
     ap.add_argument("--only", help="review a single example id")
     args = ap.parse_args()
