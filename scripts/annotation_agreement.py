@@ -71,10 +71,28 @@ def main():
     p=argparse.ArgumentParser()
     p.add_argument('--a',required=True,type=Path);p.add_argument('--b',required=True,type=Path)
     p.add_argument('--out',required=True,type=Path)
+    p.add_argument('--exclude-ids',type=Path,help='JSON with {"ids":[...]} (e.g. calibration_index.json). Primary agreement is computed WITHOUT these practice items; both variants are reported.')
     args=p.parse_args()
-    report=compare(read_jsonl(args.a),read_jsonl(args.b))
+    rows_a=read_jsonl(args.a);rows_b=read_jsonl(args.b)
+    excl=set()
+    if args.exclude_ids:
+        data=json.loads(args.exclude_ids.read_text(encoding='utf-8'))
+        excl={str(x) for x in data.get('ids',[])} if isinstance(data,dict) else {str(x) for x in data}
+    if excl:
+        primary=compare([r for r in rows_a if r['id'] not in excl],[r for r in rows_b if r['id'] not in excl])
+        full=compare(rows_a,rows_b)
+        report={'status':'HUMAN_AGREEMENT_ONLY_NOT_GOLD',
+                'agreement_excluding_practice_items':primary,
+                'agreement_including_practice_items':full,
+                'excluded_ids':sorted(excl),
+                'interpretation':'PRIMARY score = agreement_excluding_practice_items (calibration items discussed together are not independent). Both variants disclosed; not Cohen kappa, not gold correctness, not model F1.'}
+    else:
+        report=compare(rows_a,rows_b)
     args.out.parent.mkdir(parents=True,exist_ok=True)
     args.out.write_text(json.dumps(report,indent=2,ensure_ascii=False)+'\n',encoding='utf-8')
-    print(json.dumps({k:v for k,v in report.items() if k!='disagreements'},indent=2))
+    slim={k:v for k,v in report.items() if k not in ('disagreements','agreement_including_practice_items')}
+    if 'agreement_excluding_practice_items' in slim:
+        slim['agreement_excluding_practice_items']={k:v for k,v in slim['agreement_excluding_practice_items'].items() if k!='disagreements'}
+    print(json.dumps(slim,indent=2))
 
 if __name__=='__main__':main()

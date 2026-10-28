@@ -2,6 +2,13 @@
 
 # Project change history (design, not model training)
 
+## D3-final-prep — 2026-10-28 (CTO GO for technical prep; executed)
+- Calibration separated from independent scoring: `annotation_agreement.py --exclude-ids` (PRIMARY score excludes discussed practice items; both variants disclosed; tested).
+- Pilot-30 independent trial packet built (`data/annotations/d3_pilot30_v0.1/`, 30 train-partition items, disjoint from calibration, stratified, SHA `3a6d7e77…`) + `D3_PILOT30_TRIAL_PROTOCOL.md` (analysis commands, guideline-fix flow, GO/narrow decision before the 1,640-judgment full run).
+- Test gold sealing hardened: `reports/TEST_ACCESS_LOG.md` (zero accesses), access purposes restricted, violation policy.
+- Guideline change-log added to `13` (version + affected IDs; locked test selection immutable).
+- `reports/D3_ANNOTATION_HANDOFF.md`: exact reviewer file list + remaining blockers. 76/76 tests; gold stays 0; D5 not started.
+
 ## D3-technical-prep — 2026-10-28 (CTO approved; executed)
 - Pools: merged 361 mining + 100 pilot → **457 blind train/dev records** (4 identical-turn duplicates logged & dropped; 7 overlapping families grouped to one partition per pre-committed plan); sealed **363 test packets** from the locked pool (no hints/AI/model content); 10-item TRAIN calibration sample.
 - Tooling: `validate_annotations` gains `allowed-splits` (default unchanged; `dev,test` for sealed test gold); `annotation_agreement` gains per-label exact-span agreement + difficulty/uncertainty reporting; new `build_adjudicated_gold.py` builds gold ONLY from human decisions (5 safety tests). 75/75 tests.

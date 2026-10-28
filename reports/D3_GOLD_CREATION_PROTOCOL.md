@@ -10,7 +10,8 @@ python scripts/normalize_review_packet.py --input data/annotations/d3_merged_tra
 python scripts/normalize_review_packet.py --input data/annotations/d3_merged_traindev_v0.1/reviewer_B_filled.jsonl --reviewer-id reviewer_B_ISIM --out data/annotations/d3_merged_traindev_v0.1/reviewer_B_canonical.jsonl
 
 # A2. independent agreement analysis (example-level + exact-span per class + uncertainty flags)
-python scripts/annotation_agreement.py --a data/annotations/d3_merged_traindev_v0.1/reviewer_A_canonical.jsonl --b data/annotations/d3_merged_traindev_v0.1/reviewer_B_canonical.jsonl --out reports/D3_AGREEMENT.json
+#     PRIMARY score excludes the 10 calibration practice items (discussed together -> not independent)
+python scripts/annotation_agreement.py --a data/annotations/d3_merged_traindev_v0.1/reviewer_A_canonical.jsonl --b data/annotations/d3_merged_traindev_v0.1/reviewer_B_canonical.jsonl --exclude-ids data/annotations/d3_calibration_v0.1/calibration_index.json --out reports/D3_AGREEMENT.json
 
 # A3. HUMAN adjudication meeting: resolve every disagreement (boundary|class|target|polarity|ambiguity),
 #     write decisions JSONL (template below) with reasons. Disagreements are data - report them.

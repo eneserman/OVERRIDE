@@ -154,5 +154,32 @@ class BuildAdjudicatedGoldTest(unittest.TestCase):
             self.assertIn('independent review not established', r.stdout)
 
 
+class AgreementExclusionTest(unittest.TestCase):
+    def test_practice_items_excluded_from_primary_score(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            practice = canonical('cal1', 'rev_a', V, C)
+            practice_b = canonical('cal1', 'rev_b', [], [])  # discussed item: would look like disagreement
+            real_a = canonical('t1', 'rev_a', V, C)
+            real_b = canonical('t1', 'rev_b', V, C)
+            for name, rows in (('a.jsonl', [practice, real_a]), ('b.jsonl', [practice_b, real_b])):
+                (Path(tmp) / name).write_text(''.join(json.dumps(r, ensure_ascii=False) + '\n' for r in rows), encoding='utf-8')
+            excl = Path(tmp) / 'cal.jsonl'
+            excl.write_text(json.dumps({'ids': ['cal1']}), encoding='utf-8')
+            out = Path(tmp) / 'agr.jsonl'
+            r = subprocess.run([sys.executable, str(SCRIPTS / 'annotation_agreement.py'),
+                                '--a', str(Path(tmp) / 'a.jsonl'), '--b', str(Path(tmp) / 'b.jsonl'),
+                                '--exclude-ids', str(excl), '--out', str(out)],
+                               capture_output=True, text=True)
+            self.assertEqual(r.returncode, 0, r.stdout + r.stderr)
+            rep = json.loads(out.read_text(encoding='utf-8'))
+            self.assertEqual(rep['excluded_ids'], ['cal1'])
+            primary = rep['agreement_excluding_practice_items']
+            full = rep['agreement_including_practice_items']
+            self.assertEqual(primary['examples'], 1)
+            self.assertEqual(primary['exact_layer_set_agreement'], 1.0)   # practice item not counted
+            self.assertEqual(full['examples'], 2)
+            self.assertLess(full['exact_layer_set_agreement'], 1.0)        # disclosed but not primary
+
+
 if __name__ == '__main__':
     unittest.main()

@@ -106,7 +106,15 @@ When a case is genuinely ambiguous: annotate your best judgment, set `difficulty
 Microsoft Frames (see `24_EXTERNAL_DATASET_RESEARCH.md`) is the planned external source for enriching true L4/L5 RESTORE cases. Acquisition requires the official portal agreement (`LICENSE_REVIEW_REQUIRED` until then) and any imported examples form a **separate frozen pool** (`lock_prospective_holdout.py --source-release-id`, never mixed with the SGD lock). **Adding new data must never modify the existing locked holdout** (`real_sgd_heldout_lock.json` is immutable).
 
 ### Scope note on the two-annotator standard
-Two genuinely independent human annotators + adjudication is **our own research standard** (data-quality bar for this project). It is **not** a verified, instructor-mandated P2 requirement — we have no confirmed P2 guideline text to that effect. We keep the standard because annotation quality is the core of the contribution.
+Two genuinely independent human annotators + adjudication is **our own research standard** (data-quality bar for this project). It is **not** a verified, instructor-mandated P2 requirement — we have no confirmed P2 guideline text to that effect. We keep the standard because annotation quality is the core of the contribution. If two real annotators turn out to be impossible, the fallback is explicit disclosure of AI-assisted labeling and **limiting the academic claims accordingly** — never presenting AI drafts as human review.
+
+## Guideline change log (versioned; CTO rule 2026-10-28)
+
+Any rule change discovered during annotation (e.g. in the pilot-30 review) must be recorded here with **version, date, reason, and the example IDs affected**. Affected examples must be re-checked by both reviewers under the new version. **The locked prospective test selection never changes because of a guideline fix** (`data/prospective_holdout/real_sgd_heldout_lock.json` is immutable).
+
+| Version | Date | Change | Reason | Affected example IDs | Re-annotation needed |
+|---|---|---|---|---|---|
+| v0.2 | 2026-10-28 | R1–R12 + DP-1/DP-2 + UNCERTAIN convention | D0 evidence + mining inspection | — (baseline) | — |
 
 ## Annotating cases (source language: English)
 - `Actually, Paris instead of Berlin`: `Paris` NEW, `Berlin` OLD, `instead of` UPDATE_CUE. Antecedent slot needs prior context; if missing, target unknown.
