@@ -7,6 +7,56 @@
 ## Context visible to reviewer
 Full relevant **past** USER/SYSTEM messages + current USER utterance, original unmodified text. Never future turns; hide sampling heuristics and current SGD state. Each example has unique `id`, source ids, service if known. Two reviewers work independently before adjudication.
 
+## Reviewer quick-start — how to fill your packet (D2 pilot, 100 items)
+
+**Setup (owner coordinates):**
+1. Two reviewers get **one file each**: `data/annotations/pilot_v0.1/annotator_A_UNLABELED.jsonl` (reviewer A) and `annotator_B_UNLABELED.jsonl` (reviewer B). The files are identical; that is intended. **Do not open the other reviewer's file and never open `PRIVATE_sampling_manifest.jsonl`** (it contains sampling hints that would bias you).
+2. Work independently. Do not discuss individual items until both are done. Uncertainty is data: when unsure, annotate your best judgment and record it in `uncertainty_notes`.
+3. Each line is one JSON example. **Only edit the `annotation` object and add your `reviewer_id`**; never touch `source`, `history`, `current_user_utterance`, `dialogue_family_id`.
+
+**Per example, fill:**
+- `annotation.status`: `"ANNOTATED"` when finished (leave `"UNLABELED"` only for items you truly skip — skipping must be rare and noted).
+- `annotation.reviewer_id`: your identifier (real person, e.g. `reviewer_A_eser`).
+- `annotation.value_spans` / `annotation.cue_spans`: a **list** (use `[]` when you reviewed and found nothing — `[]` means "reviewed negative"; `null` means "not reviewed"). Each span: `{"start": <int>, "end": <int>, "label": <LABEL>, "text": <exact substring>}`.
+- `annotation.transitions`: list of `{"operation": "ADD|UPDATE|DELETE|KEEP|RESTORE|CANCEL_INTENT|UNRESOLVED", "slot": ..., "before": ..., "after": ...}` — only when the utterance supports it. This is a **separate layer**, not BIO.
+- `annotation.links`: reference links you can see (`REFERENCE` span → target), else `[]`.
+- `annotation.difficulty`: `L1|L2|L3|L4|L5` (see `02_NLP_TASK_DESIGN.md`).
+- `annotation.uncertainty_notes`: free text for anything ambiguous.
+
+**Offset rules (validated strictly by `scripts/validate_annotations.py`):**
+- Zero-based, **half-open** `[start, end)`, counted in Python characters of `current_user_utterance` — `utterance[start:end]` must equal your `text` **exactly**.
+- Find offsets mechanically, not by counting by eye:
+  `python -c "u='Actually, I want it in Paris on Friday.'; print(u.find('Paris'))"` → then `end = start + len('Paris')`.
+- Cue spans = **minimal complete cue phrase** ("change", "Actually", "the same"); value spans = **complete mentioned value** ("Paris", "twelve in the afternoon").
+- Different layers may overlap (`UPDATE_CUE` over `NEW_VALUE` is fine); **same-layer overlap is not allowed**.
+- Never annotate the old value as `OLD_VALUE` unless the user actually **says** it in this utterance.
+
+**Worked example** (real schema demo from `examples/UNREVIEWED_annotation_example.jsonl`, utterance `Actually Paris, but keep Friday.` — synthetic fixture, not gold; spans shown in the packet format you fill):
+
+```json
+"annotation": {
+  "status": "ANNOTATED",
+  "reviewer_id": "reviewer_A_eser",
+  "value_spans": [
+    {"start": 9,  "end": 14, "label": "NEW_VALUE",  "text": "Paris"},
+    {"start": 25, "end": 31, "label": "KEPT_VALUE", "text": "Friday"}
+  ],
+  "cue_spans": [
+    {"start": 0,  "end": 8,  "label": "UPDATE_CUE", "text": "Actually"},
+    {"start": 20, "end": 24, "label": "KEEP_CUE",   "text": "keep"}
+  ],
+  "transitions": [{"operation": "UPDATE", "slot": "city", "before": null, "after": "Paris"}],
+  "links": [],
+  "difficulty": "L2",
+  "uncertainty_notes": ""
+}
+```
+Slice check: `utterance[9:14] == "Paris"`, `utterance[25:31] == "Friday"`, `utterance[0:8] == "Actually"`, `utterance[20:24] == "keep"` — your `text` fields must pass exactly this check. Here the retention of "Friday" has an **explicit** keep word ("keep"), so `KEEP_CUE` is warranted (rule R10). In many real items there is no such word ("Yes, I like the same." → `KEPT_VALUE` only, no `KEEP_CUE`) — those judgment calls are exactly what this pilot measures.
+
+**Time budget:** roughly 1.5–3 minutes per item; ~4–6 hours for 100 items. Do it in two sittings if needed, but never while comparing with the other reviewer.
+
+**When done:** return your file unchanged in structure to the project owner. Next steps (run by the pipeline, not by you): `normalize_review_packet.py` → `annotation_agreement.py` (disagreement report) → **human adjudication** of disagreements → gold validation. Your raw files stay immutable.
+
 ## Two independent span layers
 VALUE: `NEW_VALUE`, `OLD_VALUE`, `KEPT_VALUE`, `REFERENCE`. CUE: `UPDATE_CUE`, `CANCEL_CUE`, `KEEP_CUE`, `RESTORE_CUE`. Mark minimal complete words for cues, complete mentioned value for values; offsets zero-based exclusive end relative to current USER utterance. Different layers may overlap; overlapping labels in same layer escalate to reviewer (don't overwrite).
 

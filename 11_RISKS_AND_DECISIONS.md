@@ -25,6 +25,9 @@
 
 ## Decision log (dated entries: `old decision -> evidence -> new decision`)
 
+- **2026-10-28 — Code license adopted.**
+  `old decision:` MIT template only in `legal_templates/`, adoption pending copyright-holder approval; root LICENSE absent. `evidence:` project owner approval given 2026-10-28 (course P1 rubric expects a LICENSE in a public repo). `new decision:` **root `LICENSE` published = unmodified standard MIT text, code only**; SGD data remains CC BY-SA 4.0 and must never be described as MIT-licensed (`15_DATA_LICENSE_AND_ATTRIBUTION.md` governs data).
+
 - **2026-10-28 — Taxonomy narrowing after real D0 audit.**
   `old decision:` all 4 CUE classes (UPDATE/CANCEL/KEEP/RESTORE) treated as potentially trainable BIO heads, L1–L5 all in scope, negated-cancel edge case E05 in guidelines. `evidence:` real train audit (commit `e852981a`, `reports/D0_D1_FACTUAL_FINDINGS.md`): explicit-cue revision pool ≈2,462 turns (raw regex 14,308 is ~80% bare-"No" false positives); CANCEL pool 117 turns but explicit user-directed cancels near-absent (hypotheticals + third-party cancellations dominate); **negated-cancel = 0/164,982 user turns**; RESTORE genuine support in the tens (187/208 "back to" hits are travel sense). `new decision:` **primary trained heads stay VALUE + CUE but `UPDATE_CUE`/`KEEP_CUE`(+`NEW_VALUE`/`OLD_VALUE`/`KEPT_VALUE`) are the trainable scope; `CANCEL_CUE` restricted to explicit user-directed instructions (expect tiny support, class may be demoted after pilot); `RESTORE_CUE` (L4) and E05 negated-cancel become a hand-verified DIAGNOSTIC set, separately reported, never used to inflate macro-F1.** Pilot stratification proceeds with these expectations; final call after D2 pilot + human review. This narrows L3–L5 to diagnostics; it does not change the research question.
 

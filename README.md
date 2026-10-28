@@ -17,7 +17,7 @@ Do context-aware token classifiers detect the exact phrases expressing revisions
 - Complexity levels L1–L5 from simple correction to multi-turn restore/keep; rare L4/L5 cases remain exploratory until enough gold exists.
 
 ## Data, provenance and license
-Upstream: [Google Schema-Guided Dialogue (SGD)](https://github.com/google-research-datasets/dstc8-schema-guided-dialogue), license **CC BY-SA 4.0**. SGD provides conversations, frames, `slot_values`, and some character-level slot spans. OVERRIDE's correction/keep/restore cue annotations are **new intended labels, not supplied by SGD**. Source must be pinned to a commit, audited and cited; sharing adaptations must respect license conditions.
+Upstream: [Google Schema-Guided Dialogue (SGD)](https://github.com/google-research-datasets/dstc8-schema-guided-dialogue), license **CC BY-SA 4.0**. SGD provides conversations, frames, `slot_values`, and some character-level slot spans. OVERRIDE's correction/keep/restore cue annotations are **new intended labels, not supplied by SGD**. Source must be pinned to a commit, audited and cited; sharing adaptations must respect license conditions. **Project code is MIT-licensed (see `LICENSE`); this does not extend to the SGD data.**
 
 ## Quick start (Python 3.10+)
 
