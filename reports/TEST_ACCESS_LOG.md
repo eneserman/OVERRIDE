@@ -4,6 +4,8 @@
 
 Every access is recorded below. An unrecorded access is a **protocol violation**; any result influenced by it is reported as `protocol-violated / exploratory`, never as held-out performance.
 
+**Post-creation non-viewing guarantee (CTO rule, 2026-10-28):** locking unlabeled test data and protecting the eventual test **gold** are different things. When `override_gold_TEST_SEALED_*.jsonl` exists, the model-development workflow **never opens it**: the adjudicator stores it, its SHA-256 is logged here **without loading the content into any development session**, and the only reader is the single final-evaluation command (`scripts/evaluate_frozen_test.py`) executed after the model is frozen and the owner approves. Development agents work only with train/dev gold; any request to inspect test labels during development is refused and logged.
+
 | # | Date | Who | Purpose | Scope (files/rows) | Approver | Outcome |
 |---|---|---|---|---|---|---|
 | 0 | 2026-10-28 | (none) | Log created; test gold does not exist yet (0 human labels) | — | CTO | baseline: **no accesses so far** |

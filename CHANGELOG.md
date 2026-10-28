@@ -2,6 +2,12 @@
 
 # Project change history (design, not model training)
 
+## D3-pilot-verification — 2026-10-28 (CTO: no new features; bookkeeping only)
+- Verified pilot-30 ⊂ merged-457 (records byte-identical), disjoint from the 10 calibration items; 457 = 30 + 10 + 417 (**no double counting**); independent agreement items = 447. Role registry: `data/annotations/annotation_registry_v0.1.json`.
+- `reports/D3_PILOT30_REPORT_TEMPLATE.md`: GO/REVISE/STOP decision report skeleton (per-label agreement table, class supports, bad spans, DP-1/DP-2 disagreement analysis, workload) to be filled ONLY from real human files.
+- `TEST_ACCESS_LOG.md`: post-creation non-viewing guarantee — dev workflow never opens test gold; only the single final evaluation reads it (owner-approved).
+- 76/76 tests; gold stays 0; holdout untouched; D5 not started.
+
 ## D3-final-prep — 2026-10-28 (CTO GO for technical prep; executed)
 - Calibration separated from independent scoring: `annotation_agreement.py --exclude-ids` (PRIMARY score excludes discussed practice items; both variants disclosed; tested).
 - Pilot-30 independent trial packet built (`data/annotations/d3_pilot30_v0.1/`, 30 train-partition items, disjoint from calibration, stratified, SHA `3a6d7e77…`) + `D3_PILOT30_TRIAL_PROTOCOL.md` (analysis commands, guideline-fix flow, GO/narrow decision before the 1,640-judgment full run).
