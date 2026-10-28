@@ -7,6 +7,32 @@ from pathlib import Path
 from validate_annotations import read_jsonl,validate_rows
 
 
+def span_label_metrics(da: dict, db: dict) -> dict:
+    """Per-layer, per-label exact-span agreement between the two reviewers."""
+    out = {}
+    rows = list(da.values()) + list(db.values())
+    for layer in ('value_spans', 'cue_spans'):
+        labels = sorted({x['label'] for r in rows for x in r[layer]})
+        per_label = {}
+        for lab in labels:
+            matched = only_a = only_b = 0
+            for rid in da:
+                sa = {(x['start'], x['end']) for x in da[rid][layer] if x['label'] == lab}
+                sb = {(x['start'], x['end']) for x in db[rid][layer] if x['label'] == lab}
+                matched += len(sa & sb)
+                only_a += len(sa - sb)
+                only_b += len(sb - sa)
+            denom = 2 * matched + only_a + only_b
+            per_label[lab] = {
+                'matched_exact_spans': matched,
+                'only_in_A': only_a,
+                'only_in_B': only_b,
+                'agreement_f1_symmetric': round(2 * matched / denom, 6) if denom else None,
+            }
+        out[layer] = per_label
+    return out
+
+
 def compare(a:list[dict],b:list[dict]) -> dict:
     for name,rows in [('A',a),('B',b)]:
         if validate_rows(rows,False)['status']!='PASS':
@@ -32,8 +58,13 @@ def compare(a:list[dict],b:list[dict]) -> dict:
             total+=1
     return {'status':'HUMAN_AGREEMENT_ONLY_NOT_GOLD','examples':len(da),'layer_judgements':total,
             'exact_layer_set_agreement':round(total_match/total,6) if total else None,
+            'span_level_agreement_by_label':span_label_metrics(da,db),
+            'difficulty_agreement':round(sum(1 for rid in da if da[rid].get('difficulty')==db[rid].get('difficulty'))/len(da),6) if da else None,
+            'uncertainty_flagged':{
+                'reviewer_A':sorted(rid for rid in da if (da[rid].get('annotation',{}).get('uncertainty_notes') or '').strip()),
+                'reviewer_B':sorted(rid for rid in db if (db[rid].get('annotation',{}).get('uncertainty_notes') or '').strip())},
             'disagreements':disagreements,
-            'interpretation':'Exact layer-set equality per example; not Cohen kappa, not gold correctness, not model F1.'}
+            'interpretation':'Exact layer-set equality per example plus exact-span agreement per label; not Cohen kappa, not gold correctness, not model F1.'}
 
 
 def main():

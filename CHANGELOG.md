@@ -2,6 +2,12 @@
 
 # Project change history (design, not model training)
 
+## D3-technical-prep — 2026-10-28 (CTO approved; executed)
+- Pools: merged 361 mining + 100 pilot → **457 blind train/dev records** (4 identical-turn duplicates logged & dropped; 7 overlapping families grouped to one partition per pre-committed plan); sealed **363 test packets** from the locked pool (no hints/AI/model content); 10-item TRAIN calibration sample.
+- Tooling: `validate_annotations` gains `allowed-splits` (default unchanged; `dev,test` for sealed test gold); `annotation_agreement` gains per-label exact-span agreement + difficulty/uncertainty reporting; new `build_adjudicated_gold.py` builds gold ONLY from human decisions (5 safety tests). 75/75 tests.
+- Protocols delivered: `D3_REVIEWER_ONBOARDING_TR.md` (TR onboarding), `D3_CALIBRATION_PROTOCOL.md` (DP-1/DP-2 practice + teaching key marked NOT gold), `D3_GOLD_CREATION_PROTOCOL.md` (agreement/adjudication commands, test access control, class-support honesty rule), `D3_TECHNICAL_QA_REPORT.md`.
+- Holdout lock re-verified `RAW_POOL_LOCK_VALID`; gold stays 0; D5 not started.
+
 ## D3-prep — 2026-10-28 (CTO review checks 1-4, executed)
 - Check 1 reconciliation: full chain 400 mined − 27 exact-text − 10 near-dup − 2 in-train = **361 final D3**; all 39 exclusions recorded with source IDs/hashes/reasons (`reports/D3_COUNT_RECONCILIATION.md/.json`); corrected the earlier 375/373 presentation error.
 - Check 2 deep leakage: 0 identical dialogues/user-sequences across official splits (full-fingerprint SHA-256); punctuation-variant near-dups removed train-side; 12 similar pairs listed; 62 shared history strings classified (56 system templates); 7 pilot-vs-mining family collisions resolved by split plan (`reports/D3_LEAKAGE_AUDIT.md/.json`).

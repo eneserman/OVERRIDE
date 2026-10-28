@@ -34,7 +34,8 @@ def read_jsonl(path: Path) -> list[dict[str, Any]]:
     return rows
 
 
-def validate_record(row: dict[str, Any], require_gold: bool = False) -> list[str]:
+def validate_record(row: dict[str, Any], require_gold: bool = False,
+                    allowed_splits: tuple[str, ...] = ('train',)) -> list[str]:
     errs: list[str] = []
     rid = row.get('id')
     if not isinstance(rid, str) or not rid.strip():
@@ -112,8 +113,8 @@ def validate_record(row: dict[str, Any], require_gold: bool = False) -> list[str
                 errs.append('gold requires at least two distinct reviewer identifiers')
             if not isinstance(a.get('adjudication_log_id'), str) or not a['adjudication_log_id'].strip():
                 errs.append('gold requires an adjudication_log_id (actual evidence required separately)')
-        if source.get('dataset') != 'SGD' or source.get('split') != 'train':
-            errs.append('this custom gold contract only accepts reviewed official SGD train source')
+        if source.get('dataset') != 'SGD' or source.get('split') not in allowed_splits:
+            errs.append('this custom gold contract only accepts reviewed official SGD source in splits: ' + ','.join(allowed_splits))
         family = row.get('dialogue_family_id')
         if not isinstance(family, str) or not family.strip():
             errs.append('gold requires nonempty dialogue_family_id')
@@ -122,7 +123,8 @@ def validate_record(row: dict[str, Any], require_gold: bool = False) -> list[str
     return errs
 
 
-def validate_rows(rows: list[dict[str, Any]], require_gold: bool = False) -> dict[str, Any]:
+def validate_rows(rows: list[dict[str, Any]], require_gold: bool = False,
+                  allowed_splits: tuple[str, ...] = ('train',)) -> dict[str, Any]:
     all_errors = []
     seen = set()
     for i, row in enumerate(rows):
@@ -131,7 +133,7 @@ def validate_rows(rows: list[dict[str, Any]], require_gold: bool = False) -> dic
         if rid_key in seen:
             all_errors.append(f'row {i}: duplicate example id {rid!r}')
         seen.add(rid_key)
-        all_errors.extend(f'row {i} id={rid!r}: {err}' for err in validate_record(row, require_gold))
+        all_errors.extend(f'row {i} id={rid!r}: {err}' for err in validate_record(row, require_gold, allowed_splits))
     return {'records':len(rows),'status':'PASS' if not all_errors and rows else 'FAIL', 'errors':all_errors}
 
 
@@ -139,9 +141,12 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('--input', required=True, type=Path)
     ap.add_argument('--require-gold', action='store_true')
+    ap.add_argument('--allowed-splits', default='train',
+                    help='comma list of official SGD splits acceptable for gold: train (default) or dev,test for the sealed prospective test gold')
     ap.add_argument('--report', type=Path, help='optional JSON result path')
     args = ap.parse_args()
-    report = validate_rows(read_jsonl(args.input), args.require_gold)
+    allowed = tuple(s.strip() for s in args.allowed_splits.split(',') if s.strip())
+    report = validate_rows(read_jsonl(args.input), args.require_gold, allowed)
     if args.report:
         args.report.parent.mkdir(parents=True, exist_ok=True)
         args.report.write_text(json.dumps(report, indent=2, ensure_ascii=False)+'\n',encoding='utf-8')
