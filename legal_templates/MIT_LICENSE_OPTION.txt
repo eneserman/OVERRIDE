@@ -1,0 +1,8 @@
+MIT License — OPTIONAL CODE LICENSE TEMPLATE, NOT YET ADOPTED
+
+If and only if all actual copyright holders agree to license code under MIT,
+replace this notice with the unmodified standard MIT text, the correct copyright
+holder/year, and publish a root LICENSE. This is NOT a license grant.
+
+Dataset source licensing is independent: Google SGD is CC BY-SA 4.0.
+Source: https://opensource.org/licenses/MIT

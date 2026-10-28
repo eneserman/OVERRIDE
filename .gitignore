@@ -1,0 +1,25 @@
+__pycache__/
+*.py[cod]
+.venv/
+.env
+.env.*
+!.env.example
+.pytest_cache/
+.ipynb_checkpoints/
+# Raw upstream source is pinned/downloaded separately; curate legally compliant exports later.
+data/upstream/
+# Do not commit unreviewed annotation packets, annotator identity notes, or private sampler hints.
+data/annotations/
+# Locally generated unreviewed/intermediate artifacts until reviewed for publication.
+data/intermediate/
+reports/sgd_train_audit/
+reports/sgd_smoke/
+*.tmp
+# Gold human annotations should remain local until release/legal & leakage review.
+data/gold/
+# Reports contain unreviewed/possibly identifiable examples; export only reviewed reports.
+reports/splits/
+reports/train_runs/
+# Large model artifacts are not necessary for assignment repo unless explicitly requested.
+checkpoints/
+models/

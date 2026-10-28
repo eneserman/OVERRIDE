@@ -1,0 +1,12 @@
+{
+  "status": "HANDOFF_PRECHECK_PASS",
+  "missing_required_files": [],
+  "unit_test_exit_code": 0,
+  "unit_test_output": "----------------------------------------------------------------------\nRan 35 tests in 1.756s\n\nOK",
+  "syntax_exit_code": 0,
+  "real_sgd_data_present": false,
+  "human_adjudicated_gold_present": false,
+  "model_implementation_present": false,
+  "academic_ready": "NOT_VERIFIED_NEEDS_REAL_DATA_HUMANS_TRAINED_MODELS_COLLISION_CHECK",
+  "warning": "Successful unit tests are synthetic safety checks; not an official SGD audit or trained model result."
+}

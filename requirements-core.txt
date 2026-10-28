@@ -1,0 +1,2 @@
+# Current CLI audit/validator/splitter/scorer use Python >=3.10 standard library only.
+# ML dependencies must be pinned and checked when model training is authorized.
