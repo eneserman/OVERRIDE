@@ -1,3 +1,5 @@
+> **OVERRIDE v0.7 DATA UPDATE:** For accurate current status read `18_V07_RESEARCH_PROTOCOL.md`, `19_DATASET_CARD_V07.md`, `20_GOLD_RELEASE_GATES.md`, `21_GOLD_READINESS_TR.md`, and `AGENT_D3_V07_REAL_GOLD_MASTER_PROMPT.md` **before** following the older v0.6 development handoff. In v0.7: 504 synthetic train + 126 synthetic dev + 126 synthetic challenge; 100 SGD pilot examples; 2 sets of 100 AI draft suggestions; **0 human-adjudicated gold**. No actual model training results. All synthetic/AI outputs must be disclosed. Academic gold release is BLOCKED pending real human review.
+
 # OVERRIDE — Developers | NLP Project 2
 
 **Status: full design + pre-gold Python tooling prepared. D0 real SGD train audit EXECUTED (2026-10-28, commit `e852981a`, 16,142 dialogues, all offsets valid). Not trained. No human-adjudicated custom labels, model metrics, or PPTX yet.** Repo: https://github.com/eneserman/OVERRIDE
@@ -80,3 +82,8 @@ The official P2 material emphasizes token classification, difficult/novel datase
 
 ## CI caveat
 `.github/workflows/python-tests.yml` tests only the Python contract on synthetic cases. A green CI badge is **not evidence of official SGD evaluation or model quality**.
+
+
+## 2026-10-28 v0.8 real-corpus research upgrade
+
+See `24_EXTERNAL_DATASET_RESEARCH.md` through `29_NEXT_ACTIONS_TR.md`. Added source research, prospective real-test raw lock and independent input-hash checks, Microsoft Frames candidate extractor, upstream SGD commit/hash verifier, actually trained classical synthetic BIO baseline and measurements. **Synthetic challenge F1 is NOT real OVERRIDE F1, and real gold still does not exist.** Read `28_V08_EVIDENCE_AUDIT.md` before proceeding.

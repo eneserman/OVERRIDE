@@ -16,7 +16,9 @@ reports/sgd_train_audit/
 reports/sgd_smoke/
 *.tmp
 # Gold human annotations should remain local until release/legal & leakage review.
-data/gold/
+data/gold/*
+# ...but the honesty README that declares 'GOLD NOT AVAILABLE' must stay visible.
+!data/gold/README.md
 # Reports contain unreviewed/possibly identifiable examples; export only reviewed reports.
 reports/splits/
 reports/train_runs/

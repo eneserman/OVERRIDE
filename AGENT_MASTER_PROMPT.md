@@ -1,3 +1,5 @@
+> **OVERRIDE v0.7 DATA UPDATE:** For accurate current status read `18_V07_RESEARCH_PROTOCOL.md`, `19_DATASET_CARD_V07.md`, `20_GOLD_RELEASE_GATES.md`, `21_GOLD_READINESS_TR.md`, and `AGENT_D3_V07_REAL_GOLD_MASTER_PROMPT.md` **before** following the older v0.6 development handoff. In v0.7: 504 synthetic train + 126 synthetic dev + 126 synthetic challenge; 100 SGD pilot examples; 2 sets of 100 AI draft suggestions; **0 human-adjudicated gold**. No actual model training results. All synthetic/AI outputs must be disclosed. Academic gold release is BLOCKED pending real human review.
+
 # OVERRIDE — MASTER CODING AGENT PROMPT
 
 ## Mission
@@ -34,3 +36,6 @@ Read `README.md`, `16_ARTIFACT_STATUS.md`, `00_DESIGN_AUDIT.md`, `01_REQUIREMENT
 
 ## First action RIGHT NOW
 Read docs and run existing unit tests; confirm data files exist. Execute **D0 only**. If source download/network blocked, report that and do not invent data. The project owner will decide whether to authorize the next phase after reviewing your evidence.
+
+
+**V0.8 SCIENTIFIC OVERRIDE:** First review files `24_EXTERNAL_DATASET_RESEARCH.md`–`29_NEXT_ACTIONS_TR.md`. Do not overwrite existing claims with fabricated real results; acquire official data, verify licenses and commit hashes, freeze new unseen raw holdout before model evaluation, and require authentic human-adjudicated gold. Do not compare literature JGA with OVERRIDE span F1.

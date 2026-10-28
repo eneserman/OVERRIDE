@@ -1,0 +1,14 @@
+{
+  "status": "PASS_LOCAL_CODE_TESTS_NOT_ACADEMIC_GOLD",
+  "python": "3.13.5",
+  "sklearn": "1.8.0",
+  "test_result": "----------------------------------------------------------------------\nRan 56 tests in 3.112s\n\nOK",
+  "scripts_syntax_checked": 27,
+  "real_sgd_upstream": "UNAVAILABLE",
+  "frames_original": "UNAVAILABLE",
+  "human_gold": "NOT_AVAILABLE",
+  "real_model_metrics": "NOT_MEASURED",
+  "synthetic_baseline_report_sha256": "7da0220576c8dd83ea6b1eea957c1c67559c9ac9407bd8e5e9e92f4d70b39815",
+  "timestamp": "2026-10-28",
+  "ethics": "AI suggestions are not independent human review"
+}

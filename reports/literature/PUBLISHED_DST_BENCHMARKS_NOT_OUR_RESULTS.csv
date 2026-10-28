@@ -1,0 +1,6 @@
+model,dataset_version,metric,reported_score_percent,source_attribution,source_url,our_result
+SOM-DST,MultiWOZ 2.1,JGA,53.01,"Kim et al., ACL 2020",https://aclanthology.org/2020.acl-main.53/,NO
+SOM-DST,MultiWOZ 2.0,JGA,51.72,"Kim et al., ACL 2020",https://aclanthology.org/2020.acl-main.53/,NO
+SOM-DST,MultiWOZ 2.4,JGA,66.78,MultiWOZ 2.4 repository,https://github.com/smartyfh/multiwoz2.4,NO
+TripPy,MultiWOZ 2.4,JGA,64.75,MultiWOZ 2.4 repository,https://github.com/smartyfh/multiwoz2.4,NO
+TRADE,MultiWOZ 2.4,JGA,55.05,MultiWOZ 2.4 repository,https://github.com/smartyfh/multiwoz2.4,NO

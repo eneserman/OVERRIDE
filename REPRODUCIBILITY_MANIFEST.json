@@ -1,0 +1,13 @@
+{
+  "release": "v0.8",
+  "date": "2026-10-28",
+  "research_paper_benchmarks": "published_secondary_evidence_only",
+  "own_measured_results": "synthetic_Lexical_LinearSVC_only",
+  "real_gold_status": "NONE",
+  "real_holdout_status": "NOT_YET_LOCKED",
+  "full_official_sgd_downloaded": false,
+  "frames_portal_data_downloaded": false,
+  "methodological_commitment": "holdout frozen before final model evaluation; no performance fabrication",
+  "local_unit_tests": 56,
+  "disclosure": "No validated academic gold/test; model training was only on machine-generated examples"
+}

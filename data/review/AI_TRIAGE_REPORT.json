@@ -1,0 +1,8 @@
+{
+  "records": 100,
+  "AI_ANY_DISAGREEMENT_EXAMPLES": 18,
+  "AI_SAME_SUGGESTIONS_EXAMPLES": 82,
+  "human_IAA": null,
+  "human_gold_records": 0,
+  "note": "Even AI agreements are NOT presumed gold. Review all cases; disagreements first."
+}

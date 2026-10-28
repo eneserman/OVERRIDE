@@ -1,3 +1,5 @@
+> **OVERRIDE v0.7 DATA UPDATE:** For accurate current status read `18_V07_RESEARCH_PROTOCOL.md`, `19_DATASET_CARD_V07.md`, `20_GOLD_RELEASE_GATES.md`, `21_GOLD_READINESS_TR.md`, and `AGENT_D3_V07_REAL_GOLD_MASTER_PROMPT.md` **before** following the older v0.6 development handoff. In v0.7: 504 synthetic train + 126 synthetic dev + 126 synthetic challenge; 100 SGD pilot examples; 2 sets of 100 AI draft suggestions; **0 human-adjudicated gold**. No actual model training results. All synthetic/AI outputs must be disclosed. Academic gold release is BLOCKED pending real human review.
+
 # START HERE — OVERRIDE Full Handoff
 
 **Send the entire ZIP to your coding agent; then paste the text of `AGENT_MASTER_PROMPT.md`.** The archive contains preparatory documents and code, **not** real SGD results or a completed machine learning model.
@@ -32,3 +34,6 @@
 - Repository license approval, legal review of raw/clean data republication, final public push.
 
 **Current gate:** `G1 real source audit pending`. Final grade and novelty cannot be guaranteed from prepared paperwork.
+
+
+**v0.8 mandatory:** Read `27_V08_AGENT_RESEARCH_HANDOFF.md`, `26_PROSPECTIVE_TEST_PREREGISTRATION.md`, and `28_V08_EVIDENCE_AUDIT.md`. The reference synthetic LinearSVC output is an actual measured diagnostic, not a final real result; the real primary test remains NOT LOCKED / NO GOLD.

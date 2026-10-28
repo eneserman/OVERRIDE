@@ -1,3 +1,5 @@
+> **OVERRIDE v0.7 DATA UPDATE:** For accurate current status read `18_V07_RESEARCH_PROTOCOL.md`, `19_DATASET_CARD_V07.md`, `20_GOLD_RELEASE_GATES.md`, `21_GOLD_READINESS_TR.md`, and `AGENT_D3_V07_REAL_GOLD_MASTER_PROMPT.md` **before** following the older v0.6 development handoff. In v0.7: 504 synthetic train + 126 synthetic dev + 126 synthetic challenge; 100 SGD pilot examples; 2 sets of 100 AI draft suggestions; **0 human-adjudicated gold**. No actual model training results. All synthetic/AI outputs must be disclosed. Academic gold release is BLOCKED pending real human review.
+
 # Project change history (design, not model training)
 
 ## D3-facilitation — 2026-10-28 (annotation entry helper)
@@ -30,3 +32,11 @@
 - Strengthened adjudicated gold provenance contract, SHA-256 binding of gold to split manifest and per-split class support diagnostics.
 - Added `evaluate_frozen_test.py` to prevent inadvertent train-as-test metrics and `preflight_handoff.py` for local checks.
 - Expanded unit-test regressions and documented outstanding real-data/human/ML/release blockers in `17_V06_HARDENING_AUDIT.md`.
+
+
+## v0.8 — 2026-10-28
+- Verified related corpora and published DST benchmark sources (not OVERRIDE performance).
+- Added prospective raw holdout lock + verification and mandatory contamination checks.
+- Added official SGD provenance verifier, Frames candidate extractor and Python tests.
+- Actually trained a classical token BIO model on synthetic data and saved separate exact-span diagnostic results.
+- Main real gold, blind real test and real model scores still NOT AVAILABLE.

@@ -1,0 +1,57 @@
+{
+  "dataset_name": "OVERRIDE_SYNTHETIC_BOOTSTRAP",
+  "version": "v0.7",
+  "seed": 20261028,
+  "counts": {
+    "train": 504,
+    "dev": 126,
+    "challenge": 126
+  },
+  "span_support": {
+    "train": {
+      "CANCEL_CUE": 72,
+      "KEEP_CUE": 108,
+      "KEPT_VALUE": 72,
+      "NEW_VALUE": 324,
+      "OLD_VALUE": 36,
+      "REFERENCE": 72,
+      "RESTORE_CUE": 72,
+      "UPDATE_CUE": 216
+    },
+    "dev": {
+      "CANCEL_CUE": 18,
+      "KEEP_CUE": 27,
+      "KEPT_VALUE": 18,
+      "NEW_VALUE": 81,
+      "OLD_VALUE": 9,
+      "REFERENCE": 18,
+      "RESTORE_CUE": 18,
+      "UPDATE_CUE": 54
+    },
+    "challenge": {
+      "CANCEL_CUE": 18,
+      "KEEP_CUE": 27,
+      "KEPT_VALUE": 18,
+      "NEW_VALUE": 81,
+      "OLD_VALUE": 9,
+      "REFERENCE": 18,
+      "RESTORE_CUE": 18,
+      "UPDATE_CUE": 54
+    }
+  },
+  "characters": {
+    "train": 22229,
+    "dev": 4904,
+    "challenge": 6819
+  },
+  "held_out_templates": true,
+  "academic_gold": false,
+  "reviewer_agreement_available": false,
+  "intended_use": "TRAIN/DEV bootstrap and engineering regressions; synthetic_challenge for sanity checks only; NOT independent academic test or human gold",
+  "upstream_data_used": "none in generator",
+  "files_sha256": {
+    "synthetic_challenge.jsonl": "e795c0a7a05e8ffa71747aa80b0481d54a1f87e3775ea2779cfc65c783fe9ba6",
+    "synthetic_dev.jsonl": "989331674e01ca79fccc5f660bae3a72e07a843dc886e8023c7b09bd4657b3ad",
+    "synthetic_train.jsonl": "0aa233e0abb872cc9bd7539f58ff6a866f59c2c879710f26c1fa016c7b583e07"
+  }
+}

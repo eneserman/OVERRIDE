@@ -23,3 +23,7 @@
 **Handoff rule:** All design files and downstream phase prompts are now present; the training code, actual human gold, measured models and numerical PPTX must still be produced after real evidence. Agent can receive all files together, but execute prompts D0 → D1/D2 → D3 → D4 → D5 → D6 → D7 only when previous gate is evidenced. Do not fabricate missing artifacts to make inventory green.
 
 **v0.6 changes:** stronger provenance validation, equal-source reviewer checks, overwrite guard, immutable-gold checksum, per-split class supports and safe held-out evaluation. Still NOT a trained model, true human annotations, full SGD audit, verified topic collision check or final submission.
+
+
+## v0.8 current status (2026-10-28)
+Code baseline: EXECUTED ON SYNTHETIC ONLY; measured values in `reports/experiments/V08_MEASURED_SYNTHETIC_BASELINE.json`. Published external DST JGA in literature file, not our results. Full raw SGD: NOT PRESENT. Frames: NOT PRESENT. Authentic human gold and prospective frozen real test: NOT PRESENT. Main model real F1: NOT MEASURED. See `28_V08_EVIDENCE_AUDIT.md`.
