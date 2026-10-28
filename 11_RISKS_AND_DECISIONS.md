@@ -23,6 +23,14 @@
 - No finalized task labels, model metrics, grade prediction or source frequencies until evidence.
 - L1–L5 kept as scope/diagnostics with rare categories conditional.
 
+## Decision log (dated entries: `old decision -> evidence -> new decision`)
+
+- **2026-10-28 — Taxonomy narrowing after real D0 audit.**
+  `old decision:` all 4 CUE classes (UPDATE/CANCEL/KEEP/RESTORE) treated as potentially trainable BIO heads, L1–L5 all in scope, negated-cancel edge case E05 in guidelines. `evidence:` real train audit (commit `e852981a`, `reports/D0_D1_FACTUAL_FINDINGS.md`): explicit-cue revision pool ≈2,462 turns (raw regex 14,308 is ~80% bare-"No" false positives); CANCEL pool 117 turns but explicit user-directed cancels near-absent (hypotheticals + third-party cancellations dominate); **negated-cancel = 0/164,982 user turns**; RESTORE genuine support in the tens (187/208 "back to" hits are travel sense). `new decision:` **primary trained heads stay VALUE + CUE but `UPDATE_CUE`/`KEEP_CUE`(+`NEW_VALUE`/`OLD_VALUE`/`KEPT_VALUE`) are the trainable scope; `CANCEL_CUE` restricted to explicit user-directed instructions (expect tiny support, class may be demoted after pilot); `RESTORE_CUE` (L4) and E05 negated-cancel become a hand-verified DIAGNOSTIC set, separately reported, never used to inflate macro-F1.** Pilot stratification proceeds with these expectations; final call after D2 pilot + human review. This narrows L3–L5 to diagnostics; it does not change the research question.
+
+- **2026-10-28 — Source pin and redistribution policy.**
+  `old decision:` SGD to be downloaded and pinned before D0. `evidence:` clone + audit executed; commit `e852981ae34990f4358979625854259302feaa78`, CC BY-SA 4.0 confirmed from `LICENSE.txt`. `new decision:` raw SGD stays OUT of the public repo (`data/upstream/` gitignored); only hashes, aggregate counts and license/citation notes are published; annotated derivatives require the `15_DATA_LICENSE_AND_ATTRIBUTION.md` redistribution review before any release.
+
 ## Open decisions and release conditions
 - P2 updated rubric and deadline unknown: do not infer.
 - Number of team members, student IDs and GitHub usernames unknown: contribution files templates only.

@@ -11,13 +11,13 @@
 | System/model/eval/QA architecture | Complete design docs | `05`–`12`, `14`–`15` |
 | Human review packet converter + agreement | Tested on synthetic fixtures | Does not create human gold |
 | Annotation validator / split freezer / scorer | Tested on synthetic fixtures | Python scripts + tests (not model results) |
-| Real SGD train D0 audit | **NOT RUN** | no real counts/hashes yet |
+| Real SGD train D0 audit | **RUN 2026-10-28** | pinned `e852981a`, 127 file hashes, 16,142 dialogues, 242,267/242,267 valid offsets — `reports/D0_D1_FACTUAL_FINDINGS.md` |
 | Human-reviewed gold | **NOT CREATED** | independent reviewers and adjudication pending |
-| Final label taxonomy | **NOT FROZEN** | dependent on pilot |
+| Final label taxonomy | **NARROWED 2026-10-28, not frozen** | D0 evidence + decision log in `11`; pilot/human review pending |
 | Model checkpoints and comparison | **NOT TRAINED** | dependent on gold |
 | State resolver / actual L4–L5 performance | **NOT IMPLEMENTED** | dependent on gold and sufficient context |
 | PPTX with real results | **NOT CREATED** | dependent on experiments |
-| Public GitHub + student contribution diffs | **NOT DONE** | owner/team actions required |
+| Public GitHub + student contribution diffs | **REPO LIVE (2026-10-28), contributions pending** | https://github.com/eneserman/OVERRIDE (public, CI green); real per-student contribution files still template-only |
 | P2 collision check | **NOT VERIFIED LIVE** | last user screenshots show different chosen tasks |
 
 **Handoff rule:** All design files and downstream phase prompts are now present; the training code, actual human gold, measured models and numerical PPTX must still be produced after real evidence. Agent can receive all files together, but execute prompts D0 → D1/D2 → D3 → D4 → D5 → D6 → D7 only when previous gate is evidenced. Do not fabricate missing artifacts to make inventory green.

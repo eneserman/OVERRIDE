@@ -1,6 +1,6 @@
 # OVERRIDE — Developers | NLP Project 2
 
-**Status: full design + pre-gold Python tooling prepared. Not trained. No observed official SGD audit results, human-adjudicated custom labels, model metrics, or PPTX yet.**
+**Status: full design + pre-gold Python tooling prepared. D0 real SGD train audit EXECUTED (2026-10-28, commit `e852981a`, 16,142 dialogues, all offsets valid). Not trained. No human-adjudicated custom labels, model metrics, or PPTX yet.** Repo: https://github.com/eneserman/OVERRIDE
 
 **Delivery:** Python command-line research repository, public GitHub and PowerPoint presentation. **No website or mobile app is required.**
 

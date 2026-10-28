@@ -121,6 +121,19 @@ Suggested pilot strata: explicit value replacement; value add; cancellation pola
 
 Source text plus conversation history should be visible to annotators; any candidate hints must be hidden during independent annotation when practical to reduce confirmation bias.
 
+### 4.1 Measured D0/D1 findings (2026-10-28) — supersedes planning assumptions
+
+Full-train read-only audit executed at pinned commit `e852981ae34990f4358979625854259302feaa78` (127 train files, SHA-256 recorded in `reports/SHA256_SGD_TRAIN_FILES.txt`). Evidence: `reports/D0_D1_FACTUAL_FINDINGS.md`. Key measured facts that revise earlier planning assumptions:
+
+- **Scale:** 16,142 dialogues / 329,964 turns / 175,780 user frames / 598,617 state slot entries / 242,267 span offsets, **all 242,267 offsets valid** (0 invalid).
+- **Candidate pools (not gold):** `SLOT_ADDED` 93,302 · `ALIAS_OR_STATE_VARIANT` 24,326 · `SLOT_CHANGED` 10,475 · `SLOT_CLEARED` 470.
+- **Revision cue pool is ~2.5k, not 14.3k:** of 14,308 `possible_revision_cue` turns, only **2,462** contain explicit cue words (actually/instead/rather/change*/switch/replace); 11,460 are bare "No"-prefixed answers (≈80% false-positive rate of the raw regex).
+- **Alias expansions are not revisions:** e.g. `'17:15' -> '17:15|5:15 pm'` — annotation must treat these as `NO_CHANGE`/`KEPT_VALUE` controls.
+- **CANCEL is thin:** 117 cancel-flagged turns are dominated by refund hypotheticals ("if I decide to cancel") and third-party cancellations ("my kids cancelled, I only need one ticket"); explicit user-directed booking cancellation is near-absent.
+- **NEGATED_CANCEL has ZERO corpus support:** `\b(not|n't|never|do not|don't)\s+(cancel|delete|remove|stop)\b` matched **0 of 164,982** user turns. Edge case E05 is not naturally attested; diagnostic-only.
+- **RESTORE is dominated by travel-sense "back to"** (187/208 sub-pattern hits); genuine restore-like requests number in the tens → L4 stays diagnostic-only.
+- **Supportable core:** L1/L2 (explicit replacement, partial keep+change) via 10,475 changed candidates and 2,462 explicit cue turns. L3–L5 narrow per the taxonomy decision logged in `11_RISKS_AND_DECISIONS.md`.
+
 **Implemented preparatory tool (`scripts/prepare_annotation_pilot.py`):** This generates stratified, deterministic **unlabeled** annotator A/B packets from raw SGD **train**, plus a private heuristic sampling manifest and counted summary. It hides state-delta/cue hints from annotators and never emits gold labels. Run only after the full D0 real-data audit:
 
 ```bash
@@ -237,9 +250,9 @@ OVERRIDE-PROJECT/
 
 | Gate | Need to show to declare PASS | Status now |
 |---|---|---|
-| D0 | **Real** SGD train audit JSON, pinned commit, source file checksums | NOT RUN (external source not downloaded here) |
-| D1 | Provenance-preserving unreviewed candidate inventory; false positives sampled | CODE READY, REAL DATA NOT RUN |
-| D2 | Pilot sampling plan with real counts and strata | CODE READY, REAL DATA NOT RUN |
+| D0 | **Real** SGD train audit JSON, pinned commit, source file checksums | **RUN 2026-10-28** — commit `e852981a`, 127 files hashed, 16,142 dialogues, 242,267/242,267 valid offsets (`reports/D0_D1_FACTUAL_FINDINGS.md`) |
+| D1 | Provenance-preserving unreviewed candidate inventory; false positives sampled | **RUN 2026-10-28** — 128,573 state-change candidates + manual false-positive inspection, see findings report |
+| D2 | Pilot sampling plan with real counts and strata | REAL RUN PENDING owner taxonomy approval (see §4.1) |
 | D3 | Independent human annotation and adjudication evidence | NOT RUN |
 | D4 | Frozen dialogue-grouped gold splits and duplicate audit | NOT RUN |
 | D5 | Label alignment tests on adjudicated real records | NOT RUN |
