@@ -59,6 +59,7 @@ python scripts/evaluate_frozen_test.py --full-gold data/gold/override_gold_v0.1.
 | `scripts/prepare_annotation_pilot.py` | Blind A/B candidate packets + private hints | Implemented, synthetic tests |
 | `scripts/normalize_review_packet.py`, `scripts/annotation_agreement.py` | Convert genuine reviewed blind packets to non-gold canonical reviewer format; report disagreements | Implemented, synthetic tests |
 | `scripts/validate_annotations.py` | Offset, label, overlap, provenance/status checks | Implemented, synthetic tests |
+| `scripts/annotation_entry_helper.py` | Interactive human data entry (typed phrase → verified offsets); generates no labels | Implemented, synthetic tests |
 | `scripts/freeze_gold_splits.py` | Deterministic dialogue-family split manifest | Implemented, synthetic tests |
 | `scripts/evaluate_spans.py` | Strict span scoring for exploratory/dev use | Implemented, synthetic tests |
 | `scripts/evaluate_frozen_test.py` | Checks frozen gold and test partition before final scoring | Implemented, synthetic tests |

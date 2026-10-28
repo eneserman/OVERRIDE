@@ -23,6 +23,8 @@ Full relevant **past** USER/SYSTEM messages + current USER utterance, original u
 - `annotation.difficulty`: `L1|L2|L3|L4|L5` (see `02_NLP_TASK_DESIGN.md`).
 - `annotation.uncertainty_notes`: free text for anything ambiguous.
 
+**Recommended tool:** `python scripts/annotation_entry_helper.py --packet <your file> --reviewer-id <your id> --out <filled file>` walks you through the examples interactively — you type the exact phrase, it computes and verifies the offsets, enforces the label vocabulary and overlap rules, and saves each example as you go (`--resume` continues an interrupted session). Manual editing of the JSONL is still allowed; the rules above are identical either way. The helper reads only your blind packet and generates **no** labels.
+
 **Offset rules (validated strictly by `scripts/validate_annotations.py`):**
 - Zero-based, **half-open** `[start, end)`, counted in Python characters of `current_user_utterance` — `utterance[start:end]` must equal your `text` **exactly**.
 - Find offsets mechanically, not by counting by eye:
