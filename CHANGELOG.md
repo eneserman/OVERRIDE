@@ -2,6 +2,13 @@
 
 # Project change history (design, not model training)
 
+## D1/D2 — 2026-10-28 (test lock first, then train mining; executed)
+- **D2 lock:** prospective real-test pool mined from official SGD dev+test (seed 20261028) and frozen: 363 candidates / 358 families, manifest SHA-256 `b42299f8…0581`, `--verify` → `RAW_POOL_LOCK_VALID`. Fail-closed exclusions logged (14). Evaluation protocol locked (`EVALUATION_PROTOCOL_LOCK.md`): dev/test forbidden for training/prompt/hyperparameter work; selection immutable; one final evaluation.
+- **D1 mining:** 164,982 train user turns scanned; 400 candidates (50/bucket) mined deterministically (seed 42) with per-category inspection (UPDATE clean; RESTORE bucket dominated by topic-return; CANCEL bucket by refusals — both confirmed diagnostic-weak).
+- **D3 packets:** 373 blind records ready at `data/annotations/d3_packets_v0.1/` (27 train rows removed for holdout text overlap; all QA checks pass; no hints/state in packets).
+- **Leakage evidence:** ID/family/text checks across train-mining/holdout/seen + synthetic split audit (0 collisions). Known SGD dialogue-ID collision across splits documented.
+- Evidence: `reports/D1_D2_EXECUTION_REPORT.md`. Gold remains 0; no model trained (D5 not started by owner gate).
+
 ## D3-facilitation — 2026-10-28 (annotation entry helper)
 - Added `scripts/annotation_entry_helper.py`: interactive terminal data entry for the two human reviewers (typed phrase → mechanically computed/verified offsets, label vocabulary enforcement, same-layer overlap rejection, per-example contract validation via normalize+validate). Generates NO labels; never reads the private sampling manifest; crash-safe incremental saves with `--resume`.
 - 12 new unit tests (47 total, all passing), including proof that helper output is accepted as non-gold `ANNOTATED` and always FAILS `--require-gold`.

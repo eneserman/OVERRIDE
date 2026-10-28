@@ -1,0 +1,118 @@
+{
+  "method": "fail-closed exclusion: seen id/family/text + in-pool duplicate text (first occurrence kept, file order)",
+  "excluded": [
+    {
+      "example_id": "SGD-8ef3ade178fb175d00",
+      "dialogue_id": "3_00111",
+      "split": "dev",
+      "reasons": [
+        "family_id_collision_with_seen"
+      ]
+    },
+    {
+      "example_id": "SGD-60f8f46e0fb933f7d8",
+      "dialogue_id": "11_00023",
+      "split": "dev",
+      "reasons": [
+        "duplicate_text_in_pool_of_SGD-de21007c1f5df3c2f8"
+      ]
+    },
+    {
+      "example_id": "SGD-275b03d6e35f42e0f1",
+      "dialogue_id": "1_00103",
+      "split": "dev",
+      "reasons": [
+        "duplicate_text_in_pool_of_SGD-b4c670ee485e0aca31"
+      ]
+    },
+    {
+      "example_id": "SGD-ad58a07f7dc085c60d",
+      "dialogue_id": "8_00122",
+      "split": "dev",
+      "reasons": [
+        "duplicate_text_in_pool_of_SGD-84dde9e2ddfe194075"
+      ]
+    },
+    {
+      "example_id": "SGD-eadee5e7b5b2500576",
+      "dialogue_id": "17_00083",
+      "split": "dev",
+      "reasons": [
+        "duplicate_text_in_pool_of_SGD-a675f4477db171542a"
+      ]
+    },
+    {
+      "example_id": "SGD-a41ae2ae20a7267643",
+      "dialogue_id": "21_00116",
+      "split": "test",
+      "reasons": [
+        "text_seen"
+      ]
+    },
+    {
+      "example_id": "SGD-661e77dd3a9976de14",
+      "dialogue_id": "15_00042",
+      "split": "test",
+      "reasons": [
+        "duplicate_text_in_pool_of_SGD-b663cbdf8c52ae4967"
+      ]
+    },
+    {
+      "example_id": "SGD-07fa834821d80c34aa",
+      "dialogue_id": "6_00052",
+      "split": "test",
+      "reasons": [
+        "duplicate_text_in_pool_of_SGD-a675f4477db171542a"
+      ]
+    },
+    {
+      "example_id": "SGD-c3267bd61e79752288",
+      "dialogue_id": "19_00108",
+      "split": "test",
+      "reasons": [
+        "family_id_collision_with_seen"
+      ]
+    },
+    {
+      "example_id": "SGD-d469e879551ebcf221",
+      "dialogue_id": "19_00119",
+      "split": "test",
+      "reasons": [
+        "duplicate_text_in_pool_of_SGD-b663cbdf8c52ae4967"
+      ]
+    },
+    {
+      "example_id": "SGD-58706fac8644124053",
+      "dialogue_id": "27_00015",
+      "split": "test",
+      "reasons": [
+        "duplicate_text_in_pool_of_SGD-62daf5814b5e0319af"
+      ]
+    },
+    {
+      "example_id": "SGD-875318cb771cee84b1",
+      "dialogue_id": "26_00099",
+      "split": "test",
+      "reasons": [
+        "duplicate_text_in_pool_of_SGD-62daf5814b5e0319af"
+      ]
+    },
+    {
+      "example_id": "SGD-b6588725d822f85b11",
+      "dialogue_id": "14_00126",
+      "split": "test",
+      "reasons": [
+        "duplicate_text_in_pool_of_SGD-a675f4477db171542a"
+      ]
+    },
+    {
+      "example_id": "SGD-377736633bed772252",
+      "dialogue_id": "30_00122",
+      "split": "test",
+      "reasons": [
+        "duplicate_text_in_pool_of_SGD-b663cbdf8c52ae4967"
+      ]
+    }
+  ],
+  "kept": 363
+}

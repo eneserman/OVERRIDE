@@ -12,6 +12,8 @@ data/upstream/
 data/annotations/
 # Locally generated unreviewed/intermediate artifacts until reviewed for publication.
 data/intermediate/
+# Blind prospective-test pool text stays private (hashes/IDs only in the lock manifest).
+data/prospective_holdout/private_pool/
 reports/sgd_train_audit/
 reports/sgd_smoke/
 *.tmp

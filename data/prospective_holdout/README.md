@@ -1,2 +1,5 @@
-# Not a frozen real test yet
-This directory deliberately contains **no** `real_test_gold.jsonl` and **no** fabricated model outputs. It is reserved for a prospective, fully provenance-checked, independently annotated REAL raw holdout. Use `scripts/lock_prospective_holdout.py`; save the immutable raw-pool manifest here before evaluation. A raw lock alone is not gold.
+# Prospective real holdout — RAW POOL LOCKED (2026-10-28), not human gold yet
+
+`real_sgd_heldout_lock.json` freezes the prospective real-test **candidate pool**: 363 blind candidates / 358 dialogue families mined deterministically (seed 20261028) from official SGD **dev + test** at commit `e852981a`, after fail-closed exclusions (see `pool_exclusion_log.json`). Verification: `lock_prospective_holdout.py --verify` → `RAW_POOL_LOCK_VALID`; manifest SHA-256 `b42299f8c0f999de5f940f3252ad1b891d12c1297ecd37413317509106960581`. The evaluation contract is `EVALUATION_PROTOCOL_LOCK.md`.
+
+**Rules:** the pool text stays private (`private_pool/`, gitignored) so the blind test cannot be peeked or contaminated; only hashes/IDs/provenance are published here. The pool is a heuristic candidate pool — **no gold labels, no model scores**. Human annotation (two independent reviewers) and adjudication are required before any evaluation. A raw lock alone is not gold. This directory deliberately contains **no** `real_test_gold.jsonl` and **no** fabricated model outputs.
