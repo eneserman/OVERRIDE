@@ -14,6 +14,8 @@ data/annotations/
 data/intermediate/
 # Blind prospective-test pool text stays private (hashes/IDs only in the lock manifest).
 data/prospective_holdout/private_pool/
+# AI pre-review drafts stay local: reviewers must never see AI suggestions.
+OVERRIDE_PILOT30_AI_PRE_REVIEW/
 reports/sgd_train_audit/
 reports/sgd_smoke/
 *.tmp

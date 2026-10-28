@@ -6,7 +6,7 @@
 
 | Item | Value |
 |---|---|
-| Packets | `data/annotations/d3_pilot30_v0.1/reviewer_A_BLIND.jsonl` / `reviewer_B_BLIND.jsonl` (byte-identical, **SHA-256 `3a6d7e771cf2c8f7fc5dc2d4b01182085989dad3547435f195096194f0aa18ef`**) |
+| Packets | `data/annotations/d3_pilot30_v0.1/reviewer_A_BLIND.jsonl` / `reviewer_B_BLIND.jsonl` (byte-identical; file-byte **SHA-256 `5044586213337018ea88972632bca61dd4efd3d44814f466502e2e3e359a1336`**; content-SHA `3a6d7e77…` = LF-normalized serialization, see `reports/PACKET_HASH_AUDIT.json`) |
 | Items | **30**, TRAIN partition only, **disjoint from the 10 calibration items**, stratified across private buckets (coordinator index `pilot30_index.json` — bucket labels never shown to reviewers) |
 | Rules | `13_ANNOTATION_GUIDELINES.md` v0.2 (R1–R12, DP-1, DP-2, `UNCERTAIN:` convention) |
 

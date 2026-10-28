@@ -1,0 +1,30 @@
+{
+  "status": "PACKET_HASH_AUDIT_NOT_GOLD",
+  "note": "Windows text-mode writes store CRLF; earlier reports recorded the LF-normalized CONTENT hash. Both are recorded here; content is identical. The test packet is byte-identical to the locked holdout pool (921dcd5d... matches the lock manifest source_file_sha256).",
+  "packets": {
+    "d3_pilot30_v0.1/reviewer_A_BLIND.jsonl": {
+      "rows": 30,
+      "bytes_sha256": "5044586213337018ea88972632bca61dd4efd3d44814f466502e2e3e359a1336",
+      "content_sha256_lf": "3a6d7e771cf2c8f7fc5dc2d4b01182085989dad3547435f195096194f0aa18ef",
+      "line_endings": "CRLF"
+    },
+    "d3_merged_traindev_v0.1/reviewer_A_BLIND.jsonl": {
+      "rows": 457,
+      "bytes_sha256": "b34d246c26bc8cf489a4b95ed4938ccc5b0637a23b8b8d4f8a9ab48dae07f67d",
+      "content_sha256_lf": "b975d2ea1644e4c7e53bbef0add18bd454b7ffd3a3fb37646b9fb1925b920cb8",
+      "line_endings": "CRLF"
+    },
+    "d3_test_packets_v0.1/reviewer_A_BLIND.jsonl": {
+      "rows": 363,
+      "bytes_sha256": "921dcd5d851bf27d4be8eb0dd365964738a120dfb2040f49fed69cfa853c0a72",
+      "content_sha256_lf": "525a1069336d3d40c9120a0dcf245c1ebdacfcdbad5f34215e773a7479db0b42",
+      "line_endings": "CRLF"
+    },
+    "d3_calibration_v0.1/calibration_sample.jsonl": {
+      "rows": 10,
+      "bytes_sha256": "abb816c05f520b5054dec873a515f6f97868a3afb5caf2cabb1daeadf3c694bf",
+      "content_sha256_lf": "4a8274edcbca21baa6addf132ea494ca8cc9bc238cc002c4b397fa0f9df7df44",
+      "line_endings": "CRLF"
+    }
+  }
+}

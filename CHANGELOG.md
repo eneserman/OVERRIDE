@@ -2,6 +2,13 @@
 
 # Project change history (design, not model training)
 
+## D3-AI-prereview-review — 2026-10-28 (private quality diagnosis; NOT gold)
+- Reviewed the CTO's pilot-30 AI suggestion package (2 policies, `AI_SIMULATION`) against guide v0.2: DP-1 respected 6/6 (no CANCEL on refusals), DP-2 respected 3/3 (no RESTORE on topic returns). Drafts kept local/gitignored — never shown to reviewers.
+- Coverage diagnosis confirms the CTO finding: only NEW_VALUE/REFERENCE/UPDATE_CUE observable in pilot-30; `OLD_VALUE`, `KEPT_VALUE`, `KEEP_CUE`, `RESTORE_CUE` have zero support there (cancel/restore buckets contain refusals/topic-returns). Pilot-30 = quality diagnostic + agreement trial for observable labels; **no schema-wide GO from it**.
+- The 6 AI-policy disputes analyzed against the guide → 3 rule zones: task-reference (guide gap), implicit-cue labeling, ADD-vs-UPDATE boundaries → candidate v0.3 rules listed for decision at pilot review (change-log mechanism; locked test selection immutable).
+- Hash reconciliation: `reports/PACKET_HASH_AUDIT.json` — recorded content-SHA (LF) vs file-byte SHA (CRLF); test packet bytes = locked pool SHA `921dcd5d…` (byte-identical to holdout lock source). Integrity clean.
+- `reports/D3_PILOT30_AI_PREREVIEW_REVIEW.md` is the diagnosis record. Human gold stays 0; agreement not measured; D5 not started.
+
 ## D3-pilot-verification — 2026-10-28 (CTO: no new features; bookkeeping only)
 - Verified pilot-30 ⊂ merged-457 (records byte-identical), disjoint from the 10 calibration items; 457 = 30 + 10 + 417 (**no double counting**); independent agreement items = 447. Role registry: `data/annotations/annotation_registry_v0.1.json`.
 - `reports/D3_PILOT30_REPORT_TEMPLATE.md`: GO/REVISE/STOP decision report skeleton (per-label agreement table, class supports, bad spans, DP-1/DP-2 disagreement analysis, workload) to be filled ONLY from real human files.
