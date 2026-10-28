@@ -1,6 +1,6 @@
-# 13 — Human Annotation Manual (Draft v0.2, 2026-10-28)
+# 13 — Human Annotation Manual (v0.2.1 — FROZEN for the human pilot, 2026-10-28)
 
-**Status:** Draft v0.2 — updated with **measured D0 evidence** from the real SGD train audit (16,142 dialogues; see `reports/D0_D1_FACTUAL_FINDINGS.md`). Taxonomy narrowed per decision log in `11_RISKS_AND_DECISIONS.md`. **NOT frozen:** finalize only after the D2 pilot and reviewer feedback.
+**Status:** **v0.2.1 FROZEN** for the calibration + pilot-30 + full human annotation runs. Frozen per CTO decision on 2026-10-28; further rule changes require a versioned change-log entry with affected example IDs and re-check of those items. The locked prospective test selection never changes due to guideline edits. Evidence base: measured D0 audit (`reports/D0_D1_FACTUAL_FINDINGS.md`), mining inspection, and the pilot-30 AI pre-review diagnosis (`reports/D3_PILOT30_AI_PREREVIEW_REVIEW.md`). **This is for reviewers, not an automatic label generator.**
 
 **Use only after D0/D1 feasibility evidence and review. Current taxonomy is provisional.** This is for reviewers, not an automatic label generator.
 
@@ -105,7 +105,32 @@ When a case is genuinely ambiguous: annotate your best judgment, set `difficulty
 ### Additional data (Frames) — evaluated, not yet acquired
 Microsoft Frames (see `24_EXTERNAL_DATASET_RESEARCH.md`) is the planned external source for enriching true L4/L5 RESTORE cases. Acquisition requires the official portal agreement (`LICENSE_REVIEW_REQUIRED` until then) and any imported examples form a **separate frozen pool** (`lock_prospective_holdout.py --source-release-id`, never mixed with the SGD lock). **Adding new data must never modify the existing locked holdout** (`real_sgd_heldout_lock.json` is immutable).
 
-### Scope note on the two-annotator standard
+### v0.2.1 clarifications (frozen 2026-10-28 — CTO rules 1–3)
+
+All examples below are **independent of the annotation packets** (verified: not present in the pilot-30, calibration, merged 457 or test 363 records). Real corpus examples are unreviewed SGD train text; constructed examples are marked.
+
+### DP-3 — `REFERENCE` = specific referable information, not topic return
+Label `REFERENCE` **only** when the expression points to a specific previously mentioned **value, option or referable piece of information**. Merely returning to an earlier conversation **topic/task** is NOT `REFERENCE` (and NOT `RESTORE_CUE`).
+- ✅ `REFERENCE`: `[36_00079 t4] "I want to go back to Dr. Hamblin Basil again."` — refers to a specific previously mentioned provider.
+- ✅ `REFERENCE` (constructed): *"Book the second option we discussed."* — points to a specific option.
+- ❌ no span (constructed): *"Anyway, back to the hotel reservations, please."* — topic resumption only.
+- ❌ no span: *"Back to booking tickets."* — task resumption; the object is a task, not a value.
+
+### DP-4 — `UPDATE_CUE` requires an explicit cue span in the current message
+`UPDATE_CUE` is labeled **only** on an explicit, markable cue word/phrase (`change`, `instead`, `make it`, `actually`, `I meant`, `on second thought`, …). If the state may have changed but the utterance has **no explicit cue**, do **not** invent one — label the value spans only.
+- ✅ `UPDATE_CUE` on "change": `[1_00008 t16] "No, change the time to 7 pm and for one person only."`
+- ✅ `UPDATE_CUE` on "instead of" (constructed): *"Two people instead of four."* — explicit contrast phrase.
+- ❌ no cue: `[3_00091 t4] "No, I forgot, my mother-in-law canceled, so I only need reservations for two."` — party size changes, but no explicit change expression → `NEW_VALUE` on "two" only, **no** `UPDATE_CUE`.
+
+### DP-5 — `ADD` vs `UPDATE` is decided by the previous value **of the same slot**
+First information for a slot → `ADD` + `NEW_VALUE` (rule R11). A previous value of the **same slot** being replaced → `UPDATE` (+ `NEW_VALUE`; `OLD_VALUE` only if the user *says* the old value). If the prior value is unclear from the visible context, **do not force `UPDATE`** — record the doubt in `uncertainty_notes` (prefix `UNCERTAIN:`) and leave the transition as `UNRESOLVED` if needed.
+- ✅ ADD (first fill): `[1_00000 t2] "I would like for it to be in San Jose."` → `NEW_VALUE` on "San Jose", no cue.
+- ✅ UPDATE (same slot, prior value replaced): `[1_00001 t16] "No, time change to twelve in the afternoon for one people"` → `UPDATE_CUE` on "change" + `NEW_VALUE` on "twelve in the afternoon" (old time not spoken → no `OLD_VALUE`).
+- ⚠️ UNCERTAIN (constructed): *"Make it 2 people."* with no clear prior party-size in context → do not assume what is being changed; annotate `NEW_VALUE` on "2 people", no cue, `UNCERTAIN: prior slot value not visible`.
+
+**Why these matter:** these three rules directly determine what behavior the model learns — task nouns must not become references, state change must not become a cue, and guessed updates must not become supervision.
+
+## Scope note on the two-annotator standard
 Two genuinely independent human annotators + adjudication is **our own research standard** (data-quality bar for this project). It is **not** a verified, instructor-mandated P2 requirement — we have no confirmed P2 guideline text to that effect. We keep the standard because annotation quality is the core of the contribution. If two real annotators turn out to be impossible, the fallback is explicit disclosure of AI-assisted labeling and **limiting the academic claims accordingly** — never presenting AI drafts as human review.
 
 ## Guideline change log (versioned; CTO rule 2026-10-28)
@@ -115,6 +140,7 @@ Any rule change discovered during annotation (e.g. in the pilot-30 review) must 
 | Version | Date | Change | Reason | Affected example IDs | Re-annotation needed |
 |---|---|---|---|---|---|
 | v0.2 | 2026-10-28 | R1–R12 + DP-1/DP-2 + UNCERTAIN convention | D0 evidence + mining inspection | — (baseline) | — |
+| **v0.2.1 (FROZEN for pilot)** | 2026-10-28 | **DP-3** (REFERENCE = specific referable info, not topic return), **DP-4** (UPDATE_CUE only on explicit cue spans; no invented cues for implicit change), **DP-5** (ADD vs UPDATE by same-slot previous value; uncertainty recorded instead of forced UPDATE) | CTO rules 1–3 after the pilot-30 AI pre-review (task-reference gap, implicit-cue over-labeling, ADD/UPDATE boundary disputes) | none — pilot/test records untouched; rule examples verified independent of all packets | no (pre-pilot freeze) |
 
 ## Annotating cases (source language: English)
 - `Actually, Paris instead of Berlin`: `Paris` NEW, `Berlin` OLD, `instead of` UPDATE_CUE. Antecedent slot needs prior context; if missing, target unknown.

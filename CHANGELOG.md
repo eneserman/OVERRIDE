@@ -2,6 +2,11 @@
 
 # Project change history (design, not model training)
 
+## Guideline v0.2.1 — 2026-10-28 (FROZEN for the human pilot; CTO rules 1-3)
+- `13_ANNOTATION_GUIDELINES.md` v0.2.1 with three clarifications before human annotation: **DP-3** REFERENCE = specific referable value/option, not topic return; **DP-4** UPDATE_CUE only on explicit cue spans (no invented cues for implicit change); **DP-5** ADD vs UPDATE by the same slot's previous value (uncertainty recorded instead of forced UPDATE).
+- Rule examples verified **independent of all annotation packets** (8/9 candidates outside merged-457/test-363; the one in-pool candidate discarded). Change-log row added; guideline version frozen pre-pilot; locked test selection untouched.
+- No datasets, splits, holdout lock or AI drafts modified; no new AI labels; gold stays 0; D5 not started.
+
 ## D3-AI-prereview-review — 2026-10-28 (private quality diagnosis; NOT gold)
 - Reviewed the CTO's pilot-30 AI suggestion package (2 policies, `AI_SIMULATION`) against guide v0.2: DP-1 respected 6/6 (no CANCEL on refusals), DP-2 respected 3/3 (no RESTORE on topic returns). Drafts kept local/gitignored — never shown to reviewers.
 - Coverage diagnosis confirms the CTO finding: only NEW_VALUE/REFERENCE/UPDATE_CUE observable in pilot-30; `OLD_VALUE`, `KEPT_VALUE`, `KEEP_CUE`, `RESTORE_CUE` have zero support there (cancel/restore buckets contain refusals/topic-returns). Pilot-30 = quality diagnostic + agreement trial for observable labels; **no schema-wide GO from it**.
