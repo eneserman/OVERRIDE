@@ -2,6 +2,12 @@
 
 # Project change history (design, not model training)
 
+## D3-pilot-30 RESULTS — 2026-10-29 (first real human agreement, executed)
+- Two independent human annotators (reviewer_A_BURAK, reviewer_B_ENES) completed the blind pilot-30; format validation 0 errors. Real agreement measured: **exact layer-set 0.8333**; per-label exact-span **NEW_VALUE F1 0.800, REFERENCE F1 0.667, UPDATE_CUE F1 1.000**; difficulty agreement 0.9333. OLD_VALUE/KEPT_VALUE/KEEP_CUE/CANCEL_CUE/RESTORE_CUE = 0 support → NOT EVALUABLE (consistent with D0/D1).
+- All 10 disagreements in 3 convention zones (boundary 5, value-ness 4, deixis 3); cue layer perfect (DP-1 and DP-4 both held). Decision: **REVISE-lite → GO**.
+- Guideline **v0.2.2**: C1 boundary, C2 value-ness, C3 deixis conventions added with the 10 affected example IDs for re-check (change log updated; locked test selection untouched).
+- Evidence: `reports/D3_PILOT30_RESULT.md`, `reports/D3_PILOT30_AGREEMENT.json`. Gold still 0 (adjudication next); D5 not started.
+
 ## Guideline v0.2.1 — 2026-10-28 (FROZEN for the human pilot; CTO rules 1-3)
 - `13_ANNOTATION_GUIDELINES.md` v0.2.1 with three clarifications before human annotation: **DP-3** REFERENCE = specific referable value/option, not topic return; **DP-4** UPDATE_CUE only on explicit cue spans (no invented cues for implicit change); **DP-5** ADD vs UPDATE by the same slot's previous value (uncertainty recorded instead of forced UPDATE).
 - Rule examples verified **independent of all annotation packets** (8/9 candidates outside merged-457/test-363; the one in-pool candidate discarded). Change-log row added; guideline version frozen pre-pilot; locked test selection untouched.

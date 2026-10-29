@@ -1,0 +1,31 @@
+index,example_id,current_user_utterance,value_spans,cue_spans,uncertain,reason
+1,SGD-dc0fc9487a384a238a,"At around 1:15 in the afternoon. I'll want a Standard car, but change my picking up date to the 10th of March.",NEW_VALUE: 10th of March,UPDATE_CUE: change,False,"Explicit pickup-date revision from the 9th to March 10th; the old value occurs in history, not in the current turn."
+2,SGD-a33d03792ef3358a22,Not now. I am interested in finding other events.,,,False,Rejects an offered ticket purchase and requests more events. No established user booking instruction was canceled.
+3,SGD-88b734d615dec8096c,I'd like to go back to booking tickets.,,,False,"Returns to a task (ticket booking), not a specific referable slot value or restored previous value."
+4,SGD-50c2d5c01ea6273bc9,I need to get a small rental car. I'll need to pick it up from San Jose and keep it until the 11th of March.,,,False,"First user turn; ""keep it until"" describes rental duration, not KEEP_CUE."
+5,SGD-3f5d23178a43f33127,"No, not now, but thank you.",,,False,Declines additional help; no cancellation of the previously purchased ticket.
+6,SGD-cb400b77ddaa3831a3,That one sounds perfect.,REFERENCE: That one,,False,Refers to the latest specific bus option offered by the system at turn 7; not a RESTORE.
+7,sgd_cb3429e09d02c8bbba6f,What's in my savings?,,,False,Switches to asking for savings balance; no revision to a prior instruction.
+8,SGD-6c77122a7b8320f22a,I need a flight from NYC to Washington.,,,False,Fills previously requested flight cities; no earlier values to overwrite.
+9,SGD-fe955354c12ab481b6,Please get me a seat on a bus at quarter past 5 in the evening.,,,False,"First turn: original bus request, not an instruction update."
+10,sgd_cb84c0478ba3127132d5,"Very well done, my friend. No, could you switch gears and come up with a restaurant near there?",,,False,"Switches from a completed cab booking to restaurant search; ""No"" is not cancellation of confirmed cab."
+11,sgd_a7f975950eb100c6ad18,"I like that, but let's keep looking. I'd prefer something child-friendly - maybe something involving a garden.",,,True,Asks for additional child-friendly/garden-oriented attractions; may refine a search but no certain same-slot replacement. Treat as negative with uncertainty.
+12,sgd_df230f1342d9a8fbb0b6,Sounds good to me. How much will the cost be in total?,,,False,Confirms the rental and asks a price question. Not an update.
+13,SGD-17b406ae825c527f3a,"not now, sometimes later.",,,False,Defers an offered movie playback. Not cancellation of a prior user instruction.
+14,sgd_212a606bd9aa40d63bee,Can you check my balance for me?,,,False,First turn: new checking account balance inquiry.
+15,SGD-1bff672afd614f473b,Whats the genre?,,,False,Question about genre; no revision of earlier selection.
+16,SGD-47cd5aa92ae186ccff,If I only keep it until March 5th and get a Compact what would be available then?,NEW_VALUE: March 5th; NEW_VALUE: Compact,,True,Changes planned car return date from March 10th to March 5th. Compact is a newly preferred car class relative to the offered Standard option; cue span not invented. Car-class replacement is less certain than the date update.
+17,SGD-3268166bbb220be170,"Not now, but tell me something exciting and interesting to do on the 13th of this month.",,,False,Refuses an offer to buy bus tickets and requests entertainment suggestions. Not confirmed instruction cancellation.
+18,sgd_a5d726d0e27a59f5082a,"Yes, Museum is the nice place. But I want to search for some other places also.",,,False,Requests more attraction options after considering museum; the existing positive consideration is not an instruction to replace a specific slot.
+19,SGD-71a78f8aba48043609,I'm looking for a salon.,,,False,First-turn initial salon search.
+20,sgd_667a77ce3c34f0be8dfc,Does it have 1 stop?,,,False,Asks whether an offered flight has one stop. Does not change a slot.
+21,sgd_eced9ae72265b4344224,I want to pick it up on the 4th of this month and keep it until Thursday next week.,,,False,First fill of pickup/return dates in response to system question; no update.
+22,sgd_5343c6632213dd6e7e60,"I wrote it down. Now, let's go back to the hotel issue. I need one room from March 10th",,,True,Returns to hotel task and mentions a room/date; topic return alone is neither REFERENCE nor RESTORE. Earlier hotel slot state is incompletely visible.
+23,sgd_8fc5b33e860a9aed5682,"No, not right now. That is everything. Thanks.",,,False,Declines an offered reservation; no established booking was canceled.
+24,SGD-cb1dd3332ec53679b8,How much would that one be?,REFERENCE: that one,,False,Deictic reference to the most recently offered specific rental car at system turn 11.
+25,SGD-c28e85347167059118,"Ok, back to that ticket.",REFERENCE: that ticket,,False,Specific earlier ticket/event reference to the Cubs vs Brewers option at system turn 1. Not slot-value restoration.
+26,sgd_43f2a82f62150cff9090,"I need something in New York City, preferably a games event.",,,False,"Fills preferred event category after the system requested type and city. This is ADD, not demonstrated UPDATE."
+27,sgd_a5a080f5910ac409e787,Make it 1 ticket for later today from Long Beach.,NEW_VALUE: 1 ticket; NEW_VALUE: later today,UPDATE_CUE: Make it,True,"Quantity revision 3 to 1 is explicit. Departure date may revise the earlier 7th; ""Long Beach"" fills a previously unfilled departure city and is not a revision span."
+28,SGD-500c5b88b32a42951f,"No thanks. Actually, I'm going to be in Vancouver on Monday next week. Can you see what's happening there on that date?",NEW_VALUE: Vancouver; NEW_VALUE: Monday next week,UPDATE_CUE: Actually,False,"Changes city NYC to Vancouver and date today to Monday next week; ""No thanks"" declines an offered event and is not CANCEL_CUE."
+29,sgd_9c2a8dc501010484a5fd,sounds fine to me. can you find me dentist there too?,,,True,"New dentist search; ""there"" has no clearly identifiable visible prior location, so no forced cross-turn REFERENCE."
+30,SGD-9c87f1030ff4092b34,"No, Not now.thank you.",,,False,Declines the system suggestion to book; no cancellation of an established prior user booking.

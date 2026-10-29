@@ -130,6 +130,18 @@ First information for a slot → `ADD` + `NEW_VALUE` (rule R11). A previous valu
 
 **Why these matter:** these three rules directly determine what behavior the model learns — task nouns must not become references, state change must not become a cue, and guessed updates must not become supervision.
 
+### v0.2.2 conventions (added 2026-10-29 after the pilot-30 human agreement review)
+
+**C1 — Boundary:** include the determiner when it is part of the noun phrase (`"a salon"`, `"a games event"`, `"on that date"`). Modifiers that restrict the value belong to it (`"small rental car"` — not just `"small"`). Both `text` and offsets follow the same span.
+
+**C2 — Value-ness:** label only **concrete/determinable** values. Vague preferences (`"some other places"`, `"something exciting and interesting"`) and query targets inside questions (`"1 stop"` in *"Does it have 1 stop?"*) get **no** value span. If genuinely uncertain: no span + `UNCERTAIN:` note.
+
+**C3 — Deixis:** bare pronouns and locatives (`"it"`, `"there"`) and question targets (`"the genre"` in *"What's the genre?"*) are **not** `REFERENCE`. `REFERENCE` requires a specific previously mentioned **value or option** (DP-3).
+
+**Why:** the pilot-30 human disagreements (10 items) concentrated exactly in these three convention zones — boundary (5), value-ness (4), deixis (3) — while cue decisions (DP-1, DP-4) had full agreement.
+
+**Affected example IDs (reviewers re-check these 10 under v0.2.2):** `SGD-1bff672afd614f473b`, `SGD-3268166bbb220be1`, `SGD-500c5b88b32a4295`, `SGD-50c2d5c01ea6273b`, `SGD-71a78f8aba480436`, `sgd_43f2a82f62150cff`, `sgd_667a77ce3c34f0be`, `sgd_a5d726d0e27a59f5`, `sgd_a7f975950eb100c6`, `sgd_cb84c0478ba31271`
+
 ## Scope note on the two-annotator standard
 Two genuinely independent human annotators + adjudication is **our own research standard** (data-quality bar for this project). It is **not** a verified, instructor-mandated P2 requirement — we have no confirmed P2 guideline text to that effect. We keep the standard because annotation quality is the core of the contribution. If two real annotators turn out to be impossible, the fallback is explicit disclosure of AI-assisted labeling and **limiting the academic claims accordingly** — never presenting AI drafts as human review.
 
@@ -141,6 +153,7 @@ Any rule change discovered during annotation (e.g. in the pilot-30 review) must 
 |---|---|---|---|---|---|
 | v0.2 | 2026-10-28 | R1–R12 + DP-1/DP-2 + UNCERTAIN convention | D0 evidence + mining inspection | — (baseline) | — |
 | **v0.2.1 (FROZEN for pilot)** | 2026-10-28 | **DP-3** (REFERENCE = specific referable info, not topic return), **DP-4** (UPDATE_CUE only on explicit cue spans; no invented cues for implicit change), **DP-5** (ADD vs UPDATE by same-slot previous value; uncertainty recorded instead of forced UPDATE) | CTO rules 1–3 after the pilot-30 AI pre-review (task-reference gap, implicit-cue over-labeling, ADD/UPDATE boundary disputes) | none — pilot/test records untouched; rule examples verified independent of all packets | no (pre-pilot freeze) |
+| **v0.2.2** | 2026-10-29 | **C1** boundary (determiner included in NP; restrictive modifiers belong to value), **C2** value-ness (concrete/determinable only; vague preferences and query targets unlabeled), **C3** deixis (bare pronouns/locatives/question targets are not REFERENCE) | pilot-30 human agreement: all 10 disagreements in these 3 zones (boundary 5, value-ness 4, deixis 3); cue layer agreement was 1.0 | `SGD-1bff672afd614f473b`, `SGD-3268166bbb220be1`, `SGD-500c5b88b32a4295`, `SGD-50c2d5c01ea6273b`, `SGD-71a78f8aba480436`, `sgd_43f2a82f62150cff`, `sgd_667a77ce3c34f0be`, `sgd_a5d726d0e27a59f5`, `sgd_a7f975950eb100c6`, `sgd_cb84c0478ba31271` | re-check of the 10 listed items only (~5 min/reviewer) |
 
 ## Annotating cases (source language: English)
 - `Actually, Paris instead of Berlin`: `Paris` NEW, `Berlin` OLD, `instead of` UPDATE_CUE. Antecedent slot needs prior context; if missing, target unknown.
