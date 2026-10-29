@@ -2,11 +2,11 @@
 
 # Project change history (design, not model training)
 
-## D3 ADJUDICATION FINAL — 2026-10-29 (joint decisions registered, gold build gated on 2 items)
+## D3 ADJUDICATION FINAL — 2026-10-29 (joint decisions registered, gold build gated on calibration completion)
 - Both reviewers approved proposals; joint resolution reached on the residual conflicts: **F1** `for/of/with+N` split, **F2** `around` outside, **`at least` inside**, **F3** (P4 artikelli `a small rental car [14-32]`, P7 agreed `it` removed, P9 `child-friendly` kept), **G1/G2** single version v0.2.3 for all sets, **G3** written C3 applied to agreed labels (2 `there` labels pending confirmation).
-- Guideline **v0.2.3** published with change log + affected IDs (C1-r, C4, C6, G3); full record `reports/D3_ADJUDICATION_DECISIONS_FINAL.md`.
+- Guideline **v0.2.3** published with change log + affected IDs (C1-r, C4, C6, G3); full record `reports/D3_ADJUDICATION_DECISIONS_FINAL.md`. G3 jointly confirmed: all 3 agreed bare labels (`it`, 2×`there`) removed from gold.
 - **Test-363 disposition rule registered BEFORE training:** 3 of 63 disputes resolved by F1/F2 (take B's spans); remaining **60 records stay UNRESOLVED** — test reference uses only both-reviewer-agreed spans, all 60 reported explicitly at evaluation. Test gold builds post-D5 in one logged access.
-- Train gold build gated on 2 reviewer actions: G3 confirmation (2 labels) + calibration completion (4 records). Frozen agreement scores unchanged (5e409339…, 36509d5f…).
+- Train gold build gated on the last reviewer action: **calibration completion (4 records)** — G3 already confirmed. Frozen agreement scores unchanged (5e409339…, 36509d5f…).
 
 ## D3-pilot-30 RESULTS — 2026-10-29 (first real human agreement, executed)
 - Two independent human annotators (reviewer_A_BURAK, reviewer_B_ENES) completed the blind pilot-30; format validation 0 errors. Real agreement measured: **exact layer-set 0.8333**; per-label exact-span **NEW_VALUE F1 0.800, REFERENCE F1 0.667, UPDATE_CUE F1 1.000**; difficulty agreement 0.9333. OLD_VALUE/KEPT_VALUE/KEEP_CUE/CANCEL_CUE/RESTORE_CUE = 0 support → NOT EVALUABLE (consistent with D0/D1).

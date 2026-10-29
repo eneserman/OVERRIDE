@@ -14,7 +14,7 @@
 | **F1** | split | `for/of/with + N` quantities are **split**: `a table` + `three`, `tickets` + `four people`, `a hotel` + `3 rooms`. |
 | **F2** | approximator | `around …` stays **outside**: `around 8 in the night` → `8 in the night`; `around 9:30 in the morning` → `9:30 in the morning`. |
 | **threshold** | `at least` | `at least 4.2` stays **whole** (qualifier, not a preposition). |
-| **G3** | C3 on agreed labels | Written C3 applied to agreed labels: bare `it`/`there` `REFERENCE`s are removed from gold. **Decided:** pilot-20 `it` → removed (yes). **Pending reviewer confirmation:** pilot-28 (`there` [100-105], P3) and pilot-29 (`there` [43-48], `sgd_9c2a8dc501010484a5fd`). |
+| **G3** | C3 on agreed labels | Written C3 applied to agreed labels: bare `it`/`there` `REFERENCE`s are removed from gold. **Confirmed (2026-10-29, joint):** pilot-20 `it` [5-7] → removed; pilot-28 `there` [100-105] (P3) → removed; pilot-29 `there` [43-48] (`sgd_9c2a8dc501010484a5fd`) → removed. |
 
 ## 2. Train double-set T1–T6 (final)
 
@@ -33,7 +33,7 @@
 |---|---|---|---|
 | P1 | `SGD-1bff672afd614f473b` | B (C4) | — (no span) |
 | P2 | `SGD-3268166bbb220be170` | B (C2) | `13th of this month` [69-87] (`exciting and interesting` dropped) |
-| P3 | `SGD-500c5b88b32a42951f` | A (C1-r) | `Vancouver` [40-49] · `Monday next week` [53-69] · UPDATE_CUE `Actually` [11-19] · REFERENCE `that date` [109-118] — **+ G3 pending:** agreed `there` [100-105] |
+| P3 | `SGD-500c5b88b32a42951f` | A (C1-r) | `Vancouver` [40-49] · `Monday next week` [53-69] · UPDATE_CUE `Actually` [11-19] · REFERENCE `that date` [109-118] — agreed `there` [100-105] **removed (G3 confirmed)** |
 | P4 | `SGD-50c2d5c01ea6273b` | ÖZEL (F3) | `a small rental car` [14-32] · `San Jose` [63-71] · `11th of March` [94-107] |
 | P5 | `SGD-71a78f8aba480436` | A | `a salon` [16-23] |
 | P6 | `sgd_43f2a82f62150cff` | A | `New York City` [20-33] · `a games event` [46-59] |
@@ -70,8 +70,8 @@ Method statement for the report: *"457 records: 90 double-blind independently an
 
 ## 6. Open items at the time of writing (both require reviewer action)
 
-1. **G3 confirmation for 2 labels** — pilot-28 `there` [100-105] (P3) and pilot-29 `there` [43-48] (`sgd_9c2a8dc501010484a5fd`): removed under written C3, or kept as agreed?
-2. **Calibration completion** — Burak: fill `SGD-56999b51a110fa856a`, `sgd_b7dcd06bfc640bd25e55`, `sgd_ac18893cd1c26a16dfb0`; Enes: fill `SGD-4f7096486f77086be1` + the same 3 (all 4 are discussed-calibration items).
+1. ~~**G3 confirmation for 2 labels**~~ → **RESOLVED 2026-10-29: both `there` labels removed** (joint confirmation; see §1 G3).
+2. **Calibration completion** — Burak: fill `SGD-56999b51a110fa856a`, `sgd_b7dcd06bfc640bd25e55`, `sgd_ac18893cd1c26a16dfb0`; Enes: fill `SGD-4f7096486f77086be1` + the same 3 (all 4 are discussed-calibration items). **This is the last blocker before gold.**
 
 **Signed (joint):** reviewer_A_BURAK (19:05 approval) · reviewer_B_ENES (session approval) — **Date:** 2026-10-29
 **Transcribed by:** coordinator (mechanical; no label suggestions) · **Date:** 2026-10-29

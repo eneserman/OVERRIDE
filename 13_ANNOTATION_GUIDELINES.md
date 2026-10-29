@@ -157,7 +157,7 @@ Source: joint decision message of the two reviewers (Burak 19:05 approved versio
 
 **C6 — a reference to a previously mentioned day/time is `REFERENCE`, not an update:** `on the same day` in a non-revision sentence → `REFERENCE`.
 
-**G3 — written C3 applied to agreed labels:** `REFERENCE` labels that both reviewers agreed on but that are bare pronouns/locatives (`it`, `there`) are removed from gold under written C3 — decided for pilot item 20 (`it`: yes); the two `there` labels (pilot items 28 and 29) were awaiting reviewer confirmation at the time of writing and are recorded in the decision log.
+**G3 — written C3 applied to agreed labels:** `REFERENCE` labels that both reviewers agreed on but that are bare pronouns/locatives (`it`, `there`) are removed from gold under written C3 — **jointly confirmed 2026-10-29 for all three:** pilot-20 `it` [5-7], pilot-28 `there` [100-105], pilot-29 `there` [43-48].
 
 *Numbering note:* reviewer session notes also cite a session-"R4" (concrete properties such as `child-friendly` ARE values). That is **not** the repo R4 (refund/policy hypotheticals); the mapping is recorded here to avoid a silent clash and will be reconciled before v1.0.
 
