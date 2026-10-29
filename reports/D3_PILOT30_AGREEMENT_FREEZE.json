@@ -1,0 +1,13 @@
+{
+  "status": "AGREEMENT_FROZEN_BEFORE_ADJUDICATION",
+  "frozen_utc": "2026-10-29",
+  "rule": "This agreement score is computed ONLY from the first blind independent files. Adjudication corrections go to gold and NEVER change this number. Reported to the instructor as independent-two-annotator agreement.",
+  "agreement_file": "reports\\D3_PILOT30_AGREEMENT.json",
+  "agreement_file_sha256": "5e409339785f33a36034d728639e3f2fbc7921658aa24dbe1fb4437777884194",
+  "source_files": {
+    "reviewer_A_BURAK_filled.jsonl": "7bff0ffb117501dfcad41e1316d3c250fa03b43ff9c2071b098f6cfc1338117b",
+    "reviewer_B_ENES_filled.jsonl": "e331e17f2f8416e740fe45a2ded5422683dd6510eee11c2a5c0f9da582987d7c"
+  },
+  "independence_caveat": "Coordinator-entered items disclosed: in reviewer_A_BURAK_filled.jsonl the coordinator (not Burak) entered transition-layer assumptions at positions 1, 11, 20 and the REFERENCE label question at 25. Span labels elsewhere are Burak s decisions. Transition layer is NOT part of the span agreement score (value_spans/cue_spans only), so the frozen numbers are unaffected. Position 25 REFERENCE was marked by both reviewers identically.",
+  "format_note": "Transitions use different schemas (A: {op,value}; B: {op,slot,before,after}) - flagged as FORMAT_MISMATCH category in adjudication; not a reviewer disagreement."
+}
