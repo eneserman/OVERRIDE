@@ -11,3 +11,4 @@ Every access is recorded below. An unrecorded access is a **protocol violation**
 | 0 | 2026-10-28 | (none) | Log created; test gold does not exist yet (0 human labels) | — | CTO | baseline: **no accesses so far** |
 
 Related artifacts: `data/prospective_holdout/real_sgd_heldout_lock.json` (manifest SHA-256 `b42299f8…0581`, immutable), `reports/D3_GOLD_CREATION_PROTOCOL.md` (phases B + access control), `data/annotations/d3_test_packets_v0.1/` (blind packets; unlabeled content is also sealed from development use).
+| 2026-10-29 | coordinator | none (blind packets only) | distributed sealed test-363 blind packets for human annotation (Yol A: both reviewers label all 363 independently); no test gold exists yet, none accessed |
