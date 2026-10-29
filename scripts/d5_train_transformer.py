@@ -174,8 +174,8 @@ def main() -> int:
             enc, v, c, pos, miss = build_example(r, tok, use_hist, args.max_length, args.hist_words)
             misses_total += miss
             out.append((enc,
-                        [v_ix[t] if isinstance(t, str) else IGNORE for t in v],
-                        [c_ix[t] if isinstance(t, str) else IGNORE for t in c],
+                        [v_ix.get(t, IGNORE) if isinstance(t, str) else IGNORE for t in v],
+                        [c_ix.get(t, IGNORE) if isinstance(t, str) else IGNORE for t in c],
                         pos, r))
     print(f"alignment misses (labeled words without subtoken): {misses_total}")
     if misses_total:
@@ -272,6 +272,16 @@ def main() -> int:
 
     args.outdir.mkdir(parents=True, exist_ok=True)
     tag = f"tf_h{args.history}"
+    ckpt_path = args.outdir / f"checkpoint_{tag}.pt"
+    torch.save({"state_dict": best["state"],
+                "model_name": args.model,
+                "v_tagset": v_tagset, "c_tagset": c_tagset,
+                "history": args.history, "seed": args.seed,
+                "max_length": args.max_length, "hist_words": args.hist_words,
+                "best_epoch": best["epoch"], "dev_score": round(best["score"], 4)},
+               ckpt_path)
+    import hashlib as _h
+    ckpt_sha = _h.sha256(ckpt_path.read_bytes()).hexdigest()
     (args.outdir / f"pred_{tag}_dev.jsonl").write_text(
         "".join(json.dumps(p, ensure_ascii=False) + "\n" for p in preds), encoding="utf-8")
     rep["config"] = {
@@ -283,6 +293,7 @@ def main() -> int:
         "device": str(device), "torch": torch.__version__, "alignment_misses": misses_total,
         "v_tagset": v_tagset, "c_tagset": c_tagset, "epochs_run": history_log,
         "elapsed_sec": round(time.time() - t0, 1),
+        "checkpoint": ckpt_path.name, "checkpoint_sha256": ckpt_sha,
     }
     (args.outdir / f"metrics_{tag}_dev.json").write_text(
         json.dumps(rep, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
