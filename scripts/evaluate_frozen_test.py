@@ -20,8 +20,11 @@ def canonical_gold_sha256(rows: list[dict]) -> str:
     return hashlib.sha256(canonical.encode('utf-8')).hexdigest()
 
 
-def check_manifest(gold: list[dict], manifest: dict) -> list[dict]:
-    verdict=validate_rows(gold,require_gold=True)
+def check_manifest(gold: list[dict], manifest: dict,
+                   accept_consensus: bool = False,
+                   allowed_splits: tuple[str, ...] = ('train', 'dev', 'test')) -> list[dict]:
+    verdict=validate_rows(gold,require_gold=True,allowed_splits=allowed_splits,
+                          accept_consensus=accept_consensus)
     if verdict['status']!='PASS':
         raise ValueError('Full gold invalid: '+str(verdict['errors'][:5]))
     if canonical_gold_sha256(gold) != manifest.get('gold_content_sha256'):
@@ -54,16 +57,23 @@ def main() -> None:
     parser.add_argument('--manifest',type=Path,required=True)
     parser.add_argument('--test-predictions',type=Path,required=True)
     parser.add_argument('--out',type=Path,required=True)
+    parser.add_argument('--accept-consensus-reference',action='store_true',
+                        help='accept annotation.status=CONSENSUS_REFERENCE rows (DEV-001 prospective test '
+                             'reference: 60/63 disputes never adjudicated); default stays strict ADJUDICATED-only')
     args=parser.parse_args()
     gold=read_jsonl(args.full_gold)
     manifest=json.loads(args.manifest.read_text(encoding='utf-8'))
-    heldout=check_manifest(gold,manifest)
+    heldout=check_manifest(gold,manifest,accept_consensus=args.accept_consensus_reference)
     predictions=read_jsonl(args.test_predictions)
-    report=evaluate(heldout,predictions)
+    report=evaluate(heldout,predictions,
+                    accept_consensus=args.accept_consensus_reference,
+                    allowed_splits=('train','dev','test'))
     report['evaluation_split']='frozen_custom_test'
     report['gold_content_sha256']=manifest['gold_content_sha256']
     report['manifest_digest']=manifest['manifest_digest']
-    report['source_split']='original_SGD_train_subset'
+    report['source_split']='SGD train-side (model development) + prospective holdout from official SGD dev/test'
+    report['test_reference_kind']=('consensus_reference_DEV-001' if args.accept_consensus_reference
+                                   else 'adjudicated_gold')
     args.out.parent.mkdir(parents=True,exist_ok=True)
     if args.out.exists():
         raise SystemExit(f'Refusing to overwrite frozen evaluation report: {args.out}')

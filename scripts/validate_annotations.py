@@ -14,6 +14,9 @@ from typing import Any
 VALUE_LABELS = frozenset({'NEW_VALUE', 'OLD_VALUE', 'KEPT_VALUE', 'REFERENCE'})
 CUE_LABELS = frozenset({'UPDATE_CUE', 'CANCEL_CUE', 'KEEP_CUE', 'RESTORE_CUE'})
 GOLD_STATUS = 'ADJUDICATED'
+# DEV-001: the prospective test reference is double-annotated consensus, not
+# adjudicated for the 60 unresolved disputes; accepted ONLY via explicit flag.
+CONSENSUS_STATUS = 'CONSENSUS_REFERENCE'
 
 
 def read_jsonl(path: Path) -> list[dict[str, Any]]:
@@ -35,7 +38,8 @@ def read_jsonl(path: Path) -> list[dict[str, Any]]:
 
 
 def validate_record(row: dict[str, Any], require_gold: bool = False,
-                    allowed_splits: tuple[str, ...] = ('train',)) -> list[str]:
+                    allowed_splits: tuple[str, ...] = ('train',),
+                    accept_consensus: bool = False) -> list[str]:
     errs: list[str] = []
     rid = row.get('id')
     if not isinstance(rid, str) or not rid.strip():
@@ -103,8 +107,10 @@ def validate_record(row: dict[str, Any], require_gold: bool = False,
                 errs.append(f'{key}: within-layer overlap between spans {preceding[2]} and {following[2]}')
     if require_gold:
         a = row.get('annotation')
-        if not isinstance(a, dict) or a.get('status') != GOLD_STATUS:
-            errs.append('gold status must be annotation.status=ADJUDICATED')
+        allowed_status = {GOLD_STATUS, CONSENSUS_STATUS} if accept_consensus else {GOLD_STATUS}
+        if not isinstance(a, dict) or a.get('status') not in allowed_status:
+            hint = ' (or CONSENSUS_REFERENCE when explicitly accepted, DEV-001)' if accept_consensus else ''
+            errs.append('gold status must be annotation.status=ADJUDICATED' + hint)
         else:
             if not isinstance(a.get('guideline_version'), str) or not a['guideline_version'].strip():
                 errs.append('gold missing annotation.guideline_version')
@@ -124,7 +130,8 @@ def validate_record(row: dict[str, Any], require_gold: bool = False,
 
 
 def validate_rows(rows: list[dict[str, Any]], require_gold: bool = False,
-                  allowed_splits: tuple[str, ...] = ('train',)) -> dict[str, Any]:
+                  allowed_splits: tuple[str, ...] = ('train',),
+                  accept_consensus: bool = False) -> dict[str, Any]:
     all_errors = []
     seen = set()
     for i, row in enumerate(rows):
@@ -133,7 +140,8 @@ def validate_rows(rows: list[dict[str, Any]], require_gold: bool = False,
         if rid_key in seen:
             all_errors.append(f'row {i}: duplicate example id {rid!r}')
         seen.add(rid_key)
-        all_errors.extend(f'row {i} id={rid!r}: {err}' for err in validate_record(row, require_gold, allowed_splits))
+        all_errors.extend(f'row {i} id={rid!r}: {err}' for err
+                          in validate_record(row, require_gold, allowed_splits, accept_consensus))
     return {'records':len(rows),'status':'PASS' if not all_errors and rows else 'FAIL', 'errors':all_errors}
 
 
@@ -144,9 +152,13 @@ def main():
     ap.add_argument('--allowed-splits', default='train',
                     help='comma list of official SGD splits acceptable for gold: train (default) or dev,test for the sealed prospective test gold')
     ap.add_argument('--report', type=Path, help='optional JSON result path')
+    ap.add_argument('--accept-consensus-reference', action='store_true',
+                    help='accept annotation.status=CONSENSUS_REFERENCE (DEV-001 prospective test reference); '
+                         'default stays strict ADJUDICATED-only')
     args = ap.parse_args()
     allowed = tuple(s.strip() for s in args.allowed_splits.split(',') if s.strip())
-    report = validate_rows(read_jsonl(args.input), args.require_gold, allowed)
+    report = validate_rows(read_jsonl(args.input), args.require_gold, allowed,
+                           accept_consensus=args.accept_consensus_reference)
     if args.report:
         args.report.parent.mkdir(parents=True, exist_ok=True)
         args.report.write_text(json.dumps(report, indent=2, ensure_ascii=False)+'\n',encoding='utf-8')

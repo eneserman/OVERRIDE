@@ -15,6 +15,7 @@
 | **Why it is defensible** | (a) two independent human annotations exist for all 363 records — the reviewer input to adjudication is complete; (b) the consensus-only reference is stricter, fully mechanical (intersection), and decided without any model output in existence; (c) the frozen test agreement (`36509d5f…`) measures exactly this human consensus; (d) the 60 records are enumerated and reported, never silently dropped or merged. |
 | **Impact on claims** | Final test metrics are computed against a **consensus reference**, not an adjudicated gold. The report states: N=363 records, 303 full-agreement records, 60 unresolved (agreed spans only), with per-label counts of excluded one-sided spans. Any statement like "adjudicated test gold" is therefore forbidden; the correct phrase is "double-annotated consensus test reference". |
 | **Reversal** | If the reviewers later adjudicate the 60, that produces a NEW reference version (gold v2), reported alongside — never replacing v1 silently, and only if recorded here before use. |
+| **Implementation (code)** | The locked evaluation entry point accepts this reference only via the explicit `--accept-consensus-reference` flag (`annotation.status=CONSENSUS_REFERENCE`, gated; strict ADJUDICATED-only default preserved and covered by regression tests `tests/test_consensus_reference_v08.py`). Full-gold validation spans official splits `train,dev,test`. Without the flag every entry point still refuses the consensus rows — the deviation can never be applied silently. |
 
 ## Log
 

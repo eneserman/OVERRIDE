@@ -21,8 +21,11 @@ def fscore(tp:int,fp:int,fn:int):
     return {'precision':round(p,6),'recall':round(r,6),'f1':round(f,6) if f is not None else None,'tp':tp,'fp':fp,'fn':fn}
 
 
-def evaluate(gold_rows:list[dict], pred_rows:list[dict]):
-    check=validate_rows(gold_rows,require_gold=True)
+def evaluate(gold_rows:list[dict], pred_rows:list[dict],
+             accept_consensus:bool=False,
+             allowed_splits:tuple[str,...]=('train',)):
+    check=validate_rows(gold_rows,require_gold=True,allowed_splits=allowed_splits,
+                        accept_consensus=accept_consensus)
     if check['status']!='PASS':
         raise ValueError('Invalid gold: '+str(check['errors'][:5]))
     if len({r.get('id') for r in pred_rows})!=len(pred_rows):
