@@ -142,6 +142,25 @@ First information for a slot → `ADD` + `NEW_VALUE` (rule R11). A previous valu
 
 **Affected example IDs (reviewers re-check these 10 under v0.2.2):** `SGD-1bff672afd614f473b`, `SGD-3268166bbb220be1`, `SGD-500c5b88b32a4295`, `SGD-50c2d5c01ea6273b`, `SGD-71a78f8aba480436`, `sgd_43f2a82f62150cff`, `sgd_667a77ce3c34f0be`, `sgd_a5d726d0e27a59f5`, `sgd_a7f975950eb100c6`, `sgd_cb84c0478ba31271`
 
+### v0.2.3 conventions (JOINT adjudication decisions, 2026-10-29 — both reviewers approved)
+
+Source: joint decision message of the two reviewers (Burak 19:05 approved version + Enes approved version + F1/F2/F3 resolution). Full record: `reports/D3_ADJUDICATION_DECISIONS_FINAL.md`.
+
+**C1-r — preposition / quantity / threshold revision (supersedes v0.2.2 boundary wording where they conflict):**
+- **Leading** place/time prepositions (`on`, `from`, `until`, `at`) and approximators (`around`, `about`) stay **outside** the span: `on that date` → `that date`; `around 8 in the night` → `8 in the night`.
+- Connectives **inside** the value stay in: `8 in the night`, `10th of March`.
+- Quantity structures `for/of/with + N` are **split** into head + quantity: `a table for three` → `a table` + `three`; `tickets for four people` → `tickets` + `four people`; `a hotel with 3 rooms` → `a hotel` + `3 rooms`.
+- **Threshold modifiers stay in** — not prepositions: `at least 4.2` (the whole expression qualifies the value).
+- Determiners and possessives stay in: `a salon`, `a small rental car [14-32]`, `a games event`.
+
+**C4 — question targets are not labeled:** the property/value a question asks about gets no span. `Whats the genre?` → no span; `Does it have 1 stop?` → no span for `1 stop`.
+
+**C6 — a reference to a previously mentioned day/time is `REFERENCE`, not an update:** `on the same day` in a non-revision sentence → `REFERENCE`.
+
+**G3 — written C3 applied to agreed labels:** `REFERENCE` labels that both reviewers agreed on but that are bare pronouns/locatives (`it`, `there`) are removed from gold under written C3 — decided for pilot item 20 (`it`: yes); the two `there` labels (pilot items 28 and 29) were awaiting reviewer confirmation at the time of writing and are recorded in the decision log.
+
+*Numbering note:* reviewer session notes also cite a session-"R4" (concrete properties such as `child-friendly` ARE values). That is **not** the repo R4 (refund/policy hypotheticals); the mapping is recorded here to avoid a silent clash and will be reconciled before v1.0.
+
 ## Scope note on the two-annotator standard
 Two genuinely independent human annotators + adjudication is **our own research standard** (data-quality bar for this project). It is **not** a verified, instructor-mandated P2 requirement — we have no confirmed P2 guideline text to that effect. We keep the standard because annotation quality is the core of the contribution. If two real annotators turn out to be impossible, the fallback is explicit disclosure of AI-assisted labeling and **limiting the academic claims accordingly** — never presenting AI drafts as human review.
 
@@ -154,6 +173,7 @@ Any rule change discovered during annotation (e.g. in the pilot-30 review) must 
 | v0.2 | 2026-10-28 | R1–R12 + DP-1/DP-2 + UNCERTAIN convention | D0 evidence + mining inspection | — (baseline) | — |
 | **v0.2.1 (FROZEN for pilot)** | 2026-10-28 | **DP-3** (REFERENCE = specific referable info, not topic return), **DP-4** (UPDATE_CUE only on explicit cue spans; no invented cues for implicit change), **DP-5** (ADD vs UPDATE by same-slot previous value; uncertainty recorded instead of forced UPDATE) | CTO rules 1–3 after the pilot-30 AI pre-review (task-reference gap, implicit-cue over-labeling, ADD/UPDATE boundary disputes) | none — pilot/test records untouched; rule examples verified independent of all packets | no (pre-pilot freeze) |
 | **v0.2.2** | 2026-10-29 | **C1** boundary (determiner included in NP; restrictive modifiers belong to value), **C2** value-ness (concrete/determinable only; vague preferences and query targets unlabeled), **C3** deixis (bare pronouns/locatives/question targets are not REFERENCE) | pilot-30 human agreement: all 10 disagreements in these 3 zones (boundary 5, value-ness 4, deixis 3); cue layer agreement was 1.0 | `SGD-1bff672afd614f473b`, `SGD-3268166bbb220be1`, `SGD-500c5b88b32a4295`, `SGD-50c2d5c01ea6273b`, `SGD-71a78f8aba480436`, `sgd_43f2a82f62150cff`, `sgd_667a77ce3c34f0be`, `sgd_a5d726d0e27a59f5`, `sgd_a7f975950eb100c6`, `sgd_cb84c0478ba31271` | re-check of the 10 listed items only (~5 min/reviewer) |
+| **v0.2.3 (JOINT, adjudication)** | 2026-10-29 | **C1-r** (leading prepositions/approximators out; internal connectives in; `for/of/with + N` split; `at least` in; determiners in), **C4** (question targets unlabeled), **C6** (day/time reference = REFERENCE not update), **G3** (written C3 applied to agreed labels) | joint adjudication decisions of both reviewers after the full 457 + test-363 rounds (F1/F2/F3 + G1-G3) | train: `SGD-835ec70f9e0a905054`, `SGD-4dfe44204b3234df58`, `SGD-c5bd6a91af5fa668c3`, `SGD-32ffc7799423754ec9`, `SGD-50c2d5c01ea6273b`, `sgd_667a77ce3c34f0be`, `sgd_a7f975950eb100c6`; test (gold build, post-D5): `SGD-01b297fc690c6a0e2b`, `SGD-96f3dac32fadadc7dd`, `SGD-4933c6a78cfa85d9ef`, `SGD-473c2fae903c3d2740`, `SGD-afba777aac592e7d5d`; 457: `SGD-7bb4b2f1283e503502` + verification sheet row 163 | none — every affected item was decided directly in adjudication (no re-check round) |
 
 ## Annotating cases (source language: English)
 - `Actually, Paris instead of Berlin`: `Paris` NEW, `Berlin` OLD, `instead of` UPDATE_CUE. Antecedent slot needs prior context; if missing, target unknown.
