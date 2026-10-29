@@ -1,0 +1,12 @@
+{
+  "status": "TEST_AGREEMENT_FROZEN_BEFORE_ADJUDICATION",
+  "frozen_utc": "2026-10-29",
+  "rule": "Computed ONLY from the first blind independent test files. Adjudication corrections go to test gold and NEVER change this number. Test gold stays sealed until the single final evaluation run.",
+  "agreement_file_sha256": "36509d5fad0f060798c46b5b90ed45f7f622a4bbf09db838b5b826094bb648fb",
+  "source_files_sha256": {
+    "reviewer_A_BURAK_TEST363_filled.jsonl": "6d7a030fde63248715ce04161184735627ae8d6323565602bfbe799902fe1f99",
+    "reviewer_B_ENES_TEST363_filled.jsonl": "0ead40e7a34f7547baa901b48af6a16308385e69fc45b070dc27d9b6e1c9cbe5"
+  },
+  "examples": 363,
+  "exact_layer_set_agreement": 0.910468
+}
