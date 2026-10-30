@@ -1,0 +1,1201 @@
+{
+  "status": "HUMAN_AGREEMENT_ONLY_NOT_GOLD",
+  "examples": 160,
+  "layer_judgements": 320,
+  "exact_layer_set_agreement": 0.80625,
+  "span_level_agreement_by_label": {
+    "value_spans": {
+      "KEPT_VALUE": {
+        "matched_exact_spans": 0,
+        "only_in_A": 1,
+        "only_in_B": 1,
+        "agreement_f1_symmetric": 0.0
+      },
+      "NEW_VALUE": {
+        "matched_exact_spans": 137,
+        "only_in_A": 7,
+        "only_in_B": 5,
+        "agreement_f1_symmetric": 0.958042
+      },
+      "OLD_VALUE": {
+        "matched_exact_spans": 1,
+        "only_in_A": 0,
+        "only_in_B": 0,
+        "agreement_f1_symmetric": 1.0
+      },
+      "REFERENCE": {
+        "matched_exact_spans": 23,
+        "only_in_A": 5,
+        "only_in_B": 0,
+        "agreement_f1_symmetric": 0.901961
+      }
+    },
+    "cue_spans": {
+      "KEEP_CUE": {
+        "matched_exact_spans": 1,
+        "only_in_A": 3,
+        "only_in_B": 0,
+        "agreement_f1_symmetric": 0.4
+      },
+      "RESTORE_CUE": {
+        "matched_exact_spans": 1,
+        "only_in_A": 0,
+        "only_in_B": 0,
+        "agreement_f1_symmetric": 1.0
+      },
+      "UPDATE_CUE": {
+        "matched_exact_spans": 38,
+        "only_in_A": 45,
+        "only_in_B": 13,
+        "agreement_f1_symmetric": 0.567164
+      }
+    }
+  },
+  "difficulty_agreement": 0.0,
+  "uncertainty_flagged": {
+    "reviewer_A": [
+      "SGD-9511834c56716aaf23",
+      "SGD-96f8721d8120084e0d",
+      "SGD-c148b76b064ec80d03"
+    ],
+    "reviewer_B": [
+      "SGD-0aeb76fe2e383c0eee",
+      "SGD-196339e49e558f31db",
+      "SGD-629e1aa3a2c104ade3",
+      "SGD-6572eafbc688dfbf57",
+      "SGD-8d952e1c697d9f7acc",
+      "SGD-98b9019a1c1e325da5",
+      "SGD-afd372ee3c8413b125"
+    ]
+  },
+  "disagreements": [
+    {
+      "id": "SGD-049ff086c0b6412caa",
+      "layer": "cue_spans",
+      "reviewer_A": [
+        [
+          19,
+          25,
+          "UPDATE_CUE"
+        ]
+      ],
+      "reviewer_B": []
+    },
+    {
+      "id": "SGD-05919651e082ea8e76",
+      "layer": "cue_spans",
+      "reviewer_A": [
+        [
+          0,
+          8,
+          "UPDATE_CUE"
+        ],
+        [
+          14,
+          20,
+          "UPDATE_CUE"
+        ]
+      ],
+      "reviewer_B": [
+        [
+          0,
+          8,
+          "UPDATE_CUE"
+        ],
+        [
+          14,
+          38,
+          "UPDATE_CUE"
+        ]
+      ]
+    },
+    {
+      "id": "SGD-08deba7c65388dc5ae",
+      "layer": "value_spans",
+      "reviewer_A": [
+        [
+          32,
+          43,
+          "NEW_VALUE"
+        ],
+        [
+          58,
+          79,
+          "NEW_VALUE"
+        ]
+      ],
+      "reviewer_B": [
+        [
+          32,
+          43,
+          "NEW_VALUE"
+        ],
+        [
+          63,
+          79,
+          "NEW_VALUE"
+        ]
+      ]
+    },
+    {
+      "id": "SGD-0c01829199c4e2c341",
+      "layer": "cue_spans",
+      "reviewer_A": [
+        [
+          5,
+          12,
+          "UPDATE_CUE"
+        ]
+      ],
+      "reviewer_B": []
+    },
+    {
+      "id": "SGD-13d6f8299247fe0a17",
+      "layer": "cue_spans",
+      "reviewer_A": [
+        [
+          0,
+          6,
+          "UPDATE_CUE"
+        ]
+      ],
+      "reviewer_B": [
+        [
+          0,
+          19,
+          "UPDATE_CUE"
+        ]
+      ]
+    },
+    {
+      "id": "SGD-18bb687ed7b682838c",
+      "layer": "cue_spans",
+      "reviewer_A": [
+        [
+          41,
+          47,
+          "UPDATE_CUE"
+        ]
+      ],
+      "reviewer_B": []
+    },
+    {
+      "id": "SGD-1d497d422c4eab4643",
+      "layer": "value_spans",
+      "reviewer_A": [
+        [
+          22,
+          82,
+          "NEW_VALUE"
+        ],
+        [
+          99,
+          115,
+          "NEW_VALUE"
+        ]
+      ],
+      "reviewer_B": [
+        [
+          51,
+          82,
+          "NEW_VALUE"
+        ],
+        [
+          99,
+          115,
+          "NEW_VALUE"
+        ]
+      ]
+    },
+    {
+      "id": "SGD-1d497d422c4eab4643",
+      "layer": "cue_spans",
+      "reviewer_A": [
+        [
+          7,
+          13,
+          "UPDATE_CUE"
+        ]
+      ],
+      "reviewer_B": [
+        [
+          7,
+          21,
+          "UPDATE_CUE"
+        ]
+      ]
+    },
+    {
+      "id": "SGD-24cd4513a4ebb5991c",
+      "layer": "cue_spans",
+      "reviewer_A": [
+        [
+          0,
+          17,
+          "UPDATE_CUE"
+        ],
+        [
+          25,
+          32,
+          "UPDATE_CUE"
+        ]
+      ],
+      "reviewer_B": [
+        [
+          0,
+          17,
+          "UPDATE_CUE"
+        ]
+      ]
+    },
+    {
+      "id": "SGD-25903ce29dab47a18f",
+      "layer": "cue_spans",
+      "reviewer_A": [
+        [
+          4,
+          12,
+          "UPDATE_CUE"
+        ],
+        [
+          14,
+          20,
+          "UPDATE_CUE"
+        ]
+      ],
+      "reviewer_B": [
+        [
+          4,
+          12,
+          "UPDATE_CUE"
+        ],
+        [
+          14,
+          28,
+          "UPDATE_CUE"
+        ]
+      ]
+    },
+    {
+      "id": "SGD-2e18afa744fe98c481",
+      "layer": "cue_spans",
+      "reviewer_A": [
+        [
+          21,
+          27,
+          "UPDATE_CUE"
+        ]
+      ],
+      "reviewer_B": [
+        [
+          21,
+          33,
+          "UPDATE_CUE"
+        ]
+      ]
+    },
+    {
+      "id": "SGD-306e3a65ae69e77444",
+      "layer": "cue_spans",
+      "reviewer_A": [
+        [
+          40,
+          44,
+          "KEEP_CUE"
+        ]
+      ],
+      "reviewer_B": []
+    },
+    {
+      "id": "SGD-3ab082ee7713c181d2",
+      "layer": "cue_spans",
+      "reviewer_A": [
+        [
+          4,
+          10,
+          "UPDATE_CUE"
+        ]
+      ],
+      "reviewer_B": []
+    },
+    {
+      "id": "SGD-3c5115e139cff2b700",
+      "layer": "value_spans",
+      "reviewer_A": [
+        [
+          60,
+          65,
+          "NEW_VALUE"
+        ]
+      ],
+      "reviewer_B": []
+    },
+    {
+      "id": "SGD-3c7841264aec8b28be",
+      "layer": "cue_spans",
+      "reviewer_A": [
+        [
+          13,
+          20,
+          "UPDATE_CUE"
+        ]
+      ],
+      "reviewer_B": []
+    },
+    {
+      "id": "SGD-4182f12865bf2f5576",
+      "layer": "cue_spans",
+      "reviewer_A": [
+        [
+          3,
+          11,
+          "UPDATE_CUE"
+        ],
+        [
+          20,
+          27,
+          "UPDATE_CUE"
+        ]
+      ],
+      "reviewer_B": [
+        [
+          3,
+          11,
+          "UPDATE_CUE"
+        ]
+      ]
+    },
+    {
+      "id": "SGD-421669a0dcd75378c2",
+      "layer": "cue_spans",
+      "reviewer_A": [
+        [
+          4,
+          11,
+          "UPDATE_CUE"
+        ]
+      ],
+      "reviewer_B": []
+    },
+    {
+      "id": "SGD-44d89d59ea60b04ac0",
+      "layer": "cue_spans",
+      "reviewer_A": [
+        [
+          18,
+          24,
+          "UPDATE_CUE"
+        ]
+      ],
+      "reviewer_B": [
+        [
+          18,
+          43,
+          "UPDATE_CUE"
+        ]
+      ]
+    },
+    {
+      "id": "SGD-44fff5d6abbbeff6cf",
+      "layer": "cue_spans",
+      "reviewer_A": [
+        [
+          15,
+          21,
+          "UPDATE_CUE"
+        ]
+      ],
+      "reviewer_B": [
+        [
+          15,
+          40,
+          "UPDATE_CUE"
+        ]
+      ]
+    },
+    {
+      "id": "SGD-4d7c43c341997d76b7",
+      "layer": "cue_spans",
+      "reviewer_A": [
+        [
+          7,
+          13,
+          "UPDATE_CUE"
+        ]
+      ],
+      "reviewer_B": [
+        [
+          7,
+          21,
+          "UPDATE_CUE"
+        ]
+      ]
+    },
+    {
+      "id": "SGD-541f69b97c2022b250",
+      "layer": "cue_spans",
+      "reviewer_A": [
+        [
+          0,
+          8,
+          "UPDATE_CUE"
+        ],
+        [
+          9,
+          16,
+          "UPDATE_CUE"
+        ]
+      ],
+      "reviewer_B": [
+        [
+          0,
+          8,
+          "UPDATE_CUE"
+        ]
+      ]
+    },
+    {
+      "id": "SGD-56622008cc6d05e163",
+      "layer": "value_spans",
+      "reviewer_A": [
+        [
+          0,
+          8,
+          "NEW_VALUE"
+        ],
+        [
+          45,
+          53,
+          "REFERENCE"
+        ]
+      ],
+      "reviewer_B": [
+        [
+          0,
+          8,
+          "NEW_VALUE"
+        ]
+      ]
+    },
+    {
+      "id": "SGD-582839e42ff91f310a",
+      "layer": "cue_spans",
+      "reviewer_A": [
+        [
+          12,
+          19,
+          "UPDATE_CUE"
+        ]
+      ],
+      "reviewer_B": []
+    },
+    {
+      "id": "SGD-5b9049af42beee027f",
+      "layer": "value_spans",
+      "reviewer_A": [
+        [
+          6,
+          14,
+          "REFERENCE"
+        ]
+      ],
+      "reviewer_B": []
+    },
+    {
+      "id": "SGD-5c4fafba8e9e796c2c",
+      "layer": "cue_spans",
+      "reviewer_A": [
+        [
+          0,
+          9,
+          "UPDATE_CUE"
+        ],
+        [
+          39,
+          46,
+          "UPDATE_CUE"
+        ]
+      ],
+      "reviewer_B": [
+        [
+          39,
+          46,
+          "UPDATE_CUE"
+        ]
+      ]
+    },
+    {
+      "id": "SGD-60903250a666a08835",
+      "layer": "cue_spans",
+      "reviewer_A": [
+        [
+          15,
+          22,
+          "UPDATE_CUE"
+        ]
+      ],
+      "reviewer_B": []
+    },
+    {
+      "id": "SGD-61f6470dc64d789ff2",
+      "layer": "value_spans",
+      "reviewer_A": [
+        [
+          8,
+          17,
+          "NEW_VALUE"
+        ],
+        [
+          37,
+          38,
+          "NEW_VALUE"
+        ]
+      ],
+      "reviewer_B": [
+        [
+          8,
+          17,
+          "NEW_VALUE"
+        ],
+        [
+          37,
+          44,
+          "NEW_VALUE"
+        ]
+      ]
+    },
+    {
+      "id": "SGD-629e1aa3a2c104ade3",
+      "layer": "value_spans",
+      "reviewer_A": [
+        [
+          23,
+          30,
+          "NEW_VALUE"
+        ],
+        [
+          34,
+          62,
+          "REFERENCE"
+        ],
+        [
+          76,
+          97,
+          "NEW_VALUE"
+        ]
+      ],
+      "reviewer_B": [
+        [
+          23,
+          30,
+          "NEW_VALUE"
+        ],
+        [
+          76,
+          97,
+          "NEW_VALUE"
+        ]
+      ]
+    },
+    {
+      "id": "SGD-629e1aa3a2c104ade3",
+      "layer": "cue_spans",
+      "reviewer_A": [
+        [
+          64,
+          71,
+          "UPDATE_CUE"
+        ]
+      ],
+      "reviewer_B": []
+    },
+    {
+      "id": "SGD-6572eafbc688dfbf57",
+      "layer": "value_spans",
+      "reviewer_A": [
+        [
+          0,
+          6,
+          "NEW_VALUE"
+        ],
+        [
+          10,
+          17,
+          "REFERENCE"
+        ]
+      ],
+      "reviewer_B": [
+        [
+          0,
+          6,
+          "NEW_VALUE"
+        ]
+      ]
+    },
+    {
+      "id": "SGD-75ab183eed586c7c85",
+      "layer": "cue_spans",
+      "reviewer_A": [
+        [
+          47,
+          54,
+          "UPDATE_CUE"
+        ]
+      ],
+      "reviewer_B": [
+        [
+          47,
+          54,
+          "UPDATE_CUE"
+        ],
+        [
+          66,
+          74,
+          "UPDATE_CUE"
+        ]
+      ]
+    },
+    {
+      "id": "SGD-7b63ef655c5ff0cfb9",
+      "layer": "value_spans",
+      "reviewer_A": [
+        [
+          27,
+          42,
+          "NEW_VALUE"
+        ],
+        [
+          65,
+          78,
+          "NEW_VALUE"
+        ]
+      ],
+      "reviewer_B": [
+        [
+          65,
+          78,
+          "NEW_VALUE"
+        ]
+      ]
+    },
+    {
+      "id": "SGD-8226917fdb537a63d8",
+      "layer": "cue_spans",
+      "reviewer_A": [
+        [
+          4,
+          11,
+          "UPDATE_CUE"
+        ]
+      ],
+      "reviewer_B": []
+    },
+    {
+      "id": "SGD-82ac7e7cced2cce23b",
+      "layer": "cue_spans",
+      "reviewer_A": [
+        [
+          0,
+          8,
+          "UPDATE_CUE"
+        ],
+        [
+          21,
+          28,
+          "UPDATE_CUE"
+        ]
+      ],
+      "reviewer_B": [
+        [
+          0,
+          8,
+          "UPDATE_CUE"
+        ]
+      ]
+    },
+    {
+      "id": "SGD-8552e34492a34ad531",
+      "layer": "cue_spans",
+      "reviewer_A": [
+        [
+          31,
+          38,
+          "UPDATE_CUE"
+        ]
+      ],
+      "reviewer_B": []
+    },
+    {
+      "id": "SGD-89ed45d73ef14f54e5",
+      "layer": "cue_spans",
+      "reviewer_A": [
+        [
+          14,
+          21,
+          "UPDATE_CUE"
+        ]
+      ],
+      "reviewer_B": []
+    },
+    {
+      "id": "SGD-8b4a6c54f44b51b863",
+      "layer": "cue_spans",
+      "reviewer_A": [
+        [
+          0,
+          8,
+          "UPDATE_CUE"
+        ],
+        [
+          14,
+          23,
+          "UPDATE_CUE"
+        ]
+      ],
+      "reviewer_B": [
+        [
+          0,
+          8,
+          "UPDATE_CUE"
+        ]
+      ]
+    },
+    {
+      "id": "SGD-8e1a18c538cdcd1c0d",
+      "layer": "cue_spans",
+      "reviewer_A": [
+        [
+          95,
+          103,
+          "UPDATE_CUE"
+        ]
+      ],
+      "reviewer_B": [
+        [
+          60,
+          70,
+          "UPDATE_CUE"
+        ],
+        [
+          95,
+          103,
+          "UPDATE_CUE"
+        ]
+      ]
+    },
+    {
+      "id": "SGD-8f2728109c95598f9f",
+      "layer": "cue_spans",
+      "reviewer_A": [
+        [
+          4,
+          12,
+          "UPDATE_CUE"
+        ],
+        [
+          13,
+          20,
+          "UPDATE_CUE"
+        ]
+      ],
+      "reviewer_B": [
+        [
+          4,
+          12,
+          "UPDATE_CUE"
+        ]
+      ]
+    },
+    {
+      "id": "SGD-9511834c56716aaf23",
+      "layer": "cue_spans",
+      "reviewer_A": [
+        [
+          0,
+          7,
+          "UPDATE_CUE"
+        ]
+      ],
+      "reviewer_B": []
+    },
+    {
+      "id": "SGD-96f8721d8120084e0d",
+      "layer": "cue_spans",
+      "reviewer_A": [
+        [
+          23,
+          29,
+          "UPDATE_CUE"
+        ],
+        [
+          47,
+          54,
+          "RESTORE_CUE"
+        ]
+      ],
+      "reviewer_B": [
+        [
+          23,
+          46,
+          "UPDATE_CUE"
+        ],
+        [
+          47,
+          54,
+          "RESTORE_CUE"
+        ]
+      ]
+    },
+    {
+      "id": "SGD-a49d14f27c5a3b220f",
+      "layer": "cue_spans",
+      "reviewer_A": [
+        [
+          7,
+          14,
+          "UPDATE_CUE"
+        ]
+      ],
+      "reviewer_B": []
+    },
+    {
+      "id": "SGD-a5ef1678f12cecfdbe",
+      "layer": "cue_spans",
+      "reviewer_A": [
+        [
+          8,
+          12,
+          "UPDATE_CUE"
+        ],
+        [
+          59,
+          66,
+          "UPDATE_CUE"
+        ]
+      ],
+      "reviewer_B": [
+        [
+          59,
+          66,
+          "UPDATE_CUE"
+        ]
+      ]
+    },
+    {
+      "id": "SGD-b378063b1f6dfb8125",
+      "layer": "cue_spans",
+      "reviewer_A": [
+        [
+          0,
+          7,
+          "UPDATE_CUE"
+        ]
+      ],
+      "reviewer_B": []
+    },
+    {
+      "id": "SGD-b5e503831d4621e5ac",
+      "layer": "cue_spans",
+      "reviewer_A": [
+        [
+          0,
+          7,
+          "UPDATE_CUE"
+        ]
+      ],
+      "reviewer_B": []
+    },
+    {
+      "id": "SGD-b7ffc76710f1aa02ab",
+      "layer": "cue_spans",
+      "reviewer_A": [
+        [
+          12,
+          16,
+          "KEEP_CUE"
+        ]
+      ],
+      "reviewer_B": []
+    },
+    {
+      "id": "SGD-c148b76b064ec80d03",
+      "layer": "cue_spans",
+      "reviewer_A": [
+        [
+          4,
+          8,
+          "KEEP_CUE"
+        ]
+      ],
+      "reviewer_B": []
+    },
+    {
+      "id": "SGD-c61db5580f3f055625",
+      "layer": "cue_spans",
+      "reviewer_A": [
+        [
+          89,
+          96,
+          "UPDATE_CUE"
+        ]
+      ],
+      "reviewer_B": []
+    },
+    {
+      "id": "SGD-c6e207f2722e228abe",
+      "layer": "cue_spans",
+      "reviewer_A": [
+        [
+          0,
+          7,
+          "UPDATE_CUE"
+        ]
+      ],
+      "reviewer_B": []
+    },
+    {
+      "id": "SGD-c83c350205bcbd63e7",
+      "layer": "cue_spans",
+      "reviewer_A": [
+        [
+          0,
+          8,
+          "UPDATE_CUE"
+        ],
+        [
+          10,
+          19,
+          "UPDATE_CUE"
+        ]
+      ],
+      "reviewer_B": [
+        [
+          0,
+          8,
+          "UPDATE_CUE"
+        ]
+      ]
+    },
+    {
+      "id": "SGD-d5a375dde4b05c4977",
+      "layer": "cue_spans",
+      "reviewer_A": [
+        [
+          12,
+          18,
+          "UPDATE_CUE"
+        ]
+      ],
+      "reviewer_B": []
+    },
+    {
+      "id": "SGD-d9ff6608c911a1379b",
+      "layer": "value_spans",
+      "reviewer_A": [
+        [
+          55,
+          75,
+          "NEW_VALUE"
+        ],
+        [
+          118,
+          128,
+          "REFERENCE"
+        ]
+      ],
+      "reviewer_B": [
+        [
+          55,
+          75,
+          "NEW_VALUE"
+        ]
+      ]
+    },
+    {
+      "id": "SGD-da1d681f123c64877f",
+      "layer": "cue_spans",
+      "reviewer_A": [
+        [
+          70,
+          77,
+          "UPDATE_CUE"
+        ]
+      ],
+      "reviewer_B": []
+    },
+    {
+      "id": "SGD-e82b6740d62c4a7fe8",
+      "layer": "cue_spans",
+      "reviewer_A": [
+        [
+          7,
+          14,
+          "UPDATE_CUE"
+        ]
+      ],
+      "reviewer_B": []
+    },
+    {
+      "id": "SGD-e893221df440565ab1",
+      "layer": "value_spans",
+      "reviewer_A": [
+        [
+          15,
+          31,
+          "KEPT_VALUE"
+        ]
+      ],
+      "reviewer_B": [
+        [
+          15,
+          28,
+          "KEPT_VALUE"
+        ]
+      ]
+    },
+    {
+      "id": "SGD-ebe4abd2a249f7b4d6",
+      "layer": "cue_spans",
+      "reviewer_A": [
+        [
+          4,
+          11,
+          "UPDATE_CUE"
+        ]
+      ],
+      "reviewer_B": []
+    },
+    {
+      "id": "SGD-eda7082f67d92bf187",
+      "layer": "cue_spans",
+      "reviewer_A": [
+        [
+          0,
+          8,
+          "UPDATE_CUE"
+        ],
+        [
+          20,
+          26,
+          "UPDATE_CUE"
+        ]
+      ],
+      "reviewer_B": [
+        [
+          0,
+          8,
+          "UPDATE_CUE"
+        ],
+        [
+          20,
+          34,
+          "UPDATE_CUE"
+        ]
+      ]
+    },
+    {
+      "id": "SGD-f112bdd13bfc4e3dc1",
+      "layer": "cue_spans",
+      "reviewer_A": [
+        [
+          0,
+          17,
+          "UPDATE_CUE"
+        ],
+        [
+          25,
+          32,
+          "UPDATE_CUE"
+        ]
+      ],
+      "reviewer_B": [
+        [
+          2,
+          17,
+          "UPDATE_CUE"
+        ]
+      ]
+    },
+    {
+      "id": "SGD-f737d24d944d24d31a",
+      "layer": "cue_spans",
+      "reviewer_A": [
+        [
+          29,
+          36,
+          "UPDATE_CUE"
+        ]
+      ],
+      "reviewer_B": []
+    },
+    {
+      "id": "SGD-fc3a7bdd685ca338c3",
+      "layer": "value_spans",
+      "reviewer_A": [
+        [
+          71,
+          72,
+          "NEW_VALUE"
+        ]
+      ],
+      "reviewer_B": [
+        [
+          71,
+          78,
+          "NEW_VALUE"
+        ]
+      ]
+    },
+    {
+      "id": "SGD-fd9b68205e12877172",
+      "layer": "value_spans",
+      "reviewer_A": [
+        [
+          8,
+          27,
+          "NEW_VALUE"
+        ],
+        [
+          33,
+          41,
+          "NEW_VALUE"
+        ],
+        [
+          57,
+          60,
+          "NEW_VALUE"
+        ]
+      ],
+      "reviewer_B": [
+        [
+          8,
+          27,
+          "NEW_VALUE"
+        ],
+        [
+          33,
+          41,
+          "NEW_VALUE"
+        ],
+        [
+          57,
+          66,
+          "NEW_VALUE"
+        ]
+      ]
+    },
+    {
+      "id": "SGD-fd9b68205e12877172",
+      "layer": "cue_spans",
+      "reviewer_A": [
+        [
+          0,
+          7,
+          "UPDATE_CUE"
+        ]
+      ],
+      "reviewer_B": []
+    }
+  ],
+  "interpretation": "Exact layer-set equality per example plus exact-span agreement per label; not Cohen kappa, not gold correctness, not model F1."
+}

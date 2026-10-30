@@ -1,0 +1,33 @@
+{
+  "status": "D3_EXT2_AGREEMENT_FROZEN_BEFORE_ADJUDICATION",
+  "frozen_utc": "2026-10-30",
+  "rule": "Round-2 FIRST submissions vs the original annotator REVISED file (E3/E4), computed once; decisions change gold, never this number.",
+  "files_sha256": {
+    "reports/D3_EXT2_AGREEMENT.json": "422417a57a2639c75d4ac336da87acdabb62f9aa699ed9955b90832ebb1104aa",
+    "reports/D3_EXT2_AGREEMENT_BURAKSOLO160.json": "0dc96734684bde6433e8d7b3b20b0fbfbe383de07bcb64645504d5b3f178fb2b",
+    "reports/D3_EXT2_AGREEMENT_ENESSOLO160.json": "e5a098cb7f073e5fd991d49f0cb330223e422c2777fa2bacc42383cb93bea548"
+  },
+  "examples": 320,
+  "exact_layer_set_agreement": 0.804688,
+  "record_both_layers_identical": "204/320",
+  "by_direction": {
+    "BURAKSOLO160": 0.803125,
+    "ENESSOLO160": 0.80625
+  },
+  "per_label_agreement_f1": {
+    "KEPT_VALUE": 0.0,
+    "NEW_VALUE": 0.951181,
+    "OLD_VALUE": 0.8,
+    "REFERENCE": 0.834646,
+    "CANCEL_CUE": 0.0,
+    "KEEP_CUE": 0.4,
+    "RESTORE_CUE": 1.0,
+    "UPDATE_CUE": 0.622568
+  },
+  "note_F1_record": "SGD-96f8721d8120084e0d: reference = Enes revised file (with RESTORE_CUE); gold v1.2 dropped that cue by the F1 joint decision.",
+  "comparison_same_metric": {
+    "pilot30": 0.8333,
+    "test363": 0.910468,
+    "ext_shared80": 0.8625
+  }
+}

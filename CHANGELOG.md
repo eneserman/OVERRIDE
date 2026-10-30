@@ -2,6 +2,10 @@
 
 # Project change history (design, not model training)
 
+## D3-EXT round 2 agreement FROZEN — 2026-10-30 (amendment E4, before any decision)
+- 320 single-annotated records, each now labeled blind by the second reviewer; round-2 first submissions vs the original annotator's revised file.
+- **Exact layer-set agreement 0.805** (Burak-solo 0.803, Enes-solo 0.806); per label NEW_VALUE 0.951, REFERENCE 0.835, UPDATE_CUE 0.623. `reports/D3_EXT2_AGREEMENT_FREEZE.json`.
+
 ## D3-EXT round 2 packets — 2026-10-30 (amendment E3, before any round-2 label)
 - Blind cross re-annotation of the 320 single-annotated D3-EXT records: Burak gets Enes's 160, Enes gets Burak's 160 (0 overlap with each other or the shared 80; all UNLABELED).
 - Packets (local): `reviewer_A_BURAK_EK2_BLIND.jsonl` SHA-256 `4af6761e4d0ae5be9ea18f7d71ab0814ad07644106c4b7d141d7fdc11dc655bf`, `reviewer_B_ENES_EK2_BLIND.jsonl` `ed46771cf503a6b7e786935bc82875aa374295f98b6866bbe020bd35f592e72e`.
