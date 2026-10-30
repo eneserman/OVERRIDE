@@ -53,7 +53,8 @@ def main() -> int:
     misses = 0
     for row in rows:
         r = dict(row)
-        r["_words"] = tokenize(row["current_user_utterance"])
+        # same {start, end, text} dicts that d5_prepare_data.py wrote for training
+        r["_words"] = [t._asdict() for t in tokenize(row["current_user_utterance"])]
         r["_value_tags"] = ["O"] * len(r["_words"])  # inference: labels unused
         r["_cue_tags"] = ["O"] * len(r["_words"])
         enc, _, _, pos, miss = build_example(r, tok, history, max_len, hist_words)
