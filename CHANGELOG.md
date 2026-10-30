@@ -2,6 +2,13 @@
 
 # Project change history (design, not model training)
 
+## Gold v1 blind re-annotation audit — 2026-10-30 (score computed once and FROZEN; before any D6 test access)
+- Pre-registered protocol (`reports/D3_GOLD_V1_AUDIT_PROTOCOL.md`, commit `b4a84bb`) + amendment A1 (`e4b8880`: AI limited to translation/offset, exposure declarations, rejected rounds, accepted files and their mechanical edits).
+- Sample: 24 + 24 single-annotated gold v1 records (seed `20261030`), each re-annotated blind-at-annotation-time by the other reviewer.
+- **Result (frozen):** exact layer-set agreement **22/48 = 0.458** (Burak-solo re-annotated by Enes 13/24; Enes-solo re-annotated by Burak 9/24); 26 records disagree. Re-annotations carry more spans than gold (value P 0.648 / R 0.885; cue P 0.321 / R 0.818). Rare cue labels have no gold support in the sample (not evaluable). n=48 → wide interval; not an exposure-naive error rate.
+- Files: `reports/D3_GOLD_V1_AUDIT_RESULT.json` SHA-256 `634258541a2c22cd6fbb69e7a628ea7ae376bebc119098c188510960b8b29a1e`; gold v1 SHA-256 at scoring `1f7c286ead45aa80b226ec664b83e4a7604add136e27939f429cc93602cc5924` (unchanged).
+- Next (not done): joint decisions on the 26 + 4 findings → gold v1.1 → same-plan re-freeze → D5 rerun → D6. Holdout untouched; `TEST_ACCESS_LOG` has no executed access.
+
 ## D3 ADJUDICATION FINAL — 2026-10-29 (joint decisions registered, gold build gated on calibration completion)
 - Both reviewers approved proposals; joint resolution reached on the residual conflicts: **F1** `for/of/with+N` split, **F2** `around` outside, **`at least` inside**, **F3** (P4 artikelli `a small rental car [14-32]`, P7 agreed `it` removed, P9 `child-friendly` kept), **G1/G2** single version v0.2.3 for all sets, **G3** written C3 applied to agreed labels (2 `there` labels pending confirmation).
 - Guideline **v0.2.3** published with change log + affected IDs (C1-r, C4, C6, G3); full record `reports/D3_ADJUDICATION_DECISIONS_FINAL.md`. G3 jointly confirmed: all 3 agreed bare labels (`it`, 2×`there`) removed from gold.

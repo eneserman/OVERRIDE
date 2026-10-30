@@ -1,0 +1,362 @@
+{
+  "status": "GOLD_V1_AUDIT_MEASURED",
+  "gold_v1_file_sha256": "1f7c286ead45aa80b226ec664b83e4a7604add136e27939f429cc93602cc5924",
+  "parts": {
+    "solo_A_BURAK_reannotated_by_ENES": {
+      "records": 24,
+      "exact_layer_set_agreement": 0.5416666666666666,
+      "agreeing_records": 13,
+      "disagreeing_ids": [
+        "SGD-182c1ce461a3eb105b",
+        "SGD-1c9fdf3b4be7e319ba",
+        "SGD-1cfd41567313ae2a3c",
+        "SGD-1f2bef4dfa885b81d6",
+        "SGD-5db4624c3c071251dd",
+        "SGD-6ee81a74ebaa6f633b",
+        "SGD-a15912a8024e0a52b0",
+        "SGD-f80816c105eaa3dcc9",
+        "sgd_2219a06e1be66c8073a5",
+        "sgd_74a533fbea2d35a3eafb",
+        "sgd_d33fbbebfeb845c20232"
+      ],
+      "layers": {
+        "value_spans": {
+          "micro": {
+            "precision": 0.6875,
+            "recall": 0.9565217391304348,
+            "f1": 0.8,
+            "tp": 22,
+            "fp": 10,
+            "fn": 1,
+            "gold_support": 23,
+            "evaluable": true
+          },
+          "per_label": {
+            "NEW_VALUE": {
+              "precision": 0.7272727272727273,
+              "recall": 0.9411764705882353,
+              "f1": 0.8205128205128205,
+              "tp": 16,
+              "fp": 6,
+              "fn": 1,
+              "gold_support": 17,
+              "evaluable": true
+            },
+            "REFERENCE": {
+              "precision": 0.6,
+              "recall": 1.0,
+              "f1": 0.7499999999999999,
+              "tp": 6,
+              "fp": 4,
+              "fn": 0,
+              "gold_support": 6,
+              "evaluable": true
+            }
+          }
+        },
+        "cue_spans": {
+          "micro": {
+            "precision": 0.5555555555555556,
+            "recall": 0.8333333333333334,
+            "f1": 0.6666666666666667,
+            "tp": 5,
+            "fp": 4,
+            "fn": 1,
+            "gold_support": 6,
+            "evaluable": true
+          },
+          "per_label": {
+            "KEEP_CUE": {
+              "precision": 0.0,
+              "recall": null,
+              "f1": null,
+              "tp": 0,
+              "fp": 1,
+              "fn": 0,
+              "gold_support": 0,
+              "evaluable": false
+            },
+            "RESTORE_CUE": {
+              "precision": 0.0,
+              "recall": null,
+              "f1": null,
+              "tp": 0,
+              "fp": 2,
+              "fn": 0,
+              "gold_support": 0,
+              "evaluable": false
+            },
+            "UPDATE_CUE": {
+              "precision": 0.8333333333333334,
+              "recall": 0.8333333333333334,
+              "f1": 0.8333333333333334,
+              "tp": 5,
+              "fp": 1,
+              "fn": 1,
+              "gold_support": 6,
+              "evaluable": true
+            }
+          }
+        }
+      },
+      "input_sha256": "fc684e206fae1d66cfd3a6640cd75c7e9216bfd4fa22f669340bc43398999a5c"
+    },
+    "solo_B_ENES_reannotated_by_BURAK": {
+      "records": 24,
+      "exact_layer_set_agreement": 0.375,
+      "agreeing_records": 9,
+      "disagreeing_ids": [
+        "SGD-27dc49dabef149e222",
+        "SGD-419cd65f81480b6faf",
+        "SGD-89a5741392189ee1b0",
+        "SGD-9ceb3eb66464f93159",
+        "SGD-a00ffcbaa62cc924f6",
+        "SGD-c57676bc4ee77f1934",
+        "SGD-e4236d0c4d9416c597",
+        "SGD-fac5a2ab70f48783d8",
+        "sgd_0897c71fc630d21b3d3b",
+        "sgd_242741a3a37edeae2358",
+        "sgd_2640b870a2e7b6ae1f0c",
+        "sgd_726a3cb4f155269040cc",
+        "sgd_85946b05729c39d76b8d",
+        "sgd_a5b74bdc755ed8b3a877",
+        "sgd_e51190fcf45a1105849e"
+      ],
+      "layers": {
+        "value_spans": {
+          "micro": {
+            "precision": 0.6153846153846154,
+            "recall": 0.8275862068965517,
+            "f1": 0.7058823529411765,
+            "tp": 24,
+            "fp": 15,
+            "fn": 5,
+            "gold_support": 29,
+            "evaluable": true
+          },
+          "per_label": {
+            "KEPT_VALUE": {
+              "precision": 0.0,
+              "recall": null,
+              "f1": null,
+              "tp": 0,
+              "fp": 1,
+              "fn": 0,
+              "gold_support": 0,
+              "evaluable": false
+            },
+            "NEW_VALUE": {
+              "precision": 0.7307692307692307,
+              "recall": 0.8260869565217391,
+              "f1": 0.7755102040816326,
+              "tp": 19,
+              "fp": 7,
+              "fn": 4,
+              "gold_support": 23,
+              "evaluable": true
+            },
+            "REFERENCE": {
+              "precision": 0.4166666666666667,
+              "recall": 0.8333333333333334,
+              "f1": 0.5555555555555556,
+              "tp": 5,
+              "fp": 7,
+              "fn": 1,
+              "gold_support": 6,
+              "evaluable": true
+            }
+          }
+        },
+        "cue_spans": {
+          "micro": {
+            "precision": 0.21052631578947367,
+            "recall": 0.8,
+            "f1": 0.3333333333333333,
+            "tp": 4,
+            "fp": 15,
+            "fn": 1,
+            "gold_support": 5,
+            "evaluable": true
+          },
+          "per_label": {
+            "CANCEL_CUE": {
+              "precision": 0.0,
+              "recall": null,
+              "f1": null,
+              "tp": 0,
+              "fp": 6,
+              "fn": 0,
+              "gold_support": 0,
+              "evaluable": false
+            },
+            "KEEP_CUE": {
+              "precision": 0.0,
+              "recall": null,
+              "f1": null,
+              "tp": 0,
+              "fp": 1,
+              "fn": 0,
+              "gold_support": 0,
+              "evaluable": false
+            },
+            "RESTORE_CUE": {
+              "precision": 0.0,
+              "recall": null,
+              "f1": null,
+              "tp": 0,
+              "fp": 2,
+              "fn": 0,
+              "gold_support": 0,
+              "evaluable": false
+            },
+            "UPDATE_CUE": {
+              "precision": 0.4,
+              "recall": 0.8,
+              "f1": 0.5333333333333333,
+              "tp": 4,
+              "fp": 6,
+              "fn": 1,
+              "gold_support": 5,
+              "evaluable": true
+            }
+          }
+        }
+      },
+      "input_sha256": "033e4a86ad15e2df65d30c84bf9b71959663ac0b6acc11f35160fe7b6de733ba"
+    }
+  },
+  "pooled": {
+    "records": 48,
+    "exact_layer_set_agreement": 0.4583333333333333,
+    "agreeing_records": 22,
+    "disagreeing_ids": [
+      "SGD-182c1ce461a3eb105b",
+      "SGD-1c9fdf3b4be7e319ba",
+      "SGD-1cfd41567313ae2a3c",
+      "SGD-1f2bef4dfa885b81d6",
+      "SGD-27dc49dabef149e222",
+      "SGD-419cd65f81480b6faf",
+      "SGD-5db4624c3c071251dd",
+      "SGD-6ee81a74ebaa6f633b",
+      "SGD-89a5741392189ee1b0",
+      "SGD-9ceb3eb66464f93159",
+      "SGD-a00ffcbaa62cc924f6",
+      "SGD-a15912a8024e0a52b0",
+      "SGD-c57676bc4ee77f1934",
+      "SGD-e4236d0c4d9416c597",
+      "SGD-f80816c105eaa3dcc9",
+      "SGD-fac5a2ab70f48783d8",
+      "sgd_0897c71fc630d21b3d3b",
+      "sgd_2219a06e1be66c8073a5",
+      "sgd_242741a3a37edeae2358",
+      "sgd_2640b870a2e7b6ae1f0c",
+      "sgd_726a3cb4f155269040cc",
+      "sgd_74a533fbea2d35a3eafb",
+      "sgd_85946b05729c39d76b8d",
+      "sgd_a5b74bdc755ed8b3a877",
+      "sgd_d33fbbebfeb845c20232",
+      "sgd_e51190fcf45a1105849e"
+    ],
+    "layers": {
+      "value_spans": {
+        "micro": {
+          "precision": 0.647887323943662,
+          "recall": 0.8846153846153846,
+          "f1": 0.7479674796747967,
+          "tp": 46,
+          "fp": 25,
+          "fn": 6,
+          "gold_support": 52,
+          "evaluable": true
+        },
+        "per_label": {
+          "KEPT_VALUE": {
+            "precision": 0.0,
+            "recall": null,
+            "f1": null,
+            "tp": 0,
+            "fp": 1,
+            "fn": 0,
+            "gold_support": 0,
+            "evaluable": false
+          },
+          "NEW_VALUE": {
+            "precision": 0.7291666666666666,
+            "recall": 0.875,
+            "f1": 0.7954545454545454,
+            "tp": 35,
+            "fp": 13,
+            "fn": 5,
+            "gold_support": 40,
+            "evaluable": true
+          },
+          "REFERENCE": {
+            "precision": 0.5,
+            "recall": 0.9166666666666666,
+            "f1": 0.6470588235294118,
+            "tp": 11,
+            "fp": 11,
+            "fn": 1,
+            "gold_support": 12,
+            "evaluable": true
+          }
+        }
+      },
+      "cue_spans": {
+        "micro": {
+          "precision": 0.32142857142857145,
+          "recall": 0.8181818181818182,
+          "f1": 0.46153846153846156,
+          "tp": 9,
+          "fp": 19,
+          "fn": 2,
+          "gold_support": 11,
+          "evaluable": true
+        },
+        "per_label": {
+          "CANCEL_CUE": {
+            "precision": 0.0,
+            "recall": null,
+            "f1": null,
+            "tp": 0,
+            "fp": 6,
+            "fn": 0,
+            "gold_support": 0,
+            "evaluable": false
+          },
+          "KEEP_CUE": {
+            "precision": 0.0,
+            "recall": null,
+            "f1": null,
+            "tp": 0,
+            "fp": 2,
+            "fn": 0,
+            "gold_support": 0,
+            "evaluable": false
+          },
+          "RESTORE_CUE": {
+            "precision": 0.0,
+            "recall": null,
+            "f1": null,
+            "tp": 0,
+            "fp": 4,
+            "fn": 0,
+            "gold_support": 0,
+            "evaluable": false
+          },
+          "UPDATE_CUE": {
+            "precision": 0.5625,
+            "recall": 0.8181818181818182,
+            "f1": 0.6666666666666666,
+            "tp": 9,
+            "fp": 7,
+            "fn": 2,
+            "gold_support": 11,
+            "evaluable": true
+          }
+        }
+      }
+    }
+  },
+  "caveat": "Each re-annotator saw the original labels earlier during the non-blind DOGRULAMA verification; this audit is blind to labels at annotation time but not exposure-naive. Disagreements are resolved only by joint reviewer decision."
+}
