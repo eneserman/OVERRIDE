@@ -1,5 +1,10 @@
 # Project change history
 
+## D6 — locked test evaluated once — 2026-10-30
+- 363 prospective records (official SGD dev/test), DEV-001 consensus reference. S: B1 0.470, B2 0.413, CRF 0.735, BERT v1.1 0.712, **DeBERTa-v3 ensemble (selected, no history) 0.768**, history counterpart (tail60) 0.813.
+- History helps on the test (+0.045, descriptive family-bootstrap 95% CI [+0.016, +0.078]) although it did not in CV — reported in `reports/D6_TEST_RESULTS.md`; the selected model stays the headline.
+- DEV-002 recorded during the access (SGD dialogue IDs repeat across official splits; family key = split + ID).
+
 ## D5-v2 frozen — 2026-10-30 (before any test access)
 - Grouped 5-fold CV on gold v1.3 (857 records): DeBERTa-v3-base 0.860 > RoBERTa 0.839 > BERT 0.838; stage 2 selects history = no, loss = plain, E* = 6. Weighted loss lower in every setting.
 - History hypothesis: S(tail60) − S(no) = −0.005, family-bootstrap 95% CI [−0.021, +0.012] → no evidence that history helps.

@@ -1,0 +1,109 @@
+{
+  "status": "MEASURED_FROM_SUPPLIED_GOLD_AND_PREDICTIONS",
+  "examples": 363,
+  "layers": {
+    "value_spans": {
+      "micro": {
+        "precision": 0.730769,
+        "recall": 0.835648,
+        "f1": 0.779698,
+        "tp": 361,
+        "fp": 133,
+        "fn": 71
+      },
+      "macro_f1_on_gold_supported_classes": 0.518506,
+      "classes": {
+        "KEPT_VALUE": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "tp": 0,
+          "fp": 0,
+          "fn": 3
+        },
+        "NEW_VALUE": {
+          "precision": 0.740223,
+          "recall": 0.84127,
+          "f1": 0.787519,
+          "tp": 265,
+          "fp": 93,
+          "fn": 50
+        },
+        "OLD_VALUE": {
+          "precision": null,
+          "recall": null,
+          "f1": null,
+          "tp": 0,
+          "fp": 0,
+          "fn": 0
+        },
+        "REFERENCE": {
+          "precision": 0.705882,
+          "recall": 0.842105,
+          "f1": 0.768,
+          "tp": 96,
+          "fp": 40,
+          "fn": 18
+        }
+      },
+      "gold_supported_labels": [
+        "KEPT_VALUE",
+        "NEW_VALUE",
+        "REFERENCE"
+      ]
+    },
+    "cue_spans": {
+      "micro": {
+        "precision": 0.491525,
+        "recall": 0.935484,
+        "f1": 0.644444,
+        "tp": 29,
+        "fp": 30,
+        "fn": 2
+      },
+      "macro_f1_on_gold_supported_classes": 0.644444,
+      "classes": {
+        "CANCEL_CUE": {
+          "precision": null,
+          "recall": null,
+          "f1": null,
+          "tp": 0,
+          "fp": 0,
+          "fn": 0
+        },
+        "KEEP_CUE": {
+          "precision": null,
+          "recall": null,
+          "f1": null,
+          "tp": 0,
+          "fp": 0,
+          "fn": 0
+        },
+        "RESTORE_CUE": {
+          "precision": null,
+          "recall": null,
+          "f1": null,
+          "tp": 0,
+          "fp": 0,
+          "fn": 0
+        },
+        "UPDATE_CUE": {
+          "precision": 0.491525,
+          "recall": 0.935484,
+          "f1": 0.644444,
+          "tp": 29,
+          "fp": 30,
+          "fn": 2
+        }
+      },
+      "gold_supported_labels": [
+        "UPDATE_CUE"
+      ]
+    }
+  },
+  "evaluation_split": "frozen_custom_test",
+  "gold_content_sha256": "8a3e9fd72b4725f0fdd0bfa6b71b6e02754ff9de16d93d619e37c4fe972ec4b4",
+  "manifest_digest": "dea1d83a50498fd608b33b1735595df1c70d3d2983fef445f7d419b171cc4c23",
+  "source_split": "SGD train-side (model development) + prospective holdout from official SGD dev/test",
+  "test_reference_kind": "consensus_reference_DEV-001"
+}

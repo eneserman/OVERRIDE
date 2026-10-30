@@ -1,0 +1,16 @@
+{
+  "a": "reports\\train_runs\\d6\\pred_crf_hno.jsonl",
+  "b": "reports\\train_runs\\d6\\pred_deberta_v2_ens_hno.jsonl",
+  "S_a": 0.735,
+  "S_b": 0.7682,
+  "diff_b_minus_a": 0.0332,
+  "ci95": [
+    -0.0172,
+    0.0792
+  ],
+  "families": 358,
+  "records": 363,
+  "resamples": 1000,
+  "seed": 20261102,
+  "share_of_resamples_b_better": 0.923
+}

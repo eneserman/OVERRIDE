@@ -47,7 +47,11 @@ def main() -> int:
     ap.add_argument("--resamples", type=int, default=1000)
     ap.add_argument("--seed", type=int, default=20261102)
     ap.add_argument("--out", type=Path, required=True)
+    ap.add_argument("--accept-consensus-reference", action="store_true",
+                    help="score against the DEV-001 consensus test reference (official dev/test splits)")
     args = ap.parse_args()
+    eval_kw = ({"accept_consensus": True, "allowed_splits": ("train", "dev", "test")}
+               if args.accept_consensus_reference else {})
 
     gold = read_jsonl(args.gold)
     pa = {r["id"]: r for r in read_jsonl(args.a)}
@@ -61,7 +65,7 @@ def main() -> int:
 
     point = {}
     for name, preds in (("a", pa), ("b", pb)):
-        rep = evaluate_spans.evaluate(gold, [preds[g["id"]] for g in gold])
+        rep = evaluate_spans.evaluate(gold, [preds[g["id"]] for g in gold], **eval_kw)
         ref = sum((rep["layers"][l]["micro"]["f1"] or 0.0) for l in LAYERS) / 2
         mine = score([c[0 if name == "a" else 1] for recs in fam.values() for c in recs])
         if abs(ref - mine) > 1e-5:  # evaluate_spans rounds F1 to 6 decimals

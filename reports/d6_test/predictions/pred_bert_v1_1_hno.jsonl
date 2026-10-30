@@ -1,0 +1,363 @@
+{"id": "SGD-008471943dc9539917", "value_spans": [{"start": 53, "end": 67, "label": "REFERENCE", "text": "that therapist"}, {"start": 83, "end": 90, "label": "NEW_VALUE", "text": "1:15 pm"}], "cue_spans": []}
+{"id": "SGD-00e8dd5baae14f63f9", "value_spans": [{"start": 7, "end": 15, "label": "REFERENCE", "text": "the same"}, {"start": 19, "end": 27, "label": "NEW_VALUE", "text": "San Jose"}], "cue_spans": []}
+{"id": "SGD-011cc37add92732b83", "value_spans": [{"start": 27, "end": 53, "label": "NEW_VALUE", "text": "half past 6 in the evening"}], "cue_spans": [{"start": 54, "end": 61, "label": "UPDATE_CUE", "text": "instead"}]}
+{"id": "SGD-019b130a46b27a8051", "value_spans": [], "cue_spans": []}
+{"id": "SGD-01b297fc690c6a0e2b", "value_spans": [{"start": 29, "end": 30, "label": "NEW_VALUE", "text": "a"}, {"start": 41, "end": 49, "label": "NEW_VALUE", "text": "3 people"}, {"start": 67, "end": 82, "label": "REFERENCE", "text": "this restaurant"}, {"start": 86, "end": 114, "label": "NEW_VALUE", "text": "quarter to 11 in the morning"}], "cue_spans": [{"start": 7, "end": 15, "label": "UPDATE_CUE", "text": "actually"}]}
+{"id": "SGD-01c7539aebf57ba8ba", "value_spans": [{"start": 88, "end": 96, "label": "NEW_VALUE", "text": "a garden"}, {"start": 100, "end": 110, "label": "NEW_VALUE", "text": "London, UK"}], "cue_spans": []}
+{"id": "SGD-01ca9843f24c857649", "value_spans": [], "cue_spans": []}
+{"id": "SGD-02fe608527d07f2b5b", "value_spans": [{"start": 13, "end": 26, "label": "NEW_VALUE", "text": "san Francisco"}, {"start": 30, "end": 39, "label": "NEW_VALUE", "text": "March 3rd"}, {"start": 60, "end": 68, "label": "NEW_VALUE", "text": "the 13th"}], "cue_spans": []}
+{"id": "SGD-034190a077bad4d3e1", "value_spans": [{"start": 9, "end": 17, "label": "REFERENCE", "text": "that one"}], "cue_spans": []}
+{"id": "SGD-0377f7788b7e50ebe6", "value_spans": [{"start": 47, "end": 53, "label": "NEW_VALUE", "text": "Patxi'"}, {"start": 58, "end": 67, "label": "REFERENCE", "text": "that area"}], "cue_spans": []}
+{"id": "SGD-05a39b4cb2fdbf7cd4", "value_spans": [{"start": 29, "end": 33, "label": "NEW_VALUE", "text": "four"}, {"start": 37, "end": 49, "label": "REFERENCE", "text": "the same day"}, {"start": 53, "end": 80, "label": "NEW_VALUE", "text": "12 o\"clock in the afternoon"}], "cue_spans": []}
+{"id": "SGD-05ad0c19c430456aa6", "value_spans": [{"start": 7, "end": 15, "label": "REFERENCE", "text": "that one"}], "cue_spans": []}
+{"id": "SGD-066198ec0b3f588e7f", "value_spans": [], "cue_spans": []}
+{"id": "SGD-0803af6d17b0a46698", "value_spans": [{"start": 31, "end": 47, "label": "NEW_VALUE", "text": "the 9th of March"}, {"start": 51, "end": 57, "label": "NEW_VALUE", "text": "two pm"}, {"start": 86, "end": 96, "label": "NEW_VALUE", "text": "March 14th"}], "cue_spans": []}
+{"id": "SGD-084fa12ba662c79ecf", "value_spans": [{"start": 49, "end": 83, "label": "REFERENCE", "text": "that event we talked about earlier"}], "cue_spans": []}
+{"id": "SGD-0999fa9a641a934050", "value_spans": [{"start": 29, "end": 34, "label": "NEW_VALUE", "text": "a bus"}, {"start": 39, "end": 47, "label": "NEW_VALUE", "text": "1 person"}, {"start": 95, "end": 107, "label": "NEW_VALUE", "text": "a direct bus"}], "cue_spans": []}
+{"id": "SGD-09d19a455b1b7af1ed", "value_spans": [], "cue_spans": []}
+{"id": "SGD-09d7451ddc9685ca40", "value_spans": [{"start": 0, "end": 8, "label": "REFERENCE", "text": "That one"}], "cue_spans": []}
+{"id": "SGD-0b7509111077d3b136", "value_spans": [{"start": 16, "end": 24, "label": "REFERENCE", "text": "that one"}, {"start": 63, "end": 70, "label": "NEW_VALUE", "text": "the 2nd"}, {"start": 88, "end": 99, "label": "NEW_VALUE", "text": "eleven days"}], "cue_spans": []}
+{"id": "SGD-0c780682ce4a7c4abb", "value_spans": [{"start": 7, "end": 14, "label": "NEW_VALUE", "text": "a hotel"}], "cue_spans": []}
+{"id": "SGD-0c891ea4d76c651fde", "value_spans": [], "cue_spans": []}
+{"id": "SGD-0e4d44842ba1fce21c", "value_spans": [], "cue_spans": []}
+{"id": "SGD-0ec0a23461e324e9a2", "value_spans": [{"start": 78, "end": 86, "label": "NEW_VALUE", "text": "he Salon"}, {"start": 127, "end": 136, "label": "NEW_VALUE", "text": "evening 4"}, {"start": 141, "end": 174, "label": "REFERENCE", "text": "the same day mentioned previously"}], "cue_spans": []}
+{"id": "SGD-0ede7114ed310cefc1", "value_spans": [{"start": 43, "end": 49, "label": "NEW_VALUE", "text": "a room"}], "cue_spans": []}
+{"id": "SGD-0fdf13389641e2d3ec", "value_spans": [], "cue_spans": []}
+{"id": "SGD-10043b71c8c224f1a3", "value_spans": [], "cue_spans": []}
+{"id": "SGD-10df2808f4d68af50b", "value_spans": [], "cue_spans": []}
+{"id": "SGD-138de5b8e4108fc457", "value_spans": [{"start": 21, "end": 31, "label": "NEW_VALUE", "text": "one ticket"}, {"start": 32, "end": 44, "label": "REFERENCE", "text": "the previous"}], "cue_spans": []}
+{"id": "SGD-13b32953bc91eed735", "value_spans": [], "cue_spans": []}
+{"id": "SGD-13eae7e3c882bcb916", "value_spans": [], "cue_spans": []}
+{"id": "SGD-142061d4165f29c313", "value_spans": [{"start": 5, "end": 37, "label": "NEW_VALUE", "text": "one hundred and fifty five bucks"}], "cue_spans": [{"start": 63, "end": 71, "label": "UPDATE_CUE", "text": "actually"}]}
+{"id": "SGD-1549cfe2bfe87d45dd", "value_spans": [], "cue_spans": []}
+{"id": "SGD-156512288f7e7696d2", "value_spans": [], "cue_spans": []}
+{"id": "SGD-15ee90ba7b6ed717d2", "value_spans": [{"start": 25, "end": 33, "label": "REFERENCE", "text": "that one"}, {"start": 91, "end": 124, "label": "NEW_VALUE", "text": "Funny movie starring Derek Morgan"}], "cue_spans": [{"start": 60, "end": 67, "label": "UPDATE_CUE", "text": "instead"}]}
+{"id": "SGD-175af6eb1b08f936e7", "value_spans": [], "cue_spans": []}
+{"id": "SGD-1837b1c1d082769d85", "value_spans": [{"start": 6, "end": 14, "label": "REFERENCE", "text": "that one"}], "cue_spans": []}
+{"id": "SGD-1890f3b6d377d6acb1", "value_spans": [], "cue_spans": []}
+{"id": "SGD-1a46a6c209d6c8a425", "value_spans": [], "cue_spans": []}
+{"id": "SGD-1b312cb2755480b69f", "value_spans": [{"start": 7, "end": 15, "label": "REFERENCE", "text": "that one"}, {"start": 43, "end": 57, "label": "NEW_VALUE", "text": "the television"}], "cue_spans": []}
+{"id": "SGD-1c95e18a09e511adfa", "value_spans": [{"start": 16, "end": 23, "label": "NEW_VALUE", "text": "a movie"}, {"start": 36, "end": 63, "label": "NEW_VALUE", "text": "a Regal Jack London theater"}, {"start": 67, "end": 74, "label": "NEW_VALUE", "text": "Oakland"}, {"start": 89, "end": 103, "label": "NEW_VALUE", "text": "a regular show"}], "cue_spans": []}
+{"id": "SGD-1cd43a1e92bee5b873", "value_spans": [], "cue_spans": []}
+{"id": "SGD-1d63e029caca1a4b2b", "value_spans": [{"start": 14, "end": 39, "label": "REFERENCE", "text": "the one I was looking for"}], "cue_spans": []}
+{"id": "SGD-1d765611b9e109b88d", "value_spans": [{"start": 19, "end": 27, "label": "REFERENCE", "text": "that one"}, {"start": 50, "end": 57, "label": "NEW_VALUE", "text": "a table"}], "cue_spans": []}
+{"id": "SGD-1e1fff8ba0254bfc77", "value_spans": [{"start": 20, "end": 29, "label": "REFERENCE", "text": "that song"}], "cue_spans": []}
+{"id": "SGD-1e3ac8bc60b48985d3", "value_spans": [{"start": 15, "end": 23, "label": "REFERENCE", "text": "that one"}], "cue_spans": []}
+{"id": "SGD-1eb6c5b71de355bd43", "value_spans": [{"start": 14, "end": 28, "label": "REFERENCE", "text": "this apartment"}], "cue_spans": []}
+{"id": "SGD-1f46519b15e1fb5936", "value_spans": [], "cue_spans": []}
+{"id": "SGD-20b852396966b5591f", "value_spans": [{"start": 80, "end": 101, "label": "NEW_VALUE", "text": "the 7th of this month"}, {"start": 106, "end": 116, "label": "NEW_VALUE", "text": "three days"}], "cue_spans": []}
+{"id": "SGD-216e1e59b51e979e4f", "value_spans": [], "cue_spans": []}
+{"id": "SGD-22a420178a156bc4d9", "value_spans": [{"start": 8, "end": 21, "label": "REFERENCE", "text": "the first one"}, {"start": 47, "end": 49, "label": "NEW_VALUE", "text": "IT"}, {"start": 50, "end": 53, "label": "NEW_VALUE", "text": "two"}, {"start": 90, "end": 102, "label": "NEW_VALUE", "text": "a restaurant"}], "cue_spans": []}
+{"id": "SGD-22ef2b73d2910a96fd", "value_spans": [], "cue_spans": []}
+{"id": "SGD-22fbcebfedefacfc91", "value_spans": [{"start": 5, "end": 13, "label": "REFERENCE", "text": "that one"}], "cue_spans": []}
+{"id": "SGD-236970176641544a03", "value_spans": [{"start": 30, "end": 46, "label": "NEW_VALUE", "text": "a one-way flight"}, {"start": 77, "end": 94, "label": "NEW_VALUE", "text": "American Airlines"}, {"start": 110, "end": 131, "label": "NEW_VALUE", "text": "Premium Economy class"}, {"start": 152, "end": 161, "label": "NEW_VALUE", "text": "March 7th"}], "cue_spans": []}
+{"id": "SGD-240d7c6e229f057035", "value_spans": [{"start": 11, "end": 16, "label": "NEW_VALUE", "text": "11:30"}], "cue_spans": [{"start": 0, "end": 7, "label": "UPDATE_CUE", "text": "Make it"}]}
+{"id": "SGD-2485611c2cf8d1b73c", "value_spans": [{"start": 21, "end": 31, "label": "NEW_VALUE", "text": "March 13th"}], "cue_spans": []}
+{"id": "SGD-24cdc44cb2dbd875db", "value_spans": [{"start": 7, "end": 15, "label": "REFERENCE", "text": "that one"}, {"start": 40, "end": 53, "label": "REFERENCE", "text": "those tickets"}], "cue_spans": []}
+{"id": "SGD-24cf89f120cad8ef62", "value_spans": [], "cue_spans": []}
+{"id": "SGD-258937db98b72410c2", "value_spans": [{"start": 29, "end": 48, "label": "NEW_VALUE", "text": "3740 El Camino Real"}], "cue_spans": [{"start": 4, "end": 12, "label": "UPDATE_CUE", "text": "actually"}]}
+{"id": "SGD-25e7b71ef0f7c26e58", "value_spans": [], "cue_spans": []}
+{"id": "SGD-26cfbf7bd417841527", "value_spans": [{"start": 33, "end": 45, "label": "NEW_VALUE", "text": "a direct bus"}, {"start": 51, "end": 62, "label": "NEW_VALUE", "text": "Los Angeles"}, {"start": 77, "end": 85, "label": "NEW_VALUE", "text": "1 person"}], "cue_spans": []}
+{"id": "SGD-26e85f4ed395436e9c", "value_spans": [{"start": 9, "end": 12, "label": "NEW_VALUE", "text": "the"}, {"start": 13, "end": 28, "label": "NEW_VALUE", "text": "first therapist"}], "cue_spans": []}
+{"id": "SGD-26edf3daeba6ba4e10", "value_spans": [{"start": 15, "end": 41, "label": "NEW_VALUE", "text": "a psychologist appointment"}], "cue_spans": []}
+{"id": "SGD-272ef38b122f5e5939", "value_spans": [{"start": 0, "end": 13, "label": "NEW_VALUE", "text": "Brittany Runs"}, {"start": 14, "end": 24, "label": "NEW_VALUE", "text": "a Marathon"}, {"start": 33, "end": 40, "label": "REFERENCE", "text": "the one"}], "cue_spans": []}
+{"id": "SGD-276fa085ce2a50a94f", "value_spans": [], "cue_spans": []}
+{"id": "SGD-28a243039021e7c637", "value_spans": [], "cue_spans": []}
+{"id": "SGD-2911c394cd525cb137", "value_spans": [{"start": 20, "end": 32, "label": "NEW_VALUE", "text": "a rental car"}], "cue_spans": []}
+{"id": "SGD-297878ac70af78b5f1", "value_spans": [{"start": 13, "end": 28, "label": "NEW_VALUE", "text": "vegetarian food"}], "cue_spans": []}
+{"id": "SGD-29aeb5450e25070ae9", "value_spans": [{"start": 15, "end": 25, "label": "NEW_VALUE", "text": "one person"}], "cue_spans": []}
+{"id": "SGD-2a22aea07fb959ac41", "value_spans": [], "cue_spans": []}
+{"id": "SGD-2a66c9e8154db0d73b", "value_spans": [], "cue_spans": []}
+{"id": "SGD-2ea4e2eb86eae3f7e9", "value_spans": [{"start": 106, "end": 116, "label": "NEW_VALUE", "text": "eight days"}, {"start": 121, "end": 128, "label": "NEW_VALUE", "text": "2 rooms"}], "cue_spans": [{"start": 80, "end": 86, "label": "UPDATE_CUE", "text": "change"}]}
+{"id": "SGD-31ee7dc388f1294247", "value_spans": [{"start": 33, "end": 43, "label": "NEW_VALUE", "text": "March 10th"}], "cue_spans": [{"start": 4, "end": 12, "label": "UPDATE_CUE", "text": "actually"}]}
+{"id": "SGD-321e641cc2c7435b72", "value_spans": [{"start": 30, "end": 56, "label": "NEW_VALUE", "text": "half past 7 in the evening"}], "cue_spans": [{"start": 18, "end": 25, "label": "UPDATE_CUE", "text": "make it"}]}
+{"id": "SGD-33085cd94d7461482f", "value_spans": [{"start": 12, "end": 15, "label": "NEW_VALUE", "text": "$71"}], "cue_spans": [{"start": 0, "end": 7, "label": "UPDATE_CUE", "text": "Make it"}]}
+{"id": "SGD-3668a867e182a73157", "value_spans": [{"start": 12, "end": 20, "label": "REFERENCE", "text": "that one"}, {"start": 57, "end": 67, "label": "REFERENCE", "text": "this hotel"}, {"start": 72, "end": 78, "label": "NEW_VALUE", "text": "1 room"}], "cue_spans": []}
+{"id": "SGD-36ff62f8d14d7f8318", "value_spans": [{"start": 33, "end": 51, "label": "REFERENCE", "text": "the salon we found"}, {"start": 52, "end": 54, "label": "REFERENCE", "text": "on"}, {"start": 55, "end": 67, "label": "REFERENCE", "text": "the same day"}, {"start": 71, "end": 83, "label": "NEW_VALUE", "text": "afternoon 12"}], "cue_spans": []}
+{"id": "SGD-3704b9d28159db9c82", "value_spans": [{"start": 52, "end": 59, "label": "NEW_VALUE", "text": "a hotel"}], "cue_spans": []}
+{"id": "SGD-3789cffb8dd5d88d1a", "value_spans": [], "cue_spans": []}
+{"id": "SGD-3795d3827cbc5d4c4d", "value_spans": [{"start": 35, "end": 48, "label": "NEW_VALUE", "text": "morning 11:15"}, {"start": 52, "end": 74, "label": "NEW_VALUE", "text": "the 12th of this month"}], "cue_spans": [{"start": 11, "end": 17, "label": "UPDATE_CUE", "text": "change"}]}
+{"id": "SGD-387600eee026cf5a23", "value_spans": [{"start": 33, "end": 41, "label": "NEW_VALUE", "text": "one room"}, {"start": 46, "end": 67, "label": "NEW_VALUE", "text": "the 1st of this month"}, {"start": 72, "end": 78, "label": "NEW_VALUE", "text": "6 days"}], "cue_spans": []}
+{"id": "SGD-38bc1b3a1bf8c0296c", "value_spans": [{"start": 54, "end": 68, "label": "NEW_VALUE", "text": "a regular show"}, {"start": 72, "end": 88, "label": "NEW_VALUE", "text": "shattuck cinemas"}], "cue_spans": []}
+{"id": "SGD-3988f4df5a417a970a", "value_spans": [{"start": 17, "end": 25, "label": "NEW_VALUE", "text": "a flight"}, {"start": 36, "end": 44, "label": "NEW_VALUE", "text": "a ticket"}, {"start": 49, "end": 65, "label": "NEW_VALUE", "text": "a one way flight"}, {"start": 99, "end": 108, "label": "NEW_VALUE", "text": "zero bags"}, {"start": 149, "end": 157, "label": "NEW_VALUE", "text": "the 11th"}], "cue_spans": []}
+{"id": "SGD-3a7ba4a2accc2df64a", "value_spans": [{"start": 21, "end": 43, "label": "NEW_VALUE", "text": "a baseball match event"}], "cue_spans": []}
+{"id": "SGD-3c41f90d197612285f", "value_spans": [{"start": 13, "end": 28, "label": "NEW_VALUE", "text": "a mystery movie"}, {"start": 34, "end": 40, "label": "NEW_VALUE", "text": "Monica"}, {"start": 41, "end": 46, "label": "NEW_VALUE", "text": "Dolan"}, {"start": 69, "end": 79, "label": "NEW_VALUE", "text": "Gavin Hood"}], "cue_spans": []}
+{"id": "SGD-3c7043806819dec28c", "value_spans": [{"start": 0, "end": 4, "label": "NEW_VALUE", "text": "Iain"}, {"start": 5, "end": 12, "label": "NEW_VALUE", "text": "softley"}, {"start": 22, "end": 28, "label": "NEW_VALUE", "text": "nguyen"}], "cue_spans": []}
+{"id": "SGD-3d10d4a54dec0d11aa", "value_spans": [{"start": 46, "end": 54, "label": "REFERENCE", "text": "that one"}], "cue_spans": []}
+{"id": "SGD-3d44113623b959ec89", "value_spans": [{"start": 13, "end": 25, "label": "NEW_VALUE", "text": "Scary movies"}, {"start": 29, "end": 43, "label": "NEW_VALUE", "text": "Century Cinema"}], "cue_spans": []}
+{"id": "SGD-3d590d3849ab6c613e", "value_spans": [{"start": 27, "end": 43, "label": "NEW_VALUE", "text": "the 7th of March"}], "cue_spans": []}
+{"id": "SGD-3f09b164aebe6e4caa", "value_spans": [{"start": 21, "end": 30, "label": "NEW_VALUE", "text": "March 9th"}, {"start": 49, "end": 71, "label": "NEW_VALUE", "text": "the 10th of this month"}], "cue_spans": []}
+{"id": "SGD-4187d398427d099e0e", "value_spans": [{"start": 48, "end": 67, "label": "REFERENCE", "text": "the event you found"}], "cue_spans": []}
+{"id": "SGD-42be204d07b595aef3", "value_spans": [{"start": 61, "end": 70, "label": "NEW_VALUE", "text": "March 9th"}], "cue_spans": []}
+{"id": "SGD-4300a0000c202059a7", "value_spans": [{"start": 32, "end": 46, "label": "NEW_VALUE", "text": "a regular show"}, {"start": 50, "end": 57, "label": "NEW_VALUE", "text": "the 3rd"}], "cue_spans": []}
+{"id": "SGD-43b385ccc5b304d825", "value_spans": [{"start": 28, "end": 40, "label": "NEW_VALUE", "text": "a rental car"}, {"start": 55, "end": 68, "label": "NEW_VALUE", "text": "a compact car"}, {"start": 72, "end": 89, "label": "NEW_VALUE", "text": "the 12th of March"}, {"start": 93, "end": 111, "label": "NEW_VALUE", "text": "3 in the afternoon"}], "cue_spans": []}
+{"id": "SGD-45da1ccaf094291ea9", "value_spans": [{"start": 30, "end": 33, "label": "REFERENCE", "text": "the"}, {"start": 43, "end": 52, "label": "NEW_VALUE", "text": "3 persons"}], "cue_spans": []}
+{"id": "SGD-45fbc62f5dff13a23c", "value_spans": [{"start": 20, "end": 40, "label": "REFERENCE", "text": "the same appointment"}, {"start": 45, "end": 66, "label": "NEW_VALUE", "text": "the 4th of this month"}, {"start": 70, "end": 98, "label": "NEW_VALUE", "text": "quarter to 12 in the morning"}], "cue_spans": []}
+{"id": "SGD-46ef4e83dd463f8f6c", "value_spans": [], "cue_spans": []}
+{"id": "SGD-472137739fd67397f9", "value_spans": [{"start": 21, "end": 32, "label": "NEW_VALUE", "text": "a therapist"}, {"start": 50, "end": 64, "label": "NEW_VALUE", "text": "a psychiatrist"}], "cue_spans": [{"start": 36, "end": 44, "label": "UPDATE_CUE", "text": "actually"}]}
+{"id": "SGD-473c2fae903c3d2740", "value_spans": [{"start": 29, "end": 41, "label": "NEW_VALUE", "text": "Portland, OR"}, {"start": 54, "end": 73, "label": "NEW_VALUE", "text": "9:30 in the morning"}], "cue_spans": []}
+{"id": "SGD-478d60e82b21716804", "value_spans": [{"start": 7, "end": 15, "label": "REFERENCE", "text": "that one"}], "cue_spans": []}
+{"id": "SGD-4933c6a78cfa85d9ef", "value_spans": [{"start": 55, "end": 58, "label": "NEW_VALUE", "text": "one"}, {"start": 62, "end": 63, "label": "NEW_VALUE", "text": "a"}, {"start": 78, "end": 91, "label": "REFERENCE", "text": "the same area"}], "cue_spans": []}
+{"id": "SGD-4b189bd1da7af4a504", "value_spans": [{"start": 3, "end": 15, "label": "REFERENCE", "text": "the same day"}], "cue_spans": []}
+{"id": "SGD-4b2c3d89cbe28db68e", "value_spans": [{"start": 24, "end": 45, "label": "NEW_VALUE", "text": "the 9th of this month"}, {"start": 81, "end": 109, "label": "NEW_VALUE", "text": "half past 3 in the afternoon"}], "cue_spans": [{"start": 62, "end": 68, "label": "UPDATE_CUE", "text": "change"}]}
+{"id": "SGD-4dcd46de05d408cb87", "value_spans": [{"start": 10, "end": 17, "label": "NEW_VALUE", "text": "Hackers"}, {"start": 34, "end": 42, "label": "REFERENCE", "text": "that one"}], "cue_spans": []}
+{"id": "SGD-4dfa6d6cf7b48eea47", "value_spans": [{"start": 7, "end": 16, "label": "NEW_VALUE", "text": "two baths"}], "cue_spans": []}
+{"id": "SGD-4e80b8856850bca867", "value_spans": [{"start": 13, "end": 20, "label": "NEW_VALUE", "text": "a salon"}], "cue_spans": []}
+{"id": "SGD-4ee21a05fa7566e93b", "value_spans": [], "cue_spans": []}
+{"id": "SGD-4f817197e9108f5716", "value_spans": [], "cue_spans": []}
+{"id": "SGD-5011999de95bb4910c", "value_spans": [], "cue_spans": []}
+{"id": "SGD-5197714300ab26be35", "value_spans": [{"start": 28, "end": 36, "label": "REFERENCE", "text": "that one"}, {"start": 64, "end": 71, "label": "NEW_VALUE", "text": "four of"}, {"start": 78, "end": 104, "label": "NEW_VALUE", "text": "the Green Elephant Gourmet"}], "cue_spans": []}
+{"id": "SGD-54bb934082f7255d75", "value_spans": [{"start": 32, "end": 39, "label": "NEW_VALUE", "text": "4:45 pm"}, {"start": 65, "end": 82, "label": "NEW_VALUE", "text": "the 11th of March"}], "cue_spans": []}
+{"id": "SGD-550e54a4b9474d684d", "value_spans": [{"start": 5, "end": 13, "label": "REFERENCE", "text": "the same"}, {"start": 17, "end": 37, "label": "NEW_VALUE", "text": "11:30 in the morning"}], "cue_spans": []}
+{"id": "SGD-55af53217c28fbd669", "value_spans": [{"start": 16, "end": 34, "label": "NEW_VALUE", "text": "an Animation movie"}], "cue_spans": []}
+{"id": "SGD-55afd06bedaa2359da", "value_spans": [{"start": 33, "end": 50, "label": "NEW_VALUE", "text": "3 Economy tickets"}, {"start": 54, "end": 73, "label": "NEW_VALUE", "text": "a round trip flight"}, {"start": 98, "end": 120, "label": "NEW_VALUE", "text": "the 13th of this month"}], "cue_spans": []}
+{"id": "SGD-55cd86167ac4584e01", "value_spans": [{"start": 15, "end": 27, "label": "REFERENCE", "text": "the same day"}, {"start": 31, "end": 44, "label": "NEW_VALUE", "text": "the day after"}], "cue_spans": []}
+{"id": "SGD-563325e921bb71504f", "value_spans": [{"start": 20, "end": 28, "label": "REFERENCE", "text": "that one"}], "cue_spans": []}
+{"id": "SGD-56e2a9beab0e471b81", "value_spans": [{"start": 51, "end": 74, "label": "REFERENCE", "text": "that event from earlier"}], "cue_spans": []}
+{"id": "SGD-57033b5d234f43e6e3", "value_spans": [{"start": 19, "end": 26, "label": "NEW_VALUE", "text": "a short"}, {"start": 49, "end": 54, "label": "NEW_VALUE", "text": "a car"}, {"start": 83, "end": 86, "label": "REFERENCE", "text": "the"}, {"start": 94, "end": 107, "label": "NEW_VALUE", "text": "Vancouver, BC"}, {"start": 116, "end": 124, "label": "REFERENCE", "text": "the same"}, {"start": 128, "end": 139, "label": "NEW_VALUE", "text": "next Monday"}, {"start": 143, "end": 155, "label": "NEW_VALUE", "text": "evening 4:30"}], "cue_spans": []}
+{"id": "SGD-5806a62a1c29086bd5", "value_spans": [{"start": 19, "end": 29, "label": "NEW_VALUE", "text": "Remo Drive"}], "cue_spans": [{"start": 30, "end": 38, "label": "UPDATE_CUE", "text": "actually"}]}
+{"id": "SGD-581bcdfd24034e08a0", "value_spans": [{"start": 8, "end": 19, "label": "NEW_VALUE", "text": "a therapist"}], "cue_spans": []}
+{"id": "SGD-5a5a7d7aa09e472c3e", "value_spans": [{"start": 70, "end": 82, "label": "REFERENCE", "text": "the same day"}], "cue_spans": []}
+{"id": "SGD-5ac0d018df70364886", "value_spans": [{"start": 29, "end": 34, "label": "NEW_VALUE", "text": "a bus"}, {"start": 55, "end": 67, "label": "NEW_VALUE", "text": "a direct bus"}, {"start": 86, "end": 87, "label": "NEW_VALUE", "text": "1"}], "cue_spans": []}
+{"id": "SGD-5b1a0dee18ba2f48d3", "value_spans": [], "cue_spans": []}
+{"id": "SGD-5b3267e8ef29c9e9c7", "value_spans": [{"start": 21, "end": 33, "label": "NEW_VALUE", "text": "next Tuesday"}], "cue_spans": []}
+{"id": "SGD-5b8870640ab49e2885", "value_spans": [{"start": 55, "end": 63, "label": "NEW_VALUE", "text": "10:15 am"}], "cue_spans": []}
+{"id": "SGD-5ba6a23889c84f10e5", "value_spans": [{"start": 13, "end": 20, "label": "REFERENCE", "text": "the one"}], "cue_spans": []}
+{"id": "SGD-5bcc197e7a8661f983", "value_spans": [{"start": 24, "end": 31, "label": "NEW_VALUE", "text": "a train"}], "cue_spans": []}
+{"id": "SGD-5d398fff4b1d91229c", "value_spans": [{"start": 23, "end": 35, "label": "NEW_VALUE", "text": "a restaurant"}, {"start": 48, "end": 57, "label": "NEW_VALUE", "text": "Breakfast"}], "cue_spans": []}
+{"id": "SGD-5d5d3065c2b7340993", "value_spans": [{"start": 39, "end": 46, "label": "NEW_VALUE", "text": "a house"}], "cue_spans": []}
+{"id": "SGD-5dc1eefce3f5fa1bfc", "value_spans": [{"start": 61, "end": 72, "label": "NEW_VALUE", "text": "four people"}], "cue_spans": []}
+{"id": "SGD-5df957050e033dff86", "value_spans": [{"start": 14, "end": 22, "label": "REFERENCE", "text": "that one"}], "cue_spans": []}
+{"id": "SGD-5e499fac9a20f6dd8e", "value_spans": [{"start": 31, "end": 45, "label": "NEW_VALUE", "text": "a unisex salon"}, {"start": 49, "end": 57, "label": "NEW_VALUE", "text": "San Jose"}], "cue_spans": []}
+{"id": "SGD-5e63505fcf241cd2f4", "value_spans": [{"start": 16, "end": 32, "label": "NEW_VALUE", "text": "a one way flight"}], "cue_spans": []}
+{"id": "SGD-5ee48ac10ee51c3588", "value_spans": [{"start": 20, "end": 28, "label": "NEW_VALUE", "text": "the 13th"}, {"start": 32, "end": 39, "label": "NEW_VALUE", "text": "7:30 pm"}, {"start": 67, "end": 84, "label": "NEW_VALUE", "text": "the 14th of March"}], "cue_spans": []}
+{"id": "SGD-5ff2e760af1fb500e9", "value_spans": [{"start": 76, "end": 97, "label": "NEW_VALUE", "text": "the 3rd of this month"}], "cue_spans": []}
+{"id": "SGD-6013b1df75ecb8ecc6", "value_spans": [{"start": 26, "end": 40, "label": "NEW_VALUE", "text": "afternoon 1:30"}], "cue_spans": [{"start": 7, "end": 13, "label": "UPDATE_CUE", "text": "change"}]}
+{"id": "SGD-605304d8bacca1564c", "value_spans": [{"start": 0, "end": 8, "label": "REFERENCE", "text": "That one"}], "cue_spans": []}
+{"id": "SGD-606f91d9aabde8deac", "value_spans": [], "cue_spans": []}
+{"id": "SGD-60865a5bcaaadbf101", "value_spans": [], "cue_spans": []}
+{"id": "SGD-60ceca7f86a24b2296", "value_spans": [{"start": 21, "end": 29, "label": "NEW_VALUE", "text": "one room"}, {"start": 33, "end": 47, "label": "NEW_VALUE", "text": "a 3 star hotel"}, {"start": 51, "end": 64, "label": "REFERENCE", "text": "the same area"}], "cue_spans": []}
+{"id": "SGD-61aad5a09929e7022f", "value_spans": [{"start": 0, "end": 9, "label": "NEW_VALUE", "text": "cambodian"}], "cue_spans": []}
+{"id": "SGD-62daf5814b5e0319af", "value_spans": [], "cue_spans": []}
+{"id": "SGD-659b67e5b0a3aef898", "value_spans": [{"start": 66, "end": 88, "label": "REFERENCE", "text": "the last one you found"}], "cue_spans": []}
+{"id": "SGD-65ec31f0a0461e0e2a", "value_spans": [{"start": 11, "end": 17, "label": "NEW_VALUE", "text": "two pm"}], "cue_spans": [{"start": 0, "end": 7, "label": "UPDATE_CUE", "text": "Make it"}]}
+{"id": "SGD-661d4b84f853573c5d", "value_spans": [{"start": 12, "end": 25, "label": "REFERENCE", "text": "the first one"}, {"start": 27, "end": 49, "label": "NEW_VALUE", "text": "A Madea Family Funeral"}, {"start": 84, "end": 102, "label": "NEW_VALUE", "text": "Mandarin subtitles"}], "cue_spans": []}
+{"id": "SGD-6679995c4bdfa077a4", "value_spans": [{"start": 30, "end": 42, "label": "NEW_VALUE", "text": "a restaurant"}], "cue_spans": []}
+{"id": "SGD-671eea69df9e7b9d3b", "value_spans": [{"start": 21, "end": 28, "label": "NEW_VALUE", "text": "a salon"}, {"start": 32, "end": 42, "label": "NEW_VALUE", "text": "San Rafael"}, {"start": 60, "end": 63, "label": "NEW_VALUE", "text": "one"}], "cue_spans": []}
+{"id": "SGD-6851e5cb554646f772", "value_spans": [{"start": 21, "end": 38, "label": "NEW_VALUE", "text": "an one way flight"}, {"start": 42, "end": 54, "label": "NEW_VALUE", "text": "2nd of March"}], "cue_spans": []}
+{"id": "SGD-68aee8eed61ea02e4b", "value_spans": [{"start": 27, "end": 37, "label": "NEW_VALUE", "text": "a 3d movie"}, {"start": 41, "end": 54, "label": "REFERENCE", "text": "the same area"}], "cue_spans": []}
+{"id": "SGD-695d1551ed86f992a4", "value_spans": [{"start": 20, "end": 27, "label": "NEW_VALUE", "text": "a table"}, {"start": 31, "end": 43, "label": "NEW_VALUE", "text": "a restaurant"}, {"start": 47, "end": 60, "label": "REFERENCE", "text": "the same area"}], "cue_spans": []}
+{"id": "SGD-6af3733cd782e588c6", "value_spans": [], "cue_spans": []}
+{"id": "SGD-6b0372615e4d2d052a", "value_spans": [], "cue_spans": []}
+{"id": "SGD-6c3ccc3342542fe891", "value_spans": [{"start": 40, "end": 51, "label": "REFERENCE", "text": "those event"}], "cue_spans": []}
+{"id": "SGD-6dc66cde9b0e276ca3", "value_spans": [{"start": 14, "end": 22, "label": "REFERENCE", "text": "this bus"}, {"start": 68, "end": 105, "label": "REFERENCE", "text": "the event that I have selected before"}, {"start": 114, "end": 127, "label": "NEW_VALUE", "text": "three tickets"}], "cue_spans": []}
+{"id": "SGD-6ddc184cc91fb881fa", "value_spans": [{"start": 20, "end": 28, "label": "NEW_VALUE", "text": "the 13th"}, {"start": 32, "end": 38, "label": "NEW_VALUE", "text": "two pm"}], "cue_spans": [{"start": 8, "end": 15, "label": "UPDATE_CUE", "text": "make it"}]}
+{"id": "SGD-6f0bde478edd803333", "value_spans": [{"start": 35, "end": 47, "label": "NEW_VALUE", "text": "a restaurant"}], "cue_spans": []}
+{"id": "SGD-6fd439fc26d73b655c", "value_spans": [{"start": 23, "end": 28, "label": "NEW_VALUE", "text": "a bus"}, {"start": 34, "end": 43, "label": "NEW_VALUE", "text": "Las Vegas"}, {"start": 47, "end": 53, "label": "NEW_VALUE", "text": "Fresno"}, {"start": 57, "end": 74, "label": "NEW_VALUE", "text": "Tuesday next week"}], "cue_spans": []}
+{"id": "SGD-71a4a572c6b9bef24c", "value_spans": [{"start": 107, "end": 120, "label": "NEW_VALUE", "text": "movie tickets"}, {"start": 138, "end": 141, "label": "REFERENCE", "text": "the"}, {"start": 150, "end": 154, "label": "NEW_VALUE", "text": "7 pm"}], "cue_spans": []}
+{"id": "SGD-71fa1bc9500c66eb6a", "value_spans": [{"start": 25, "end": 32, "label": "NEW_VALUE", "text": "a plane"}, {"start": 55, "end": 74, "label": "NEW_VALUE", "text": "a round trip flight"}], "cue_spans": [{"start": 33, "end": 40, "label": "UPDATE_CUE", "text": "instead"}]}
+{"id": "SGD-7297073f8e20f565bd", "value_spans": [], "cue_spans": []}
+{"id": "SGD-72c48468ebdb295d5b", "value_spans": [{"start": 12, "end": 17, "label": "NEW_VALUE", "text": "10:15"}], "cue_spans": [{"start": 0, "end": 7, "label": "UPDATE_CUE", "text": "Make it"}]}
+{"id": "SGD-744eea6068ba024b2f", "value_spans": [{"start": 16, "end": 28, "label": "NEW_VALUE", "text": "an imax show"}], "cue_spans": [{"start": 29, "end": 37, "label": "UPDATE_CUE", "text": "actually"}]}
+{"id": "SGD-747ddd9528cfaa18f1", "value_spans": [], "cue_spans": []}
+{"id": "SGD-75221b4a3bc13ea93a", "value_spans": [{"start": 24, "end": 39, "label": "NEW_VALUE", "text": "London, England"}], "cue_spans": [{"start": 40, "end": 47, "label": "UPDATE_CUE", "text": "instead"}]}
+{"id": "SGD-75a587bd5181646b6b", "value_spans": [{"start": 73, "end": 82, "label": "NEW_VALUE", "text": "featuring"}, {"start": 83, "end": 95, "label": "NEW_VALUE", "text": "Josef Sommer"}], "cue_spans": []}
+{"id": "SGD-75c2a85dc9ed2878c8", "value_spans": [{"start": 12, "end": 20, "label": "REFERENCE", "text": "that one"}], "cue_spans": []}
+{"id": "SGD-767afec932a8bb9efe", "value_spans": [{"start": 27, "end": 38, "label": "NEW_VALUE", "text": "two tickets"}, {"start": 42, "end": 51, "label": "REFERENCE", "text": "the event"}, {"start": 55, "end": 65, "label": "NEW_VALUE", "text": "the Strand"}], "cue_spans": []}
+{"id": "SGD-7715f3540e122e89f5", "value_spans": [{"start": 27, "end": 34, "label": "NEW_VALUE", "text": "a salon"}, {"start": 38, "end": 40, "label": "NEW_VALUE", "text": "SF"}], "cue_spans": []}
+{"id": "SGD-77ad49031cc0ca0312", "value_spans": [{"start": 115, "end": 124, "label": "NEW_VALUE", "text": "afternoon"}, {"start": 125, "end": 129, "label": "NEW_VALUE", "text": "3:15"}], "cue_spans": []}
+{"id": "SGD-79308f62cc4771e63c", "value_spans": [{"start": 26, "end": 34, "label": "REFERENCE", "text": "that one"}], "cue_spans": []}
+{"id": "SGD-7a56f1d54b809fcb02", "value_spans": [{"start": 11, "end": 20, "label": "NEW_VALUE", "text": "march 4th"}], "cue_spans": []}
+{"id": "SGD-7a738783d928cf2a76", "value_spans": [{"start": 27, "end": 35, "label": "NEW_VALUE", "text": "the 13th"}], "cue_spans": []}
+{"id": "SGD-7a9d58d832eef13a24", "value_spans": [], "cue_spans": []}
+{"id": "SGD-7ad0caf04ba4c0d76d", "value_spans": [{"start": 8, "end": 34, "label": "NEW_VALUE", "text": "3 o\"clock in the afternoon"}], "cue_spans": [{"start": 0, "end": 7, "label": "UPDATE_CUE", "text": "Make it"}]}
+{"id": "SGD-7c0ed7bb01b09c3d12", "value_spans": [{"start": 5, "end": 18, "label": "NEW_VALUE", "text": "Paris, France"}], "cue_spans": []}
+{"id": "SGD-7dd158f917c2df9a2f", "value_spans": [], "cue_spans": []}
+{"id": "SGD-7f38ce32209aaecf5b", "value_spans": [{"start": 42, "end": 58, "label": "NEW_VALUE", "text": "Friday next week"}], "cue_spans": []}
+{"id": "SGD-7f52e29581ea6abafe", "value_spans": [{"start": 44, "end": 63, "label": "REFERENCE", "text": "that song you found"}], "cue_spans": []}
+{"id": "SGD-8065e8cad6794de1c5", "value_spans": [], "cue_spans": []}
+{"id": "SGD-814d1e8820c3297798", "value_spans": [{"start": 7, "end": 15, "label": "NEW_VALUE", "text": "a rating"}, {"start": 28, "end": 31, "label": "NEW_VALUE", "text": "4.0"}, {"start": 48, "end": 50, "label": "NEW_VALUE", "text": "at"}, {"start": 51, "end": 56, "label": "NEW_VALUE", "text": "least"}, {"start": 57, "end": 60, "label": "NEW_VALUE", "text": "4.4"}], "cue_spans": []}
+{"id": "SGD-8159be5b05e003d3a7", "value_spans": [{"start": 0, "end": 8, "label": "REFERENCE", "text": "That one"}], "cue_spans": []}
+{"id": "SGD-81892e2ffec400ba62", "value_spans": [{"start": 20, "end": 44, "label": "NEW_VALUE", "text": "a romance movie directed"}, {"start": 45, "end": 47, "label": "NEW_VALUE", "text": "by"}, {"start": 48, "end": 61, "label": "NEW_VALUE", "text": "george sidney"}], "cue_spans": []}
+{"id": "SGD-82423658e69b0580f8", "value_spans": [{"start": 31, "end": 40, "label": "NEW_VALUE", "text": "Las Vegas"}], "cue_spans": []}
+{"id": "SGD-837dbb77c5d7f846a1", "value_spans": [{"start": 20, "end": 49, "label": "NEW_VALUE", "text": "quarter past 5 in the evening"}], "cue_spans": [{"start": 0, "end": 8, "label": "UPDATE_CUE", "text": "Actually"}, {"start": 9, "end": 16, "label": "UPDATE_CUE", "text": "make it"}, {"start": 54, "end": 58, "label": "UPDATE_CUE", "text": "name"}]}
+{"id": "SGD-84dde9e2ddfe194075", "value_spans": [], "cue_spans": []}
+{"id": "SGD-858a34e0e0b5aa4bd0", "value_spans": [{"start": 17, "end": 39, "label": "REFERENCE", "text": "that salon appointment"}, {"start": 54, "end": 57, "label": "NEW_VALUE", "text": "one"}, {"start": 62, "end": 67, "label": "NEW_VALUE", "text": "18:45"}], "cue_spans": []}
+{"id": "SGD-86c09a16f616ed7b18", "value_spans": [], "cue_spans": []}
+{"id": "SGD-86cd07580a2d7d8091", "value_spans": [{"start": 23, "end": 38, "label": "NEW_VALUE", "text": "London, England"}], "cue_spans": []}
+{"id": "SGD-86e477e8c61c5781eb", "value_spans": [{"start": 27, "end": 34, "label": "NEW_VALUE", "text": "a salon"}], "cue_spans": []}
+{"id": "SGD-8960f4f294e56995fc", "value_spans": [{"start": 21, "end": 22, "label": "NEW_VALUE", "text": "a"}, {"start": 32, "end": 41, "label": "NEW_VALUE", "text": "Cupertino"}], "cue_spans": [{"start": 57, "end": 65, "label": "UPDATE_CUE", "text": "actually"}]}
+{"id": "SGD-89c55e6b30b3b1731c", "value_spans": [{"start": 24, "end": 36, "label": "REFERENCE", "text": "the same day"}], "cue_spans": [{"start": 12, "end": 19, "label": "UPDATE_CUE", "text": "make it"}]}
+{"id": "SGD-8a59133eeea3f1bb0f", "value_spans": [{"start": 15, "end": 32, "label": "NEW_VALUE", "text": "a nice To-go meal"}, {"start": 36, "end": 51, "label": "REFERENCE", "text": "the same day as"}, {"start": 52, "end": 66, "label": "REFERENCE", "text": "my appointment"}], "cue_spans": []}
+{"id": "SGD-8a703dd08f6351e29f", "value_spans": [{"start": 33, "end": 41, "label": "REFERENCE", "text": "the same"}], "cue_spans": []}
+{"id": "SGD-8b58440cbf4fc76496", "value_spans": [], "cue_spans": []}
+{"id": "SGD-8c1778a3902fcb9c31", "value_spans": [{"start": 15, "end": 20, "label": "NEW_VALUE", "text": "a car"}, {"start": 41, "end": 44, "label": "REFERENCE", "text": "the"}, {"start": 55, "end": 62, "label": "NEW_VALUE", "text": "Fremont"}, {"start": 83, "end": 86, "label": "REFERENCE", "text": "the"}, {"start": 100, "end": 115, "label": "NEW_VALUE", "text": "a full-size car"}], "cue_spans": []}
+{"id": "SGD-8cd4d52fe742b3c10b", "value_spans": [{"start": 35, "end": 45, "label": "NEW_VALUE", "text": "March 14th"}], "cue_spans": []}
+{"id": "SGD-8d30924115ce860c5d", "value_spans": [], "cue_spans": []}
+{"id": "SGD-8d9226ee0cd6e16f25", "value_spans": [], "cue_spans": []}
+{"id": "SGD-8e387ed1670cda82a7", "value_spans": [{"start": 7, "end": 15, "label": "REFERENCE", "text": "that one"}], "cue_spans": []}
+{"id": "SGD-8fd3fd4f35b2c7864c", "value_spans": [{"start": 13, "end": 20, "label": "REFERENCE", "text": "the one"}], "cue_spans": []}
+{"id": "SGD-8fff8cd09be757797c", "value_spans": [], "cue_spans": []}
+{"id": "SGD-906c3f7e2c2a4af507", "value_spans": [{"start": 21, "end": 30, "label": "NEW_VALUE", "text": "2 tickets"}, {"start": 34, "end": 43, "label": "REFERENCE", "text": "the event"}], "cue_spans": []}
+{"id": "SGD-908edb0ac2404238f3", "value_spans": [{"start": 34, "end": 57, "label": "REFERENCE", "text": "the song you just found"}, {"start": 62, "end": 73, "label": "NEW_VALUE", "text": "the speaker"}], "cue_spans": []}
+{"id": "SGD-91b30ed4c6ecb13c19", "value_spans": [{"start": 10, "end": 28, "label": "REFERENCE", "text": "the one i searched"}], "cue_spans": []}
+{"id": "SGD-928301e853a398ffe5", "value_spans": [{"start": 13, "end": 21, "label": "NEW_VALUE", "text": "the 10th"}, {"start": 26, "end": 36, "label": "NEW_VALUE", "text": "three days"}], "cue_spans": [{"start": 0, "end": 7, "label": "UPDATE_CUE", "text": "Make it"}]}
+{"id": "SGD-941310099ee80c5d93", "value_spans": [], "cue_spans": []}
+{"id": "SGD-94ad57b863764392cc", "value_spans": [{"start": 31, "end": 39, "label": "REFERENCE", "text": "the same"}, {"start": 43, "end": 54, "label": "NEW_VALUE", "text": "Santa Clara"}, {"start": 58, "end": 70, "label": "NEW_VALUE", "text": "3rd of March"}], "cue_spans": []}
+{"id": "SGD-94e95c6a27275e5fb6", "value_spans": [{"start": 19, "end": 27, "label": "REFERENCE", "text": "that one"}], "cue_spans": []}
+{"id": "SGD-9559a59edfca9b07c7", "value_spans": [{"start": 35, "end": 45, "label": "NEW_VALUE", "text": "a pop song"}, {"start": 46, "end": 48, "label": "NEW_VALUE", "text": "by"}, {"start": 49, "end": 61, "label": "NEW_VALUE", "text": "Charlie Puth"}], "cue_spans": [{"start": 13, "end": 21, "label": "UPDATE_CUE", "text": "actually"}]}
+{"id": "SGD-960b3f6dd013f6c1ee", "value_spans": [{"start": 21, "end": 26, "label": "NEW_VALUE", "text": "a bus"}], "cue_spans": []}
+{"id": "SGD-96f3dac32fadadc7dd", "value_spans": [{"start": 17, "end": 24, "label": "NEW_VALUE", "text": "a table"}, {"start": 29, "end": 32, "label": "NEW_VALUE", "text": "one"}, {"start": 36, "end": 52, "label": "NEW_VALUE", "text": "the Elephant Bar"}], "cue_spans": []}
+{"id": "SGD-984a6c251ca49117df", "value_spans": [{"start": 0, "end": 9, "label": "NEW_VALUE", "text": "Labyrinth"}, {"start": 13, "end": 29, "label": "REFERENCE", "text": "the one I choose"}], "cue_spans": []}
+{"id": "SGD-98dd664b02b2c61777", "value_spans": [{"start": 32, "end": 50, "label": "NEW_VALUE", "text": "day after tomorrow"}], "cue_spans": [{"start": 7, "end": 13, "label": "UPDATE_CUE", "text": "change"}]}
+{"id": "SGD-995f9364e61d69fb95", "value_spans": [], "cue_spans": []}
+{"id": "SGD-99dce5d105c94287f4", "value_spans": [{"start": 28, "end": 38, "label": "NEW_VALUE", "text": "my bedroom"}], "cue_spans": [{"start": 0, "end": 8, "label": "UPDATE_CUE", "text": "Actually"}]}
+{"id": "SGD-9aa0c465a9ae8b6f15", "value_spans": [{"start": 29, "end": 37, "label": "REFERENCE", "text": "the same"}, {"start": 41, "end": 58, "label": "NEW_VALUE", "text": "1st of this month"}], "cue_spans": []}
+{"id": "SGD-9bb842dbc620eb3de9", "value_spans": [{"start": 20, "end": 25, "label": "NEW_VALUE", "text": "a bus"}], "cue_spans": []}
+{"id": "SGD-9d3e5bcb721e504cd4", "value_spans": [{"start": 6, "end": 14, "label": "REFERENCE", "text": "that one"}], "cue_spans": []}
+{"id": "SGD-9e26259ace12b97519", "value_spans": [], "cue_spans": []}
+{"id": "SGD-9e583f8f4dba95ac84", "value_spans": [{"start": 19, "end": 34, "label": "REFERENCE", "text": "this restaurant"}, {"start": 39, "end": 57, "label": "NEW_VALUE", "text": "vegetarian options"}], "cue_spans": []}
+{"id": "SGD-9ee4ac3ac26705b89c", "value_spans": [{"start": 7, "end": 19, "label": "NEW_VALUE", "text": "an apartment"}], "cue_spans": []}
+{"id": "SGD-9fd126121a5369bc2e", "value_spans": [{"start": 34, "end": 52, "label": "NEW_VALUE", "text": "my bedroom speaker"}], "cue_spans": [{"start": 0, "end": 8, "label": "UPDATE_CUE", "text": "Actually"}, {"start": 14, "end": 20, "label": "UPDATE_CUE", "text": "Change"}, {"start": 21, "end": 25, "label": "UPDATE_CUE", "text": "that"}]}
+{"id": "SGD-a008de71b1fb15fdd8", "value_spans": [{"start": 14, "end": 36, "label": "NEW_VALUE", "text": "La Finestra Ristorante"}, {"start": 90, "end": 103, "label": "NEW_VALUE", "text": "2 restaurants"}], "cue_spans": []}
+{"id": "SGD-a12e0fa81b3eba49e8", "value_spans": [{"start": 20, "end": 25, "label": "NEW_VALUE", "text": "10:45"}], "cue_spans": [{"start": 8, "end": 15, "label": "UPDATE_CUE", "text": "make it"}]}
+{"id": "SGD-a21492ee7099a63156", "value_spans": [{"start": 7, "end": 15, "label": "REFERENCE", "text": "that one"}, {"start": 44, "end": 53, "label": "REFERENCE", "text": "that game"}], "cue_spans": []}
+{"id": "SGD-a227f4cc7597478cfd", "value_spans": [{"start": 37, "end": 45, "label": "REFERENCE", "text": "that one"}], "cue_spans": []}
+{"id": "SGD-a24636b4e77206ce94", "value_spans": [{"start": 40, "end": 50, "label": "NEW_VALUE", "text": "Rutherford"}], "cue_spans": []}
+{"id": "SGD-a2878a8856ae7ec8cc", "value_spans": [{"start": 18, "end": 26, "label": "REFERENCE", "text": "that one"}], "cue_spans": []}
+{"id": "SGD-a313d0389d3696db6c", "value_spans": [{"start": 24, "end": 37, "label": "NEW_VALUE", "text": "economy seats"}, {"start": 41, "end": 49, "label": "NEW_VALUE", "text": "a flight"}], "cue_spans": []}
+{"id": "SGD-a42622fdb5bab25adb", "value_spans": [{"start": 17, "end": 24, "label": "REFERENCE", "text": "the one"}], "cue_spans": []}
+{"id": "SGD-a4492da6e8a18d1d73", "value_spans": [{"start": 10, "end": 22, "label": "NEW_VALUE", "text": "a Play movie"}, {"start": 26, "end": 35, "label": "NEW_VALUE", "text": "San Ramon"}, {"start": 42, "end": 56, "label": "NEW_VALUE", "text": "a regular show"}], "cue_spans": []}
+{"id": "SGD-a45479e0a2cf9199f8", "value_spans": [{"start": 40, "end": 48, "label": "REFERENCE", "text": "the same"}], "cue_spans": []}
+{"id": "SGD-a4abd38431422ea1bc", "value_spans": [{"start": 44, "end": 59, "label": "NEW_VALUE", "text": "an evening 5:15"}, {"start": 77, "end": 85, "label": "REFERENCE", "text": "that day"}, {"start": 92, "end": 95, "label": "REFERENCE", "text": "the"}], "cue_spans": []}
+{"id": "SGD-a4ba2d50656a456e80", "value_spans": [{"start": 19, "end": 31, "label": "NEW_VALUE", "text": "a restaurant"}, {"start": 99, "end": 103, "label": "NEW_VALUE", "text": "that"}, {"start": 104, "end": 114, "label": "NEW_VALUE", "text": "Steakhouse"}], "cue_spans": []}
+{"id": "SGD-a4feacdbd397807df2", "value_spans": [{"start": 7, "end": 15, "label": "REFERENCE", "text": "That one"}], "cue_spans": []}
+{"id": "SGD-a516f43bc7eb3a1321", "value_spans": [{"start": 27, "end": 31, "label": "NEW_VALUE", "text": "some"}, {"start": 32, "end": 58, "label": "NEW_VALUE", "text": "child-friendly attractions"}, {"start": 85, "end": 100, "label": "NEW_VALUE", "text": "Nature Preserve"}], "cue_spans": []}
+{"id": "SGD-a5e01d379a96d00984", "value_spans": [{"start": 20, "end": 27, "label": "REFERENCE", "text": "the one"}], "cue_spans": []}
+{"id": "SGD-a6529a1f21bb4c3802", "value_spans": [{"start": 20, "end": 31, "label": "NEW_VALUE", "text": "a therapist"}], "cue_spans": []}
+{"id": "SGD-a675f4477db171542a", "value_spans": [], "cue_spans": []}
+{"id": "SGD-a68489995542711a4f", "value_spans": [{"start": 35, "end": 52, "label": "REFERENCE", "text": "that previous car"}], "cue_spans": []}
+{"id": "SGD-a6b086bb15f5e6ffeb", "value_spans": [{"start": 23, "end": 35, "label": "NEW_VALUE", "text": "a Stage show"}], "cue_spans": [{"start": 54, "end": 60, "label": "UPDATE_CUE", "text": "change"}]}
+{"id": "SGD-a6fd73a1b0451ba780", "value_spans": [{"start": 76, "end": 103, "label": "REFERENCE", "text": "the therapist you mentioned"}, {"start": 108, "end": 116, "label": "REFERENCE", "text": "that day"}], "cue_spans": []}
+{"id": "SGD-a7127943b7505ab7a4", "value_spans": [], "cue_spans": []}
+{"id": "SGD-a71a2a77d432cb5d34", "value_spans": [], "cue_spans": []}
+{"id": "SGD-a7eed44cacc50e2a82", "value_spans": [], "cue_spans": []}
+{"id": "SGD-a85ed420969e7718b2", "value_spans": [{"start": 23, "end": 31, "label": "REFERENCE", "text": "that one"}, {"start": 136, "end": 149, "label": "NEW_VALUE", "text": "Neil Marshall"}], "cue_spans": []}
+{"id": "SGD-a956fb777ea5c0362f", "value_spans": [{"start": 44, "end": 46, "label": "NEW_VALUE", "text": "at"}, {"start": 47, "end": 52, "label": "NEW_VALUE", "text": "least"}, {"start": 53, "end": 64, "label": "NEW_VALUE", "text": "three stars"}, {"start": 73, "end": 84, "label": "NEW_VALUE", "text": "three rooms"}], "cue_spans": []}
+{"id": "SGD-a96ee783066f90388b", "value_spans": [], "cue_spans": []}
+{"id": "SGD-a98e0366d3cafc18b3", "value_spans": [{"start": 0, "end": 8, "label": "REFERENCE", "text": "That one"}], "cue_spans": []}
+{"id": "SGD-ab3307fe11e0f4c244", "value_spans": [{"start": 16, "end": 24, "label": "REFERENCE", "text": "that one"}], "cue_spans": []}
+{"id": "SGD-ab4a8a5d9135238925", "value_spans": [{"start": 42, "end": 59, "label": "REFERENCE", "text": "the same SUV type"}], "cue_spans": []}
+{"id": "SGD-ab96e82fe98a5b6656", "value_spans": [{"start": 42, "end": 51, "label": "NEW_VALUE", "text": "one table"}, {"start": 56, "end": 64, "label": "REFERENCE", "text": "that day"}], "cue_spans": []}
+{"id": "SGD-abd88f45761d560d8e", "value_spans": [], "cue_spans": []}
+{"id": "SGD-acf2290e35a6c30e7b", "value_spans": [{"start": 22, "end": 29, "label": "NEW_VALUE", "text": "the 7th"}], "cue_spans": [{"start": 2, "end": 10, "label": "UPDATE_CUE", "text": "actually"}]}
+{"id": "SGD-ad8a52b19396d36716", "value_spans": [{"start": 20, "end": 32, "label": "REFERENCE", "text": "the same day"}], "cue_spans": []}
+{"id": "SGD-add72ab2b6b718c726", "value_spans": [{"start": 103, "end": 120, "label": "NEW_VALUE", "text": "english subtitles"}], "cue_spans": []}
+{"id": "SGD-aec4528fd834578601", "value_spans": [{"start": 20, "end": 29, "label": "NEW_VALUE", "text": "evening 4"}], "cue_spans": [{"start": 8, "end": 15, "label": "UPDATE_CUE", "text": "make it"}]}
+{"id": "SGD-af4a7c56cb9c36e698", "value_spans": [{"start": 18, "end": 25, "label": "NEW_VALUE", "text": "a movie"}], "cue_spans": []}
+{"id": "SGD-afa833db9f218e2207", "value_spans": [{"start": 90, "end": 106, "label": "NEW_VALUE", "text": "a one way flight"}], "cue_spans": []}
+{"id": "SGD-afba777aac592e7d5d", "value_spans": [{"start": 36, "end": 55, "label": "NEW_VALUE", "text": "five in the evening"}, {"start": 75, "end": 85, "label": "NEW_VALUE", "text": "March 12th"}], "cue_spans": []}
+{"id": "SGD-b01ddb4bf2c369a500", "value_spans": [{"start": 65, "end": 84, "label": "REFERENCE", "text": "that show you found"}], "cue_spans": []}
+{"id": "SGD-b06df768fdfece932f", "value_spans": [], "cue_spans": []}
+{"id": "SGD-b0cbabcfa22cbee62a", "value_spans": [{"start": 54, "end": 73, "label": "NEW_VALUE", "text": "a round trip flight"}, {"start": 103, "end": 111, "label": "REFERENCE", "text": "the same"}], "cue_spans": []}
+{"id": "SGD-b154943addc7c2fa42", "value_spans": [], "cue_spans": []}
+{"id": "SGD-b309f55f844901a4fc", "value_spans": [{"start": 18, "end": 24, "label": "NEW_VALUE", "text": "Little"}], "cue_spans": []}
+{"id": "SGD-b4363b3c0b149e85d3", "value_spans": [{"start": 92, "end": 99, "label": "NEW_VALUE", "text": "a table"}, {"start": 103, "end": 115, "label": "NEW_VALUE", "text": "a restaurant"}, {"start": 128, "end": 141, "label": "REFERENCE", "text": "the same area"}], "cue_spans": [{"start": 0, "end": 8, "label": "UPDATE_CUE", "text": "Actually"}]}
+{"id": "SGD-b4c670ee485e0aca31", "value_spans": [], "cue_spans": []}
+{"id": "SGD-b5188fa403672cbac0", "value_spans": [{"start": 20, "end": 40, "label": "REFERENCE", "text": "the same appointment"}, {"start": 70, "end": 86, "label": "NEW_VALUE", "text": "4 in the evening"}], "cue_spans": []}
+{"id": "SGD-b5c3a292374c75fd61", "value_spans": [{"start": 16, "end": 28, "label": "NEW_VALUE", "text": "a nice salon"}, {"start": 32, "end": 40, "label": "NEW_VALUE", "text": "San Jose"}], "cue_spans": []}
+{"id": "SGD-b663cbdf8c52ae4967", "value_spans": [{"start": 0, "end": 8, "label": "REFERENCE", "text": "That one"}], "cue_spans": []}
+{"id": "SGD-b7d4adc0efdc7ed0ae", "value_spans": [], "cue_spans": []}
+{"id": "SGD-b7f0de421d83f90d61", "value_spans": [{"start": 50, "end": 58, "label": "REFERENCE", "text": "the same"}], "cue_spans": []}
+{"id": "SGD-b86729d0eb44c656b3", "value_spans": [], "cue_spans": []}
+{"id": "SGD-b91b223521640d6cc0", "value_spans": [{"start": 19, "end": 27, "label": "REFERENCE", "text": "that one"}, {"start": 41, "end": 48, "label": "NEW_VALUE", "text": "9:45 am"}, {"start": 52, "end": 59, "label": "NEW_VALUE", "text": "the 9th"}], "cue_spans": [{"start": 29, "end": 36, "label": "UPDATE_CUE", "text": "Make it"}]}
+{"id": "SGD-bab9689b8e0123af2e", "value_spans": [], "cue_spans": []}
+{"id": "SGD-bb582186da2fd72f46", "value_spans": [{"start": 13, "end": 24, "label": "NEW_VALUE", "text": "Sydney, NSW"}, {"start": 93, "end": 94, "label": "NEW_VALUE", "text": "a"}], "cue_spans": []}
+{"id": "SGD-bc6ac8f8626c8d4ad1", "value_spans": [{"start": 15, "end": 17, "label": "NEW_VALUE", "text": "Dr"}], "cue_spans": []}
+{"id": "SGD-bd4eb9ebafe37790b2", "value_spans": [{"start": 48, "end": 60, "label": "NEW_VALUE", "text": "3rd of March"}, {"start": 65, "end": 71, "label": "NEW_VALUE", "text": "3 days"}], "cue_spans": [{"start": 10, "end": 16, "label": "UPDATE_CUE", "text": "change"}, {"start": 72, "end": 79, "label": "UPDATE_CUE", "text": "instead"}]}
+{"id": "SGD-bd68e6f8b406fdb603", "value_spans": [{"start": 21, "end": 29, "label": "REFERENCE", "text": "that one"}, {"start": 52, "end": 66, "label": "NEW_VALUE", "text": "an appointment"}], "cue_spans": []}
+{"id": "SGD-bda4aea3a26e339d43", "value_spans": [{"start": 13, "end": 21, "label": "REFERENCE", "text": "that one"}], "cue_spans": []}
+{"id": "SGD-be07c44132d15d1fcd", "value_spans": [{"start": 27, "end": 49, "label": "NEW_VALUE", "text": "the 11th of this month"}], "cue_spans": []}
+{"id": "SGD-be1399cf9d8ce4cdee", "value_spans": [{"start": 24, "end": 31, "label": "NEW_VALUE", "text": "6:30 pm"}, {"start": 43, "end": 51, "label": "REFERENCE", "text": "the same"}, {"start": 55, "end": 67, "label": "NEW_VALUE", "text": "4th of March"}], "cue_spans": []}
+{"id": "SGD-be6f6c1c375893675f", "value_spans": [{"start": 4, "end": 18, "label": "NEW_VALUE", "text": "Original Joe's"}], "cue_spans": []}
+{"id": "SGD-beff649e5f8900d7e0", "value_spans": [{"start": 48, "end": 67, "label": "NEW_VALUE", "text": "The Farewell insead"}], "cue_spans": [{"start": 3, "end": 11, "label": "UPDATE_CUE", "text": "actually"}]}
+{"id": "SGD-c012dcdcfc58b6d89b", "value_spans": [{"start": 16, "end": 48, "label": "NEW_VALUE", "text": "a movie directed by Claire Denis"}], "cue_spans": []}
+{"id": "SGD-c027fed77c46be1af7", "value_spans": [{"start": 7, "end": 15, "label": "REFERENCE", "text": "that one"}], "cue_spans": []}
+{"id": "SGD-c06522fa3310be7410", "value_spans": [{"start": 42, "end": 65, "label": "REFERENCE", "text": "the event we just found"}], "cue_spans": []}
+{"id": "SGD-c0dffb2a498a661ce5", "value_spans": [{"start": 31, "end": 46, "label": "REFERENCE", "text": "that rental car"}], "cue_spans": []}
+{"id": "SGD-c0eebab1471fcc3147", "value_spans": [{"start": 45, "end": 57, "label": "NEW_VALUE", "text": "four tickets"}, {"start": 62, "end": 80, "label": "REFERENCE", "text": "the previous event"}], "cue_spans": []}
+{"id": "SGD-c34a8f1ef3c3873b96", "value_spans": [{"start": 59, "end": 68, "label": "NEW_VALUE", "text": "subtitles"}, {"start": 72, "end": 79, "label": "NEW_VALUE", "text": "spanish"}], "cue_spans": []}
+{"id": "SGD-c3d8e69524aa3b04a3", "value_spans": [{"start": 26, "end": 51, "label": "REFERENCE", "text": "the song we found earlier"}], "cue_spans": []}
+{"id": "SGD-c3f81f71d0c17db39e", "value_spans": [], "cue_spans": []}
+{"id": "SGD-c4b6bbbdd8b44bb036", "value_spans": [{"start": 32, "end": 48, "label": "NEW_VALUE", "text": "the 5th of March"}], "cue_spans": [{"start": 0, "end": 8, "label": "UPDATE_CUE", "text": "Actually"}]}
+{"id": "SGD-c4bdec3512377b3304", "value_spans": [], "cue_spans": []}
+{"id": "SGD-c4f501b2f3eb824bb6", "value_spans": [{"start": 7, "end": 12, "label": "NEW_VALUE", "text": "a bus"}], "cue_spans": []}
+{"id": "SGD-c5935a158abda6c879", "value_spans": [{"start": 16, "end": 35, "label": "NEW_VALUE", "text": "a movie directed by"}, {"start": 36, "end": 48, "label": "NEW_VALUE", "text": "Harry Elfont"}], "cue_spans": []}
+{"id": "SGD-c7dabed827a375e0fb", "value_spans": [{"start": 27, "end": 32, "label": "NEW_VALUE", "text": "Lotus"}], "cue_spans": [{"start": 5, "end": 13, "label": "UPDATE_CUE", "text": "actually"}]}
+{"id": "SGD-c82970080c4b36f5af", "value_spans": [{"start": 29, "end": 45, "label": "NEW_VALUE", "text": "the 1st of March"}, {"start": 58, "end": 68, "label": "NEW_VALUE", "text": "March 10th"}], "cue_spans": [{"start": 0, "end": 8, "label": "UPDATE_CUE", "text": "Actually"}]}
+{"id": "SGD-c88d629af7933a70d4", "value_spans": [{"start": 16, "end": 27, "label": "NEW_VALUE", "text": "some movies"}, {"start": 45, "end": 50, "label": "NEW_VALUE", "text": "drama"}], "cue_spans": []}
+{"id": "SGD-c948ea67083e3bff43", "value_spans": [{"start": 26, "end": 33, "label": "NEW_VALUE", "text": "a salon"}], "cue_spans": []}
+{"id": "SGD-cb2c89f6689d338a39", "value_spans": [{"start": 16, "end": 23, "label": "NEW_VALUE", "text": "a movie"}], "cue_spans": []}
+{"id": "SGD-cb5f0f311acfcc86ea", "value_spans": [{"start": 35, "end": 47, "label": "REFERENCE", "text": "the same day"}, {"start": 59, "end": 74, "label": "NEW_VALUE", "text": "some restaurant"}], "cue_spans": []}
+{"id": "SGD-ce3f1eafa8fa13b8cb", "value_spans": [{"start": 5, "end": 13, "label": "REFERENCE", "text": "that one"}], "cue_spans": []}
+{"id": "SGD-ce450a3ac24d929e89", "value_spans": [{"start": 21, "end": 29, "label": "NEW_VALUE", "text": "one room"}, {"start": 33, "end": 47, "label": "NEW_VALUE", "text": "a 3 star hotel"}], "cue_spans": [{"start": 5, "end": 13, "label": "UPDATE_CUE", "text": "actually"}]}
+{"id": "SGD-ce98975d65a3302b45", "value_spans": [{"start": 0, "end": 8, "label": "REFERENCE", "text": "That one"}], "cue_spans": []}
+{"id": "SGD-cea3b82598f4c29a4d", "value_spans": [{"start": 12, "end": 19, "label": "NEW_VALUE", "text": "a movie"}], "cue_spans": []}
+{"id": "SGD-cec13a02aad84e47f4", "value_spans": [], "cue_spans": []}
+{"id": "SGD-d0a5fb255ee333fd06", "value_spans": [{"start": 42, "end": 55, "label": "NEW_VALUE", "text": "13th of March"}], "cue_spans": []}
+{"id": "SGD-d0cf9166a375eabd77", "value_spans": [{"start": 85, "end": 94, "label": "NEW_VALUE", "text": "Pop songs"}, {"start": 108, "end": 111, "label": "REFERENCE", "text": "the"}, {"start": 119, "end": 124, "label": "NEW_VALUE", "text": "Lizzo"}], "cue_spans": [{"start": 62, "end": 69, "label": "UPDATE_CUE", "text": "instead"}]}
+{"id": "SGD-d1d38809a1be315adf", "value_spans": [{"start": 61, "end": 70, "label": "NEW_VALUE", "text": "four days"}, {"start": 74, "end": 77, "label": "NEW_VALUE", "text": "the"}, {"start": 78, "end": 89, "label": "NEW_VALUE", "text": "Amora Hotel"}], "cue_spans": []}
+{"id": "SGD-d288e584f81beb96e2", "value_spans": [], "cue_spans": []}
+{"id": "SGD-d28c67be82919f6764", "value_spans": [{"start": 45, "end": 53, "label": "NEW_VALUE", "text": "2 people"}, {"start": 89, "end": 106, "label": "NEW_VALUE", "text": "a customer rating"}, {"start": 113, "end": 118, "label": "NEW_VALUE", "text": "least"}, {"start": 119, "end": 122, "label": "NEW_VALUE", "text": "4.2"}], "cue_spans": []}
+{"id": "SGD-d2f3caa88c10f30799", "value_spans": [{"start": 13, "end": 22, "label": "REFERENCE", "text": "the one I"}], "cue_spans": []}
+{"id": "SGD-d3acd9401d90da49c5", "value_spans": [], "cue_spans": []}
+{"id": "SGD-d55be8e6dc5ab2e315", "value_spans": [{"start": 35, "end": 62, "label": "REFERENCE", "text": "the tickets I found earlier"}], "cue_spans": []}
+{"id": "SGD-d57f1192620462c56e", "value_spans": [{"start": 26, "end": 38, "label": "NEW_VALUE", "text": "a direct bus"}], "cue_spans": []}
+{"id": "SGD-d662f5d4c62404b87e", "value_spans": [{"start": 68, "end": 86, "label": "NEW_VALUE", "text": "Thursday next week"}], "cue_spans": []}
+{"id": "SGD-d7bdf967ff539fa0a8", "value_spans": [{"start": 20, "end": 43, "label": "NEW_VALUE", "text": "San Jose Original Joe's"}, {"start": 47, "end": 63, "label": "NEW_VALUE", "text": "6 in the evening"}], "cue_spans": []}
+{"id": "SGD-d8632ab11495cea175", "value_spans": [{"start": 63, "end": 76, "label": "NEW_VALUE", "text": "this Saturday"}], "cue_spans": []}
+{"id": "SGD-d91fcda8190bdb09e6", "value_spans": [{"start": 0, "end": 11, "label": "NEW_VALUE", "text": "body double"}], "cue_spans": []}
+{"id": "SGD-dbacf0697432ed48cb", "value_spans": [{"start": 36, "end": 41, "label": "NEW_VALUE", "text": "Raees"}], "cue_spans": []}
+{"id": "SGD-dc04784966bfb2cc68", "value_spans": [{"start": 31, "end": 39, "label": "NEW_VALUE", "text": "an event"}], "cue_spans": []}
+{"id": "SGD-dc434482b03d37bcdc", "value_spans": [{"start": 12, "end": 22, "label": "REFERENCE", "text": "that salon"}, {"start": 63, "end": 75, "label": "REFERENCE", "text": "the same day"}], "cue_spans": []}
+{"id": "SGD-dd73b65a6a98bda156", "value_spans": [{"start": 5, "end": 13, "label": "REFERENCE", "text": "that one"}, {"start": 23, "end": 29, "label": "NEW_VALUE", "text": "3 days"}], "cue_spans": [{"start": 30, "end": 37, "label": "UPDATE_CUE", "text": "instead"}]}
+{"id": "SGD-dd7c3dee1ac579cf99", "value_spans": [{"start": 20, "end": 42, "label": "NEW_VALUE", "text": "the speaker in kitchen"}], "cue_spans": [{"start": 11, "end": 13, "label": "UPDATE_CUE", "text": "do"}, {"start": 43, "end": 50, "label": "UPDATE_CUE", "text": "instead"}]}
+{"id": "SGD-de000a42881e22a848", "value_spans": [], "cue_spans": []}
+{"id": "SGD-de21007c1f5df3c2f8", "value_spans": [{"start": 20, "end": 38, "label": "NEW_VALUE", "text": "my savings account"}], "cue_spans": []}
+{"id": "SGD-de557a0fe3d8c16b45", "value_spans": [], "cue_spans": [{"start": 9, "end": 15, "label": "UPDATE_CUE", "text": "change"}]}
+{"id": "SGD-de86c2b804174625fa", "value_spans": [{"start": 44, "end": 60, "label": "NEW_VALUE", "text": "the 5th of march"}], "cue_spans": []}
+{"id": "SGD-dea6a25ade18c1b060", "value_spans": [{"start": 22, "end": 46, "label": "REFERENCE", "text": "that event you suggested"}], "cue_spans": []}
+{"id": "SGD-df3783e013bc5ef6ab", "value_spans": [{"start": 25, "end": 37, "label": "NEW_VALUE", "text": "a good movie"}, {"start": 60, "end": 80, "label": "NEW_VALUE", "text": "a supernatural movie"}, {"start": 101, "end": 111, "label": "NEW_VALUE", "text": "Jeremy Ray"}], "cue_spans": [{"start": 0, "end": 8, "label": "UPDATE_CUE", "text": "Actually"}]}
+{"id": "SGD-dfce8f2e77de8b4d7d", "value_spans": [{"start": 29, "end": 40, "label": "NEW_VALUE", "text": "next Friday"}], "cue_spans": [{"start": 10, "end": 16, "label": "UPDATE_CUE", "text": "change"}, {"start": 41, "end": 48, "label": "UPDATE_CUE", "text": "instead"}]}
+{"id": "SGD-e0a37cc5e7e70d0b74", "value_spans": [{"start": 52, "end": 62, "label": "NEW_VALUE", "text": "March 13th"}], "cue_spans": []}
+{"id": "SGD-e1bc8998de2e742765", "value_spans": [{"start": 41, "end": 49, "label": "NEW_VALUE", "text": "1 ticket"}], "cue_spans": []}
+{"id": "SGD-e1bf83556c8176e6cc", "value_spans": [], "cue_spans": []}
+{"id": "SGD-e4fc7548319b0b5597", "value_spans": [{"start": 21, "end": 38, "label": "NEW_VALUE", "text": "a four star hotel"}], "cue_spans": []}
+{"id": "SGD-e586c40d45a2d3aa89", "value_spans": [{"start": 70, "end": 93, "label": "REFERENCE", "text": "the hotel you suggested"}], "cue_spans": []}
+{"id": "SGD-e604a41ac1a2857168", "value_spans": [], "cue_spans": []}
+{"id": "SGD-e6f2e4b0beede44005", "value_spans": [{"start": 40, "end": 41, "label": "NEW_VALUE", "text": "a"}, {"start": 78, "end": 81, "label": "REFERENCE", "text": "the"}, {"start": 92, "end": 102, "label": "NEW_VALUE", "text": "4.1 rating"}, {"start": 117, "end": 127, "label": "NEW_VALUE", "text": "one person"}], "cue_spans": []}
+{"id": "SGD-e7b18e834738656481", "value_spans": [{"start": 48, "end": 75, "label": "REFERENCE", "text": "the event you found earlier"}], "cue_spans": []}
+{"id": "SGD-e7e803fcc271c1401e", "value_spans": [{"start": 26, "end": 48, "label": "NEW_VALUE", "text": "the speaker in kitchen"}], "cue_spans": [{"start": 0, "end": 8, "label": "UPDATE_CUE", "text": "Actually"}]}
+{"id": "SGD-e85093c78fb81ce09e", "value_spans": [], "cue_spans": []}
+{"id": "SGD-e8dd9aa8ad532718e7", "value_spans": [{"start": 45, "end": 57, "label": "NEW_VALUE", "text": "four tickets"}, {"start": 61, "end": 88, "label": "REFERENCE", "text": "the event you found earlier"}], "cue_spans": []}
+{"id": "SGD-e9f9133b63ca376f47", "value_spans": [], "cue_spans": []}
+{"id": "SGD-ea36a6efb4dffc34ab", "value_spans": [{"start": 62, "end": 79, "label": "NEW_VALUE", "text": "the 12th of March"}], "cue_spans": []}
+{"id": "SGD-ea91688813cf6455a1", "value_spans": [{"start": 33, "end": 42, "label": "REFERENCE", "text": "the event"}], "cue_spans": []}
+{"id": "SGD-eba05fed194a90ef44", "value_spans": [{"start": 15, "end": 28, "label": "NEW_VALUE", "text": "the day after"}, {"start": 32, "end": 44, "label": "REFERENCE", "text": "the same day"}], "cue_spans": []}
+{"id": "SGD-ef32ad4371d568842b", "value_spans": [{"start": 12, "end": 41, "label": "NEW_VALUE", "text": "a quarter to 5 in the evening"}], "cue_spans": [{"start": 0, "end": 7, "label": "UPDATE_CUE", "text": "Make it"}]}
+{"id": "SGD-ef9ed6db7eaaa20e49", "value_spans": [{"start": 26, "end": 37, "label": "NEW_VALUE", "text": "a therapist"}], "cue_spans": []}
+{"id": "SGD-f0a22554f70f058563", "value_spans": [{"start": 24, "end": 34, "label": "REFERENCE", "text": "that hotel"}, {"start": 51, "end": 57, "label": "NEW_VALUE", "text": "a room"}, {"start": 77, "end": 83, "label": "NEW_VALUE", "text": "3 days"}], "cue_spans": []}
+{"id": "SGD-f1081cddb8cb21c29a", "value_spans": [{"start": 19, "end": 24, "label": "NEW_VALUE", "text": "a car"}, {"start": 75, "end": 88, "label": "NEW_VALUE", "text": "a compact car"}, {"start": 140, "end": 157, "label": "NEW_VALUE", "text": "the 10th of march"}], "cue_spans": []}
+{"id": "SGD-f1ee137e68d8a92a61", "value_spans": [{"start": 45, "end": 48, "label": "NEW_VALUE", "text": "LAX"}, {"start": 73, "end": 81, "label": "NEW_VALUE", "text": "a museum"}], "cue_spans": []}
+{"id": "SGD-f22f55e0034a60759f", "value_spans": [{"start": 12, "end": 23, "label": "NEW_VALUE", "text": "later today"}], "cue_spans": []}
+{"id": "SGD-f2c54634af90f40c62", "value_spans": [{"start": 16, "end": 25, "label": "NEW_VALUE", "text": "2 tickets"}], "cue_spans": [{"start": 2, "end": 10, "label": "UPDATE_CUE", "text": "actually"}]}
+{"id": "SGD-f36cb1a24de29e8b29", "value_spans": [{"start": 20, "end": 27, "label": "NEW_VALUE", "text": "4:30 pm"}], "cue_spans": [{"start": 7, "end": 13, "label": "UPDATE_CUE", "text": "change"}]}
+{"id": "SGD-f7ab6501367660a014", "value_spans": [], "cue_spans": []}
+{"id": "SGD-fab2a6f318ac40520a", "value_spans": [{"start": 16, "end": 19, "label": "NEW_VALUE", "text": "NYC"}], "cue_spans": []}
+{"id": "SGD-faeb071d15cdf92b74", "value_spans": [], "cue_spans": []}
+{"id": "SGD-fb42bd68a015304705", "value_spans": [{"start": 0, "end": 8, "label": "REFERENCE", "text": "That one"}, {"start": 44, "end": 51, "label": "NEW_VALUE", "text": "a movie"}, {"start": 55, "end": 68, "label": "REFERENCE", "text": "the same city"}, {"start": 88, "end": 101, "label": "NEW_VALUE", "text": "Comedy movies"}], "cue_spans": []}
+{"id": "SGD-fc767510fa46f8575f", "value_spans": [], "cue_spans": []}
+{"id": "SGD-fc91590d3c3684532e", "value_spans": [], "cue_spans": []}
+{"id": "SGD-fe60f2a860e7eeddf9", "value_spans": [], "cue_spans": []}
+{"id": "SGD-fe688a9605549b7745", "value_spans": [{"start": 17, "end": 25, "label": "REFERENCE", "text": "that one"}, {"start": 41, "end": 44, "label": "NEW_VALUE", "text": "Ben"}, {"start": 45, "end": 50, "label": "NEW_VALUE", "text": "Platt"}, {"start": 63, "end": 66, "label": "NEW_VALUE", "text": "the"}, {"start": 67, "end": 85, "label": "NEW_VALUE", "text": "Sing To Me Instead"}], "cue_spans": []}
+{"id": "SGD-fef1569a1caedce1d8", "value_spans": [{"start": 58, "end": 85, "label": "REFERENCE", "text": "the event you found earlier"}, {"start": 112, "end": 121, "label": "NEW_VALUE", "text": "3 tickets"}], "cue_spans": []}
