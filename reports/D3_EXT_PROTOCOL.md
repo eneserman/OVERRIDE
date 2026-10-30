@@ -75,3 +75,28 @@ bucket: UPDATE 2767, REFERENCE 705, CANCEL 439, KEEP 360, RESTORE 156, MIXED 39,
 Change: **MIXED 80 → 30, UPDATE 120 → 170** (shared MIXED 16 → 6, UPDATE 24 → 34). Totals stay 400 records / 80
 shared / 240 per reviewer; the table in §2 is superseded by these values. UPDATE takes the slots because it is the
 bucket with explicit revision words, i.e. the claimed classes.
+
+## 8. Amendment E2 — how the labels were produced; which version is scored (2026-10-30, BEFORE agreement is computed)
+
+**Declaration (owner, also on behalf of Burak, relayed):** the labels were given by Burak and Enes separately; AI was
+used for translation, offset calculation and writing the JSON — it did not suggest labels. The `BASLAT_5_EK_*.bat`
+helper (§4) was **not** used. This deviates from §4 ("no AI offsets"); the coordinator cannot verify the declaration.
+
+**Submissions (SHA-256 of the files as received):**
+- first: Burak `e80c46662d99c2529214a45e2fd6b6280e8e3e93d59b077cf442153b00181f0e`, Enes `af9e01dda199a1b4bfc13d6dd444aa3739b7b467e9ad87c6fab3940c0bfd8fa2`
+  (both `status: LABELED`, no `reviewer_id`; otherwise schema-valid except the offset in Enes's file below)
+- revised: Burak `3b32b43b2d0646a87de1847ec9c07819f12f6126e35aec598170ffdf449e5a95` (24 records with changed spans, 6 shared),
+  Enes `d0083cad4e3525b93275c59677c284ae32048b85282e1bc53ebbe9267801cc64` (17 records, 4 shared)
+
+**Exposure before revision:** between the two submissions the coordinator's chat message showed both reviewers' label
+counts and that 59 of the 80 shared records had identical span sets in a pre-count (the coordinator saw this
+pre-count while checking the files; it is not the frozen score). Revisions were therefore made after this exposure.
+
+**Rule applied (same as the test-363 freeze: agreement only from the first blind files):**
+- **Agreement (§5.1) is computed once from the FIRST submissions** on the 80 shared records, after only mechanical
+  fixes: `status` → `ANNOTATED`, `reviewer_id` added, and one offset.
+- **The REVISED files are the reviewers' positions for gold v1.2**: solo records take the revised labels (then the
+  §5.3 rule scan); shared-record differences between the two revised files go to the joint decision (§5.2).
+- Mechanical offset fix, owner-confirmed, applied to both of Enes's versions: `SGD-a5ef1678f12cecfdbe` `"3"`
+  [35,36] → [57,58] (the offset tool returned the "3" inside "5:30"; it overlapped the `5:30 in the evening` span).
+- Logged in `data/annotations/d3_ext_v0.1/D3_EXT_STAGE_LOG.json`.
