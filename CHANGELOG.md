@@ -2,6 +2,11 @@
 
 # Project change history (design, not model training)
 
+## Gold v1.2 built — 2026-10-30 (before any test access)
+- 20 decisions locked (`D3_EXT_DECISIONS.md`): 18 matched between the two separate sheets; S4/S19 resolved jointly to B for consistency with gold v1.1; F1 removes one RESTORE_CUE.
+- `scripts/build_gold_v1_2.py` (fail-closed, tested): **857 records** (457 v1.1 unchanged + 400 new: 61 double-blind agreed, 19 joint decisions, 320 single + rule scan). Validator PASS. SHA-256 `cc8efc0f…6362`.
+- Split frozen from the union of the two pre-committed plans: 771 train / 86 dev; old 457 keep their partition. Dev UPDATE_CUE support 3 → 20.
+
 ## D3-EXT annotations received + agreement FROZEN — 2026-10-30 (before any test access)
 - Both reviewers returned 240/240; amendment E2 (`D3_EXT_PROTOCOL.md` §8) records the production declaration (labels by the reviewers; AI for translation, offsets and JSON; helper not used), the exposure before revision and the rule: agreement from the FIRST submissions, revised files feed gold v1.2.
 - **Frozen agreement (80 shared, first submissions):** exact layer-set **0.8625** (pilot 0.833, test 0.910 on the same metric); records identical in both layers 59/80; per-label NEW_VALUE 0.944, REFERENCE 0.857, UPDATE_CUE 0.692. `reports/D3_EXT_AGREEMENT_FREEZE.json`.
