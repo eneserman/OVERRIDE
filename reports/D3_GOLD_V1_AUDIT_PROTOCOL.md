@@ -105,3 +105,47 @@ python scripts/gold_v1_audit.py score --index data/annotations/d3_gold_v1_audit/
   --burak-canonical data/annotations/d3_gold_v1_audit/BURAK_reannotates_ENES_solo_canonical.jsonl \
   --out reports/D3_GOLD_V1_AUDIT_RESULT.json
 ```
+
+## 7. Amendment A1 — recorded 2026-10-30, BEFORE the audit score is computed
+
+Nothing below changes the sample, the metric or the scoring code. It records how the
+48 audit labels were produced, so the score is read with the right caveats.
+
+**AI assistance (declared by both reviewers):** AI was used only for Turkish↔English
+translation and for computing character offsets. The reviewers state the label
+decisions are their own and were written separately. The coordinator cannot verify
+this; it rests on the declaration.
+
+**Exposure (declared by both reviewers):** neither reviewer saw or used AI-generated
+interpretation notes or AI-proposed labels while producing the final audit labels.
+*Coordinator's record of fact:* such AI files existed in this session and were
+attached to the coordination chat by the owner (`BURAK_blind_onerilen_etiketler`,
+`BURAK_24_kayit_duzeltilmis`, `ENES_BURAK_diyalog_yorumlari_24` with interpretation
+and suggested-response fields, and `second_pass_*` fields in
+`ENES_BURAK_bagimsiz_ikinci_tur_24`). The owner therefore held them. This is reported
+as an unverifiable limitation, not as proof of use.
+
+**Rejected rounds (not scored, kept locally):** Burak's earlier files
+(`BURAK_blind_onerilen_etiketler`, `BURAK_24_kayit_duzeltilmis`,
+`BURAK_reannotates_ENES_solo_filled`, `..._filled_revised`) were rejected by the
+coordinator because their free-text notes, difficulty and transitions were
+identical to AI-proposed labels or they failed the schema. Enes's first labeled file
+(`ENES_BURAK_24_DOLDURULMUS_ETIKETLER`) used a non-schema cue vocabulary.
+
+**Accepted files and their only mechanical edits:**
+- Burak: `BURAK_24_BAGIMSIZ_YENI_ETIKETLEME` → two offsets changed after owner
+  confirmation (record `SGD-9ceb3eb66464f93159`: `"1"` [0,1]→[23,24]; record
+  `SGD-a00ffcbaa62cc924f6`: `"2"` [117,118]→[145,146]; cause: the offset tool
+  returned the first occurrence). Logged in `BURAK_offset_corrections.json`.
+- Enes: `ENES_BURAK_24_ANNOTATED_v023_DUZELTILMIS` → only `reviewer_id` `ENES` →
+  `reviewer_B_ENES`. Before this file, Enes translated his non-schema cue
+  vocabulary into the four schema cue labels himself: of 30 cue spans, 21 were
+  removed and 9 kept (UPDATE→UPDATE_CUE 5, NEGATION→UPDATE_CUE 1,
+  CONTINUE→KEEP_CUE 1, RETURN→RESTORE_CUE 2). The value layer did not change
+  (24/24 records identical). Logged in `ENES_stage_log.json`.
+
+**Reading the score:** n = 48 records (24 per set), so the agreement figure is a
+rough estimate with a wide interval; per-label F1 on rare labels is not conclusive.
+It estimates agreement of AI-assisted (translation/offset) human re-annotation with
+gold v1 on the 353 eligible solo records. It is not an exposure-naive,
+fully-independent error rate. Disagreements go to the two reviewers for a joint decision.
