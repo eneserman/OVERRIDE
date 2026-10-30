@@ -66,3 +66,12 @@ their assignment.
 The locked holdout, its consensus-reference rule (DEV-001), the evaluation metrics, the taxonomy scope (SCOPE-001)
 and the frozen audit score. D5-v2 (grouped CV, model changes) is planned on gold v1.2 and will be pre-registered
 separately before any run.
+
+## 7. Amendment E1 — before any packet existed (2026-10-30)
+
+The first build aborted fail-closed: **MIXED had only 39 eligible dialogues** (92 MIXED turns in all of SGD train).
+Only per-bucket eligible counts were computed; no candidate was drawn, written or viewed. Eligible dialogues per
+bucket: UPDATE 2767, REFERENCE 705, CANCEL 439, KEEP 360, RESTORE 156, MIXED 39, HARD_NEGATIVE 15649, NO_CONTEXT 15435.
+Change: **MIXED 80 → 30, UPDATE 120 → 170** (shared MIXED 16 → 6, UPDATE 24 → 34). Totals stay 400 records / 80
+shared / 240 per reviewer; the table in §2 is superseded by these values. UPDATE takes the slots because it is the
+bucket with explicit revision words, i.e. the claimed classes.

@@ -27,9 +27,10 @@ from mine_sgd_revision_candidates import scan_dialogues  # noqa: E402
 SEED = 20261031
 PLAN_SEED = "20261028"
 GUIDELINE = "v0.2.3"
-QUOTAS = {"UPDATE": 120, "MIXED": 80, "HARD_NEGATIVE": 60, "REFERENCE": 50,
+# Amendment E1 (D3_EXT_PROTOCOL.md §7): MIXED has only 39 eligible dialogues, so 50 of its slots move to UPDATE.
+QUOTAS = {"UPDATE": 170, "MIXED": 30, "HARD_NEGATIVE": 60, "REFERENCE": 50,
           "NO_CONTEXT": 30, "CANCEL": 20, "KEEP": 20, "RESTORE": 20}
-SHARED = {"UPDATE": 24, "MIXED": 16, "HARD_NEGATIVE": 12, "REFERENCE": 10,
+SHARED = {"UPDATE": 34, "MIXED": 6, "HARD_NEGATIVE": 12, "REFERENCE": 10,
           "NO_CONTEXT": 6, "CANCEL": 4, "KEEP": 4, "RESTORE": 4}
 PACKET_KEYS = {"example_id", "source", "history", "current_user_utterance", "annotation"}
 
