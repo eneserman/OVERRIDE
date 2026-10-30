@@ -2,6 +2,12 @@
 
 # Project change history (design, not model training)
 
+## D3-EXT packets + gold v1.1 + D5 v1.1 — 2026-10-30 (before any test access)
+- Gold v1.1 locked (`D3_GOLD_V1_1_DECISIONS.md`): 3 record changes; taxonomy narrowing Option A adopted (SCOPE-001).
+- D5 rerun on v1.1 with the frozen config (`D5_RESULTS_V1_1.md`): BERT no-history dev mean 0.681; dev cue metric rests on 4 spans.
+- D3-EXT pre-registered (`D3_EXT_PROTOCOL.md`, amendment E1 MIXED 80→30 / UPDATE 120→170 before any packet): **400 new train-side records, 80 double-annotated**, 240 per reviewer; 40 new families → dev by the plan rule (`D3_EXT_SPLIT_PLAN.json`).
+- Packets (local): `reviewer_A_BURAK_EK_BLIND.jsonl` SHA-256 `c4155146b6e8203fe185b54a4e3d381f0a21a2c823c70aaa7f0e1a0bd8569bc0`, `reviewer_B_ENES_EK_BLIND.jsonl` `f1dd23fda41a16e5ac2ac7899325b7e692f9b8617338351166bfdea271e896fd`. Independent checks: 0 family / normalized-text overlap with all prior annotation, pilot and gold files; 0 holdout text or SHA overlap; no private bucket fields in packets.
+
 ## Gold v1 blind re-annotation audit — 2026-10-30 (score computed once and FROZEN; before any D6 test access)
 - Pre-registered protocol (`reports/D3_GOLD_V1_AUDIT_PROTOCOL.md`, commit `b4a84bb`) + amendment A1 (`e4b8880`: AI limited to translation/offset, exposure declarations, rejected rounds, accepted files and their mechanical edits).
 - Sample: 24 + 24 single-annotated gold v1 records (seed `20261030`), each re-annotated blind-at-annotation-time by the other reviewer.
