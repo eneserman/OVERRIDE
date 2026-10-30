@@ -1,0 +1,451 @@
+{
+  "counts": {
+    "CANCEL_CUE": {
+      "label": 3,
+      "overlap": 1,
+      "missed": 3
+    },
+    "KEEP_CUE": {
+      "missed": 2
+    },
+    "KEPT_VALUE": {
+      "label": 1,
+      "overlap": 1,
+      "missed": 1
+    },
+    "NEW_VALUE": {
+      "missed": 28,
+      "spurious": 48,
+      "exact": 705,
+      "overlap": 2,
+      "boundary": 29
+    },
+    "OLD_VALUE": {
+      "label": 2,
+      "missed": 1
+    },
+    "REFERENCE": {
+      "missed": 14,
+      "exact": 162,
+      "spurious": 18,
+      "boundary": 9,
+      "overlap": 2,
+      "label": 2
+    },
+    "RESTORE_CUE": {
+      "missed": 1
+    },
+    "UPDATE_CUE": {
+      "exact": 195,
+      "missed": 23,
+      "spurious": 27,
+      "boundary": 8
+    }
+  },
+  "examples": {
+    "CANCEL_CUE|label": [
+      {
+        "id": "SGD-25c5ecf394b074c770",
+        "utterance": "Never mind, I would like two tickets.",
+        "gold": "Never mind",
+        "pred": [
+          "UPDATE_CUE:'Never mind'"
+        ]
+      },
+      {
+        "id": "SGD-76b0d419b9d12b68e8",
+        "utterance": "Nevermind, play it on bedroom device instead.",
+        "gold": "Nevermind",
+        "pred": [
+          "UPDATE_CUE:'Nevermind'"
+        ]
+      },
+      {
+        "id": "SGD-b775a460fd68236e28",
+        "utterance": "Never mind, make it for 12:30.",
+        "gold": "Never mind",
+        "pred": [
+          "UPDATE_CUE:'Never mind'"
+        ]
+      }
+    ],
+    "CANCEL_CUE|missed": [
+      {
+        "id": "SGD-bcf9f3e6a055cc742e",
+        "utterance": "Actually, never mind about that one game. Lets get 3 tickets for Crystal Palace Vs Norwich on the 7th.",
+        "gold": "never mind",
+        "pred": []
+      },
+      {
+        "id": "SGD-d6b1b3602d86f87a55",
+        "utterance": "Don't want that one. Please look for one in Vallejo.",
+        "gold": "Don't want",
+        "pred": []
+      },
+      {
+        "id": "SGD-190e934c0db202ae4e",
+        "utterance": "No, forget it.",
+        "gold": "forget it",
+        "pred": []
+      }
+    ],
+    "CANCEL_CUE|overlap": [
+      {
+        "id": "SGD-b07dcf4204f40810d5",
+        "utterance": "Scratch that. Make it the 8th of March.",
+        "gold": "Scratch that",
+        "pred": [
+          "UPDATE_CUE:'Scratch'"
+        ]
+      }
+    ],
+    "KEEP_CUE|missed": [
+      {
+        "id": "SGD-340601c040d120afc0",
+        "utterance": "No, keep them where they are.",
+        "gold": "keep",
+        "pred": []
+      },
+      {
+        "id": "SGD-e893221df440565ab1",
+        "utterance": "Actually, keep the subtitles on please.",
+        "gold": "keep",
+        "pred": []
+      }
+    ],
+    "KEPT_VALUE|label": [
+      {
+        "id": "SGD-26dbf517975d29cc9c",
+        "utterance": "Now this is a bit of a change, but can you find me a bus that will leave from Vegas on the 10th of March with the same destination?",
+        "gold": "the same destination",
+        "pred": [
+          "REFERENCE:'the same destination'"
+        ]
+      }
+    ],
+    "KEPT_VALUE|missed": [
+      {
+        "id": "SGD-e893221df440565ab1",
+        "utterance": "Actually, keep the subtitles on please.",
+        "gold": "the subtitles on",
+        "pred": []
+      }
+    ],
+    "KEPT_VALUE|overlap": [
+      {
+        "id": "SGD-eb00d5865c3e3adad8",
+        "utterance": "That's the same date as my return flight. Yeah that should work fine actually.",
+        "gold": "the same date as my return flight",
+        "pred": [
+          "REFERENCE:'the same date'"
+        ]
+      }
+    ],
+    "NEW_VALUE|boundary": [
+      {
+        "id": "SGD-1cf541e680694cb9fe",
+        "utterance": "I want an intermediate car till the 13th of March.",
+        "gold": "the 13th of March",
+        "pred": [
+          "NEW_VALUE:'the'",
+          "NEW_VALUE:'13th of March'"
+        ]
+      },
+      {
+        "id": "SGD-1d5c005812e17dc259",
+        "utterance": "I need to check my savings account balance.",
+        "gold": "my savings account",
+        "pred": [
+          "NEW_VALUE:'savings account'"
+        ]
+      },
+      {
+        "id": "SGD-3268166bbb220be170",
+        "utterance": "Not now, but tell me something exciting and interesting to do on the 13th of this month.",
+        "gold": "13th of this month",
+        "pred": [
+          "NEW_VALUE:'the 13th of this month'"
+        ]
+      }
+    ],
+    "NEW_VALUE|missed": [
+      {
+        "id": "SGD-039d8305064b7c7b57",
+        "utterance": "Not now exactly but might be later on. Right now, I wish to get the bus tickets to reach that place. Can you help me?",
+        "gold": "the bus tickets",
+        "pred": []
+      },
+      {
+        "id": "SGD-07732d19fcfb7204c0",
+        "utterance": "Can you arrange a car for me on 9th of March at Indira Gandhi International Airport around 19:30?",
+        "gold": "a car",
+        "pred": []
+      },
+      {
+        "id": "SGD-0fb62f45e35c1abcde",
+        "utterance": "I'd like to find some attractions to see in London, UK.",
+        "gold": "some attractions",
+        "pred": []
+      }
+    ],
+    "NEW_VALUE|overlap": [
+      {
+        "id": "SGD-148b0aee03a8931e50",
+        "utterance": "Okay. Now book an appointment at the salon n the same day at 11:15 in the morning",
+        "gold": "the salon",
+        "pred": [
+          "REFERENCE:'the'"
+        ]
+      },
+      {
+        "id": "SGD-46bc709da11838b67a",
+        "utterance": "I need two tickets. Could you make it the game on the 6th?",
+        "gold": "the 6th",
+        "pred": [
+          "REFERENCE:'the game on the'"
+        ]
+      }
+    ],
+    "NEW_VALUE|spurious": [
+      {
+        "id": "SGD-054cede67b944dc889",
+        "utterance": "Teen Spirit is perfect, I'll keep that in mind for later. That's all for now.",
+        "gold": null,
+        "pred": [
+          "Teen Spirit"
+        ]
+      },
+      {
+        "id": "SGD-182c1ce461a3eb105b",
+        "utterance": "Not now.What is your opinion on going by bus?",
+        "gold": null,
+        "pred": [
+          "bus"
+        ]
+      },
+      {
+        "id": "SGD-1cdee83272d3d7034d",
+        "utterance": "Thank you for everything. Do you have a rental car for me there. A small one will do and I will want it till next Tuesday.",
+        "gold": null,
+        "pred": [
+          "a rental car"
+        ]
+      }
+    ],
+    "OLD_VALUE|label": [
+      {
+        "id": "SGD-98b9019a1c1e325da5",
+        "utterance": "Do you have any other buses available on the same day? I would prefer Economy tickets rather than extra ticket.",
+        "gold": "extra ticket",
+        "pred": [
+          "NEW_VALUE:'extra ticket'"
+        ]
+      },
+      {
+        "id": "SGD-ec181d856ff42a451f",
+        "utterance": "March 13th please. I'm sorry, did I say SFO? I meant LAX.",
+        "gold": "SFO",
+        "pred": [
+          "NEW_VALUE:'SFO'"
+        ]
+      }
+    ],
+    "OLD_VALUE|missed": [
+      {
+        "id": "SGD-dc3782f2b7037ebb87",
+        "utterance": "Citizen Kane sounds great. But I'm thinking more about watching something online, rather than in theaters. Can I have a romance movie by Michael Gordon?",
+        "gold": "in theaters",
+        "pred": []
+      }
+    ],
+    "REFERENCE|boundary": [
+      {
+        "id": "SGD-1f2bef4dfa885b81d6",
+        "utterance": "Which airport does it fly into and when does the second flight land?",
+        "gold": "the second flight",
+        "pred": [
+          "REFERENCE:'the'"
+        ]
+      },
+      {
+        "id": "SGD-4ff299f1ccdc43e4ac",
+        "utterance": "Yes, that's the one I meant.",
+        "gold": "the one I meant",
+        "pred": [
+          "REFERENCE:'the one I'"
+        ]
+      },
+      {
+        "id": "SGD-790966d351ce3ebe5d",
+        "utterance": "That sounds perfect. Please buy that one way ticket for me.",
+        "gold": "that one way ticket",
+        "pred": [
+          "REFERENCE:'that'",
+          "NEW_VALUE:'one way ticket'"
+        ]
+      }
+    ],
+    "REFERENCE|label": [
+      {
+        "id": "SGD-0a32c5568cf413123c",
+        "utterance": "Dogman is actually awesome. Now let's find an American restaurant in the area.",
+        "gold": "Dogman",
+        "pred": [
+          "NEW_VALUE:'Dogman'"
+        ]
+      },
+      {
+        "id": "SGD-c06b1baf64c3b47812",
+        "utterance": "Yeah, I heard of that one! I want to see Shazam then. What showtimes are there today? Actually I'm free on the 2nd.",
+        "gold": "Shazam",
+        "pred": [
+          "NEW_VALUE:'Shazam'"
+        ]
+      }
+    ],
+    "REFERENCE|missed": [
+      {
+        "id": "SGD-038a1aeb385e355ef1",
+        "utterance": "That is nice to hear and the same is okay for me.",
+        "gold": "the same",
+        "pred": []
+      },
+      {
+        "id": "SGD-5db4624c3c071251dd",
+        "utterance": "I want to know the arrival time of my return flight for my reference. Can you get me the same?",
+        "gold": "my return flight",
+        "pred": []
+      },
+      {
+        "id": "SGD-61d65a52d633603ba3",
+        "utterance": "no , not now, But i need to purchase tickets to the event. will you book the tickets for the event?",
+        "gold": "the event",
+        "pred": []
+      }
+    ],
+    "REFERENCE|overlap": [
+      {
+        "id": "SGD-e4236d0c4d9416c597",
+        "utterance": "Okay, I think I can afford to book the tickets, make it for the game on the 9th of March.",
+        "gold": "the game on the 9th of March",
+        "pred": [
+          "NEW_VALUE:'the 9th of March'"
+        ]
+      },
+      {
+        "id": "SGD-8e8b00acbb2e511ccc",
+        "utterance": "Tootsie JT Leroy is great. What time can I watch that?",
+        "gold": "JT Leroy",
+        "pred": [
+          "NEW_VALUE:'Tootsie JT Leroy'"
+        ]
+      }
+    ],
+    "REFERENCE|spurious": [
+      {
+        "id": "SGD-09d193068f712fbe13",
+        "utterance": "Yes, I know, this is a nice hotel. I want to check the weather condition there on March 7th. Can you help me to check the same?",
+        "gold": null,
+        "pred": [
+          "the same"
+        ]
+      },
+      {
+        "id": "SGD-0ec9470801b28cf007",
+        "utterance": "I want to check the weather condition in Washington for the date 1st of March. Can you help me to check the same?",
+        "gold": null,
+        "pred": [
+          "the"
+        ]
+      },
+      {
+        "id": "SGD-2e0513624d8774cef4",
+        "utterance": "Sorry, I have changed my mind to check-in on 8th of March and will check-out on the 13th. Change the booking according to these dates.",
+        "gold": null,
+        "pred": [
+          "these dates"
+        ]
+      }
+    ],
+    "RESTORE_CUE|missed": [
+      {
+        "id": "SGD-96f8721d8120084e0d",
+        "utterance": "No, I am sorry can you change the check in day back to the 2nd of March 2019 and it will be for four people.",
+        "gold": "back to",
+        "pred": []
+      }
+    ],
+    "UPDATE_CUE|boundary": [
+      {
+        "id": "SGD-2e0513624d8774cef4",
+        "utterance": "Sorry, I have changed my mind to check-in on 8th of March and will check-out on the 13th. Change the booking according to these dates.",
+        "gold": "I have changed my mind",
+        "pred": [
+          "UPDATE_CUE:'changed my mind'"
+        ]
+      },
+      {
+        "id": "SGD-42a52c3dadd0448b5f",
+        "utterance": "There's been a change of plan. I'll collect the car at half past 3 in the afternoon on 5th of March, from Portland Bus Station.",
+        "gold": "a change of plan",
+        "pred": [
+          "UPDATE_CUE:'change'"
+        ]
+      },
+      {
+        "id": "SGD-90cfacf6a275f8d7f3",
+        "utterance": "Let's try Jojo restaurant the same day at afternoon 1. Let's just make it for three people though.",
+        "gold": "make it",
+        "pred": [
+          "UPDATE_CUE:'make'"
+        ]
+      }
+    ],
+    "UPDATE_CUE|missed": [
+      {
+        "id": "SGD-141c8c3e600dd5bf9c",
+        "utterance": "Actually instead make it 6:30 in the evening.",
+        "gold": "make it",
+        "pred": []
+      },
+      {
+        "id": "SGD-227742e7c4d5985f80",
+        "utterance": "Actually, I changed my mind. Let me get 2 tickets.",
+        "gold": "changed my mind",
+        "pred": []
+      },
+      {
+        "id": "SGD-26dbf517975d29cc9c",
+        "utterance": "Now this is a bit of a change, but can you find me a bus that will leave from Vegas on the 10th of March with the same destination?",
+        "gold": "a bit of a change",
+        "pred": []
+      }
+    ],
+    "UPDATE_CUE|spurious": [
+      {
+        "id": "SGD-1fff16d10708ab6a57",
+        "utterance": "No nevermind that. Instead make it a round-trip flight, returning March 5th.",
+        "gold": null,
+        "pred": [
+          "make it"
+        ]
+      },
+      {
+        "id": "SGD-30aa55ce88c699bc0b",
+        "utterance": "No. Forget it. Can you get a cab instead for me to get there?",
+        "gold": null,
+        "pred": [
+          "Forget it"
+        ]
+      },
+      {
+        "id": "SGD-5443430d674203cb04",
+        "utterance": "No I would rather depart at 6 in the evening.",
+        "gold": null,
+        "pred": [
+          "rather"
+        ]
+      }
+    ]
+  }
+}

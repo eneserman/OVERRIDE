@@ -1,6 +1,12 @@
-> **OVERRIDE v0.7 DATA UPDATE:** For accurate current status read `18_V07_RESEARCH_PROTOCOL.md`, `19_DATASET_CARD_V07.md`, `20_GOLD_RELEASE_GATES.md`, `21_GOLD_READINESS_TR.md`, and `AGENT_D3_V07_REAL_GOLD_MASTER_PROMPT.md` **before** following the older v0.6 development handoff. In v0.7: 504 synthetic train + 126 synthetic dev + 126 synthetic challenge; 100 SGD pilot examples; 2 sets of 100 AI draft suggestions; **0 human-adjudicated gold**. No actual model training results. All synthetic/AI outputs must be disclosed. Academic gold release is BLOCKED pending real human review.
+# Project change history
 
-# Project change history (design, not model training)
+## D5-v2 frozen — 2026-10-30 (before any test access)
+- Grouped 5-fold CV on gold v1.3 (857 records): DeBERTa-v3-base 0.860 > RoBERTa 0.839 > BERT 0.838; stage 2 selects history = no, loss = plain, E* = 6. Weighted loss lower in every setting.
+- History hypothesis: S(tail60) − S(no) = −0.005, family-bootstrap 95% CI [−0.021, +0.012] → no evidence that history helps.
+- Final models: 3 seeds × {no, tail60}, all 857 records, 6 epochs; checkpoint SHA-256s in `reports/D5V2_RESULTS.md`. Error analysis on out-of-fold predictions: `reports/ERROR_ANALYSIS_CV.md`.
+
+## Repository cleaned — 2026-10-30
+- Planning notes, agent prompts, synthetic bootstrap data, AI pre-review artifacts and superseded V06–V08 reports removed (kept in git history); guidelines and data format moved to `docs/`.
 
 ## Gold v1.3 built — 2026-10-30 (before any test access)
 - Round-2 dispositions locked (`D3_EXT2_DECISIONS.md`): 204 identical, 101 agreed on separate sheets, 11 joint, 4 kept from v1.2 by rule; 59 records change spans. K96 reverses F1 (RESTORE_CUE kept, three-turn context).
