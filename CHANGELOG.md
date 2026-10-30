@@ -2,6 +2,10 @@
 
 # Project change history (design, not model training)
 
+## D3-EXT round 2 packets — 2026-10-30 (amendment E3, before any round-2 label)
+- Blind cross re-annotation of the 320 single-annotated D3-EXT records: Burak gets Enes's 160, Enes gets Burak's 160 (0 overlap with each other or the shared 80; all UNLABELED).
+- Packets (local): `reviewer_A_BURAK_EK2_BLIND.jsonl` SHA-256 `4af6761e4d0ae5be9ea18f7d71ab0814ad07644106c4b7d141d7fdc11dc655bf`, `reviewer_B_ENES_EK2_BLIND.jsonl` `ed46771cf503a6b7e786935bc82875aa374295f98b6866bbe020bd35f592e72e`.
+
 ## Gold v1.2 built — 2026-10-30 (before any test access)
 - 20 decisions locked (`D3_EXT_DECISIONS.md`): 18 matched between the two separate sheets; S4/S19 resolved jointly to B for consistency with gold v1.1; F1 removes one RESTORE_CUE.
 - `scripts/build_gold_v1_2.py` (fail-closed, tested): **857 records** (457 v1.1 unchanged + 400 new: 61 double-blind agreed, 19 joint decisions, 320 single + rule scan). Validator PASS. SHA-256 `cc8efc0f…6362`.
