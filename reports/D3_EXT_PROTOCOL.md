@@ -100,3 +100,24 @@ pre-count while checking the files; it is not the frozen score). Revisions were 
 - Mechanical offset fix, owner-confirmed, applied to both of Enes's versions: `SGD-a5ef1678f12cecfdbe` `"3"`
   [35,36] → [57,58] (the offset tool returned the "3" inside "5:30"; it overlapped the `5:30 in the evening` span).
 - Logged in `data/annotations/d3_ext_v0.1/D3_EXT_STAGE_LOG.json`.
+
+## 9. Amendment E3 — blind cross re-annotation of the 320 single-annotated records (2026-10-30, before round 2)
+
+Owner decision (own quality decision, not an instructor requirement): every D3-EXT record becomes double-blind.
+
+- **Packets** (`scripts/build_ext2_packets.py`): Burak gets Enes's 160 solo records, Enes gets Burak's 160, copied
+  from the original blind packets (UNLABELED), order reshuffled per reviewer. Launchers `BASLAT_6_EK2_A.bat` /
+  `BASLAT_6_EK2_B.bat`; outputs `reviewer_*_EK2_filled.jsonl`.
+- **Declaration before round 2 (owner, also for Burak, relayed):** neither reviewer has looked at the other's labels.
+  Coordinator's record: the owner received and forwarded Burak's filled files, so he had access to them; this is
+  stated as a limitation, not as proof of viewing.
+- **Same rules as §4 and E2:** guideline v0.2.3; no discussion, no access to the other's files, gold v1.2 or private
+  indexes; AI for translation only — any offset/JSON help is declared before scoring, and only the **first** submission
+  is scored.
+- **Agreement:** computed once with `annotation_agreement.py` on the 320 records, round-2 first submission vs the
+  original annotator's **revised** file (the version in gold v1.2), and frozen before any decision. Reported next to
+  the 80-record shared agreement (0.8625), never merged into it.
+- **Disposition:** identical → unchanged; differing → both reviewers decide separately, then jointly where they differ
+  (A = original annotator, B = round-2 annotator, D = other); no joint agreement to change ⇒ the gold v1.2 record stays.
+  Result: **gold v1.3**, built from gold v1.2 + these decisions only; segment labels change from
+  `ext_single_annotation_*` to `ext_cross_double_blind_*`.
