@@ -2,6 +2,11 @@
 
 # Project change history (design, not model training)
 
+## Gold v1.3 built — 2026-10-30 (before any test access)
+- Round-2 dispositions locked (`D3_EXT2_DECISIONS.md`): 204 identical, 101 agreed on separate sheets, 11 joint, 4 kept from v1.2 by rule; 59 records change spans. K96 reverses F1 (RESTORE_CUE kept, three-turn context).
+- `scripts/build_gold_v1_3.py` (fail-closed, tested): 857 records, validator PASS, SHA-256 `ce7b9a05…9dbc`. All 400 D3-EXT records are now double-blind.
+- Split unchanged in membership (771 / 86); dev UPDATE_CUE support 26.
+
 ## D3-EXT round 2 agreement FROZEN — 2026-10-30 (amendment E4, before any decision)
 - 320 single-annotated records, each now labeled blind by the second reviewer; round-2 first submissions vs the original annotator's revised file.
 - **Exact layer-set agreement 0.805** (Burak-solo 0.803, Enes-solo 0.806); per label NEW_VALUE 0.951, REFERENCE 0.835, UPDATE_CUE 0.623. `reports/D3_EXT2_AGREEMENT_FREEZE.json`.
