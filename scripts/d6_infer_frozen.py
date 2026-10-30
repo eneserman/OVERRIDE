@@ -60,7 +60,7 @@ def main() -> int:
         enc, _, _, pos, miss = build_example(r, tok, history, max_len, hist_words)
         misses += miss
         dummy = [0] * len(enc["input_ids"])  # inference: labels unused by loss/argmax
-        examples.append((enc, dummy, dummy, pos, row))
+        examples.append((enc, dummy, dummy, pos, r))
     if misses:
         raise SystemExit(f"alignment misses on test input: {misses} (must be 0)")
 
