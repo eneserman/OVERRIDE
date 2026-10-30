@@ -121,3 +121,15 @@ Owner decision (own quality decision, not an instructor requirement): every D3-E
   (A = original annotator, B = round-2 annotator, D = other); no joint agreement to change ⇒ the gold v1.2 record stays.
   Result: **gold v1.3**, built from gold v1.2 + these decisions only; segment labels change from
   `ext_single_annotation_*` to `ext_cross_double_blind_*`.
+
+## 10. Amendment E4 — round-2 production declaration (2026-10-30, BEFORE round-2 agreement is computed)
+
+- **Declaration (owner, also for Burak, relayed):** same as E2 — labels given by Burak and Enes separately; AI used for
+  translation, offsets and JSON only; the `BASLAT_6_EK2_*.bat` helper was not used. Not verifiable by the coordinator.
+- **First submissions (scored, no revision accepted):** Burak `8742408cc9f9bc83634b0c5603c23e08c5c82a964a860c992b716f14d1a0244d`,
+  Enes `8f449816229036565cca5a6a03b449d2b46f56df07d97c8ed5e42e8677e9e18d` (160 records each; `status: LABELED`,
+  no `reviewer_id`; labels and offsets valid; rule scan: 1 RESTORE_CUE flag in Burak's file).
+- **Mechanical fixes only:** `status` → `ANNOTATED`, `reviewer_id` added. Logged in `D3_EXT2_STAGE_LOG.json`.
+- **Comparison reference:** the original annotator's REVISED file. It equals gold v1.2 on all 320 records except
+  `SGD-96f8721d8120084e0d`, where gold v1.2 dropped one RESTORE_CUE by the F1 joint decision; that one record is
+  reported separately in the freeze file.
