@@ -2,7 +2,7 @@
 """Exact-offset labeled-span evaluator, no inflated token/O accuracy.
 
 Prediction rows: {id, value_spans:[{start,end,label}], cue_spans:[...]}.
-Gold rows: adjudicated canonical records (see 14_DATA_CONTRACTS.md).
+Gold rows: adjudicated canonical records (see docs/DATA_FORMAT.md).
 """
 from __future__ import annotations
 import argparse

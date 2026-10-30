@@ -6,9 +6,9 @@ import unittest
 ROOT=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT/'scripts'))
 from lock_prospective_holdout import create_lock, verify_lock
-from run_synthetic_token_baseline import tokenize, gold_tags,decode,metrics
+from inspect_upstream_provenance import inspect
 
-class TestV08Research(unittest.TestCase):
+class TestHoldoutLock(unittest.TestCase):
     def source(self, id, dialog, split='test', txt='Change the destination to Paris.', turn=2):
         return {'example_id':id,'current_user_utterance':txt,'source':{
             'dataset':'SGD','split':split,'dialogue_id':dialog,'turn_index':turn},
@@ -46,14 +46,7 @@ class TestV08Research(unittest.TestCase):
             item=self.source('b','Y','test','No, use Paris.');item['history'][0]['turn_index']=3
             self.write(pool,[item]);
             with self.assertRaises(ValueError):create_lock(pool,[seen],'abcdef012345','VERIFIED')
-    def test_decode_and_f1(self):
-        toks=tokenize('No, change to Paris!');tags=['O','O','B-UPDATE_CUE','O','B-NEW_VALUE','O'];
-        self.assertEqual(decode(tags,toks)[-1]['start'],14)
-        m=metrics([[{'start':14,'end':19,'label':'NEW_VALUE'}]],[[{'start':14,'end':19,'label':'NEW_VALUE'}]])
-        self.assertEqual(m['strict_micro_f1'],1.0)
-    def test_invalid_boundary_raises(self):
-        r={'id':'x','current_user_utterance':'New York',
-           'value_spans':[{'start':1,'end':4,'text':'ew ','label':'NEW_VALUE'}]}
-        with self.assertRaises(ValueError):gold_tags(r,tokenize('New York'),'value_spans')
+    def test_missing_source_refuses(self):
+        with self.assertRaises(ValueError):inspect(Path('/tmp/not_a_real_sgd_source_foo_1337'))
 
 if __name__=='__main__':unittest.main()

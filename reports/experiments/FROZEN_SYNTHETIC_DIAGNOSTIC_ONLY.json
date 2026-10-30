@@ -1,8 +1,0 @@
-{
-  "status": "FROZEN_SYNTHETIC_DIAGNOSTIC_NOT_REAL_TEST",
-  "source_path": "data/synthetic_bootstrap/synthetic_challenge.jsonl",
-  "bytes": 165142,
-  "sha256": "e795c0a7a05e8ffa71747aa80b0481d54a1f87e3775ea2779cfc65c783fe9ba6",
-  "n": 126,
-  "warning": "Identical deterministic generator lineage; this is not independent human test."
-}

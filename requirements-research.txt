@@ -1,5 +1,0 @@
-# V0.8 lexical synthetic diagnostic model, not pretrained Transformer/CRF
-numpy==2.3.5
-scikit-learn==1.8.0
-# Core processing/test suite uses Python standard library.
-# Future D5 Transformer/CRF requirements belong in independently pinned training env.

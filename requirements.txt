@@ -1,0 +1,11 @@
+# Data pipeline, validation, agreement and scoring use the Python >=3.10 standard library only.
+# Model training / inference (pinned to the versions used for the reported results, Python 3.13):
+numpy==2.4.4
+torch==2.14.1  # CUDA build 2.14.1+cu126 was used on an RTX 4060 Laptop GPU
+transformers==5.22.0
+tokenizers==0.23.1
+sentencepiece==0.2.2
+protobuf==4.25.9
+scikit-learn==1.9.1
+sklearn-crfsuite==0.5.0
+python-crfsuite==0.9.12
