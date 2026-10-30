@@ -2,6 +2,11 @@
 
 # Project change history (design, not model training)
 
+## D3-EXT annotations received + agreement FROZEN — 2026-10-30 (before any test access)
+- Both reviewers returned 240/240; amendment E2 (`D3_EXT_PROTOCOL.md` §8) records the production declaration (labels by the reviewers; AI for translation, offsets and JSON; helper not used), the exposure before revision and the rule: agreement from the FIRST submissions, revised files feed gold v1.2.
+- **Frozen agreement (80 shared, first submissions):** exact layer-set **0.8625** (pilot 0.833, test 0.910 on the same metric); records identical in both layers 59/80; per-label NEW_VALUE 0.944, REFERENCE 0.857, UPDATE_CUE 0.692. `reports/D3_EXT_AGREEMENT_FREEZE.json`.
+- Rule scan on the revised files (`scripts/rule_scan_v023.py`): 1 flag (a RESTORE_CUE). 19 shared records still differ between the revised files → local decision sheets for both reviewers.
+
 ## D3-EXT packets + gold v1.1 + D5 v1.1 — 2026-10-30 (before any test access)
 - Gold v1.1 locked (`D3_GOLD_V1_1_DECISIONS.md`): 3 record changes; taxonomy narrowing Option A adopted (SCOPE-001).
 - D5 rerun on v1.1 with the frozen config (`D5_RESULTS_V1_1.md`): BERT no-history dev mean 0.681; dev cue metric rests on 4 spans.

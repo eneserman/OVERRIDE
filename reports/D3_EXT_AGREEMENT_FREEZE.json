@@ -1,0 +1,24 @@
+{
+  "status": "D3_EXT_AGREEMENT_FROZEN_BEFORE_ADJUDICATION",
+  "frozen_utc": "2026-10-30",
+  "rule": "Computed once from the FIRST submissions (amendment E2) on the 80 shared records, after mechanical fixes only. Revisions and adjudication change gold, never this number.",
+  "agreement_file": "reports/D3_EXT_AGREEMENT.json",
+  "agreement_file_sha256": "b60723952269a58ae19bbb04f3cadffeec423a561c7049790cc8c2fa35fc295a",
+  "source_files_sha256": {
+    "reviewer_A_BURAK_EK_FIRST_SHARED80_canonical.jsonl": "32912fdd21dfe81a8fd3551d6e4e93c479d5e7636952c990dac74360dcc0e58f",
+    "reviewer_B_ENES_EK_FIRST_SHARED80_canonical.jsonl": "a5848049ec400cb12dfeb1b14a82d2425b12eac59b3ae497cbf57dc1b7a2944a"
+  },
+  "examples": 80,
+  "exact_layer_set_agreement": 0.8625,
+  "record_both_layers_identical": "59/80",
+  "per_label_agreement_f1": {
+    "NEW_VALUE": 0.944099,
+    "REFERENCE": 0.857143,
+    "UPDATE_CUE": 0.692308
+  },
+  "comparison_same_metric": {
+    "pilot30": 0.8333,
+    "test363": 0.910468
+  },
+  "note": "Coordinator saw a record-level pre-count (59/80) before this freeze while checking the files (E2)."
+}
