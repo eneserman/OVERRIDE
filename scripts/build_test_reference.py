@@ -56,6 +56,11 @@ def key_to_span(k: tuple) -> dict:
     return {"start": k[0], "end": k[1], "label": k[2], "text": k[3]}
 
 
+def family_key(official_split: str, dialogue_id: str) -> str:
+    """SGD restarts dialogue numbering per official split, so a family is (split, dialogue_id) (DEV-002)."""
+    return f"{official_split}::{dialogue_id}"
+
+
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--lock", type=Path, required=True)
@@ -156,7 +161,7 @@ def main() -> int:
         row_out = {
             "id": rid,
             "source": dict(ra["source"]),
-            "dialogue_family_id": ra["dialogue_family_id"],
+            "dialogue_family_id": family_key(cand["official_source_split"], ra["dialogue_family_id"]),
             "history": ra.get("history", []),
             "current_user_utterance": ra["current_user_utterance"],
             "value_spans": spans["value_spans"],
@@ -202,7 +207,8 @@ def main() -> int:
     test_ids = {r["id"] for r in test_rows}
     if td_ids & test_ids:
         raise SystemExit(f"ID overlap train/dev gold vs test: {sorted(td_ids & test_ids)[:5]}")
-    td_fams = {str(r.get("dialogue_family_id") or r["source"]["dialogue_id"]) for r in td_rows}
+    td_fams = {family_key(r["source"]["split"], str(r.get("dialogue_family_id") or r["source"]["dialogue_id"]))
+               for r in td_rows}
     test_fams = {str(r["dialogue_family_id"]) for r in test_rows}
     if td_fams & test_fams:
         raise SystemExit(f"FAMILY leakage train/dev vs test: {sorted(td_fams & test_fams)[:5]}")

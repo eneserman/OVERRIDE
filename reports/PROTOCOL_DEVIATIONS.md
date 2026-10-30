@@ -17,9 +17,21 @@
 | **Reversal** | If the reviewers later adjudicate the 60, that produces a NEW reference version (gold v2), reported alongside — never replacing v1 silently, and only if recorded here before use. |
 | **Implementation (code)** | The locked evaluation entry point accepts this reference only via the explicit `--accept-consensus-reference` flag (`annotation.status=CONSENSUS_REFERENCE`, gated; strict ADJUDICATED-only default preserved and covered by regression tests `tests/test_consensus_reference_v08.py`). Full-gold validation spans official splits `train,dev,test`. Without the flag every entry point still refuses the consensus rows — the deviation can never be applied silently. |
 
+## DEV-002 — Dialogue family key must include the official SGD split
+
+| Field | Value |
+|---|---|
+| **Recorded** | 2026-10-30, during the single D6 access (after the model freeze `2702a45`, before any prediction or score exists) |
+| **What happened** | `build_test_reference.py` aborted (fail-closed, nothing written): 5 family IDs (`10_00028`, `16_00094`, `17_00090`, `20_00011`, `23_00076`) occur both in gold v1.3 (official `train`) and in the holdout (official `dev`/`test`). |
+| **Verification** | Raw SGD (`data/upstream/sgd`, pinned commit `e852981a`): SGD restarts dialogue numbering per split; 4,269 of 16,152 dialogue IDs exist in more than one split. The 5 pairs are different dialogues (different services and first turns, e.g. train `10_00028` Events_2 vs dev `10_00028` Media_2+Weather_1). No dialogue is shared; gold v1.3 contains only official-train rows and the holdout only official dev/test rows. |
+| **Deviating decision** | Family identity becomes `(official split, dialogue_id)`. Test reference rows carry `dialogue_family_id = "<official split>::<dialogue_id>"`; the leakage check compares train-side families as `train::<id>`. Train/dev gold v1.3 is not changed. |
+| **Why it is defensible** | It is a correctness fix of an identity key, not a change of membership, labels, metric or models; the 363 locked IDs and their texts are re-verified against the lock as before; the fix is decided without any model output on the test. |
+| **Implementation (code)** | `scripts/build_test_reference.py` (namespaced keys) + regression test `tests/test_test_reference_family_key.py`; committed before the reference is rebuilt. |
+
 ## Log
 
 | ID | Date | Clause | Summary | Status |
 |---|---|---|---|---|
 | DEV-001 | 2026-10-29 | §3 step 1 (adjudicate holdout) | 60/63 test disputes → consensus reference instead of adjudication; 3 resolved by rule | REGISTERED before D5 |
 | SCOPE-001 | 2026-10-30 | claims scope (not a membership or metric change) | Taxonomy narrowing, Option A + KEPT_VALUE out of scope (`D5_TAXONOMY_NARROWING_PROPOSAL.md` §4) | ADOPTED before any holdout access |
+| DEV-002 | 2026-10-30 | family identity in the test-reference leakage check | SGD dialogue IDs repeat across official splits; family key = official split + dialogue ID | REGISTERED during D6, before any prediction |
