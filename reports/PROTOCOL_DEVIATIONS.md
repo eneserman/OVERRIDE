@@ -22,3 +22,4 @@
 | ID | Date | Clause | Summary | Status |
 |---|---|---|---|---|
 | DEV-001 | 2026-10-29 | §3 step 1 (adjudicate holdout) | 60/63 test disputes → consensus reference instead of adjudication; 3 resolved by rule | REGISTERED before D5 |
+| SCOPE-001 | 2026-10-30 | claims scope (not a membership or metric change) | Taxonomy narrowing, Option A + KEPT_VALUE out of scope (`D5_TAXONOMY_NARROWING_PROPOSAL.md` §4) | ADOPTED before any holdout access |
