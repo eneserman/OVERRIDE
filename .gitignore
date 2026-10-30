@@ -3,29 +3,33 @@ __pycache__/
 .venv/
 .env
 .env.*
-!.env.example
 .pytest_cache/
 .ipynb_checkpoints/
-# Raw upstream source is pinned/downloaded separately; curate legally compliant exports later.
+*.tmp
+
+# Upstream SGD is fetched at a pinned commit (see data/raw/README.md), never redistributed in full.
 data/upstream/
-# Do not commit unreviewed annotation packets, annotator identity notes, or private sampler hints.
+# Working files of the annotation rounds (blind packets, launchers, filled sheets); the released data is data/gold/.
 data/annotations/
-# Locally generated unreviewed/intermediate artifacts until reviewed for publication.
 data/intermediate/
-# Blind prospective-test pool text stays private (hashes/IDs only in the lock manifest).
 data/prospective_holdout/private_pool/
-# AI pre-review drafts stay local: reviewers must never see AI suggestions.
-OVERRIDE_PILOT30_AI_PRE_REVIEW/
+
+# Released gold: only the final versions; superseded builds stay local and are rebuilt by scripts/build_gold_*.py.
+data/gold/*
+!data/gold/README.md
+!data/gold/train_dev_gold_v1_3.jsonl
+!data/gold/test_reference_v1.jsonl
+!data/gold/full_gold_v1_3_plus_test.jsonl
+
+# Model runs and checkpoints are large; their hashes and metrics are in reports/.
+reports/train_runs/
 reports/sgd_train_audit/
 reports/sgd_smoke/
-*.tmp
-# Gold human annotations should remain local until release/legal & leakage review.
-data/gold/*
-# ...but the honesty README that declares 'GOLD NOT AVAILABLE' must stay visible.
-!data/gold/README.md
-# Reports contain unreviewed/possibly identifiable examples; export only reviewed reports.
-reports/splits/
-reports/train_runs/
-# Large model artifacts are not necessary for assignment repo unless explicitly requested.
+reports/splits/*
+!reports/splits/frozen_full_manifest_v1_3.json
+!reports/splits/frozen_plan_traindev_gold_v1_3.json
 checkpoints/
 models/
+
+# Local AI pre-review drafts from the pilot (never shown to annotators, not part of the release)
+OVERRIDE_PILOT30_AI_PRE_REVIEW/

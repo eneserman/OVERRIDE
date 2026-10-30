@@ -1,89 +1,170 @@
-> **OVERRIDE v0.7 DATA UPDATE:** For accurate current status read `18_V07_RESEARCH_PROTOCOL.md`, `19_DATASET_CARD_V07.md`, `20_GOLD_RELEASE_GATES.md`, `21_GOLD_READINESS_TR.md`, and `AGENT_D3_V07_REAL_GOLD_MASTER_PROMPT.md` **before** following the older v0.6 development handoff. In v0.7: 504 synthetic train + 126 synthetic dev + 126 synthetic challenge; 100 SGD pilot examples; 2 sets of 100 AI draft suggestions; **0 human-adjudicated gold**. No actual model training results. All synthetic/AI outputs must be disclosed. Academic gold release is BLOCKED pending real human review.
+# OVERRIDE — detecting revisions in multi-turn dialogue
 
-# OVERRIDE — Developers | NLP Project 2
+**NLP Project 2 (token classification) · Team Developers**
+Adnan Burak Özbay (2309111073) · Enes Erman (2309111066) · Mohammed Firas (2309015722) · İlayda Şenel (2309011159)
 
-**Status: full design + pre-gold Python tooling prepared. D0 real SGD train audit EXECUTED (2026-10-28, commit `e852981a`, 16,142 dialogues, all offsets valid). Not trained. No human-adjudicated custom labels, model metrics, or PPTX yet.** Repo: https://github.com/eneserman/OVERRIDE
+Users change their minds mid-conversation: *"Actually, make it 7 pm at the same place."* OVERRIDE labels, token by
+token, **which words signal the change** (UPDATE_CUE), **what the new value is** (NEW_VALUE) and **what refers back**
+to an earlier turn (REFERENCE). The labels do not exist in any public dataset: we selected 1,220 user turns from Google's
+Schema-Guided Dialogue corpus and annotated them ourselves, double-blind. The model is chosen by pre-registered
+cross-validation and evaluated **once** on a test set that was hash-locked before any model existed.
 
-**Delivery:** Python command-line research repository, public GitHub and PowerPoint presentation. **No website or mobile app is required.**
+## Results (locked prospective test, 363 turns, strict exact-span micro-F1)
 
-**v0.6 safety fixes:** read `17_V06_HARDENING_AUDIT.md` before running the agent. Frozen test evaluation must use `scripts/evaluate_frozen_test.py` with the full adjudicated gold file, manifest and test-only predictions. Avoid direct test claims from unconstrained `evaluate_spans.py`.
+| System | VALUE F1 | CUE F1 | S (mean) |
+|---|---|---|---|
+| B2 surface rules | 0.462 | 0.364 | 0.413 |
+| B1 lexicon copy | 0.526 | 0.414 | 0.470 |
+| BERT-base, first data version (411 turns) | 0.780 | 0.644 | 0.712 |
+| CRF (word, shape and context features) | 0.758 | 0.712 | 0.735 |
+| **DeBERTa-v3 3-seed ensemble, no history — selected model** | **0.845** | **0.691** | **0.768** |
+| DeBERTa-v3 3-seed ensemble, last 60 words of history — pre-registered comparison | 0.870 | 0.757 | 0.813 |
 
-**Handoff navigation:** start with `START_HERE_FOR_AGENT.md`; the coding agent receives `AGENT_MASTER_PROMPT.md`.
+- Selected by grouped 5-fold CV on 857 turns (CV S 0.860). On CV, dialogue history did not help (−0.005, 95%
+  family-bootstrap CI [−0.021, +0.012]); **on the locked test it does** (+0.045, [+0.016, +0.078]). We report the
+  model fixed before the test (0.768); the history result is reported as the comparison it was registered as.
+  Details: [`reports/D6_TEST_RESULTS.md`](reports/D6_TEST_RESULTS.md).
+- Per label on the test (selected model): NEW_VALUE 0.858, REFERENCE 0.821, UPDATE_CUE 0.691 (31 spans).
+- Error analysis (CV predictions only): [`reports/ERROR_ANALYSIS_CV.md`](reports/ERROR_ANALYSIS_CV.md).
 
-## One-sentence research question
-Do context-aware token classifiers detect the exact phrases expressing revisions, cancellations, retained information and historical references in multi-turn conversations more reliably than last-turn-only classifiers?
+## Task
 
-## Primary vs secondary tasks
-- **Primary / assessed focus:** two provisional token classification layers — VALUE (`NEW_VALUE`, `OLD_VALUE`, `KEPT_VALUE`, `REFERENCE`) and CUE (`UPDATE_CUE`, `CANCEL_CUE`, `KEEP_CUE`, `RESTORE_CUE`). Strict exact-span F1 on validated current-user-text spans.
-- **Secondary / separately evaluated:** reference resolution and state transitions (`ADD`, `UPDATE`, `DELETE`, `KEEP`, `RESTORE`, `CANCEL_INTENT`, `UNRESOLVED`). **Do not** pretend SGD already provides gold revision labels or that the resolver is implemented.
-- Complexity levels L1–L5 from simple correction to multi-turn restore/keep; rare L4/L5 cases remain exploratory until enough gold exists.
+Each user turn is tagged with two BIO layers over a shared word tokenizer:
 
-## Data, provenance and license
-Upstream: [Google Schema-Guided Dialogue (SGD)](https://github.com/google-research-datasets/dstc8-schema-guided-dialogue), license **CC BY-SA 4.0**. SGD provides conversations, frames, `slot_values`, and some character-level slot spans. OVERRIDE's correction/keep/restore cue annotations are **new intended labels, not supplied by SGD**. Source must be pinned to a commit, audited and cited; sharing adaptations must respect license conditions. **Project code is MIT-licensed (see `LICENSE`); this does not extend to the SGD data.**
+| Layer | Labels (claims in **bold**) |
+|---|---|
+| VALUE | **NEW_VALUE**, **REFERENCE**, OLD_VALUE, KEPT_VALUE |
+| CUE | **UPDATE_CUE**, CANCEL_CUE, KEEP_CUE, RESTORE_CUE |
 
-## Quick start (Python 3.10+)
+This is not NER: the same phrase ("Friday") is a NEW_VALUE, plain context or part of a REFERENCE depending on the
+earlier turns. Eight labels are defined in the guideline; the five with fewer than 10 examples are kept in the data but
+excluded from claims (SCOPE-001, decided before the test was opened). Metric: a predicted span counts only if start,
+end and label all match (`scripts/evaluate_spans.py`).
+
+## Repository layout
+
+```
+├── README.md                 this file
+├── LICENSE                   MIT, code
+├── DATA_LICENSE.md           CC BY-SA 4.0, data (adapted from SGD) and attribution
+├── CHANGELOG.md              dated history of every data and model milestone
+├── requirements.txt          pinned versions used for the reported results
+├── contributions/            one file per team member
+├── data/
+│   ├── raw/                  1,220 selected SGD turns without labels + how to fetch the pinned SGD source
+│   ├── gold/                 released annotations: train-side 857, test 363, combined 1,220
+│   └── prospective_holdout/  hash lock of the test turns, created before annotation
+├── docs/
+│   ├── ANNOTATION_GUIDELINES.md   labeling rules (v0.2.3) with the decision rules added during adjudication
+│   ├── DATA_FORMAT.md             record and span schema
+│   └── DATA_PIPELINE.md           raw SGD → released gold, step by step
+├── reports/                  protocols (written before each step), agreement freezes, decisions, results
+│   ├── d6_test/              test metrics, bootstrap intervals and predictions of all six systems
+│   └── splits/               frozen split manifests (train/dev plan, full 3-way manifest)
+├── scripts/                  every step of the pipeline (table below)
+└── tests/                    unit tests (python -m unittest discover -s tests)
+```
+
+## Scripts
+
+**Source and selection**
+
+| Script | Purpose |
+|---|---|
+| `inspect_upstream_provenance.py` | Pin the SGD commit and check its split files |
+| `audit_sgd.py` | Read-only audit of SGD (schemas, offsets, slot-state deltas) |
+| `mine_sgd_revision_candidates.py` | Scan all train user turns, assign heuristic buckets, sample per bucket (buckets hidden from annotators) |
+| `prepare_annotation_pilot.py` | Blind calibration/pilot packets |
+| `build_ext_packets.py` | The 400-turn second batch, pre-registered quotas and seed |
+| `build_ext2_packets.py` | Cross round: each annotator relabels the other's solo turns blind |
+| `lock_prospective_holdout.py` | Select and hash-lock the 363 test turns from official SGD dev/test |
+| `export_raw_turns.py` | Write `data/raw/` and verify every text against SGD |
+
+**Annotation, agreement and gold**
+
+| Script | Purpose |
+|---|---|
+| `annotation_entry_helper.py` | Turn typed span text into character offsets (no label suggestions) |
+| `normalize_review_packet.py` | Filled packet → canonical per-annotator records |
+| `annotation_agreement.py` | Exact span-set agreement per layer and label |
+| `rule_scan_v023.py` | Flag records that may violate a written guideline rule |
+| `gold_v1_audit.py` | Blind re-annotation audit of the first single-annotated batch |
+| `validate_annotations.py` | Strict schema/offset/overlap validator used by every builder |
+| `build_adjudicated_gold.py`, `build_train_gold_v1.py` | Gold v1 (457) from two annotations + joint decisions |
+| `build_gold_v1_1.py`, `build_gold_v1_2.py`, `build_gold_v1_3.py` | Later gold versions; untouched rows asserted identical |
+| `build_test_reference.py` | Test reference (DEV-001), run once after the model freeze |
+| `freeze_gold_splits.py`, `freeze_plan_split.py` | Family-grouped split manifests |
+
+**Models and evaluation**
+
+| Script | Purpose |
+|---|---|
+| `span_tokenizer.py` | Character-offset word tokenizer shared by all models |
+| `d5_prepare_data.py` | Gold spans → word-level BIO tags |
+| `d5_run_baselines.py` | B0/B1/B2 surface baselines on the dev split |
+| `d5_train_crf.py` | Linear-chain CRF per layer |
+| `d5_train_transformer.py` | First transformer (shared encoder + two token heads), dev-split selection |
+| `d5v2_cv.py` | Grouped 5-fold CV for one configuration (encoder × history × loss), pooled out-of-fold scoring |
+| `d5v2_bootstrap.py` | Family-bootstrap 95% interval for the difference of two systems |
+| `d5v2_final.py` | Train the final seeds on all 857 turns; ensemble prediction by softmax averaging |
+| `d6_baselines.py` | Fit B1, B2, CRF on all 857 turns and predict the test |
+| `d6_infer_frozen.py` | Predict with the first BERT checkpoint |
+| `evaluate_spans.py` | Strict exact-span evaluator (per label, micro, macro) |
+| `evaluate_frozen_test.py` | The only test scorer: re-verifies gold hash, manifest digest and family separation |
+| `error_analysis.py` | Boundary / label / missed / spurious error taxonomy |
+| `demo.py` | Label a sentence (and optional earlier turns) from the command line |
+
+## Reproduce
+
+Python 3.13, an 8 GB GPU for the transformers (CPU works, slowly).
 
 ```bash
-python -m unittest discover -s tests -v
-python -m compileall -q scripts tests
-python scripts/preflight_handoff.py
+pip install -r requirements.txt
+python -m unittest discover -s tests            # 100+ tests, standard library only
 
-# Clone official source when network is available and document exact commit.
+# data (optional: re-verify the released turns against SGD)
 git clone https://github.com/google-research-datasets/dstc8-schema-guided-dialogue.git data/upstream/sgd
-git -C data/upstream/sgd rev-parse HEAD
-python scripts/audit_sgd.py --sgd-root data/upstream/sgd --split train --out reports/sgd_train_audit
+git -C data/upstream/sgd checkout e852981ae34990f4358979625854259302feaa78
+python scripts/export_raw_turns.py --gold data/gold/train_dev_gold_v1_3.jsonl data/gold/test_reference_v1.jsonl \
+  --out data/raw/sgd_turns_unlabeled.jsonl --sgd-root data/upstream/sgd
 
-# Only after real audit approval, prepare blind annotator packets:
-python scripts/prepare_annotation_pilot.py --sgd-root data/upstream/sgd --out data/annotations/pilot_v0.1 --sample-size 100 --seed 42 --context-turns 8
+# model selection (one run per configuration; reports/D5V2_PROTOCOL.md lists all eight)
+python scripts/d5v2_cv.py --gold data/gold/train_dev_gold_v1_3.jsonl --model microsoft/deberta-v3-base \
+  --history no --loss plain --outdir reports/train_runs/d5v2_cv
+
+# final model: seeds 20261029, 20261030, 20261031
+python scripts/d5v2_final.py train --gold data/gold/train_dev_gold_v1_3.jsonl --model microsoft/deberta-v3-base \
+  --history no --loss plain --epochs 6 --seed 20261029 --outdir reports/train_runs/d5v2_final/no
+
+# test predictions and the frozen scorer
+python scripts/d5v2_final.py predict --checkpoints reports/train_runs/d5v2_final/no/final_seed20261029.pt \
+  reports/train_runs/d5v2_final/no/final_seed20261030.pt reports/train_runs/d5v2_final/no/final_seed20261031.pt \
+  --input data/gold/test_reference_v1.jsonl --out reports/train_runs/d6/pred_deberta_v2_ens_hno.jsonl
+python scripts/evaluate_frozen_test.py --full-gold data/gold/full_gold_v1_3_plus_test.jsonl \
+  --manifest reports/splits/frozen_full_manifest_v1_3.json --accept-consensus-reference \
+  --test-predictions reports/train_runs/d6/pred_deberta_v2_ens_hno.jsonl --out reports/d6_test/metrics_check.json
+
+# demo
+python scripts/demo.py --text "Actually, make it 7 pm at the same place." --checkpoints "reports/train_runs/d5v2_final/no/*.pt"
 ```
 
-The following tools exist **now**, but require genuine adjudicated gold for legitimate final use:
+Checkpoints (6 × 0.7 GB) are not in the repository; their SHA-256 hashes are in `reports/D5V2_RESULTS.md`, and the
+training commands above regenerate them. The released predictions in `reports/d6_test/predictions/` let anyone
+re-score the test without a GPU.
 
-```bash
-python scripts/validate_annotations.py --input examples/UNREVIEWED_annotation_example.jsonl
-# After independent human reviews and adjudication:
-python scripts/validate_annotations.py --input data/gold/override_gold_v0.1.jsonl --require-gold
-python scripts/freeze_gold_splits.py --gold data/gold/override_gold_v0.1.jsonl --out reports/splits/frozen_v0.1.json --seed 42
-# After real model predictions over a fixed held-out gold subset:
-python scripts/evaluate_frozen_test.py --full-gold data/gold/override_gold_v0.1.jsonl --manifest reports/splits/frozen_v0.1.json --test-predictions <test_only_predictions.jsonl> --out <frozen_test_metrics.json>
-```
+## Research integrity
 
-**Synthetic validation passes do not prove scientific quality.** The included `examples/` file is invented solely to test schema, carries `SYNTHETIC_NOT_SGD`, and must never appear in training/evaluation.
+- **Pre-registration:** each protocol (`reports/D3_EXT_PROTOCOL.md`, `reports/D5V2_PROTOCOL.md`, …) was committed before
+  the step it governs; git timestamps are the evidence.
+- **Locked test:** the 363 test turns were hash-locked before annotation, annotated blind by both annotators, and opened
+  once (`reports/TEST_ACCESS_LOG.md`) after the model freeze was committed and pushed.
+- **Agreement** is always computed from first submissions and frozen before any decision
+  (`reports/*AGREEMENT_FREEZE.json`).
+- **Deviations** are recorded, never applied silently (`reports/PROTOCOL_DEVIATIONS.md`): DEV-001 consensus test
+  reference, SCOPE-001 claim scope, DEV-002 family key across SGD splits.
+- **AI use (declared):** translation, character-offset computation, JSON formatting and coding assistance. Every
+  label and every adjudication decision was made by the annotators.
 
-## Directory guide
+## License and citation
 
-| Path | Purpose | Availability |
-|---|---|---|
-| `00_DESIGN_AUDIT.md`–`04_HUMAN_ANNOTATION_PILOT.md` | Requirements, token task, SGD audit and human annotation design | Written and reviewed as drafts |
-| `05_SYSTEM_ARCHITECTURE.md`–`16_ARTIFACT_STATUS.md` | Architecture, experiments, evaluation, QA, release, storyboard, risk, contracts and status | Written as future implementation specs |
-| `AGENT_MASTER_PROMPT.md`, `AGENT_D*.md` | Controlled phase-by-phase engineering handoff | Ready to give to coding agent |
-| `scripts/audit_sgd.py` | Read-only source audit, state-change **candidates**, not gold | Implemented, synthetic tests |
-| `scripts/prepare_annotation_pilot.py` | Blind A/B candidate packets + private hints | Implemented, synthetic tests |
-| `scripts/normalize_review_packet.py`, `scripts/annotation_agreement.py` | Convert genuine reviewed blind packets to non-gold canonical reviewer format; report disagreements | Implemented, synthetic tests |
-| `scripts/validate_annotations.py` | Offset, label, overlap, provenance/status checks | Implemented, synthetic tests |
-| `scripts/annotation_entry_helper.py` | Interactive human data entry (typed phrase → verified offsets); generates no labels | Implemented, synthetic tests |
-| `scripts/freeze_gold_splits.py` | Deterministic dialogue-family split manifest | Implemented, synthetic tests |
-| `scripts/evaluate_spans.py` | Strict span scoring for exploratory/dev use | Implemented, synthetic tests |
-| `scripts/evaluate_frozen_test.py` | Checks frozen gold and test partition before final scoring | Implemented, synthetic tests |
-| `scripts/preflight_handoff.py` | Verifies local handoff completeness and syntax/tests | Implemented, synthetic tests |
-| `tests/` | Unit/integration fixture tests | Tested locally; not official SGD results |
-| `configs/experiment.example.json` | Future model run configuration template | **Template only** |
-| `examples/UNREVIEWED_annotation_example.jsonl` | Artificial offset demonstration | **Not gold** |
-| `contributions/CONTRIBUTION_TEMPLATE.md` | Real team members fill their own Git evidence | Template only |
-| `reports/` | Verified reports after actual runs; old synthetic verification marked | Partial |
-| `src/override/` | Future ML/data/model code | **Not implemented** |
-| `data/upstream/`, `data/annotations/`, `data/gold/` | Real data and human reviewer outputs | **Not included in this handoff** |
-
-## Next action and strict gate
-Hand the **entire ZIP** to the coding agent and paste `AGENT_MASTER_PROMPT.md`. Agent runs D0 only, returns real data/hashes/counts and GO/NARROW/NO-GO. Then humans review D1–D3, and only after frozen gold is model training allowed. Do not skip gates because documents for later phases already exist.
-
-## Academic and honesty checklist
-The official P2 material emphasizes token classification, difficult/novel datasets/tasks, technical depth and P2 sheet collision avoidance. The explicit numerical rubric received earlier is from **Project 1**, so its percentages/timing are **not automatically P2 rules**. Submission asks for GitHub URL then PPTX. Public repo must be clean, licensed, documented and contain real team contribution histories. **Never fabricate metrics, gold labels or human reviews.**
-
-## CI caveat
-`.github/workflows/python-tests.yml` tests only the Python contract on synthetic cases. A green CI badge is **not evidence of official SGD evaluation or model quality**.
-
-
-## 2026-10-28 v0.8 real-corpus research upgrade
-
-See `24_EXTERNAL_DATASET_RESEARCH.md` through `29_NEXT_ACTIONS_TR.md`. Added source research, prospective real-test raw lock and independent input-hash checks, Microsoft Frames candidate extractor, upstream SGD commit/hash verifier, actually trained classical synthetic BIO baseline and measurements. **Synthetic challenge F1 is NOT real OVERRIDE F1, and real gold still does not exist.** Read `28_V08_EVIDENCE_AUDIT.md` before proceeding.
+Code: MIT (`LICENSE`). Data: CC BY-SA 4.0, adapted from Google SGD (Rastogi et al., AAAI 2020) — see `DATA_LICENSE.md`.

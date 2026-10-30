@@ -1,41 +1,41 @@
-# Gold annotations — status
+# Gold data (released)
 
-**Train/dev gold v1 EXISTS (human-annotated, human-adjudicated). Test gold does NOT exist yet and is built only after model freeze.**
+| File | Rows | What it is |
+|---|---|---|
+| `train_dev_gold_v1_3.jsonl` | 857 | Model-development gold from official SGD `train`. SHA-256 `ce7b9a054138b48f1bbc18544ccc7374ed7b05e9196048317feb072fa8a39dbc` |
+| `test_reference_v1.jsonl` | 363 | Locked prospective test from official SGD `dev`/`test`, DEV-001 consensus reference |
+| `full_gold_v1_3_plus_test.jsonl` | 1,220 | Both files together; the input of `scripts/evaluate_frozen_test.py` with `reports/splits/frozen_full_manifest_v1_3.json` (gold content SHA-256 `8a3e9fd7…c4b4`) |
 
-## What is here
+Each row: the raw fields of `data/raw/sgd_turns_unlabeled.jsonl` plus `value_spans` and `cue_spans`
+(`{start, end, text, label}`, character offsets into `current_user_utterance`) and an `annotation` block (status,
+guideline version, reviewers, decision provenance). Format: `docs/DATA_FORMAT.md`; rules: `docs/ANNOTATION_GUIDELINES.md`.
 
-| File | Status |
-|---|---|
-| `train_dev_gold_v1.jsonl` | 457 records, `source.split == train`, validator `--require-gold --allowed-splits train` → **PASS 457/457, 0 errors**. (File itself is gitignored; regenerate with `scripts/build_train_gold_v1.py` + `scripts/build_adjudicated_gold.py`.) |
-| Test gold | **Intentionally absent.** The locked 363-record holdout is annotated (double-blind, both reviewers) but its reference is built in ONE logged access after D5 model freeze, per `EVALUATION_PROTOCOL_LOCK.md` and `reports/TEST_ACCESS_LOG.md`. |
+## Label counts
 
-## Provenance (no fabricated labels, ever)
+| Label | Train-side (857) | Test (363) |
+|---|---|---|
+| NEW_VALUE | 764 | 315 |
+| REFERENCE | 189 | 114 |
+| UPDATE_CUE | 226 | 31 |
+| CANCEL_CUE | 7 | 0 |
+| KEPT_VALUE / OLD_VALUE / KEEP_CUE / RESTORE_CUE | 3 / 3 / 2 / 1 | 3 / 0 / 0 / 0 |
 
-- **90 double-blind** records (pilot-30 + stratified double-set-60) independently annotated by `reviewer_A_BURAK` and `reviewer_B_ENES`, then adjudicated **jointly by the two humans** (`reports/D3_ADJUDICATION_DECISIONS_FINAL.md`, 2026-10-29). A coordinator only transcribed decisions; no label suggestion was made by AI.
-- **357 single-annotated** records with **100% second-eye verification** (357/357 approved `K`, 0 changes; `DOGRULAMA_*` sheets).
-- **10 calibration** records completed after discussion (2 spans removed by recorded decision, 1 decided B-wins).
-- All 18 joint decisions in `scripts/build_train_gold_v1.py` are asserted against the signed document's "Final spans" columns — the build aborts on any mismatch.
-- Frozen agreement scores (computed pre-adjudication) are never recomputed: pilot `5e409339…`, test `36509d5f…`.
+Claims are made for NEW_VALUE, REFERENCE and UPDATE_CUE only (SCOPE-001, `reports/PROTOCOL_DEVIATIONS.md`).
 
-## Honest label support in train/dev gold v1 (N=457)
+## Provenance
 
-| Layer | Label | Count | Evaluable? |
-|---|---|---|---|
-| VALUE | NEW_VALUE | 368 | yes |
-| VALUE | REFERENCE | 106 | yes |
-| VALUE | KEPT_VALUE | 4 | marginal (tiny support) |
-| VALUE | OLD_VALUE | **0** | **NOT EVALUABLE** |
-| CUE | UPDATE_CUE | 74 | yes |
-| CUE | CANCEL_CUE | 6 | marginal (tiny support) |
-| CUE | KEEP_CUE | 1 | **NOT EVALUABLE in practice (n=1)** |
-| CUE | RESTORE_CUE | **0** | **NOT EVALUABLE** |
+| Segment | Records | How it was labeled |
+|---|---|---|
+| Pilot, calibration and double sets | 100 | double-blind, joint adjudication |
+| First single-annotated batch | 357 | one annotator + second-eye check; blind audit of 48 found agreement 0.458 → 3 records fixed (`reports/D3_GOLD_V1_AUDIT_RESULT.json`) |
+| New batch, shared | 80 | double-blind, agreement 0.8625, joint decisions |
+| New batch, cross round | 320 | double-blind, agreement 0.805, separate + joint decisions |
+| Test | 363 | double-blind (agreement frozen before any model), 300 identical, 3 decided by rule, 60 intersection only |
 
-- 151/457 records carry no span at all (legitimate empty-revision examples).
-- `transitions` layer is present but empty (`[]`) in gold: transition schemas were inconsistent across reviewer files and the transition layer is outside the locked evaluation contract (VALUE + CUE heads only). Raw transition annotations remain in the reviewer working files.
-- Baseline ceiling warning: this is a **difficult, low-frequency-span** task — any claimed "≥90% baseline" here must be scrutinized per the course rubric's saturation rule.
+Labels and decisions were made by the two annotators (reviewer_A_BURAK, reviewer_B_ENES). AI was used for translation,
+offset computation and JSON formatting, as declared in `reports/D3_EXT_PROTOCOL.md`.
 
-## Hard rules
+**Rebuild:** `scripts/build_train_gold_v1.py` → `build_gold_v1_1.py` → `build_gold_v1_2.py` → `build_gold_v1_3.py`
+(from the local annotation rounds) and `scripts/build_test_reference.py` (from the two test annotations and the lock).
 
-- Never create or edit a gold JSONL by hand. Gold is produced only by the two builder scripts above from human review artifacts.
-- `data/annotations/` (reviewer files, worksheets, verification sheets) and `data/gold/*` (except this README) are gitignored by `.gitignore`.
-- Historical note: versions ≤ v0.7 of this README declared "GOLD NOT AVAILABLE" during the AI-simulated pre-pilot era; those simulated files were never used as gold and are excluded from every claim above.
+**License:** CC BY-SA 4.0 (adapted from SGD), see `DATA_LICENSE.md`.

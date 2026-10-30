@@ -23,7 +23,6 @@ SOFTWARE.
 ---
 
 NOTE ON SCOPE: This license covers the OVERRIDE project CODE only.
-The upstream Google Schema-Guided Dialogue (SGD) dataset remains under
-CC BY-SA 4.0 (see DATA_LICENSE_AND_ATTRIBUTION notes in 15_DATA_LICENSE_AND_ATTRIBUTION.md
-and data/upstream/sgd/LICENSE.txt). Do not claim the source data became
-MIT-licensed.
+The released data (data/raw, data/gold) is adapted from the Google
+Schema-Guided Dialogue (SGD) dataset and is licensed under CC BY-SA 4.0;
+see DATA_LICENSE.md.

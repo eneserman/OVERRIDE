@@ -1,5 +1,9 @@
 # Project change history
 
+## Release — 2026-10-30 (after D6)
+- Data released: `data/raw/sgd_turns_unlabeled.jsonl` (1,220 turns, every text re-verified against SGD by `scripts/export_raw_turns.py`), `data/gold/` (train-side 857, test 363, combined 1,220); CC BY-SA 4.0 (`DATA_LICENSE.md`).
+- README rewritten (results, layout, every script, reproduction); `docs/DATA_PIPELINE.md`; `scripts/demo.py`; contribution files.
+
 ## D6 — locked test evaluated once — 2026-10-30
 - 363 prospective records (official SGD dev/test), DEV-001 consensus reference. S: B1 0.470, B2 0.413, CRF 0.735, BERT v1.1 0.712, **DeBERTa-v3 ensemble (selected, no history) 0.768**, history counterpart (tail60) 0.813.
 - History helps on the test (+0.045, descriptive family-bootstrap 95% CI [+0.016, +0.078]) although it did not in CV — reported in `reports/D6_TEST_RESULTS.md`; the selected model stays the headline.
