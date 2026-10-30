@@ -1,7 +1,7 @@
-# Taxonomy Narrowing — PROPOSAL (2026-10-30, awaiting both signatures)
+# Taxonomy Narrowing — ADOPTED 2026-10-30 (Option A)
 
-**Status: ADOPTED — Option A, with KEPT_VALUE out of scope (see §4).** Becomes binding only when both reviewers sign
-below, and only if signed **before** the locked holdout is opened. It changes the
+**Status: ADOPTED — Option A, with KEPT_VALUE out of scope (see §4).** It was adopted before the locked holdout was
+opened; Burak's concurrence was relayed by Enes and no handwritten signatures were collected (§4). It changes the
 scope of per-class claims; it does not change any label, the training tagset, the
 frozen model configuration or the locked test selection.
 
