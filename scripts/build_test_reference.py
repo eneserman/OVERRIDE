@@ -161,7 +161,7 @@ def main() -> int:
         row_out = {
             "id": rid,
             "source": dict(ra["source"]),
-            "dialogue_family_id": family_key(cand["official_source_split"], ra["dialogue_family_id"]),
+            "dialogue_family_id": ra["dialogue_family_id"],
             "history": ra.get("history", []),
             "current_user_utterance": ra["current_user_utterance"],
             "value_spans": spans["value_spans"],
@@ -207,9 +207,10 @@ def main() -> int:
     test_ids = {r["id"] for r in test_rows}
     if td_ids & test_ids:
         raise SystemExit(f"ID overlap train/dev gold vs test: {sorted(td_ids & test_ids)[:5]}")
-    td_fams = {family_key(r["source"]["split"], str(r.get("dialogue_family_id") or r["source"]["dialogue_id"]))
-               for r in td_rows}
-    test_fams = {str(r["dialogue_family_id"]) for r in test_rows}
+    if any(r["source"]["split"] != "train" for r in td_rows):
+        raise SystemExit("train/dev gold must come from the official SGD train split only")
+    td_fams = {family_key("train", str(r.get("dialogue_family_id") or r["source"]["dialogue_id"])) for r in td_rows}
+    test_fams = {family_key(r["source"]["split"], str(r["dialogue_family_id"])) for r in test_rows}
     if td_fams & test_fams:
         raise SystemExit(f"FAMILY leakage train/dev vs test: {sorted(td_fams & test_fams)[:5]}")
 
@@ -232,9 +233,10 @@ def main() -> int:
         "splits": {"train": sorted(plan["splits"]["train"]),
                    "dev": sorted(plan["splits"]["dev"]),
                    "test": sorted(test_ids)},
-        "family_assignment": dict(plan["family_assignment"]),
+        "family_key": "official_split::dialogue_id (DEV-002)",
+        "family_assignment": {family_key("train", str(f)): s for f, s in plan["family_assignment"].items()},
     }
-    manifest["family_assignment"].update({str(f): "test" for f in sorted(test_fams)})
+    manifest["family_assignment"].update({f: "test" for f in sorted(test_fams)})
     manifest["family_counts"] = {"train": len({str(f) for f, s in manifest["family_assignment"].items() if s == "train"}),
                                  "dev": len({str(f) for f, s in manifest["family_assignment"].items() if s == "dev"}),
                                  "test": len(test_fams)}

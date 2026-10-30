@@ -44,7 +44,12 @@ def check_manifest(gold: list[dict], manifest: dict,
     if not splits['test'] or not splits['train'] or not splits['dev']:
         raise ValueError('Empty frozen split')
     assignment = manifest.get('family_assignment',{})
-    if any(assignment.get(row['dialogue_family_id']) != split
+    # DEV-002 manifests key families as '<official split>::<dialogue_id>'; older manifests use the bare id
+    namespaced = manifest.get('family_key') == 'official_split::dialogue_id (DEV-002)'
+    def family(row: dict) -> str:
+        fam = str(row['dialogue_family_id'])
+        return f"{row['source']['split']}::{fam}" if namespaced else fam
+    if any(assignment.get(family(row)) != split
            for split, group in splits.items() for rid in group
            for row in [by_id[rid]]):
         raise ValueError('Family leakage/inconsistent split membership')
