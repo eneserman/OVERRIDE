@@ -1,0 +1,16 @@
+{
+  "a": "reports\\train_runs\\d5v2_cv\\deberta-v3-base__no__plain\\oof_epoch6.jsonl",
+  "b": "reports\\train_runs\\d5v2_cv\\deberta-v3-base__no__plain__extra\\oof_epoch6.jsonl",
+  "S_a": 0.8602,
+  "S_b": 0.8575,
+  "diff_b_minus_a": -0.0027,
+  "ci95": [
+    -0.0182,
+    0.0136
+  ],
+  "families": 854,
+  "records": 857,
+  "resamples": 1000,
+  "seed": 20261102,
+  "share_of_resamples_b_better": 0.409
+}

@@ -1,6 +1,6 @@
-# Synthetic training data experiment (protocol, written before the training run)
+﻿# Synthetic training data experiment (protocol, written before the training run)
 
-**Status:** data built and quality-checked; protocol committed before the CV run; results appended in §5.
+**Status:** FINAL. Protocol committed before the CV run (`bc99727`); results in §5. Human check of 50 records open.
 
 ## 1. What and why
 
@@ -57,4 +57,20 @@ that is the human check below.
 
 ## 5. Results
 
-(appended after the run)
+Pooled out-of-fold scores on the same 857 human records (`reports/train_runs/d5v2_cv/*/cv_result.json`, local):
+
+| Training data | VALUE F1 | CUE F1 | **S (epoch 6)** | best epoch, S |
+|---|---|---|---|---|
+| 857 human (original selection run) | 0.891 | 0.830 | **0.860** | 6, 0.860 |
+| 857 human + 240 synthetic | 0.888 | 0.827 | **0.858** | 5, 0.858 |
+
+**Primary comparison:** ΔS = **−0.003**, 95% family-bootstrap interval **[−0.018, +0.014]**, synthetic better in 41% of
+resamples (`reports/SYNTHETIC_BOOTSTRAP.json`). Within the run-to-run noise stated in §4: **no measurable effect**.
+
+Per label (epoch 6): NEW_VALUE 0.905 → 0.899, REFERENCE 0.846 → 0.859, UPDATE_CUE 0.848 → 0.844. The 45 hard
+negatives did not reduce spurious cues (false cue spans 39 → 45).
+
+**Reading.** 240 AI-written turns (+28% training records) neither helped nor hurt. The model is not short of this kind
+of easy, clean example; its remaining errors are the hard, context-dependent ones (`ERROR_ANALYSIS_CV.md`), which
+written-to-order examples do not reproduce. The frozen model stays as it is; the synthetic set is released as a
+declared resource with its quality report.
