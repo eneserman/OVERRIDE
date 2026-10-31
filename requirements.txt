@@ -1,4 +1,4 @@
-# Data pipeline, validation, agreement and scoring use the Python >=3.10 standard library only.
+﻿# Data pipeline, validation, agreement and scoring use the Python >=3.10 standard library only.
 # Model training / inference (pinned to the versions used for the reported results, Python 3.13):
 numpy==2.4.4
 torch==2.14.1  # CUDA build 2.14.1+cu126 was used on an RTX 4060 Laptop GPU
@@ -12,3 +12,4 @@ python-crfsuite==0.9.12
 laya==0.4.19  # JEV-alternative comparison only (scripts/jev_alt_laya.py)
 fastapi==0.129.0  # web demo only (app/server.py)
 uvicorn==0.34.0
+playwright==1.64.1  # demo end-to-end check and video recording only

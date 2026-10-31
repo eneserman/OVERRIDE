@@ -149,6 +149,10 @@
   .chip { white-space: nowrap; font-family: var(--serif); font-size: 44px; line-height: 1; padding: 14px 18px 16px; border-radius: 10px; background: var(--chip); border: 1px solid var(--line); color: var(--ink-2);
           opacity: 0; transform: translateY(-10px); transition: opacity .3s, transform .3s, background .5s, border-color .5s, color .5s; }
   .chip.in { opacity: 1; transform: none; }
+  .chips-row.wrap { flex-wrap: wrap; row-gap: 34px !important; margin-top: 10px; }
+  .chips-row.wrap .chip.lit { position: relative; }
+  .chips-row.wrap .chip.lit::after { content: attr(data-label); position: absolute; left: 50%; top: 100%; transform: translate(-50%, 4px); font: 600 9.5px var(--sans); letter-spacing: .3px; color: var(--ink-2); white-space: nowrap; }
+  .stage.compact .tags-row { display: none; }
   .chip.punct { padding: 14px 12px 16px; }
   .chip.c-UPDATE_CUE.lit, .chip.c-CANCEL_CUE.lit, .chip.c-KEEP_CUE.lit, .chip.c-RESTORE_CUE.lit { background: var(--cue); border-color: var(--cue-b); color: var(--ink); }
   .chip.c-NEW_VALUE.lit { background: var(--val); border-color: var(--val-b); color: var(--ink); }
@@ -226,7 +230,7 @@
   #st-table, .extable-wrap { overflow-x: auto; }
   @media (max-width: 1400px) { .an { grid-template-columns: 380px minmax(0, 1fr); } .cards-row { gap: 12px; flex-wrap: nowrap; } .rc { min-width: 0; flex: 0 1 230px; padding: 12px 14px; } .rc b { font-size: 16px; } }
   @media (max-width: 1250px) { .stats { grid-template-columns: repeat(2, 1fr); } .extable .ctx { display: none; } .an { grid-template-columns: minmax(0, 1fr); } .spans-grid, .grid2 { grid-template-columns: 1fr; } }
-  @media (max-width: 760px) { .app { grid-template-columns: 1fr; } aside { position: static; height: auto; } .side-art { display: none; } nav { flex-direction: row; flex-wrap: wrap; padding-bottom: 12px; }
+  @media (max-width: 760px) { .filters .seg { flex-wrap: wrap; max-width: 100%; } .app { grid-template-columns: 1fr; } aside { position: static; height: auto; } .side-art { display: none; } nav { flex-direction: row; flex-wrap: wrap; padding-bottom: 12px; }
     .chip { font-size: 28px; } .ex-row, .ex-grid { grid-template-columns: 1fr; } main { padding: 12px; } .card { padding: 18px 16px; } .topbar { flex-wrap: wrap; } }
   /* language switch */
   .lang { display: flex; padding: 3px; gap: 2px; }
@@ -763,7 +767,7 @@ function resetVisual() { ["tagsrow", "chips", "rcards", "verdict"].forEach((id) 
 async function redrawVisual() { FAST = true; resetVisual(); await playVisual(); FAST = false; }
 async function playVisual() {
   const d = last, segs = segments(d);
-  segs.forEach((s) => { const c = document.createElement("div"); c.className = "chip" + (s.punct ? " punct" : "") + (s.span ? " c-" + s.span.label : ""); c.textContent = s.text; $("chips").appendChild(c); s.el = c; });
+  segs.forEach((s) => { const c = document.createElement("div"); c.className = "chip" + (s.punct ? " punct" : "") + (s.span ? " c-" + s.span.label : ""); c.textContent = s.text; if (s.span) c.dataset.label = s.span.label; $("chips").appendChild(c); s.el = c; });
   fitChips();
   for (const s of segs) { s.el.classList.add("in"); await wait(110); }
   await wait(450);
@@ -789,7 +793,12 @@ async function playVisual() {
 function fitChips() {
   const row = $("chips"); let size = 44;
   row.querySelectorAll(".chip").forEach((c) => { c.style.fontSize = size + "px"; c.style.padding = ""; });
-  while (row.scrollWidth > row.clientWidth && size > 16) { size -= 2; row.querySelectorAll(".chip").forEach((c) => { c.style.fontSize = size + "px"; c.style.padding = `${size * .3}px ${size * .38}px`; }); }
+  row.classList.remove("wrap"); $("stage").classList.remove("compact");
+  while (row.scrollWidth > row.clientWidth && size > 18) { size -= 2; row.querySelectorAll(".chip").forEach((c) => { c.style.fontSize = size + "px"; c.style.padding = `${size * .3}px ${size * .38}px`; }); }
+  if (row.scrollWidth > row.clientWidth) {  /* too long for one line: wrap, labels go under the chips, no floating tags */
+    size = 24; row.classList.add("wrap"); $("stage").classList.add("compact");
+    row.querySelectorAll(".chip").forEach((c) => { c.style.fontSize = size + "px"; c.style.padding = "7px 10px"; });
+  }
   row.style.gap = Math.max(6, size / 4) + "px";
 }
 function positionTags(labeled) {
@@ -806,6 +815,7 @@ function drawLinks(animate) {
   const box = $("stage").getBoundingClientRect(), svg = $("links"); svg.innerHTML = "";
   const add = (d, color, cls) => { const p = document.createElementNS("http://www.w3.org/2000/svg", "path"); p.setAttribute("d", d); p.setAttribute("stroke", color); p.setAttribute("class", "link-path " + cls);
     svg.appendChild(p); p.style.setProperty("--len", p.getTotalLength()); if (!animate) p.classList.add("in"); return p; };
+  if ($("stage").classList.contains("compact")) return;  /* wrapped rows: the labels sit under the chips */
   last._labeled.forEach((s) => {
     const r = s.el.getBoundingClientRect(), t = s.tag.getBoundingClientRect(), color = COLOR[s.span.label];
     const up = add(curve(t.left + t.width / 2 - box.left, t.bottom - box.top + 2, r.left + r.width / 2 - box.left, r.top - box.top - 4), color, "upper");
