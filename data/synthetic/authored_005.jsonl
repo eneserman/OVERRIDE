@@ -1,0 +1,95 @@
+{"context_id": "CTX-0335", "utterance": "A 5:55 am return is brutal. Same flight out, but a later one back?", "spans": [["Same flight out", "REFERENCE"], ["a later one back", "NEW_VALUE"]]}
+{"context_id": "CTX-0336", "utterance": "yep, go ahead", "spans": []}
+{"context_id": "CTX-0337", "utterance": "Hmm, can we bump it to 11:15?", "spans": [["bump", "UPDATE_CUE"], ["11:15", "NEW_VALUE"]]}
+{"context_id": "CTX-0338", "utterance": "I need 3 days, not 2.", "spans": [["3 days", "NEW_VALUE"], ["2", "OLD_VALUE"]]}
+{"context_id": "CTX-0339", "utterance": "Cool, and what about my checking?", "spans": [["checking", "NEW_VALUE"]]}
+{"context_id": "CTX-0340", "utterance": "Okay, set me up there for Thursday afternoon.", "spans": [["Thursday afternoon", "NEW_VALUE"]]}
+{"context_id": "CTX-0341", "utterance": "Should I bring an umbrella?", "spans": []}
+{"context_id": "CTX-0342", "utterance": "Make that 2 tickets, my roommate is in.", "spans": [["Make that", "UPDATE_CUE"], ["2 tickets", "NEW_VALUE"]]}
+{"context_id": "CTX-0343", "utterance": "What's the price on that Alaska flight?", "spans": [["that Alaska flight", "REFERENCE"]]}
+{"context_id": "CTX-0344", "utterance": "Cool building. Anything more modern, like a gallery?", "spans": [["a gallery", "NEW_VALUE"]]}
+{"context_id": "CTX-0345", "utterance": "Correction: it's at half past nine, not 9.", "spans": [["Correction", "UPDATE_CUE"], ["half past nine", "NEW_VALUE"], ["9", "OLD_VALUE"]]}
+{"context_id": "CTX-0346", "utterance": "Wait, send it from checking, not savings.", "spans": [["checking", "NEW_VALUE"], ["savings", "OLD_VALUE"]]}
+{"context_id": "CTX-0347", "utterance": "Too early for me. Anything with that return time but leaving after 9?", "spans": [["that return time", "REFERENCE"], ["after 9", "NEW_VALUE"]]}
+{"context_id": "CTX-0348", "utterance": "Not on the TV, use the bedroom speaker.", "spans": [["the TV", "OLD_VALUE"], ["the bedroom speaker", "NEW_VALUE"]]}
+{"context_id": "CTX-0349", "utterance": "Right. Oh, and make that 2 rooms.", "spans": [["make that", "UPDATE_CUE"], ["2 rooms", "NEW_VALUE"]]}
+{"context_id": "CTX-0350", "utterance": "is it good for kids", "spans": []}
+{"context_id": "CTX-0351", "utterance": "Yes. Actually make it a regular ride, I'm carrying stuff.", "spans": [["Actually", "UPDATE_CUE"], ["make it", "UPDATE_CUE"], ["a regular ride", "NEW_VALUE"]]}
+{"context_id": "CTX-0352", "utterance": "Yes, 4 days in the same hotel.", "spans": [["4 days", "NEW_VALUE"], ["the same hotel", "REFERENCE"]]}
+{"context_id": "CTX-0353", "utterance": "Right, a shared ride for one.", "spans": [["a shared ride", "NEW_VALUE"], ["one", "NEW_VALUE"]]}
+{"context_id": "CTX-0354", "utterance": "Almost. Drop-off on the 10th, the rest is right.", "spans": [["the 10th", "NEW_VALUE"]]}
+{"context_id": "CTX-0355", "utterance": "Long Shot looks fun, when is it on?", "spans": [["Long Shot", "NEW_VALUE"]]}
+{"context_id": "CTX-0356", "utterance": "Is there an afternoon bus that day?", "spans": [["an afternoon bus", "NEW_VALUE"], ["that day", "REFERENCE"]]}
+{"context_id": "CTX-0357", "utterance": "Does it have a washer?", "spans": []}
+{"context_id": "CTX-0358", "utterance": "Apple Dental is fine, Monday at 9 please.", "spans": [["Apple Dental", "REFERENCE"], ["Monday", "NEW_VALUE"], ["9", "NEW_VALUE"]]}
+{"context_id": "CTX-0359", "utterance": "Great Clips works. Book it for tomorrow at noon.", "spans": [["Great Clips", "REFERENCE"], ["tomorrow", "NEW_VALUE"], ["noon", "NEW_VALUE"]]}
+{"context_id": "CTX-0360", "utterance": "7:10 is too early, what's the next one?", "spans": [["7:10", "OLD_VALUE"], ["the next one", "NEW_VALUE"]]}
+{"context_id": "CTX-0361", "utterance": "That's perfect for my son. Next Monday at 4?", "spans": [["Next Monday", "NEW_VALUE"], ["4", "NEW_VALUE"]]}
+{"context_id": "CTX-0362", "utterance": "All good, confirm it.", "spans": []}
+{"context_id": "CTX-0363", "utterance": "Say Anything, please.", "spans": [["Say Anything", "NEW_VALUE"]]}
+{"context_id": "CTX-0364", "utterance": "Yes, the bedroom it is.", "spans": [["the bedroom", "NEW_VALUE"]]}
+{"context_id": "CTX-0365", "utterance": "$13 is great, I'll take that one.", "spans": [["that one", "REFERENCE"]]}
+{"context_id": "CTX-0366", "utterance": "Hmm, play something by Common Kings instead.", "spans": [["Common Kings", "NEW_VALUE"], ["instead", "UPDATE_CUE"]]}
+{"context_id": "CTX-0367", "utterance": "Oh shoot, the 10th is busy. Same time on the 11th?", "spans": [["the 10th", "OLD_VALUE"], ["Same time", "REFERENCE"], ["the 11th", "NEW_VALUE"]]}
+{"context_id": "CTX-0368", "utterance": "Yes, 11 am on the 8th.", "spans": [["11 am", "NEW_VALUE"], ["the 8th", "NEW_VALUE"]]}
+{"context_id": "CTX-0369", "utterance": "Go back to the first song you suggested.", "spans": [["Go back to", "RESTORE_CUE"], ["the first song you suggested", "REFERENCE"]]}
+{"context_id": "CTX-0370", "utterance": "Any Knicks games instead?", "spans": [["Knicks games", "NEW_VALUE"], ["instead", "UPDATE_CUE"]]}
+{"context_id": "CTX-0371", "utterance": "What are its opening hours?", "spans": []}
+{"context_id": "CTX-0372", "utterance": "Something rated over 4 in the same area?", "spans": [["over 4", "NEW_VALUE"], ["the same area", "REFERENCE"]]}
+{"context_id": "CTX-0373", "utterance": "Not Monday, it's next Tuesday at 8:15 pm.", "spans": [["Monday", "OLD_VALUE"], ["next Tuesday", "NEW_VALUE"], ["8:15 pm", "NEW_VALUE"]]}
+{"context_id": "CTX-0374", "utterance": "Fusion is fine, pick up at 10 am.", "spans": [["Fusion", "REFERENCE"], ["10 am", "NEW_VALUE"]]}
+{"context_id": "CTX-0375", "utterance": "Meh. I'll stick with the first game then.", "spans": [["the first game", "REFERENCE"]]}
+{"context_id": "CTX-0376", "utterance": "9 is good. Book it for 2 people.", "spans": [["9", "REFERENCE"], ["2 people", "NEW_VALUE"]]}
+{"context_id": "CTX-0377", "utterance": "Over budget. Anything with the same layout for under 3,500?", "spans": [["the same layout", "REFERENCE"], ["under 3,500", "NEW_VALUE"]]}
+{"context_id": "CTX-0378", "utterance": "Looks good, go ahead and reserve it.", "spans": []}
+{"context_id": "CTX-0379", "utterance": "Oh wait, make it 2 tickets, my dad isn't coming.", "spans": [["make it", "UPDATE_CUE"], ["2 tickets", "NEW_VALUE"]]}
+{"context_id": "CTX-0380", "utterance": "Is it close to the convention center?", "spans": []}
+{"context_id": "CTX-0381", "utterance": "Schedule a doctor's appointment at 10 that morning.", "spans": [["a doctor's appointment", "NEW_VALUE"], ["10", "NEW_VALUE"], ["that morning", "REFERENCE"]]}
+{"context_id": "CTX-0382", "utterance": "No, on my bedroom speaker please.", "spans": [["my bedroom speaker", "NEW_VALUE"]]}
+{"context_id": "CTX-0383", "utterance": "Yes, but switch to 3 people.", "spans": [["switch", "UPDATE_CUE"], ["3 people", "NEW_VALUE"]]}
+{"context_id": "CTX-0384", "utterance": "Yup, book it.", "spans": []}
+{"context_id": "CTX-0385", "utterance": "Okay, how do I get there by bus?", "spans": []}
+{"context_id": "CTX-0386", "utterance": "Yes, and could you make it 2 rooms?", "spans": [["make it", "UPDATE_CUE"], ["2 rooms", "NEW_VALUE"]]}
+{"context_id": "CTX-0387", "utterance": "I've seen the steps already. What else is near the museum?", "spans": []}
+{"context_id": "CTX-0388", "utterance": "Can we make the visit the 10th instead?", "spans": [["make", "UPDATE_CUE"], ["the 10th", "NEW_VALUE"], ["instead", "UPDATE_CUE"]]}
+{"context_id": "CTX-0389", "utterance": "Is there an earlier 3d one on the same day?", "spans": [["an earlier 3d one", "NEW_VALUE"], ["the same day", "REFERENCE"]]}
+{"context_id": "CTX-0390", "utterance": "I'd rather avoid transfers. Any direct bus?", "spans": [["direct bus", "NEW_VALUE"]]}
+{"context_id": "CTX-0391", "utterance": "Yes, but in premium economy please.", "spans": [["premium economy", "NEW_VALUE"]]}
+{"context_id": "CTX-0392", "utterance": "Ok, Shazam! it is.", "spans": [["Shazam!", "NEW_VALUE"]]}
+{"context_id": "CTX-0393", "utterance": "Sounds right, reserve 3 on that bus.", "spans": [["3", "NEW_VALUE"], ["that bus", "REFERENCE"]]}
+{"context_id": "CTX-0394", "utterance": "The Altima's fine. Can I return it on the 10th?", "spans": [["The Altima", "REFERENCE"], ["the 10th", "NEW_VALUE"]]}
+{"context_id": "CTX-0395", "utterance": "Too late. Can you check the 4th?", "spans": [["the 4th", "NEW_VALUE"]]}
+{"context_id": "CTX-0396", "utterance": "Chilly. Thanks, that's all.", "spans": []}
+{"context_id": "CTX-0397", "utterance": "Yikes, and the week after?", "spans": [["the week after", "NEW_VALUE"]]}
+{"context_id": "CTX-0398", "utterance": "11 Howard sounds nice. Book it from Friday to Sunday.", "spans": [["11 Howard", "REFERENCE"], ["Friday", "NEW_VALUE"], ["Sunday", "NEW_VALUE"]]}
+{"context_id": "CTX-0399", "utterance": "Is there one with 4 stars instead?", "spans": [["4 stars", "NEW_VALUE"], ["instead", "UPDATE_CUE"]]}
+{"context_id": "CTX-0400", "utterance": "Can we push that to 6 pm? I work till 5.", "spans": [["push", "UPDATE_CUE"], ["6 pm", "NEW_VALUE"]]}
+{"context_id": "CTX-0401", "utterance": "Is that one close to the Louvre?", "spans": []}
+{"context_id": "CTX-0402", "utterance": "Not TV, use the kitchen speaker please.", "spans": [["TV", "OLD_VALUE"], ["the kitchen speaker", "NEW_VALUE"]]}
+{"context_id": "CTX-0403", "utterance": "Anyone who's a woman doctor in Palo Alto?", "spans": []}
+{"context_id": "CTX-0404", "utterance": "On second thought, 1 pm is better.", "spans": [["On second thought", "UPDATE_CUE"], ["1 pm", "NEW_VALUE"]]}
+{"context_id": "CTX-0405", "utterance": "Can we make the pickup earlier, like 5 pm?", "spans": [["make", "UPDATE_CUE"], ["5 pm", "NEW_VALUE"]]}
+{"context_id": "CTX-0406", "utterance": "Nah, play some jazz instead.", "spans": [["jazz", "NEW_VALUE"], ["instead", "UPDATE_CUE"]]}
+{"context_id": "CTX-0407", "utterance": "Too big. What about a compact on the same date?", "spans": [["a compact", "NEW_VALUE"], ["the same date", "REFERENCE"]]}
+{"context_id": "CTX-0408", "utterance": "Great, 3 tickets for that one.", "spans": [["3 tickets", "NEW_VALUE"], ["that one", "REFERENCE"]]}
+{"context_id": "CTX-0409", "utterance": "La Jolla is perfect. I'll take it for 4 nights.", "spans": [["4 nights", "NEW_VALUE"]]}
+{"context_id": "CTX-0410", "utterance": "1 bedroom is too small. Back to the one before that?", "spans": [["1 bedroom", "OLD_VALUE"], ["Back to", "RESTORE_CUE"], ["the one before that", "REFERENCE"]]}
+{"context_id": "CTX-0411", "utterance": "Okay, can I see him on Wednesday at 2?", "spans": [["Wednesday", "NEW_VALUE"], ["2", "NEW_VALUE"]]}
+{"context_id": "CTX-0412", "utterance": "Can I visit it this weekend?", "spans": [["this weekend", "NEW_VALUE"]]}
+{"context_id": "CTX-0413", "utterance": "Great, get me 2 tickets for that.", "spans": [["2 tickets", "NEW_VALUE"]]}
+{"context_id": "CTX-0414", "utterance": "Fusion at LAX works.", "spans": [["Fusion", "REFERENCE"], ["LAX", "REFERENCE"]]}
+{"context_id": "CTX-0415", "utterance": "Hmm, is there one closer to downtown with a pool?", "spans": [["a pool", "NEW_VALUE"]]}
+{"context_id": "CTX-0416", "utterance": "Delta works. Book economy for 2.", "spans": [["Delta", "REFERENCE"], ["economy", "NEW_VALUE"], ["2", "NEW_VALUE"]]}
+{"context_id": "CTX-0417", "utterance": "Ooh yes! 2 tickets please.", "spans": [["2 tickets", "NEW_VALUE"]]}
+{"context_id": "CTX-0418", "utterance": "Fit's fine, but at 10 am please.", "spans": [["Fit", "REFERENCE"], ["10 am", "NEW_VALUE"]]}
+{"context_id": "CTX-0419", "utterance": "Yes, 3 people on the 9th.", "spans": [["3 people", "NEW_VALUE"], ["the 9th", "NEW_VALUE"]]}
+{"context_id": "CTX-0420", "utterance": "Sorry, I meant on the bedroom speaker, not the TV.", "spans": [["I meant", "UPDATE_CUE"], ["the bedroom speaker", "NEW_VALUE"], ["the TV", "OLD_VALUE"]]}
+{"context_id": "CTX-0421", "utterance": "How much does it cost to get in?", "spans": []}
+{"context_id": "CTX-0422", "utterance": "Not my genre. Go back to the earlier one, I liked it.", "spans": [["Go back to", "RESTORE_CUE"], ["the earlier one", "REFERENCE"]]}
+{"context_id": "CTX-0423", "utterance": "That works. Reserve it for 2 adults.", "spans": [["2 adults", "NEW_VALUE"]]}
+{"context_id": "CTX-0424", "utterance": "Yes, noon on the 1st is good.", "spans": [["noon", "NEW_VALUE"], ["the 1st", "NEW_VALUE"]]}
+{"context_id": "CTX-0425", "utterance": "Too pricey. Same size but cheaper?", "spans": [["Same size", "REFERENCE"]]}
+{"context_id": "CTX-0426", "utterance": "That's within my budget. Visit on Saturday?", "spans": [["Saturday", "NEW_VALUE"]]}
+{"context_id": "CTX-0427", "utterance": "Sorry, I meant to Sacramento from Fresno.", "spans": [["I meant", "UPDATE_CUE"], ["Sacramento", "NEW_VALUE"], ["Fresno", "NEW_VALUE"]]}
+{"context_id": "CTX-0428", "utterance": "Yes, 4 people, same time.", "spans": [["4 people", "NEW_VALUE"], ["same time", "REFERENCE"]]}
+{"context_id": "CTX-0429", "utterance": "Can I grab that Altima on the 4th instead of the 3rd?", "spans": [["that Altima", "REFERENCE"], ["the 4th", "NEW_VALUE"], ["instead of", "UPDATE_CUE"], ["the 3rd", "OLD_VALUE"]]}

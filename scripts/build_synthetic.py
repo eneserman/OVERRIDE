@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+﻿#!/usr/bin/env python3
 """Build the declared synthetic training set (reports/SYNTHETIC_DATA.md) and its quality report.
 
 Input: real SGD contexts (`synth_contexts.py`) and AI-authored turns (`data/synthetic/authored_*.jsonl`: context_id,
@@ -36,14 +36,14 @@ def distinct_n(texts: list[str], n: int) -> float:
 
 def main() -> int:
     ap = argparse.ArgumentParser()
-    ap.add_argument("--contexts", type=Path, required=True)
+    ap.add_argument("--contexts", type=Path, nargs="+", required=True)
     ap.add_argument("--authored", type=Path, nargs="+", required=True)
     ap.add_argument("--gold", type=Path, nargs="+", required=True, help="human gold, for the copy check")
     ap.add_argument("--out", type=Path, required=True)
     ap.add_argument("--report", type=Path, required=True)
     args = ap.parse_args()
 
-    contexts = {c["context_id"]: c for c in read_jsonl(args.contexts)}
+    contexts = {c["context_id"]: c for p in args.contexts for c in read_jsonl(p)}
     real_turns = {r["current_user_utterance"].strip().lower() for p in args.gold for r in read_jsonl(p)}
     rows, errors = [], []
     for path in args.authored:

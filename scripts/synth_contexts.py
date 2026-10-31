@@ -29,10 +29,15 @@ def main() -> int:
     ap.add_argument("--per-service", type=int, default=20)
     ap.add_argument("--history-turns", type=int, default=4)
     ap.add_argument("--seed", type=int, default=20261031)
+    ap.add_argument("--exclude-contexts", type=Path, nargs="*", default=[],
+                    help="earlier context files: their dialogues are excluded and their IDs are not reused")
     ap.add_argument("--out", type=Path, required=True)
     args = ap.parse_args()
 
     used = {(r["source"]["split"], r["source"]["dialogue_id"]) for p in args.exclude for r in read_jsonl(p)}
+    earlier = [c for p in args.exclude_contexts for c in read_jsonl(p)]
+    used |= {("train", c["dialogue_id"]) for c in earlier}
+    first_id = max((int(c["context_id"][4:]) + 1 for c in earlier), default=0)
     by_service = defaultdict(list)
     for f in sorted((args.sgd_root / "train").glob("dialogues_*.json")):
         for d in json.loads(f.read_text(encoding="utf-8")):
@@ -68,7 +73,7 @@ def main() -> int:
     rng.shuffle(picked)
     picked = picked[:args.n]
     for k, c in enumerate(picked):
-        c["context_id"] = f"CTX-{k:04d}"
+        c["context_id"] = f"CTX-{first_id + k:04d}"
     args.out.parent.mkdir(parents=True, exist_ok=True)
     args.out.write_text("".join(json.dumps(c, ensure_ascii=False) + "\n" for c in picked), encoding="utf-8")
     print(json.dumps({"contexts": len(picked), "services": len({c["service"] for c in picked}),

@@ -70,7 +70,22 @@ resamples (`reports/SYNTHETIC_BOOTSTRAP.json`). Within the run-to-run noise stat
 Per label (epoch 6): NEW_VALUE 0.905 → 0.899, REFERENCE 0.846 → 0.859, UPDATE_CUE 0.848 → 0.844. The 45 hard
 negatives did not reduce spurious cues (false cue spans 39 → 45).
 
-**Reading.** 240 AI-written turns (+28% training records) neither helped nor hurt. The model is not short of this kind
+## 6. Extension to 1,000 synthetic turns (written before its run)
+
+The owner asked for a larger released set. 760 more contexts (`data/synthetic/contexts_002.jsonl`, seed 20261102;
+dialogues of the first 240 contexts also excluded) got one AI-written turn each (`authored_004`–`011`), built with the
+same checks into `data/synthetic/synthetic_v2.jsonl` (1,000 records; the 240 of v1 are byte-identical inside it).
+13 turns were rewritten after the checks flagged them (duplicates, a copy of a real SGD turn, ambiguous span text).
+
+`reports/synthetic_quality_v2.json`: 142 records without spans; NEW_VALUE 931, REFERENCE 348, UPDATE_CUE 228,
+OLD_VALUE 94, RESTORE_CUE 14; 30 different cue phrases; most frequent opening 2.1% of turns; distinct-1 0.141 /
+distinct-2 0.560 (human gold, same size: 0.086 / 0.392); 0 near-duplicates; 0 copies of real turns.
+
+Same experiment as §4 with `synthetic_v2.jsonl` (outdir `reports/train_runs/d5v2_cv_syn1000/`): primary = S at epoch 6
+on the 857 human records vs the original run, family bootstrap; no test access; the frozen model stays as it is.
+Result appended below.
+
+**Reading of §5.** 240 AI-written turns (+28% training records) neither helped nor hurt. The model is not short of this kind
 of easy, clean example; its remaining errors are the hard, context-dependent ones (`ERROR_ANALYSIS_CV.md`), which
 written-to-order examples do not reproduce. The frozen model stays as it is; the synthetic set is released as a
 declared resource with its quality report.
