@@ -1,6 +1,6 @@
-# JEV-alternative comparison: Laya zero-shot (protocol, written before any run)
+﻿# JEV-alternative comparison: Laya zero-shot (protocol, written before any run)
 
-**Status:** protocol committed before the first Laya prediction; results are appended in §5 after the runs.
+**Status:** FINAL. Protocol committed before the first Laya prediction (`f29b856`); results in §5.
 
 ## 1. Why
 
@@ -42,4 +42,30 @@ before, and nothing is tuned on it.
 
 ## 5. Results
 
-(appended after the runs)
+**Selection on the 857 train-side records** (`reports/jev_alt/select.json`; Laya never saw these labels):
+
+| Variant | VALUE F1 | CUE F1 | S |
+|---|---|---|---|
+| **choice, english (selected)** | 0.055 | 0.051 | **0.053** |
+| noul, multilingual | 0.019 | 0.086 | 0.053 |
+| choice, multilingual | 0.015 | 0.062 | 0.038 |
+| noul, english | 0.007 | 0.053 | 0.030 |
+| *for scale: our DeBERTa-v3, pooled out-of-fold CV on the same records* | *0.891* | *0.830* | *0.860* |
+
+**Locked test, single run (DEV-003, access #2)** (`reports/d6_test/metrics_laya_choice_en.json`):
+
+| System | VALUE F1 | CUE F1 | S |
+|---|---|---|---|
+| Laya zero-shot (choice, english) | 0.031 | 0.017 | **0.024** |
+| DeBERTa-v3 ensemble, history = no (selected, unchanged) | 0.845 | 0.691 | 0.768 |
+
+Per label on the test: NEW_VALUE 0.042 (11 of 315 found, 201 false), REFERENCE 0.000 (59 false), UPDATE_CUE 0.017
+(6 of 31 found, **671 false**).
+
+**Reading.** The decision model answers the *sentence-level* question it was built for: in the probes, every word of a
+revision turn got the same answer ("this text is a change"), so cue recall is non-zero but precision collapses
+(671 false cue spans on 363 turns). Word roles in context are not a question Laya can answer zero-shot. It is below
+even our rule baselines (S 0.41–0.47). This is the expected and useful result: a general System-1 decision model does
+not replace task data; the new labels and a trained token model are what make the task solvable. Fine-tuning Laya on
+our labels (its authors report large gains from fine-tuning) is left out: it would be a different system, trained on
+the same data as our model.

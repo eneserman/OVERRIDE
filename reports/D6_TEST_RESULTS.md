@@ -27,6 +27,9 @@ predictions on 46/46 records).
 | **DeBERTa-v3 ensemble, history = no — selected model** | 857 | **0.845** | **0.691** | **0.768** |
 | DeBERTa-v3 ensemble, history = tail60 — pre-registered counterpart | 857 | 0.870 | 0.757 | 0.813 |
 
+**Added after D6** (DEV-003, test access #2, one run, nothing changed above): Laya zero-shot, a JEV-alternative
+decision model, VALUE 0.031 · CUE 0.017 · **S 0.024** — `reports/JEV_ALTERNATIVE.md`.
+
 S = mean of VALUE and CUE micro-F1. The **headline result is the selected model (S 0.768)**: it is the one fixed by
 the protocol before the test was opened. The tail60 row is the pre-registered history comparison, not a re-selection.
 
