@@ -28,6 +28,17 @@
 | **Why it is defensible** | It is a correctness fix of an identity key, not a change of membership, labels, metric or models; the 363 locked IDs and their texts are re-verified against the lock as before; the fix is decided without any model output on the test. |
 | **Implementation (code)** | `scripts/build_test_reference.py` (namespaced keys, official-train-only assertion), `scripts/evaluate_frozen_test.py` (reads the declared key; old manifests unchanged) + regression tests `tests/test_test_reference_family_key.py` (same number in another split accepted, true same-split leakage still rejected); committed before the reference is rebuilt. A first attempt that rewrote `dialogue_family_id` in the rows was rejected by the validator before anything was written. |
 
+## DEV-003 — Second test access to score an added comparison system (Laya, JEV alternative)
+
+| Field | Value |
+|---|---|
+| **Recorded** | 2026-10-31, before any Laya prediction exists |
+| **Locked clause** | `TEST_ACCESS_LOG.md` access #1: "no further test access permitted" |
+| **Deviating decision** | The course asks for JEV / JEV-alternative methods after D6 was run. One added system, Laya zero-shot (`reports/JEV_ALTERNATIVE.md`), is scored on the 363 test rows once. Its variant is chosen on train-side gold only. |
+| **Who decided** | owner Enes (approved in chat, 2026-10-31) |
+| **Why it is defensible** | Laya is never trained or tuned on our data; its variant is fixed before the access; the access cannot change the frozen model, the reported test numbers of the six D6 systems, or any earlier decision. The row is labeled "added after D6". |
+| **Impact on claims** | Headline unchanged (selected DeBERTa, S 0.768). Laya's test number is a comparison row only. |
+
 ## Log
 
 | ID | Date | Clause | Summary | Status |
@@ -35,3 +46,4 @@
 | DEV-001 | 2026-10-29 | §3 step 1 (adjudicate holdout) | 60/63 test disputes → consensus reference instead of adjudication; 3 resolved by rule | REGISTERED before D5 |
 | SCOPE-001 | 2026-10-30 | claims scope (not a membership or metric change) | Taxonomy narrowing, Option A + KEPT_VALUE out of scope (`D5_TAXONOMY_NARROWING_PROPOSAL.md` §4) | ADOPTED before any holdout access |
 | DEV-002 | 2026-10-30 | family identity in the test-reference leakage check | SGD dialogue IDs repeat across official splits; family key = official split + dialogue ID | REGISTERED during D6, before any prediction |
+| DEV-003 | 2026-10-31 | single test access (`TEST_ACCESS_LOG.md` #1) | second access to score one added comparison system (Laya zero-shot, JEV alternative); no model or reported number changes | REGISTERED before any Laya prediction |
