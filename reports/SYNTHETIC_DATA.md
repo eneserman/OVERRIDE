@@ -83,7 +83,19 @@ distinct-2 0.560 (human gold, same size: 0.086 / 0.392); 0 near-duplicates; 0 co
 
 Same experiment as §4 with `synthetic_v2.jsonl` (outdir `reports/train_runs/d5v2_cv_syn1000/`): primary = S at epoch 6
 on the 857 human records vs the original run, family bootstrap; no test access; the frozen model stays as it is.
-Result appended below.
+**Result** (`reports/SYNTHETIC_BOOTSTRAP_1000.json`):
+
+| Training data | VALUE F1 | CUE F1 | **S (epoch 6)** | best epoch, S |
+|---|---|---|---|---|
+| 857 human | 0.891 | 0.830 | **0.860** | 6, 0.860 |
+| 857 human + 240 synthetic | 0.888 | 0.827 | **0.858** | 5, 0.858 |
+| 857 human + 1,000 synthetic | 0.886 | 0.820 | **0.853** | 9, 0.857 |
+
+ΔS (1,000 synthetic − none) = **−0.007**, 95% interval **[−0.024, +0.009]**, synthetic better in 22% of resamples.
+Per label: NEW_VALUE 0.899, REFERENCE 0.845, UPDATE_CUE 0.842 (false cue spans 43). Not a significant change, but
+the direction is consistent: more synthetic data did not help, and with 1,000 turns (more synthetic than human
+records) the score drifts slightly down. Conclusion: the synthetic set is released as a resource; the model trained
+on human labels only stays the reported one.
 
 **Reading of §5.** 240 AI-written turns (+28% training records) neither helped nor hurt. The model is not short of this kind
 of easy, clean example; its remaining errors are the hard, context-dependent ones (`ERROR_ANALYSIS_CV.md`), which

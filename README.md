@@ -32,8 +32,9 @@ cross-validation and evaluated **once** on a test set that was hash-locked befor
 - **JEV alternative:** Laya, an open System-1 decision model, asked about every word zero-shot, scores S 0.053 on the
   train-side records and 0.024 on the test: decision models answer sentence-level questions, not word roles in context
   ([`reports/JEV_ALTERNATIVE.md`](reports/JEV_ALTERNATIVE.md); second test access declared as DEV-003).
-- **Declared synthetic data:** 240 AI-written turns on real SGD contexts, quality-checked, change CV S by −0.003
-  [−0.018, +0.014], i.e. no measurable effect ([`reports/SYNTHETIC_DATA.md`](reports/SYNTHETIC_DATA.md)).
+- **Synthetic data:** 1,000 AI-written turns on real SGD contexts, quality-checked (0 duplicates or copies, more
+  lexical variety than the human data). Added to training they do not help: CV S −0.003 with 240 turns, −0.007
+  [−0.024, +0.009] with 1,000 ([`reports/SYNTHETIC_DATA.md`](reports/SYNTHETIC_DATA.md)).
 
 ## Task
 
@@ -61,7 +62,7 @@ end and label all match (`scripts/evaluate_spans.py`).
 ├── data/
 │   ├── raw/                  1,220 selected SGD turns without labels + how to fetch the pinned SGD source
 │   ├── gold/                 released annotations: train-side 857, test 363, combined 1,220
-│   ├── synthetic/            240 declared AI-written turns on real SGD contexts (never mixed into gold)
+│   ├── synthetic/            1,000 AI-written training turns on real SGD contexts (kept apart from gold)
 │   └── prospective_holdout/  hash lock of the test turns, created before annotation
 ├── docs/
 │   ├── ANNOTATION_GUIDELINES.md   labeling rules (v0.2.3) with the decision rules added during adjudication
