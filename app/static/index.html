@@ -1,0 +1,568 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Conversation Revision Analyzer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #efede7; --panel: #f7f6f2; --card: rgba(255,255,255,.62); --card-solid: #fbfaf7;
+    --ink: #1c1c1a; --ink-2: #4a4945; --muted: #8a8880; --line: #e3e0d7; --line-2: #d6d2c6;
+    --cue: #fbe6a2; --cue-b: #f1cd62; --cue-i: #6b4f00; --cue-c: #f2c443;
+    --val: #cdeed6; --val-b: #8ed3a4; --val-i: #1d5a31; --val-c: #3cb56a;
+    --ref: #d9e7fb; --ref-b: #9dc0f1; --ref-i: #1d4f8f; --ref-c: #4f8fe6;
+    --old: #e7e0fa; --old-b: #b8a6ee; --old-i: #4b3a8c; --old-c: #9b7fe6;
+    --none: #f1efe9; --none-c: #b9b6ad;
+    --serif: "EB Garamond", Garamond, Georgia, serif;
+    --sans: Inter, "Segoe UI", system-ui, sans-serif;
+    --r: 12px;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; }
+  body { background: var(--paper); color: var(--ink); font-family: var(--sans); font-size: 14px;
+         background-image: radial-gradient(ellipse at 70% 10%, rgba(255,255,255,.7), transparent 60%),
+                           radial-gradient(ellipse at 20% 90%, rgba(255,255,255,.45), transparent 55%); }
+  button { font: inherit; color: inherit; cursor: pointer; }
+  .app { display: grid; grid-template-columns: 196px minmax(0, 1fr); min-height: 100vh; }
+
+  /* sidebar */
+  aside { background: linear-gradient(#f3f2ee, #eceae4); border-right: 1px solid var(--line); display: flex; flex-direction: column; position: sticky; top: 0; height: 100vh; overflow: hidden; }
+  .brand { font-family: var(--serif); font-weight: 600; letter-spacing: 1.4px; font-size: 15px; line-height: 1.35; padding: 30px 26px 0; text-transform: uppercase; }
+  .brand + hr { width: 28px; margin: 22px 26px 26px; border: 0; border-top: 1px solid var(--ink-2); }
+  nav { display: flex; flex-direction: column; gap: 6px; padding: 0 14px; }
+  nav button { display: flex; align-items: center; gap: 12px; border: 0; background: none; padding: 11px 14px; border-radius: 8px; font-family: var(--serif); font-size: 17px; color: var(--ink-2); text-align: left; }
+  nav button svg { width: 19px; height: 19px; flex: none; }
+  nav button:hover { background: rgba(0,0,0,.04); }
+  nav button.on { background: #3a3a37; color: #fff; }
+  .side-art { position: relative; height: 330px; background: url(static/sidebar.jpg) center top / cover no-repeat;
+              -webkit-mask-image: linear-gradient(transparent, #000 25%); mask-image: linear-gradient(transparent, #000 25%); }
+  .tagline { margin: auto 24px -40px; position: relative; z-index: 1; font-family: var(--serif); font-size: 15px; line-height: 1.3; color: var(--ink-2); }
+  .side-art { padding-top: 0; } .side-art { background-position: center 70px; -webkit-mask-image: linear-gradient(transparent 10%, #000 40%); mask-image: linear-gradient(transparent 10%, #000 40%); }
+  .side-art .tagline { -webkit-mask-image: none; }
+  .tagline b { color: var(--ink); font-weight: 500; }
+  .tagline::after { content: ""; display: block; width: 24px; border-top: 1px solid var(--ink-2); margin-top: 12px; }
+
+  /* top status */
+  main { min-width: 0; padding: 18px 26px 28px; }
+  .topbar { display: flex; justify-content: flex-end; gap: 10px; margin-bottom: 14px; }
+  .pill { display: flex; align-items: center; gap: 10px; background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 7px 14px; }
+  .pill svg { width: 20px; height: 20px; color: var(--ink-2); }
+  .pill b { display: block; font-size: 12.5px; font-weight: 600; } .pill small { display: block; font-size: 11px; color: var(--muted); }
+  .view { display: none; } .view.on { display: block; }
+
+  /* cards */
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: var(--r); padding: 22px 24px; backdrop-filter: blur(2px); }
+  .head { display: flex; align-items: flex-start; gap: 14px; margin-bottom: 16px; }
+  .num { flex: none; width: 40px; height: 40px; border-radius: 50%; border: 1px solid var(--line-2); display: grid; place-items: center; font-family: var(--serif); font-size: 19px; color: var(--ink-2); background: var(--card-solid); }
+  .head h2 { margin: 0; font-family: var(--serif); font-weight: 600; font-size: 25px; letter-spacing: -.2px; }
+  .head p { margin: 3px 0 0; color: var(--muted); font-size: 13px; }
+  .head .right { margin-left: auto; display: flex; gap: 8px; align-items: center; }
+  .seg { display: flex; background: var(--card-solid); border: 1px solid var(--line); border-radius: 8px; padding: 3px; }
+  .seg button { border: 0; background: none; padding: 8px 22px; border-radius: 6px; font-size: 13px; color: var(--ink-2); }
+  .seg button.on { background: #222220; color: #fff; }
+  .ghost { border: 0; background: none; color: var(--ink-2); font-size: 12.5px; display: flex; align-items: center; gap: 6px; padding: 4px 6px; }
+  .ghost:hover { color: var(--ink); }
+
+  /* analyze layout */
+  .an { display: grid; grid-template-columns: 430px minmax(0, 1fr); gap: 18px; align-items: start; }
+  .an.wide { grid-template-columns: minmax(0, 1fr); }
+  .an.wide .leftcol { display: none; }
+  .leftcol { display: flex; flex-direction: column; gap: 16px; }
+  .turn { display: flex; align-items: center; gap: 12px; background: rgba(240,238,232,.75); border: 1px solid var(--line); border-radius: 10px; padding: 9px 12px; margin-bottom: 8px; }
+  .who { flex: none; border: 0; border-radius: 6px; font-size: 12px; font-weight: 600; letter-spacing: .4px; padding: 6px 12px; }
+  .who.USER { background: #dbe8fb; color: var(--ref-i); } .who.SYSTEM { background: #d6efdd; color: var(--val-i); }
+  .turn input { flex: 1; min-width: 0; border: 0; background: none; font: inherit; font-size: 14px; color: var(--ink); outline: none; }
+  .turn .t { color: var(--muted); font-size: 12px; }
+  .turn .x { border: 0; background: none; color: var(--muted); font-size: 17px; padding: 0 2px; opacity: 0; }
+  .turn:hover .x { opacity: 1; }
+  .btn { border: 1px solid var(--line-2); background: var(--card-solid); border-radius: 8px; padding: 9px 16px; display: inline-flex; gap: 8px; align-items: center; }
+  .btn:hover { background: #fff; }
+  textarea { width: 100%; min-height: 108px; resize: vertical; border: 1px solid var(--line-2); border-radius: 10px; padding: 14px 16px; font: 17px/1.5 var(--sans); color: var(--ink); background: #fff; outline: none; }
+  textarea:focus { border-color: #c9b066; box-shadow: 0 0 0 3px rgba(242,196,67,.25); }
+  .count { margin-left: auto; color: var(--muted); font-size: 12.5px; }
+  .toggle { display: flex; gap: 14px; align-items: flex-start; margin: 4px 2px 0; }
+  .switch { flex: none; width: 46px; height: 26px; border-radius: 13px; background: #3a3a37; position: relative; border: 0; transition: background .2s; }
+  .switch::after { content: ""; position: absolute; left: 3px; top: 3px; width: 20px; height: 20px; border-radius: 50%; background: #fff; transition: left .2s; }
+  .switch[aria-checked=true] { background: var(--val-c); } .switch[aria-checked=true]::after { left: 23px; }
+  .switch:disabled { opacity: .4; cursor: not-allowed; }
+  .toggle b { font-weight: 600; } .toggle small { display: block; color: var(--muted); font-size: 12px; margin-top: 3px; }
+  .go { width: 100%; border: 0; border-radius: 10px; background: #1f1f1d; color: #fff; padding: 17px 20px; display: flex; align-items: center; justify-content: center; gap: 12px; font-family: var(--serif); font-size: 19px; position: relative; }
+  .go:hover { background: #33332f; } .go:disabled { opacity: .7; cursor: progress; }
+  .go kbd { position: absolute; right: 18px; font: 12px var(--sans); color: #bdbbb3; }
+  .err { color: #a33; font-size: 13px; min-height: 18px; margin-top: 8px; }
+  .ex-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+  .ex { text-align: left; border: 1px solid var(--line); background: var(--card-solid); border-radius: 10px; padding: 12px; }
+  .ex:hover { border-color: var(--ref-b); }
+  .ex b { display: block; font-weight: 600; margin-bottom: 5px; } .ex span { color: var(--ink-2); font-size: 12.5px; line-height: 1.45; }
+  .sub { display: flex; align-items: baseline; margin-bottom: 10px; } .sub h3 { margin: 0; font-family: var(--serif); font-weight: 600; font-size: 19px; }
+
+  /* model understanding (visual) */
+  .stage { position: relative; min-height: 430px; }
+  .stage svg.links { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; overflow: visible; }
+  .tags-row, .chips-row { display: flex; align-items: center; justify-content: center; gap: 12px; flex-wrap: wrap; }
+  .tags-row { height: 46px; position: relative; }
+  .chips-row { margin-top: 64px; flex-wrap: nowrap; }
+  .chip { white-space: nowrap; font-family: var(--serif); font-size: 44px; line-height: 1; padding: 14px 18px 16px; border-radius: 10px; background: rgba(255,255,255,.55); border: 1px solid var(--line); color: var(--ink-2);
+          opacity: 0; transform: translateY(-10px); transition: opacity .3s, transform .3s, background .5s, border-color .5s, color .5s; }
+  .chip.in { opacity: 1; transform: none; }
+  .chip.punct { padding: 14px 12px 16px; }
+  .chip.c-UPDATE_CUE.lit, .chip.c-CANCEL_CUE.lit, .chip.c-KEEP_CUE.lit, .chip.c-RESTORE_CUE.lit { background: var(--cue); border-color: var(--cue-b); color: var(--ink); }
+  .chip.c-NEW_VALUE.lit { background: var(--val); border-color: var(--val-b); color: var(--ink); }
+  .chip.c-REFERENCE.lit { background: var(--ref); border-color: var(--ref-b); color: var(--ink); }
+  .chip.c-OLD_VALUE.lit, .chip.c-KEPT_VALUE.lit { background: var(--old); border-color: var(--old-b); color: var(--ink); }
+  .badge { display: inline-block; font-size: 11.5px; font-weight: 600; letter-spacing: .3px; border-radius: 5px; padding: 4px 8px; border: 1px solid transparent; white-space: nowrap; }
+  .b-UPDATE_CUE, .b-CANCEL_CUE, .b-KEEP_CUE, .b-RESTORE_CUE { background: var(--cue); border-color: var(--cue-b); color: var(--cue-i); }
+  .b-NEW_VALUE { background: var(--val); border-color: var(--val-b); color: var(--val-i); }
+  .b-REFERENCE { background: var(--ref); border-color: var(--ref-b); color: var(--ref-i); }
+  .b-OLD_VALUE, .b-KEPT_VALUE { background: var(--old); border-color: var(--old-b); color: var(--old-i); }
+  .b-O { background: transparent; color: var(--ink-2); font-weight: 400; }
+  .tag-float { position: absolute; transform: translate(-50%, 0); opacity: 0; transition: opacity .35s; }
+  .tag-float.in { opacity: 1; }
+  .cards-row { display: flex; justify-content: center; gap: 26px; margin-top: 74px; flex-wrap: wrap; }
+  .rc { min-width: 196px; display: flex; gap: 14px; align-items: center; background: var(--card-solid); border: 1px solid var(--line); border-radius: 10px; padding: 14px 18px;
+        opacity: 0; transform: translateY(10px); transition: opacity .35s, transform .35s; }
+  .rc.in { opacity: 1; transform: none; }
+  .rc svg { width: 26px; height: 26px; flex: none; color: var(--ink-2); }
+  .rc small { display: block; color: var(--muted); font-size: 12.5px; } .rc b { font-family: var(--serif); font-size: 19px; font-weight: 600; }
+  .link-path { fill: none; stroke-width: 1.6; stroke-dasharray: var(--len); stroke-dashoffset: var(--len); transition: stroke-dashoffset .7s ease-out; }
+  .link-path.in { stroke-dashoffset: 0; }
+  .legend { display: flex; justify-content: center; gap: 38px; margin-top: 34px; color: var(--ink-2); font-size: 13px; flex-wrap: wrap; }
+  .legend span::before { content: ""; display: inline-block; width: 12px; height: 12px; border-radius: 50%; background: var(--c); margin-right: 8px; vertical-align: -1px; }
+  .placeholder { color: var(--muted); text-align: center; padding: 120px 20px; font-family: var(--serif); font-size: 20px; }
+  .verdict { text-align: center; margin-top: 30px; font-family: var(--serif); font-size: 20px; color: var(--ink-2); }
+
+  /* table */
+  table { width: 100%; border-collapse: collapse; font-size: 13.5px; }
+  th { text-align: left; font-weight: 600; color: var(--ink-2); background: rgba(232,229,221,.6); padding: 10px 12px; border-bottom: 1px solid var(--line-2); }
+  td { padding: 8px 12px; border-bottom: 1px solid var(--line); }
+  tbody tr { opacity: 0; transition: opacity .25s; } tbody tr.in { opacity: 1; }
+  td.mono { font-family: Consolas, "Cascadia Mono", monospace; font-size: 13px; color: var(--ink-2); }
+  td .badge { min-width: 112px; }
+  .bar { height: 9px; background: #e6e3dc; border-radius: 5px; overflow: hidden; width: 100%; min-width: 90px; }
+  .bar i { display: block; height: 100%; width: 0; border-radius: 5px; transition: width .6s ease-out; background: var(--none-c); }
+  .f-UPDATE_CUE, .f-CANCEL_CUE, .f-KEEP_CUE, .f-RESTORE_CUE { background: var(--cue-c) !important; }
+  .f-NEW_VALUE { background: var(--val-c) !important; } .f-REFERENCE { background: var(--ref-c) !important; }
+  .f-OLD_VALUE, .f-KEPT_VALUE { background: var(--old-c) !important; }
+  .confcell { display: flex; align-items: center; gap: 12px; } .confcell span { width: 34px; text-align: right; }
+
+  /* spans */
+  .spans-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 18px; }
+  .span-card { display: flex; align-items: center; gap: 16px; border: 1px solid var(--line); border-left: 4px solid var(--c); background: var(--card-solid); border-radius: 10px; padding: 14px 16px; margin-bottom: 10px; cursor: pointer; width: 100%; text-align: left;
+               opacity: 0; transform: translateX(-8px); transition: opacity .3s, transform .3s, box-shadow .2s; }
+  .span-card.in { opacity: 1; transform: none; }
+  .span-card.sel { box-shadow: 0 0 0 2px var(--c) inset; }
+  .span-card q { font-family: var(--serif); font-size: 21px; quotes: "\201C" "\201D"; }
+  .span-card .meta { color: var(--muted); font-size: 12.5px; margin-top: 3px; }
+  .span-card .pct { font-weight: 600; font-size: 15px; margin-left: auto; }
+  .minibars { display: flex; align-items: flex-end; gap: 4px; height: 30px; }
+  .minibars i { width: 7px; background: #b8b5ac; border-radius: 2px; }
+  .detail dl { display: grid; grid-template-columns: 110px 1fr; gap: 14px 10px; margin: 0; font-size: 14px; } .detail dt { color: var(--muted); }
+  .seedbars { display: flex; gap: 26px; align-items: flex-end; height: 120px; margin: 18px 0 6px; padding-left: 110px; }
+  .seedbars div { display: flex; flex-direction: column; align-items: center; gap: 6px; font-size: 12px; color: var(--ink-2); }
+  .seedbars i { width: 26px; background: #8f8c84; border-radius: 3px 3px 0 0; height: 0; transition: height .6s ease-out; }
+  .strip { display: flex; flex-wrap: wrap; gap: 8px; align-items: flex-start; justify-content: center; margin-top: 8px; }
+  .strip .w { display: flex; flex-direction: column; align-items: center; gap: 6px; }
+  .strip .w b { font-family: var(--serif); font-size: 22px; font-weight: 500; padding: 6px 12px; border-radius: 7px; border-bottom: 3px solid transparent; }
+  .strip .w small { font-size: 10.5px; color: var(--muted); letter-spacing: .3px; min-height: 13px; }
+
+  /* model info, charts */
+  .grid2 { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 18px; }
+  .chart { display: flex; align-items: flex-end; gap: 22px; height: 170px; padding: 10px 6px 0; border-bottom: 1px solid var(--line-2); }
+  .chart .col { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; gap: 6px; height: 100%; font-size: 12px; }
+  .chart .col i { width: 100%; max-width: 54px; border-radius: 4px 4px 0 0; height: 0; transition: height .7s ease-out; background: var(--none-c); }
+  .chart .col b { font-size: 12px; } .chart-labels { display: flex; gap: 22px; padding: 6px 6px 0; } .chart-labels span { flex: 1; text-align: center; font-size: 11px; color: var(--muted); }
+  .hist { display: flex; align-items: flex-end; gap: 4px; height: 140px; border-bottom: 1px solid var(--line-2); }
+  .hist i { flex: 1; background: #b9b6ad; border-radius: 2px 2px 0 0; height: 0; transition: height .6s; } .hist i.hi { background: #2a2a28; }
+  .axis { display: flex; justify-content: space-between; font-size: 11px; color: var(--muted); padding-top: 4px; }
+  .kv { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 18px; font-size: 13px; } .kv small { color: var(--muted); display: block; margin-bottom: 4px; }
+  .bench td:last-child, .bench th:last-child { text-align: right; } .bench tr.me td { font-weight: 600; }
+  .about { max-width: 820px; font-size: 15px; line-height: 1.65; color: var(--ink-2); } .about h3 { font-family: var(--serif); font-size: 21px; color: var(--ink); margin: 22px 0 6px; }
+  .ex-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+  .ex-grid .ex { padding: 18px; } .ex-grid .ex span { font-size: 14px; }
+  @media (max-width: 1250px) { .an { grid-template-columns: 1fr; } .spans-grid, .grid2 { grid-template-columns: 1fr; } }
+  @media (max-width: 760px) { .app { grid-template-columns: 1fr; } aside { position: static; height: auto; } .side-art { display: none; } nav { flex-direction: row; flex-wrap: wrap; padding-bottom: 12px; }
+    .chip { font-size: 28px; } .ex-row, .ex-grid { grid-template-columns: 1fr; } .topbar { flex-wrap: wrap; } }
+</style>
+</head>
+<body>
+<div class="app">
+  <aside>
+    <div class="brand">Conversation<br>Revision<br>Analyzer</div>
+    <hr>
+    <nav aria-label="Pages">
+      <button class="on" data-view="analyze"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 12h4l2-6 4 12 2-6h6"/></svg>Analyze</button>
+      <button data-view="examples"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 3h9l4 4v14H6z"/><path d="M15 3v4h4M9 12h7M9 16h7"/></svg>Examples</button>
+      <button data-view="model"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="7" y="7" width="10" height="10" rx="1.5"/><path d="M10 3v4M14 3v4M10 17v4M14 17v4M3 10h4M3 14h4M17 10h4M17 14h4"/></svg>Model Info</button>
+      <button data-view="about"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 5h7a2 2 0 0 1 2 2v13a2 2 0 0 0-2-2H3zM21 5h-7a2 2 0 0 0-2 2v13a2 2 0 0 1 2-2h7z"/></svg>About</button>
+    </nav>
+    <div class="tagline">Understanding <b>user revisions</b> in natural conversations.</div><div class="side-art"></div>
+  </aside>
+
+  <main>
+    <div class="topbar" aria-label="Model status">
+      <div class="pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M4.9 19.1 7 17M17 7l2.1-2.1"/></svg><div><b id="st-model">DeBERTa-v3</b><small id="st-seeds">loading…</small></div></div>
+      <div class="pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="7" y="7" width="10" height="10" rx="1.5"/><path d="M10 3v4M14 3v4M10 17v4M14 17v4M3 10h4M3 14h4M17 10h4M17 14h4"/></svg><div><b id="st-dev">—</b><small>device</small></div></div>
+      <div class="pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><div><b id="st-ms">—</b><small>last request</small></div></div>
+    </div>
+
+    <!-- ANALYZE -->
+    <section class="view on" id="v-analyze">
+      <div class="an" id="an">
+        <div class="leftcol">
+          <div class="card">
+            <div class="head"><div class="num">01</div><div><h2>Conversation context</h2><p>The earlier turns of the dialogue.</p></div>
+              <div class="right"><button class="ghost" id="clear" type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 20h16M14 4l6 6-9 9H5v-6z"/></svg>Clear</button></div></div>
+            <div id="turns"></div>
+            <button class="btn" id="addturn" type="button"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>Add turn</button>
+          </div>
+          <div class="card">
+            <div class="head"><div class="num">02</div><div><h2>New user message</h2><p>The turn the model labels, word by word.</p></div><span class="count" id="count">0 / 300</span></div>
+            <textarea id="utt" maxlength="300" spellcheck="false" aria-label="New user message"></textarea>
+            <div class="err" id="err" role="alert"></div>
+            <div class="toggle">
+              <button class="switch" id="hist" role="switch" aria-checked="false" aria-label="Use history"></button>
+              <div><b>Use history</b> <span style="color:var(--muted);font-size:12px">(context-aware model)</span>
+                <small>Off: selected model (test S 0.768) &nbsp;|&nbsp; On: reads the last 60 words of history (test S 0.813)</small></div>
+            </div>
+            <button class="go" id="go" type="button" style="margin-top:18px"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M7 4v16l13-8z"/></svg><span id="golabel">Analyze message</span><kbd>Enter ↵</kbd></button>
+            <div class="sub" style="margin-top:22px"><h3>Try an example</h3><button class="ghost" style="margin-left:auto" data-goto="examples" type="button">See all →</button></div>
+            <div class="ex-row" id="ex-row"></div>
+          </div>
+        </div>
+
+        <div class="card" id="work">
+          <div class="head"><div class="num" id="worknum">03</div><div><h2 id="worktitle">Model understanding</h2><p id="worksub">Each word is assigned a role by the model.</p></div>
+            <div class="right">
+              <div class="seg" id="seg-a" role="tablist"><button class="on" data-stage="visual" role="tab">Visual</button><button data-stage="table" role="tab">Token table</button><button data-stage="spans" role="tab">Spans</button></div>
+            </div></div>
+
+          <div id="st-visual">
+            <div class="stage" id="stage">
+              <svg class="links" id="links" aria-hidden="true"></svg>
+              <div class="tags-row" id="tagsrow"></div>
+              <div class="chips-row" id="chips"></div>
+              <div class="cards-row" id="rcards"></div>
+              <div class="placeholder" id="ph">Write a message and press <i>Analyze</i>.</div>
+            </div>
+            <div class="verdict" id="verdict"></div>
+            <div class="legend">
+              <span style="--c:var(--cue-c)">Change cue</span><span style="--c:var(--val-c)">New value</span><span style="--c:var(--ref-c)">Reference</span><span style="--c:var(--old-c)">Old / Kept value</span><span style="--c:var(--none-c)">No role</span>
+            </div>
+          </div>
+
+          <div id="st-table" hidden>
+            <table aria-label="Tokens and predictions"><thead><tr><th>#</th><th>Word</th><th>Model token(s)</th><th>Predicted role</th><th style="width:26%">Confidence</th><th>Seed 1</th><th>Seed 2</th><th>Seed 3</th></tr></thead><tbody id="tbody"></tbody></table>
+          </div>
+
+          <div id="st-spans" hidden>
+            <div class="spans-grid">
+              <div id="spanlist"></div>
+              <div class="card detail" style="padding:20px 22px">
+                <div class="sub"><h3>Span details</h3></div>
+                <div id="detail"><p style="color:var(--muted)">Select a span.</p></div>
+              </div>
+            </div>
+            <div class="card" style="margin-top:16px;padding:18px 22px">
+              <div class="sub"><h3 style="font-size:16px">All spans in order</h3></div>
+              <div class="strip" id="strip"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- EXAMPLES -->
+    <section class="view" id="v-examples">
+      <div class="card"><div class="head"><div class="num">✦</div><div><h2>Examples</h2><p>Real-style turns from booking dialogues. Click one to analyze it.</p></div></div>
+        <div class="ex-grid" id="ex-grid"></div></div>
+    </section>
+
+    <!-- MODEL INFO -->
+    <section class="view" id="v-model">
+      <div class="card" style="margin-bottom:18px"><div class="head" style="margin:0"><div><h2>Model information</h2><p>The frozen model, its seeds, the last request and the locked-test benchmark.</p></div>
+        <div class="right"><div class="seg" id="seg-m"><button class="on" data-mtab="overview">Overview</button><button data-mtab="bench">Benchmark</button></div></div></div></div>
+      <div id="m-overview">
+        <div class="grid2">
+          <div class="card">
+            <div style="display:flex;gap:14px;align-items:center"><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M4.9 19.1 7 17M17 7l2.1-2.1"/></svg>
+              <div><small style="color:var(--muted)">Model</small><div style="font-family:var(--serif);font-size:21px;font-weight:600" id="mi-model">microsoft/deberta-v3-base</div><small id="mi-seeds" style="color:var(--muted)"></small></div></div>
+            <div class="kv"><div><small>Inference</small><b id="mi-ms">—</b><br><small>last request</small></div><div><small>Device</small><b id="mi-dev">—</b></div><div><small>History</small><b id="mi-hist">—</b></div></div>
+            <div class="sub" style="margin-top:24px"><h3 style="font-size:16px">Seeds — mean confidence on the last request</h3></div>
+            <div id="mi-seedbars"></div>
+          </div>
+          <div class="card">
+            <div class="sub"><h3 style="font-size:16px">Confidence by role</h3><small class="count">mean over the words of the last request</small></div>
+            <div class="chart" id="rolechart"></div><div class="chart-labels" id="rolelabels"></div>
+          </div>
+        </div>
+        <div class="card" style="margin-top:18px">
+          <div class="sub"><h3 style="font-size:16px">Token confidence distribution</h3><small class="count">words of the last request, 20 bins from 0 to 1</small></div>
+          <div class="hist" id="confhist"></div><div class="axis"><span>0.0</span><span>0.2</span><span>0.4</span><span>0.6</span><span>0.8</span><span>1.0</span></div>
+        </div>
+      </div>
+      <div id="m-bench" hidden>
+        <div class="card">
+          <div class="sub"><h3>Locked test, 363 turns — strict exact-span F1</h3></div>
+          <table class="bench"><thead><tr><th>System</th><th>VALUE F1</th><th>CUE F1</th><th>S (mean)</th></tr></thead><tbody id="benchbody"></tbody></table>
+          <p style="color:var(--muted);font-size:12.5px;margin-top:12px">Read from <code>reports/d6_test/</code>. The selected model was fixed before the test was opened; the history model is the pre-registered comparison.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section class="view" id="v-about">
+      <div class="card about">
+        <div class="head"><div><h2>About OVERRIDE</h2><p>NLP Project 2 · token classification · Team Developers</p></div></div>
+        <p>When users change their minds mid-conversation (<i>"Actually, make it 7 pm at the same place"</i>), an assistant has to find which words signal the change, what the new value is, and what points back to an earlier turn. OVERRIDE labels every word of the user's turn with that revision role, in two BIO layers.</p>
+        <h3>Data</h3><p>1,220 user turns selected from Google's Schema-Guided Dialogue corpus and labeled by two annotators, blind to each other (34,522 word-level labels, agreement 0.86 / 0.81). 363 turns from other SGD splits were locked as a test set before any model existed.</p>
+        <h3>Model</h3><p>DeBERTa-v3-base with two token heads (VALUE, CUE), selected by grouped 5-fold cross-validation and frozen as a 3-seed ensemble. Locked test: S 0.768, above a CRF (0.735), rule baselines (0.41–0.47) and a zero-shot decision model (0.02).</p>
+        <h3>Team</h3><p>Adnan Burak Özbay (2309111073) · Enes Erman (2309111066) · Mohammed Firas (2309015722) · İlayda Şenel (2309011159)</p>
+        <p><a href="https://github.com/eneserman/OVERRIDE" style="color:var(--ink)">github.com/eneserman/OVERRIDE</a></p>
+      </div>
+    </section>
+  </main>
+</div>
+
+<script>
+const EXAMPLES = [
+  { name: "Change time", hist: [["USER", "Book a table for Friday at 6."], ["SYSTEM", "Booked: Friday, 6 pm, Dolce."]], utt: "Actually, make it 7 pm at the same place." },
+  { name: "Different place", hist: [["USER", "Find me an Italian place for tonight."], ["SYSTEM", "Il Fornaio has a table at 8 pm."]], utt: "Instead, book at La Roma for the same time." },
+  { name: "No change", hist: [["USER", "Find me a dentist in San Jose."], ["SYSTEM", "A-1 Dental Care is in San Jose."]], utt: "No thanks, that's all." },
+  { name: "Switch the car", hist: [["USER", "I need a car from SFO on March 3rd."], ["SYSTEM", "A compact Honda Fit is available at SFO on March 3rd."]], utt: "Is there an SUV at the same airport instead?" },
+  { name: "Fewer tickets", hist: [["USER", "Get me 4 tickets for the Warriors game."], ["SYSTEM", "Please confirm: 4 tickets for Warriors vs Lakers on March 8th."]], utt: "Sorry, change that to 2 tickets." },
+  { name: "Go back", hist: [["SYSTEM", "How about Linkin Park, Numb?"], ["USER", "Something else."], ["SYSTEM", "How about Silence by Popcaan?"]], utt: "Go back to the first song you suggested." },
+];
+const ROLE = { UPDATE_CUE: "Change cue", CANCEL_CUE: "Cancel cue", KEEP_CUE: "Keep cue", RESTORE_CUE: "Restore cue", NEW_VALUE: "New value", REFERENCE: "Reference", OLD_VALUE: "Old value", KEPT_VALUE: "Kept value" };
+const COLOR = { UPDATE_CUE: "#e7b42b", CANCEL_CUE: "#e7b42b", KEEP_CUE: "#e7b42b", RESTORE_CUE: "#e7b42b", NEW_VALUE: "#33a862", REFERENCE: "#4f8fe6", OLD_VALUE: "#9b7fe6", KEPT_VALUE: "#9b7fe6" };
+const GROUP = (l) => l.endsWith("_CUE") ? "cue" : (l === "OLD_VALUE" || l === "KEPT_VALUE") ? "old" : l === "NEW_VALUE" ? "val" : "ref";
+const params = new URLSearchParams(location.search);
+const SLOW = params.has("slow") ? 1.8 : 1, TOUR = params.has("tour");
+const $ = (id) => document.getElementById(id);
+const wait = (ms) => new Promise((r) => setTimeout(r, ms * SLOW));
+const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+const pct = (p) => p == null ? "–" : Math.round(p * 100) + "%";
+let last = null, info = null, busy = false, selSpan = 0;
+
+/* ---------- navigation ---------- */
+function show(view) {
+  document.querySelectorAll("nav button").forEach((b) => b.classList.toggle("on", b.dataset.view === view));
+  document.querySelectorAll(".view").forEach((v) => v.classList.toggle("on", v.id === "v-" + view));
+  if (view === "model") renderModel();
+  if (view === "analyze" && last && stage === "visual") requestAnimationFrame(() => { fitChips(); drawLinks(false); });
+}
+document.querySelectorAll("nav button").forEach((b) => b.onclick = () => show(b.dataset.view));
+document.querySelectorAll("[data-goto]").forEach((b) => b.onclick = () => show(b.dataset.goto));
+let stage = "visual";
+const STAGES = { visual: ["03", "Model understanding", "Each word is assigned a role by the model, using the trained token heads."],
+                 table: ["03", "Tokenization & predictions", "Each word, its model tokens, the predicted role and the confidence of every seed."],
+                 spans: ["04", "Detected spans", "Contiguous words with the same role, and how sure each seed is."] };
+function setStage(s) {
+  stage = s;
+  document.querySelectorAll("#seg-a button").forEach((b) => b.classList.toggle("on", b.dataset.stage === s));
+  ["visual", "table", "spans"].forEach((k) => $("st-" + k).hidden = k !== s);
+  $("an").classList.toggle("wide", s !== "visual");
+  [$("worknum").textContent, $("worktitle").textContent, $("worksub").textContent] = STAGES[s];
+  if (s === "visual" && last) requestAnimationFrame(() => { fitChips(); drawLinks(false); });
+}
+document.querySelectorAll("#seg-a button").forEach((b) => b.onclick = () => setStage(b.dataset.stage));
+document.querySelectorAll("#seg-m button").forEach((b) => b.onclick = () => {
+  document.querySelectorAll("#seg-m button").forEach((x) => x.classList.toggle("on", x === b));
+  $("m-overview").hidden = b.dataset.mtab !== "overview"; $("m-bench").hidden = b.dataset.mtab !== "bench";
+});
+
+/* ---------- conversation input ---------- */
+function addTurn(speaker = "USER", text = "") {
+  const d = document.createElement("div"); d.className = "turn";
+  d.innerHTML = `<button class="who ${speaker}" type="button" title="Switch speaker">${speaker}</button><input value="${esc(text)}" aria-label="Earlier turn" placeholder="Earlier message"><span class="t"></span><button class="x" type="button" aria-label="Remove turn">×</button>`;
+  const who = d.querySelector(".who");
+  who.onclick = () => { const s = who.textContent === "USER" ? "SYSTEM" : "USER"; who.textContent = s; who.className = "who " + s; };
+  d.querySelector(".x").onclick = () => { d.remove(); numberTurns(); };
+  $("turns").appendChild(d); numberTurns();
+}
+function numberTurns() { document.querySelectorAll(".turn .t").forEach((t, i) => t.textContent = "T" + (i + 1)); }
+function load(ex) {
+  $("turns").innerHTML = ""; ex.hist.forEach(([s, t]) => addTurn(s, t));
+  $("utt").value = ex.utt; updCount(); $("err").textContent = "";
+}
+function updCount() { $("count").textContent = `${$("utt").value.length} / 300`; }
+$("utt").addEventListener("input", () => { updCount(); $("err").textContent = ""; });
+$("utt").addEventListener("keydown", (e) => { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); analyze(); } });
+$("addturn").onclick = () => addTurn(document.querySelectorAll(".turn").length % 2 ? "SYSTEM" : "USER");
+$("clear").onclick = () => { $("turns").innerHTML = ""; $("utt").value = ""; updCount(); $("utt").focus(); };
+$("hist").onclick = () => { const on = $("hist").getAttribute("aria-checked") !== "true"; $("hist").setAttribute("aria-checked", on); };
+$("go").onclick = analyze;
+const exCard = (ex) => { const b = document.createElement("button"); b.type = "button"; b.className = "ex";
+  b.innerHTML = `<b>${esc(ex.name)}</b><span>${esc(ex.utt)}</span>`; b.onclick = () => { load(ex); show("analyze"); setStage("visual"); }; return b; };
+EXAMPLES.slice(0, 3).forEach((ex) => $("ex-row").appendChild(exCard(ex)));
+EXAMPLES.forEach((ex) => $("ex-grid").appendChild(exCard(ex)));
+if (params.has("blank")) { addTurn("USER", ""); addTurn("SYSTEM", ""); updCount(); } else load(EXAMPLES[0]);
+
+fetch("api/info").then((r) => r.json()).then((i) => {
+  info = i;
+  $("st-model").textContent = "DeBERTa-v3"; $("st-seeds").textContent = `${i.seeds} seeds (ensemble)`; $("st-dev").textContent = i.device;
+  $("mi-model").textContent = i.model; $("mi-seeds").textContent = `${i.seeds}-seed ensemble · trained on ${i.train_records} human-labeled turns`; $("mi-dev").textContent = i.device;
+  if (!i.history_available) { $("hist").disabled = true; }
+  $("benchbody").innerHTML = i.test.map((t) => `<tr class="${t.system.includes("selected") ? "me" : ""}"><td>${esc(t.system)}</td><td>${t.value.toFixed(3)}</td><td>${t.cue.toFixed(3)}</td><td>${t.S.toFixed(3)}</td></tr>`).join("");
+}).catch(() => { $("st-seeds").textContent = "server not reachable"; });
+
+/* ---------- analyze ---------- */
+async function analyze() {
+  if (busy) return;
+  const utterance = $("utt").value.trim();
+  if (!utterance) { $("err").textContent = "Write the new user message first."; $("utt").focus(); return; }
+  const history = [...document.querySelectorAll(".turn")].map((d) => ({ speaker: d.querySelector(".who").textContent, utterance: d.querySelector("input").value.trim() })).filter((t) => t.utterance);
+  busy = true; $("go").disabled = true; $("golabel").textContent = "Analyzing…";
+  setStage("visual"); resetVisual();
+  try {
+    const res = await fetch("api/analyze", { method: "POST", headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ utterance, history, use_history: $("hist").getAttribute("aria-checked") === "true" }) });
+    if (!res.ok) { const e = await res.json().catch(() => ({})); throw new Error(e.detail || "The model server returned an error."); }
+    last = await res.json(); last.utt = utterance; selSpan = 0;
+    $("st-ms").textContent = last.ms + " ms"; $("mi-ms").textContent = last.ms + " ms";
+    $("mi-hist").textContent = last.history_mode === "no" ? "Off" : "On (last 60 words)";
+    buildTable(); buildSpans();
+    await playVisual();
+    if (TOUR) { await wait(2600); setStage("table"); await playTable(); await wait(2200); setStage("spans"); await playSpans(); }
+  } catch (e) { $("err").textContent = e.message; }
+  finally { busy = false; $("go").disabled = false; $("golabel").textContent = "Analyze message"; }
+}
+
+/* segments: consecutive words sharing one span (cue spans win over value spans for the display) */
+function segments(d) {
+  const owner = d.words.map((w) => {
+    const sp = d.spans.filter((s) => s.start <= w.start && w.end <= s.end).sort((a, b) => (b.label.endsWith("_CUE")) - (a.label.endsWith("_CUE")));
+    return sp[0] || null;
+  });
+  const segs = [];
+  d.words.forEach((w, i) => {
+    const prev = segs[segs.length - 1];
+    if (prev && owner[i] && prev.span === owner[i]) { prev.end = w.end; prev.text = d.utt.slice(prev.start, w.end); }
+    else segs.push({ start: w.start, end: w.end, text: w.text, span: owner[i], punct: !/[\p{L}\p{N}]/u.test(w.text) });
+  });
+  return segs;
+}
+function resetVisual() {
+  ["tagsrow", "chips", "rcards", "verdict"].forEach((id) => $(id).innerHTML = ""); $("links").innerHTML = ""; $("ph").hidden = true;
+}
+async function playVisual() {
+  const d = last, segs = segments(d);
+  segs.forEach((s, i) => { const c = document.createElement("div"); c.className = "chip" + (s.punct ? " punct" : "") + (s.span ? " c-" + s.span.label : ""); c.textContent = s.text; c.dataset.i = i; $("chips").appendChild(c); s.el = c; });
+  fitChips();
+  for (const s of segs) { s.el.classList.add("in"); await wait(110); }
+  await wait(450);
+  const labeled = segs.filter((s) => s.span);
+  labeled.forEach((s) => { const t = document.createElement("span"); t.className = "badge tag-float b-" + s.span.label; t.textContent = s.span.label; $("tagsrow").appendChild(t); s.tag = t; });
+  const groups = {}; labeled.forEach((s) => (groups[GROUP(s.span.label)] ||= []).push(s));
+  const order = Object.keys(groups);
+  order.forEach((g) => {
+    const ss = groups[g], lab = ss[0].span.label, c = document.createElement("div"); c.className = "rc";
+    const icon = { cue: '<path d="M4 12a8 8 0 0 1 14-5l2 2M20 12a8 8 0 0 1-14 5l-2-2M20 4v5h-5M4 20v-5h5"/>', val: '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
+                   ref: '<path d="M12 21s-7-6.5-7-12a7 7 0 0 1 14 0c0 5.5-7 12-7 12z"/><circle cx="12" cy="9" r="2.5"/>', old: '<path d="M3 12h18M7 8l-4 4 4 4"/>' }[g];
+    const title = { cue: "Change signal", val: "New value", ref: "Points back to an earlier turn", old: ROLE[lab] }[g];
+    c.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">${icon}</svg><div><small>${title}</small><b>${ss.map((s) => esc(s.text)).join(" · ")}</b></div>`;
+    $("rcards").appendChild(c); ss.forEach((s) => s.card = c);
+  });
+  positionTags(labeled); last._segs = segs; last._labeled = labeled;
+  for (const s of labeled) { s.el.classList.add("lit"); s.tag.classList.add("in"); await wait(220); }
+  drawLinks(true);
+  await wait(250);
+  for (const c of $("rcards").children) { c.classList.add("in"); await wait(200); }
+  document.querySelectorAll(".link-path.lower").forEach((p) => p.classList.add("in"));
+  $("verdict").textContent = labeled.length ? "" : "No revision found: nothing in this message changes or points back.";
+}
+function fitChips() {  /* one line: shrink the font until the row fits the card */
+  const row = $("chips"); let size = 44;
+  row.querySelectorAll(".chip").forEach((c) => c.style.fontSize = size + "px");
+  while (row.scrollWidth > row.clientWidth && size > 16) { size -= 2; row.querySelectorAll(".chip").forEach((c) => { c.style.fontSize = size + "px"; c.style.padding = `${size * .3}px ${size * .38}px`; }); }
+  row.style.gap = Math.max(6, size / 4) + "px";
+}
+function positionTags(labeled) {
+  const row = $("tagsrow").getBoundingClientRect();
+  labeled.forEach((s) => { const r = s.el.getBoundingClientRect(); s.tag.style.left = (r.left + r.width / 2 - row.left) + "px"; s.tag.style.top = "0px"; });
+}
+function curve(x1, y1, x2, y2) { const my = (y1 + y2) / 2; return `M${x1},${y1} C${x1},${my} ${x2},${my} ${x2},${y2}`; }
+function drawLinks(animate) {
+  if (!last || !last._labeled) return;
+  positionTags(last._labeled);
+  const box = $("stage").getBoundingClientRect(), svg = $("links"); svg.innerHTML = "";
+  const add = (d, color, cls) => { const p = document.createElementNS("http://www.w3.org/2000/svg", "path"); p.setAttribute("d", d); p.setAttribute("stroke", color); p.setAttribute("class", "link-path " + cls);
+    svg.appendChild(p); const L = p.getTotalLength(); p.style.setProperty("--len", L); if (!animate) p.classList.add("in"); return p; };
+  last._labeled.forEach((s) => {
+    const r = s.el.getBoundingClientRect(), t = s.tag.getBoundingClientRect(), color = COLOR[s.span.label];
+    const up = add(curve(t.left + t.width / 2 - box.left, t.bottom - box.top + 2, r.left + r.width / 2 - box.left, r.top - box.top - 4), color, "upper");
+    if (animate) requestAnimationFrame(() => up.classList.add("in"));
+    if (s.card) { const c = s.card.getBoundingClientRect();
+      add(curve(r.left + r.width / 2 - box.left, r.bottom - box.top + 4, c.left + c.width / 2 - box.left, c.top - box.top - 4), color, "lower"); }
+  });
+}
+window.addEventListener("resize", () => { if (stage === "visual" && last && last._segs) { fitChips(); drawLinks(false); } });
+
+/* ---------- token table ---------- */
+function shown(w) { const c = w.cue_tag.replace(/^[BI]-/, ""), v = w.value_tag.replace(/^[BI]-/, ""); return c !== "O" ? { lab: c, p: w.cue_p } : { lab: v, p: w.value_p }; }
+function buildTable() {
+  $("tbody").innerHTML = last.words.map((w, i) => { const s = shown(w), sp = w.seed_p || [];
+    return `<tr><td>${i + 1}</td><td>${esc(w.text)}</td><td class="mono">${esc(w.pieces.join(" "))}</td><td><span class="badge b-${s.lab}">${s.lab === "O" ? "No role" : s.lab}</span></td>
+      <td><div class="confcell"><span>${s.p == null ? "–" : s.p.toFixed(2)}</span><div class="bar"><i class="f-${s.lab}" data-w="${(s.p || 0) * 100}"></i></div></div></td>
+      ${[0, 1, 2].map((k) => `<td>${sp[k] == null ? "–" : sp[k].toFixed(2)}</td>`).join("")}</tr>`; }).join("");
+}
+async function playTable() { for (const tr of $("tbody").children) { tr.classList.add("in"); const i = tr.querySelector("i"); await wait(20); i.style.width = i.dataset.w + "%"; await wait(90); } }
+
+/* ---------- spans ---------- */
+function buildSpans() {
+  const sp = [...last.spans].sort((a, b) => a.start - b.start);
+  last._spans = sp;
+  $("spanlist").innerHTML = sp.length ? "" : `<p style="color:var(--muted);font-family:var(--serif);font-size:18px;padding:20px">No spans: the model found no revision in this message.</p>`;
+  sp.forEach((s, i) => {
+    const b = document.createElement("button"); b.type = "button"; b.className = "span-card"; b.style.setProperty("--c", COLOR[s.label]);
+    b.innerHTML = `<span class="badge b-${s.label}">${s.label}</span><div><q>${esc(s.text)}</q><div class="meta">${s.words} word${s.words === 1 ? "" : "s"}</div></div>
+      <div class="minibars" aria-hidden="true">${(s.seed_p || []).map((p) => `<i style="height:${Math.max(4, (p - 0.5) * 60)}px"></i>`).join("")}</div>
+      <span class="pct" style="color:${COLOR[s.label]}">${pct(s.p)}</span><span style="color:var(--muted)">›</span>`;
+    b.onclick = () => selectSpan(i); $("spanlist").appendChild(b);
+  });
+  const segs = segments(last);
+  $("strip").innerHTML = segs.map((g) => { const l = g.span ? g.span.label : "";
+    const st = l ? `background:var(--${GROUP(l) === "val" ? "val" : GROUP(l)});border-bottom-color:${COLOR[l]}` : "";
+    return `<div class="w"><b style="${st}">${esc(g.text)}</b><small>${l}</small></div>`; }).join("");
+  selectSpan(0);
+}
+function selectSpan(i) {
+  const sp = last._spans || []; selSpan = i;
+  document.querySelectorAll(".span-card").forEach((c, k) => c.classList.toggle("sel", k === i));
+  const s = sp[i]; if (!s) { $("detail").innerHTML = `<p style="color:var(--muted)">No span to show.</p>`; return; }
+  $("detail").innerHTML = `<dl><dt>Role</dt><dd style="margin:0"><span class="badge b-${s.label}">${s.label}</span> &nbsp;${ROLE[s.label] || ""}</dd>
+    <dt>Text</dt><dd style="margin:0">${esc(s.text)}</dd><dt>Model tokens</dt><dd style="margin:0" class="mono">[${esc((s.pieces || []).join(", "))}]</dd>
+    <dt>Confidence</dt><dd style="margin:0"><b>${s.p == null ? "–" : s.p.toFixed(2)}</b> &nbsp;<span style="color:var(--muted)">mean of ${s.seed_p.length} seeds</span></dd></dl>
+    <div class="seedbars">${s.seed_p.map((p, k) => `<div><i data-h="${p * 100}"></i><span>${p.toFixed(2)}</span><small>Seed ${k + 1}</small></div>`).join("")}</div>
+    <button class="ghost" type="button" id="totable" style="margin:8px auto 0">Show in token table →</button>`;
+  requestAnimationFrame(() => document.querySelectorAll(".seedbars i").forEach((b) => b.style.height = b.dataset.h + "px"));
+  $("totable").onclick = () => { setStage("table"); document.querySelectorAll("#tbody tr").forEach((tr) => { tr.classList.add("in"); const b = tr.querySelector("i"); b.style.width = b.dataset.w + "%"; }); };
+}
+async function playSpans() { for (const c of document.querySelectorAll(".span-card")) { c.classList.add("in"); await wait(180); } }
+const _set = setStage;
+setStage = function (s) { _set(s); if (!last) return;
+  if (s === "table") document.querySelectorAll("#tbody tr").forEach((tr) => { if (!TOUR || !busy) { tr.classList.add("in"); const b = tr.querySelector("i"); b.style.width = b.dataset.w + "%"; } });
+  if (s === "spans" && (!TOUR || !busy)) { document.querySelectorAll(".span-card").forEach((c) => c.classList.add("in")); selectSpan(selSpan); } };
+
+/* ---------- model info ---------- */
+function renderModel() {
+  const roles = [["UPDATE_CUE", "UPDATE_CUE"], ["NEW_VALUE", "NEW_VALUE"], ["REFERENCE", "REFERENCE"], ["OLD", "Old / Kept"], ["O", "No role"]];
+  const words = last ? last.words.filter((w) => /[\p{L}\p{N}]/u.test(w.text) && w.value_p != null) : [];
+  const stats = roles.map(([k]) => { const ps = words.map(shown).filter((s) => k === "OLD" ? (s.lab === "OLD_VALUE" || s.lab === "KEPT_VALUE") : k === "UPDATE_CUE" ? s.lab.endsWith("_CUE") : s.lab === k).map((s) => s.p);
+    return ps.length ? ps.reduce((a, b) => a + b, 0) / ps.length : null; });
+  const fill = ["var(--cue-c)", "var(--val-c)", "var(--ref-c)", "var(--old-c)", "var(--none-c)"];
+  $("rolechart").innerHTML = stats.map((p, i) => `<div class="col"><b>${p == null ? "—" : pct(p)}</b><i style="background:${fill[i]}" data-h="${p == null ? 0 : p * 100}"></i></div>`).join("");
+  $("rolelabels").innerHTML = roles.map(([, l]) => `<span>${l}</span>`).join("");
+  const n = last ? last.seeds : 3, seedMeans = [...Array(n)].map((_, k) => { const ps = words.map((w) => w.seed_p && w.seed_p[k]).filter((x) => x != null); return ps.length ? ps.reduce((a, b) => a + b, 0) / ps.length : null; });
+  $("mi-seedbars").innerHTML = seedMeans.map((p, k) => `<div class="confcell" style="margin:10px 0"><span style="width:64px;flex:none;text-align:left;color:var(--ink-2);white-space:nowrap">Seed ${k + 1}</span><span>${p == null ? "–" : p.toFixed(2)}</span><div class="bar"><i style="background:#8f8c84" data-w="${(p || 0) * 100}"></i></div></div>`).join("");
+  const bins = Array(20).fill(0); words.forEach((w) => { const p = shown(w).p; bins[Math.min(19, Math.floor(p * 20))]++; });
+  const mx = Math.max(1, ...bins);
+  $("confhist").innerHTML = bins.map((b, i) => `<i class="${i >= 18 ? "hi" : ""}" data-h="${(b / mx) * 130}" title="${(i / 20).toFixed(2)}–${((i + 1) / 20).toFixed(2)}: ${b}"></i>`).join("");
+  requestAnimationFrame(() => { document.querySelectorAll("#rolechart i").forEach((b) => b.style.height = (b.dataset.h * 1.3) + "px");
+    document.querySelectorAll("#mi-seedbars i").forEach((b) => b.style.width = b.dataset.w + "%"); document.querySelectorAll("#confhist i").forEach((b) => b.style.height = b.dataset.h + "px"); });
+}
+</script>
+</body>
+</html>

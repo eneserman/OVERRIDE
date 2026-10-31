@@ -58,6 +58,7 @@ end and label all match (`scripts/evaluate_spans.py`).
 ├── DATA_LICENSE.md           CC BY-SA 4.0, data (adapted from SGD) and attribution
 ├── CHANGELOG.md              dated history of every data and model milestone
 ├── requirements.txt          pinned versions used for the reported results
+├── app/                      live web demo: server.py (FastAPI around the frozen ensembles) + static/ page
 ├── contributions/            one file per team member
 ├── data/
 │   ├── raw/                  1,220 selected SGD turns without labels + how to fetch the pinned SGD source
@@ -158,8 +159,12 @@ python scripts/evaluate_frozen_test.py --full-gold data/gold/full_gold_v1_3_plus
   --manifest reports/splits/frozen_full_manifest_v1_3.json --accept-consensus-reference \
   --test-predictions reports/train_runs/d6/pred_deberta_v2_ens_hno.jsonl --out reports/d6_test/metrics_check.json
 
-# demo
+# demo (command line)
 python scripts/demo.py --text "Actually, make it 7 pm at the same place." --checkpoints "reports/train_runs/d5v2_final/no/*.pt"
+
+# demo (web app, http://localhost:8000): words, model tokens, per-seed confidence, spans, locked-test benchmark
+python app/server.py --checkpoints-no "reports/train_runs/d5v2_final/no/*.pt" \
+  --checkpoints-history "reports/train_runs/d5v2_final/tail60/*.pt"
 ```
 
 Checkpoints (6 × 0.7 GB) are not in the repository; their SHA-256 hashes are in `reports/D5V2_RESULTS.md`, and the
