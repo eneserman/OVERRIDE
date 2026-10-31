@@ -13,6 +13,7 @@ cross-validation and evaluated **once** on a test set that was hash-locked befor
 
 | System | VALUE F1 | CUE F1 | S (mean) |
 |---|---|---|---|
+| Laya zero-shot decision model (JEV alternative), added after D6 | 0.031 | 0.017 | 0.024 |
 | B2 surface rules | 0.462 | 0.364 | 0.413 |
 | B1 lexicon copy | 0.526 | 0.414 | 0.470 |
 | BERT-base, first data version (411 turns) | 0.780 | 0.644 | 0.712 |
@@ -26,6 +27,13 @@ cross-validation and evaluated **once** on a test set that was hash-locked befor
   Details: [`reports/D6_TEST_RESULTS.md`](reports/D6_TEST_RESULTS.md).
 - Per label on the test (selected model): NEW_VALUE 0.858, REFERENCE 0.821, UPDATE_CUE 0.691 (31 spans).
 - Error analysis (CV predictions only): [`reports/ERROR_ANALYSIS_CV.md`](reports/ERROR_ANALYSIS_CV.md).
+- **Why span F1, not accuracy:** a tagger that labels nothing gets 87.9% token accuracy on our data and 0 span F1
+  ([`reports/metric_justification_cv.json`](reports/metric_justification_cv.json)).
+- **JEV alternative:** Laya, an open System-1 decision model, asked about every word zero-shot, scores S 0.053 on the
+  train-side records and 0.024 on the test: decision models answer sentence-level questions, not word roles in context
+  ([`reports/JEV_ALTERNATIVE.md`](reports/JEV_ALTERNATIVE.md); second test access declared as DEV-003).
+- **Declared synthetic data:** 240 AI-written turns on real SGD contexts, quality-checked, change CV S by −0.003
+  [−0.018, +0.014], i.e. no measurable effect ([`reports/SYNTHETIC_DATA.md`](reports/SYNTHETIC_DATA.md)).
 
 ## Task
 
@@ -53,6 +61,7 @@ end and label all match (`scripts/evaluate_spans.py`).
 ├── data/
 │   ├── raw/                  1,220 selected SGD turns without labels + how to fetch the pinned SGD source
 │   ├── gold/                 released annotations: train-side 857, test 363, combined 1,220
+│   ├── synthetic/            240 declared AI-written turns on real SGD contexts (never mixed into gold)
 │   └── prospective_holdout/  hash lock of the test turns, created before annotation
 ├── docs/
 │   ├── ANNOTATION_GUIDELINES.md   labeling rules (v0.2.3) with the decision rules added during adjudication
@@ -112,6 +121,10 @@ end and label all match (`scripts/evaluate_spans.py`).
 | `evaluate_spans.py` | Strict exact-span evaluator (per label, micro, macro) |
 | `evaluate_frozen_test.py` | The only test scorer: re-verifies gold hash, manifest digest and family separation |
 | `error_analysis.py` | Boundary / label / missed / spurious error taxonomy |
+| `metric_justification.py` | Token accuracy vs strict span F1 for an all-O tagger and real predictions |
+| `jev_alt_laya.py` | JEV alternative: Laya decision model asked about every word, zero-shot (`select` / `predict`) |
+| `synth_contexts.py` | Sample real SGD contexts for the synthetic-data experiment (gold and test dialogues excluded) |
+| `build_synthetic.py` | Build the declared synthetic set from AI-written turns; offsets, duplicate/copy checks, diversity report |
 | `demo.py` | Label a sentence (and optional earlier turns) from the command line |
 
 ## Reproduce
@@ -161,9 +174,11 @@ re-score the test without a GPU.
 - **Agreement** is always computed from first submissions and frozen before any decision
   (`reports/*AGREEMENT_FREEZE.json`).
 - **Deviations** are recorded, never applied silently (`reports/PROTOCOL_DEVIATIONS.md`): DEV-001 consensus test
-  reference, SCOPE-001 claim scope, DEV-002 family key across SGD splits.
+  reference, SCOPE-001 claim scope, DEV-002 family key across SGD splits, DEV-003 second test access for the added
+  Laya row.
 - **AI use (declared):** translation, character-offset computation, JSON formatting and coding assistance. Every
-  label and every adjudication decision was made by the annotators.
+  label in `data/gold/` and every adjudication decision was made by the annotators. The only AI-written data is
+  `data/synthetic/`, marked `SYNTHETIC_AI` in every record and used only in the experiment of `SYNTHETIC_DATA.md`.
 
 ## License and citation
 
