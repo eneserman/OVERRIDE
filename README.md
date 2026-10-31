@@ -1,4 +1,4 @@
-# OVERRIDE — detecting revisions in multi-turn dialogue
+﻿# OVERRIDE — detecting revisions in multi-turn dialogue
 
 **NLP Project 2 (token classification) · Team Developers**
 Adnan Burak Özbay (2309111073) · Enes Erman (2309111066) · Mohammed Firas (2309015722) · İlayda Şenel (2309011159)
@@ -58,7 +58,7 @@ end and label all match (`scripts/evaluate_spans.py`).
 ├── DATA_LICENSE.md           CC BY-SA 4.0, data (adapted from SGD) and attribution
 ├── CHANGELOG.md              dated history of every data and model milestone
 ├── requirements.txt          pinned versions used for the reported results
-├── app/                      live web demo: server.py (FastAPI around the frozen ensembles) + static/ page
+├── app/                      live web demo: server.py (FastAPI around the frozen ensembles), static/ page, e2e_check.py
 ├── contributions/            one file per team member
 ├── data/
 │   ├── raw/                  1,220 selected SGD turns without labels + how to fetch the pinned SGD source
@@ -165,6 +165,7 @@ python scripts/demo.py --text "Actually, make it 7 pm at the same place." --chec
 # demo (web app, http://localhost:8000): words, model tokens, per-seed confidence, spans, locked-test benchmark
 python app/server.py --checkpoints-no "reports/train_runs/d5v2_final/no/*.pt" \
   --checkpoints-history "reports/train_runs/d5v2_final/tail60/*.pt"
+python app/e2e_check.py --url http://localhost:8000   # 59 browser checks of every page and control (Playwright)
 ```
 
 Checkpoints (6 × 0.7 GB) are not in the repository; their SHA-256 hashes are in `reports/D5V2_RESULTS.md`, and the
