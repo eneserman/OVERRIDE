@@ -18,7 +18,6 @@ import time
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from d5_train_crf import decode  # noqa: E402
 from evaluate_spans import evaluate  # noqa: E402
 from span_tokenizer import tokenize  # noqa: E402
 from validate_annotations import read_jsonl  # noqa: E402
@@ -74,11 +73,13 @@ def predict(router, rows: list[dict], variant: str, batch_size: int) -> list[dic
         labels[rid][i] = word_label(res["answers"], qtype)
     out = []
     for r in rows:
-        tags, prev = [], "O"
-        for lab in labels[r["id"]]:
-            tags.append("O" if lab == "O" else ("I-" if lab == prev else "B-") + lab)
+        spans, prev = [], "O"
+        for w, lab in zip(words[r["id"]], labels[r["id"]]):
+            if lab != "O" and lab == prev:
+                spans[-1]["end"] = w["end"]
+            elif lab != "O":
+                spans.append({"start": w["start"], "end": w["end"], "label": lab})
             prev = lab
-        spans = decode(words[r["id"]], tags)
         for s in spans:
             s["text"] = r["current_user_utterance"][s["start"]:s["end"]]
         out.append({"id": r["id"],

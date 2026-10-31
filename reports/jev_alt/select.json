@@ -1,0 +1,72 @@
+{
+  "gold": "data\\gold\\train_dev_gold_v1_3.jsonl",
+  "examples": 857,
+  "variants": {
+    "choice_en": {
+      "value_f1": 0.05527,
+      "cue_f1": 0.051422,
+      "S": 0.053346,
+      "per_label": {
+        "KEPT_VALUE": 0.0,
+        "NEW_VALUE": 0.067039,
+        "OLD_VALUE": 0.0,
+        "REFERENCE": 0.006734,
+        "CANCEL_CUE": 0.0,
+        "KEEP_CUE": 0.0,
+        "RESTORE_CUE": 0.0,
+        "UPDATE_CUE": 0.051705
+      },
+      "seconds": 130.5
+    },
+    "choice_ml": {
+      "value_f1": 0.014838,
+      "cue_f1": 0.061947,
+      "S": 0.038393,
+      "per_label": {
+        "KEPT_VALUE": 0.0,
+        "NEW_VALUE": 0.015539,
+        "OLD_VALUE": 0.0,
+        "REFERENCE": 0.010899,
+        "CANCEL_CUE": 0.0,
+        "KEEP_CUE": 0.0,
+        "RESTORE_CUE": 0.0,
+        "UPDATE_CUE": 0.063348
+      },
+      "seconds": 61.2
+    },
+    "noul_en": {
+      "value_f1": 0.006985,
+      "cue_f1": 0.053333,
+      "S": 0.030159,
+      "per_label": {
+        "KEPT_VALUE": 0.0,
+        "NEW_VALUE": 0.001994,
+        "OLD_VALUE": 0.0,
+        "REFERENCE": 0.014104,
+        "CANCEL_CUE": 0.0,
+        "KEEP_CUE": 0.0,
+        "RESTORE_CUE": 0.0,
+        "UPDATE_CUE": 0.053619
+      },
+      "seconds": 301.4
+    },
+    "noul_ml": {
+      "value_f1": 0.019195,
+      "cue_f1": 0.086154,
+      "S": 0.052674,
+      "per_label": {
+        "KEPT_VALUE": 0.0,
+        "NEW_VALUE": 0.026964,
+        "OLD_VALUE": 0.0,
+        "REFERENCE": 0.006018,
+        "CANCEL_CUE": 0.0,
+        "KEEP_CUE": 0.0,
+        "RESTORE_CUE": 0.0,
+        "UPDATE_CUE": 0.0875
+      },
+      "seconds": 139.6
+    }
+  },
+  "selected": "choice_en",
+  "rule": "highest S on train-side gold; ties broken by the order choice_en, choice_ml, noul_en, noul_ml"
+}
