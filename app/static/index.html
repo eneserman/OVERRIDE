@@ -245,6 +245,33 @@
   .guide b { color: var(--ink); }
   .guide p { margin: 8px 0 0 50px; color: var(--muted); font-size: 14px; }
   .g { border-radius: 4px; padding: 1px 6px; color: var(--ink); white-space: nowrap; }
+
+  /* dataset page */
+  .dchart { display: flex; flex-direction: column; gap: 9px; }
+  .drow { display: grid; grid-template-columns: 118px minmax(0, 1fr) 60px; align-items: center; gap: 10px; font-size: 12.5px; }
+  .drow .lbl { color: var(--ink-2); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .drow .stack { display: flex; height: 14px; border-radius: 4px; overflow: hidden; background: var(--track); }
+  .drow .stack i { display: block; height: 100%; width: 0; transition: width .7s ease-out; }
+  .drow .n { text-align: right; color: var(--ink-2); font-variant-numeric: tabular-nums; }
+  .keys { display: flex; gap: 16px; font-size: 12px; color: var(--muted); margin-top: 12px; flex-wrap: wrap; }
+  .keys span::before { content: ""; display: inline-block; width: 10px; height: 10px; border-radius: 2px; background: var(--c); margin-right: 6px; vertical-align: -1px; }
+  .filters { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-bottom: 14px; }
+  .filters input[type=search] { flex: 1 1 220px; min-width: 0; border: 1px solid var(--line-2); border-radius: 8px; padding: 9px 12px; font: inherit; background: var(--surface); color: var(--ink); outline: none; }
+  .filters select { border: 1px solid var(--line-2); border-radius: 8px; padding: 8px 10px; font: inherit; background: var(--surface); color: var(--ink); }
+  .lchips { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 14px; }
+  .lchip { border: 1px solid var(--line-2); background: var(--card-solid); border-radius: 999px; padding: 5px 11px; font-size: 12px; color: var(--ink-2); }
+  .lchip.on { border-color: var(--ink-2); color: var(--ink); background: var(--hover); font-weight: 600; }
+  .lchip i { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--c); margin-right: 6px; }
+  .rec { border-top: 1px solid var(--line); padding: 12px 4px; }
+  .rec:first-child { border-top: 0; }
+  .rec .top { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; font-size: 12px; color: var(--muted); }
+  .part { border-radius: 5px; padding: 2px 7px; font-size: 11px; font-weight: 600; letter-spacing: .3px; border: 1px solid var(--line-2); color: var(--ink-2); }
+  .part.test { border-color: var(--ref-b); color: var(--ref-i); } .part.synthetic { border-style: dashed; }
+  .rec .msg { margin: 6px 0 4px; }
+  .rec details summary { cursor: pointer; font-size: 12px; color: var(--muted); }
+  .rec details div { font-size: 12.5px; color: var(--ink-2); margin: 4px 0 0 12px; }
+  .rec .open { margin-left: auto; }
+  .pager { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-top: 12px; font-size: 13px; color: var(--muted); }
   .g-cue { background: var(--cue); } .g-val { background: var(--val); } .g-ref { background: var(--ref); } .g-old { background: var(--old); }
 </style>
 </head>
@@ -256,6 +283,7 @@
     <nav aria-label="Pages">
       <button class="on" data-view="analyze"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 12h4l2-6 4 12 2-6h6"/></svg><span data-i="nav_analyze">Analyze</span></button>
       <button data-view="examples"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 3h9l4 4v14H6z"/><path d="M15 3v4h4M9 12h7M9 16h7"/></svg><span data-i="nav_examples">Examples</span></button>
+      <button data-view="data"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><ellipse cx="12" cy="6" rx="7" ry="3"/><path d="M5 6v6c0 1.7 3.1 3 7 3s7-1.3 7-3V6M5 12v6c0 1.7 3.1 3 7 3s7-1.3 7-3v-6"/></svg><span data-i="nav_data">Dataset</span></button>
       <button data-view="model"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="7" y="7" width="10" height="10" rx="1.5"/><path d="M10 3v4M14 3v4M10 17v4M14 17v4M3 10h4M3 14h4M17 10h4M17 14h4"/></svg><span data-i="nav_model">Model Info</span></button>
       <button data-view="about"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 5h7a2 2 0 0 1 2 2v13a2 2 0 0 0-2-2H3zM21 5h-7a2 2 0 0 0-2 2v13a2 2 0 0 1 2-2h7z"/></svg><span data-i="nav_about">About</span></button>
     </nav>
@@ -341,6 +369,32 @@
       </div>
     </section>
 
+    <!-- DATASET -->
+    <section class="view" id="v-data">
+      <div class="stats">
+        <div class="stat"><small data-i="ds_turns"></small><b id="ds-turns">—</b></div>
+        <div class="stat"><small data-i="ds_labels"></small><b id="ds-labels">—</b></div>
+        <div class="stat"><small data-i="ds_spans"></small><b id="ds-spans">—</b></div>
+        <div class="stat"><small data-i="ds_doms"></small><b id="ds-doms">—</b></div>
+      </div>
+      <div class="grid2" style="margin-bottom:18px">
+        <div class="card"><div class="sub"><h3 style="font-size:16px" data-i="ds_bylabel"></h3></div><div class="dchart" id="ds-labelchart"></div>
+          <div class="keys"><span style="--c:var(--ink-2)" data-i="ds_train"></span><span style="--c:var(--ref-c)" data-i="ds_test"></span><span style="--c:var(--line-2)" data-i="ds_syn"></span></div></div>
+        <div class="card"><div class="sub"><h3 style="font-size:16px" data-i="ds_bydom"></h3><small class="count" data-i="ds_human"></small></div><div class="dchart" id="ds-domchart"></div></div>
+      </div>
+      <div class="card">
+        <div class="head"><div class="num">◎</div><div><h2 data-i="ds_t"></h2><p data-i="ds_s"></p></div></div>
+        <div class="filters">
+          <input type="search" id="ds-q" data-iph="ds_search" aria-label="Search">
+          <div class="seg" id="ds-part"><button class="on" data-part="human" data-i="ds_p_human"></button><button data-part="train" data-i="ds_p_train"></button><button data-part="test" data-i="ds_p_test"></button><button data-part="synthetic" data-i="ds_p_syn"></button></div>
+          <select id="ds-dom" aria-label="Domain"></select>
+        </div>
+        <div class="lchips" id="ds-lchips"></div>
+        <div id="ds-list"></div>
+        <div class="pager"><span id="ds-count"></span><div style="display:flex;gap:8px"><button class="open" id="ds-prev" type="button">←</button><span id="ds-page"></span><button class="open" id="ds-next" type="button">→</button></div></div>
+      </div>
+    </section>
+
     <!-- MODEL INFO -->
     <section class="view" id="v-model">
       <div class="card" style="margin-bottom:18px"><div class="head" style="margin:0"><div><h2 data-i="m_t"></h2><p data-i="m_s"></p></div>
@@ -410,6 +464,11 @@ const I18N = {
     no_role: "No role", words: (n) => `${n} word${n === 1 ? "" : "s"}`, no_spans: "No spans: the model found no revision in this message.", no_span_show: "No span to show.",
     d_role: "Role", d_text: "Text", d_tokens: "Model tokens", d_conf: "Confidence", mean_seeds: "mean of {n} seeds", to_table: "Show in token table →",
     role: { UPDATE_CUE: "Change cue", CANCEL_CUE: "Cancel cue", KEEP_CUE: "Keep cue", RESTORE_CUE: "Restore cue", NEW_VALUE: "New value", REFERENCE: "Reference", OLD_VALUE: "Old value", KEPT_VALUE: "Kept value" },
+    nav_data: "Dataset", ds_turns: "Human-labeled turns", ds_labels: "Word-level labels", ds_spans: "Labeled spans", ds_doms: "Domains (SGD services)",
+    ds_bylabel: "Spans per label", ds_bydom: "Turns per domain", ds_human: "human-labeled turns", ds_train: "train", ds_test: "test (locked)", ds_syn: "synthetic",
+    ds_t: "Browse the dataset", ds_s: "Every released record with its labels, exactly as published in data/gold/ and data/synthetic/.",
+    ds_search: "Search words, e.g. instead, same place…", ds_p_human: "Human (all)", ds_p_train: "Train", ds_p_test: "Test", ds_p_syn: "Synthetic", ds_all_dom: "All domains",
+    ds_count: "{n} records", ds_page: "{p} / {q}", ds_ctx: "earlier turns", ds_none: "No record matches these filters.", ds_label_any: "any label", ds_nolabel: "no span",
     ex_n: "Examples", ex_d: "Domains", ex_r: "Roles the model found", runall: "Run all examples", running: "Running {i} / {n}…", runagain: "Run again", retry: "Server not reachable, retry",
     ex_t: "Examples", ex_s: "Booking-dialogue turns, each built to test one behaviour. Run them all, or open one in the analyzer.",
     exh_scn: "Scenario", exh_dom: "Domain", exh_turn: "Earlier turn", exh_msg: "User message", exh_roles: "Roles found", exh_conf: "Conf.",
@@ -456,6 +515,11 @@ const I18N = {
     no_role: "Rol yok", words: (n) => `${n} kelime`, no_spans: "Span yok: model bu mesajda düzeltme bulmadı.", no_span_show: "Gösterilecek span yok.",
     d_role: "Rol", d_text: "Metin", d_tokens: "Model tokenları", d_conf: "Güven", mean_seeds: "{n} seed ortalaması", to_table: "Token tablosunda göster →",
     role: { UPDATE_CUE: "Değişiklik sinyali", CANCEL_CUE: "İptal sinyali", KEEP_CUE: "Koruma sinyali", RESTORE_CUE: "Geri dönme sinyali", NEW_VALUE: "Yeni değer", REFERENCE: "Referans", OLD_VALUE: "Eski değer", KEPT_VALUE: "Korunan değer" },
+    nav_data: "Veri seti", ds_turns: "İnsan etiketli cümle", ds_labels: "Kelime düzeyi etiket", ds_spans: "Etiketli span", ds_doms: "Alan (SGD servisi)",
+    ds_bylabel: "Etikete göre span sayısı", ds_bydom: "Alana göre cümle sayısı", ds_human: "insan etiketli cümleler", ds_train: "eğitim", ds_test: "test (kilitli)", ds_syn: "sentetik",
+    ds_t: "Veri setini incele", ds_s: "Yayımlanan her kayıt, data/gold/ ve data/synthetic/ içindeki etiketleriyle birebir.",
+    ds_search: "Kelime ara, örn. instead, same place…", ds_p_human: "İnsan (tümü)", ds_p_train: "Eğitim", ds_p_test: "Test", ds_p_syn: "Sentetik", ds_all_dom: "Tüm alanlar",
+    ds_count: "{n} kayıt", ds_page: "{p} / {q}", ds_ctx: "önceki turlar", ds_none: "Bu filtrelere uyan kayıt yok.", ds_label_any: "her etiket", ds_nolabel: "span yok",
     ex_n: "Örnek", ex_d: "Alan", ex_r: "Modelin bulduğu roller", runall: "Tüm örnekleri çalıştır", running: "Çalışıyor {i} / {n}…", runagain: "Tekrar çalıştır", retry: "Sunucuya ulaşılamadı, tekrar dene",
     ex_t: "Örnekler", ex_s: "Rezervasyon diyaloglarından cümleler; her biri tek bir davranışı test eder. Hepsini çalıştır ya da birini analizde aç.",
     exh_scn: "Senaryo", exh_dom: "Alan", exh_turn: "Önceki tur", exh_msg: "Kullanıcı mesajı", exh_roles: "Bulunan roller", exh_conf: "Güven",
@@ -518,6 +582,7 @@ function applyLang() {
   if (last) { buildTable(true); buildSpans(); if (!$("st-visual").hidden) redrawVisual(); }
   else $("detail").innerHTML = `<p style="color:var(--muted)">${T("select_span")}</p>`;
   if ($("v-model").classList.contains("on")) renderModel();
+  if (DS.rows) renderData();
 }
 document.querySelectorAll(".lang button").forEach((b) => b.onclick = () => { lang = b.dataset.lang; store.set("override-lang", lang); applyLang(); });
 
@@ -560,6 +625,7 @@ function show(view) {
   document.querySelectorAll("nav button").forEach((b) => b.classList.toggle("on", b.dataset.view === view));
   document.querySelectorAll(".view").forEach((v) => v.classList.toggle("on", v.id === "v-" + view));
   if (view === "model") renderModel();
+  if (view === "data") loadData();
   if (view === "analyze" && last && stage === "visual") requestAnimationFrame(() => { fitChips(); drawLinks(false); });
 }
 document.querySelectorAll("nav button").forEach((b) => b.onclick = () => show(b.dataset.view));
@@ -807,6 +873,64 @@ function renderModel() {
   requestAnimationFrame(() => { document.querySelectorAll("#rolechart i").forEach((b) => b.style.height = (b.dataset.h * 1.3) + "px");
     document.querySelectorAll("#mi-seedbars i").forEach((b) => b.style.width = b.dataset.w + "%"); document.querySelectorAll("#confhist i").forEach((b) => b.style.height = b.dataset.h + "px"); });
 }
+
+
+/* ---------- dataset page ---------- */
+const DS = { rows: null, part: "human", label: null, page: 0, per: 20 };
+const LABELS = ["UPDATE_CUE", "NEW_VALUE", "REFERENCE", "OLD_VALUE", "KEPT_VALUE", "CANCEL_CUE", "KEEP_CUE", "RESTORE_CUE"];
+async function loadData() {
+  if (DS.rows) return renderData();
+  try { DS.rows = (await (await fetch("api/data")).json()).records; } catch (e) { $("ds-list").innerHTML = `<p class="pending">${T("unreach")}</p>`; return; }
+  renderData(true);
+}
+function renderData(fresh) {
+  if (!DS.rows) return;
+  const human = DS.rows.filter((r) => r.part !== "synthetic"), fmt = (n) => n.toLocaleString(lang === "tr" ? "tr-TR" : "en-US");
+  $("ds-turns").textContent = fmt(human.length); $("ds-labels").textContent = fmt(human.reduce((a, r) => a + 2 * r.words, 0));
+  $("ds-spans").textContent = fmt(human.reduce((a, r) => a + r.spans.length, 0)); $("ds-doms").textContent = new Set(human.map((r) => r.service)).size;
+  const cnt = (part, lab) => DS.rows.filter((r) => r.part === part).reduce((a, r) => a + r.spans.filter((s) => s[2] === lab).length, 0);
+  const lc = LABELS.map((l) => ({ l, tr: cnt("train", l), te: cnt("test", l), sy: cnt("synthetic", l) })).filter((x) => x.tr + x.te + x.sy);
+  const mx = Math.max(...lc.map((x) => x.tr + x.te + x.sy));
+  $("ds-labelchart").innerHTML = lc.map((x) => `<div class="drow"><span class="lbl">${x.l}</span><div class="stack">
+      <i style="background:var(--ink-2)" data-w="${x.tr / mx * 100}"></i><i style="background:var(--ref-c)" data-w="${x.te / mx * 100}"></i><i style="background:var(--line-2)" data-w="${x.sy / mx * 100}"></i></div>
+      <span class="n">${fmt(x.tr + x.te)}${x.sy ? ` <small style="color:var(--muted)">+${x.sy}</small>` : ""}</span></div>`).join("");
+  const dom = {}; human.forEach((r) => { const d = r.service.split("_")[0]; dom[d] = (dom[d] || 0) + 1; });
+  const ds = Object.entries(dom).sort((a, b) => b[1] - a[1]).slice(0, 10), dm = ds[0] ? ds[0][1] : 1;
+  $("ds-domchart").innerHTML = ds.map(([d, n]) => `<div class="drow"><span class="lbl">${esc(d)}</span><div class="stack"><i style="background:var(--val-c)" data-w="${n / dm * 100}"></i></div><span class="n">${n}</span></div>`).join("");
+  requestAnimationFrame(() => document.querySelectorAll("#v-data .stack i").forEach((i) => i.style.width = i.dataset.w + "%"));
+  const sel = $("ds-dom"), cur = sel.value;
+  sel.innerHTML = `<option value="">${T("ds_all_dom")}</option>` + [...new Set(DS.rows.map((r) => r.service.split("_")[0]))].sort().map((d) => `<option>${esc(d)}</option>`).join("");
+  sel.value = cur;
+  $("ds-lchips").innerHTML = [[null, T("ds_label_any"), "var(--none-c)"], ...LABELS.filter((l) => lc.some((x) => x.l === l)).map((l) => [l, l, COLOR[l]]), ["NONE", T("ds_nolabel"), "var(--line-2)"]]
+    .map(([k, txt, c]) => `<button class="lchip ${DS.label === k ? "on" : ""}" data-l="${k ?? ""}" type="button"><i style="--c:${c}"></i>${esc(txt)}</button>`).join("");
+  $("ds-lchips").querySelectorAll(".lchip").forEach((b) => b.onclick = () => { DS.label = b.dataset.l || null; DS.page = 0; renderData(); });
+  if (fresh) DS.page = 0;
+  renderList();
+}
+function renderList() {
+  const q = $("ds-q").value.trim().toLowerCase(), dom = $("ds-dom").value;
+  const rows = DS.rows.filter((r) => (DS.part === "human" ? r.part !== "synthetic" : r.part === DS.part)
+    && (!dom || r.service.split("_")[0] === dom) && (!q || r.utt.toLowerCase().includes(q))
+    && (!DS.label || (DS.label === "NONE" ? !r.spans.length : r.spans.some((s) => s[2] === DS.label))));
+  const pages = Math.max(1, Math.ceil(rows.length / DS.per)); DS.page = Math.min(DS.page, pages - 1);
+  const slice = rows.slice(DS.page * DS.per, DS.page * DS.per + DS.per);
+  $("ds-list").innerHTML = slice.length ? slice.map((r) => `<div class="rec"><div class="top"><span class="part ${r.part}">${T(r.part === "synthetic" ? "ds_syn" : r.part === "test" ? "ds_test" : "ds_train")}</span>
+      <span class="dom">${esc(r.service.split("_")[0])}</span><span>${esc(r.id)}</span><button class="open" type="button" data-id="${esc(r.id)}">${T("open")}</button></div>
+      <div class="msg">${markup(r.utt, r.spans.map(([start, end, label]) => ({ start, end, label })))}</div>
+      <div class="found-roles" style="max-width:none">${[...new Set(r.spans.map((s) => s[2]))].map((l) => `<span class="badge b-${l}">${l}</span>`).join("")}</div>
+      ${r.history.length ? `<details><summary>${T("ds_ctx")} (${r.history.length})</summary>${r.history.map(([s, u]) => `<div><b>${esc(s)}:</b> ${esc(u)}</div>`).join("")}</details>` : ""}</div>`).join("")
+    : `<p class="pending" style="padding:20px 4px">${T("ds_none")}</p>`;
+  $("ds-list").querySelectorAll("[data-id]").forEach((b) => b.onclick = () => { const r = DS.rows.find((x) => x.id === b.dataset.id);
+    load({ hist: r.history, utt: r.utt }); show("analyze"); setStage("visual"); analyze(); });
+  $("ds-count").textContent = T("ds_count", { n: rows.length.toLocaleString(lang === "tr" ? "tr-TR" : "en-US") });
+  $("ds-page").textContent = T("ds_page", { p: DS.page + 1, q: pages });
+  $("ds-prev").disabled = DS.page === 0; $("ds-next").disabled = DS.page >= pages - 1;
+}
+$("ds-q").addEventListener("input", () => { DS.page = 0; renderList(); });
+$("ds-dom").addEventListener("change", () => { DS.page = 0; renderList(); });
+$("ds-prev").onclick = () => { DS.page--; renderList(); }; $("ds-next").onclick = () => { DS.page++; renderList(); };
+document.querySelectorAll("#ds-part button").forEach((b) => b.onclick = () => {
+  DS.part = b.dataset.part; DS.page = 0; document.querySelectorAll("#ds-part button").forEach((x) => x.classList.toggle("on", x === b)); renderList(); });
 
 /* ---------- start ---------- */
 if (params.has("demo")) load(EXAMPLES[0]); else { addTurn("USER"); addTurn("SYSTEM"); updCount(); }

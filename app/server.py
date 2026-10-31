@@ -29,9 +29,30 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "scripts"))
 from d5_train_transformer import TwoHead  # noqa: E402
 from d5v2_cv import collate, spans_from  # noqa: E402
 from d5v2_final import prepare  # noqa: E402
+from span_tokenizer import tokenize  # noqa: E402
 
 STATIC = Path(__file__).with_name("static")
-REPORTS = Path(__file__).resolve().parents[1] / "reports" / "d6_test"
+ROOT = Path(__file__).resolve().parents[1]
+REPORTS = ROOT / "reports" / "d6_test"
+DATASETS = [("train", ROOT / "data/gold/train_dev_gold_v1_3.jsonl"), ("test", ROOT / "data/gold/test_reference_v1.jsonl"),
+            ("synthetic", ROOT / "data/synthetic/synthetic_v2.jsonl")]
+
+
+def dataset_rows() -> list[dict]:
+    """The released records in a compact form for the dataset page (labels as published, nothing recomputed)."""
+    out = []
+    for part, path in DATASETS:
+        if not path.exists():
+            continue
+        for line in path.read_text(encoding="utf-8").splitlines():
+            if not line.strip():
+                continue
+            r = json.loads(line)
+            out.append({"id": r["id"], "part": part, "service": (r.get("source") or {}).get("service", ""),
+                        "history": [[h.get("speaker", ""), h.get("utterance", "")] for h in (r.get("history") or [])[-4:]],
+                        "utt": r["current_user_utterance"], "words": len(tokenize(r["current_user_utterance"])),
+                        "spans": [[s["start"], s["end"], s["label"]] for s in r["value_spans"] + r["cue_spans"]]})
+    return out
 MAX_CHARS = 300
 
 
@@ -134,6 +155,12 @@ def build_app(no_paths: list[str], hist_paths: list[str]) -> FastAPI:
         return {"device": "GPU" if device.type == "cuda" else "CPU", "history_available": True in ensembles,
                 "model": ensembles[False].meta["model"], "seeds": len(ensembles[False].models),
                 "train_records": ensembles[False].meta["records"], "test": test_scores()}
+
+    data = dataset_rows()
+
+    @app.get("/api/data")
+    def dataset():
+        return {"records": data}
 
     @app.get("/static/{name}")
     def static(name: str):
