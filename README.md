@@ -9,6 +9,14 @@ to an earlier turn (REFERENCE). The labels do not exist in any public dataset: w
 Schema-Guided Dialogue corpus and annotated them ourselves, double-blind. The model is chosen by pre-registered
 cross-validation and evaluated **once** on a test set that was hash-locked before any model existed.
 
+### ▶ Live demo: **[override-demo.vercel.app](https://override-demo.vercel.app)**
+
+[![OVERRIDE web demo: the model marks the change cue, the new value and the reference](docs/demo.jpg)](https://override-demo.vercel.app)
+
+Pick an example or any of the 2,220 dataset turns and see how the model labels every word, with per-seed confidence,
+the token table, the spans and the locked-test benchmark (English / Türkçe, day / night). [How the online version
+works](#web-demo).
+
 ## Results (locked prospective test, 363 turns, strict exact-span micro-F1)
 
 | System | VALUE F1 | CUE F1 | S (mean) |
@@ -50,6 +58,15 @@ earlier turns. Eight labels are defined in the guideline; the five with fewer th
 excluded from claims (SCOPE-001, decided before the test was opened). Metric: a predicted span counts only if start,
 end and label all match (`scripts/evaluate_spans.py`).
 
+## Web demo
+
+- **Online:** [override-demo.vercel.app](https://override-demo.vercel.app). The ensemble (6 checkpoints × 0.7 GB) does
+  not fit a static host, so `app/export_static.py` asked the running demo server for the model's real answers on the 8
+  examples and every dataset turn, with history off and on (4,452 answers), and wrote them to `web/`. The page looks a
+  request up there and says so on screen; a sentence that is not in that set needs the local server.
+- **Local, any sentence:** `python app/server.py` with the checkpoints (commands under [Reproduce](#reproduce)), then
+  open http://localhost:8000. `python app/e2e_check.py` drives every page and control in a real browser (59 checks).
+
 ## Repository layout
 
 ```
@@ -58,7 +75,9 @@ end and label all match (`scripts/evaluate_spans.py`).
 ├── DATA_LICENSE.md           CC BY-SA 4.0, data (adapted from SGD) and attribution
 ├── CHANGELOG.md              dated history of every data and model milestone
 ├── requirements.txt          pinned versions used for the reported results
-├── app/                      live web demo: server.py (FastAPI around the frozen ensembles), static/ page, e2e_check.py
+├── app/                      live web demo: server.py (FastAPI around the frozen ensembles), static/ page, e2e_check.py,
+│                             export_static.py (builds web/)
+├── web/                      the online version deployed on Vercel (page + precomputed ensemble answers)
 ├── contributions/            one file per team member
 ├── data/
 │   ├── raw/                  1,220 selected SGD turns without labels + how to fetch the pinned SGD source
@@ -166,6 +185,7 @@ python scripts/demo.py --text "Actually, make it 7 pm at the same place." --chec
 python app/server.py --checkpoints-no "reports/train_runs/d5v2_final/no/*.pt" \
   --checkpoints-history "reports/train_runs/d5v2_final/tail60/*.pt"
 python app/e2e_check.py --url http://localhost:8000   # 59 browser checks of every page and control (Playwright)
+python app/export_static.py --url http://localhost:8000 --out web   # rebuild the online version
 ```
 
 Checkpoints (6 × 0.7 GB) are not in the repository; their SHA-256 hashes are in `reports/D5V2_RESULTS.md`, and the

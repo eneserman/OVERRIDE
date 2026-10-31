@@ -33,3 +33,7 @@ models/
 
 # Local AI pre-review drafts from the pilot (never shown to annotators, not part of the release)
 OVERRIDE_PILOT30_AI_PRE_REVIEW/
+
+# Vercel CLI link of the static site (web/ is rebuilt by app/export_static.py)
+web/.vercel/
+web/.gitignore
