@@ -1,0 +1,32 @@
+{
+  "gold": "data\\gold\\train_dev_gold_v1_3.jsonl",
+  "records": 857,
+  "words": 11961,
+  "labeled_word_share_per_layer": 0.121,
+  "systems": {
+    "all_O": {
+      "token_accuracy": {
+        "value_spans": 0.7855,
+        "cue_spans": 0.9725,
+        "both_layers": 0.879
+      },
+      "span_f1": {
+        "value_f1": 0.0,
+        "cue_f1": 0.0,
+        "S": 0.0
+      }
+    },
+    "oof_epoch6": {
+      "token_accuracy": {
+        "value_spans": 0.9708,
+        "cue_spans": 0.9902,
+        "both_layers": 0.9805
+      },
+      "span_f1": {
+        "value_f1": 0.890601,
+        "cue_f1": 0.829787,
+        "S": 0.8602
+      }
+    }
+  }
+}

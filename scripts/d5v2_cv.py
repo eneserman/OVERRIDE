@@ -112,8 +112,11 @@ def main() -> int:
     ap.add_argument("--folds", type=int, default=5)
     ap.add_argument("--seed", type=int, default=20261029)
     ap.add_argument("--limit-folds", type=int, default=None, help="smoke test only: run this many folds")
+    ap.add_argument("--extra-train", type=Path, default=None,
+                    help="records added to every training fold and never scored (declared synthetic data)")
+    ap.add_argument("--save-epoch", type=int, nargs="*", default=[], help="also write the OOF predictions of these epochs")
     args = ap.parse_args()
-    name = f"{args.model.split('/')[-1]}__{args.history}__{args.loss}"
+    name = f"{args.model.split('/')[-1]}__{args.history}__{args.loss}" + ("__extra" if args.extra_train else "")
     out = args.outdir / name
     if (out / "cv_result.json").exists():
         raise SystemExit(f"ABORT: result exists for {name}")
@@ -126,8 +129,12 @@ def main() -> int:
     v_ix, c_ix = {t: i for i, t in enumerate(v_tags)}, {t: i for i, t in enumerate(c_tags)}
     tok = AutoTokenizer.from_pretrained(args.model)
     max_len = 160 if args.history == "no" else 192
+    extra = read_jsonl(args.extra_train) if args.extra_train else []
+    extra_ids = {x["id"] for x in extra}
+    if {g["id"] for g in gold} & extra_ids:
+        raise SystemExit("ABORT: extra-train IDs overlap the gold")
     rows, misses, collisions = [], 0, 0
-    for g in gold:
+    for g in gold + extra:
         r = dict(g)
         r["_words"] = [t._asdict() for t in tokenize(g["current_user_utterance"])]
         toks = tokenize(g["current_user_utterance"])
@@ -142,6 +149,8 @@ def main() -> int:
                           and (r["_v"][wi] != "O" or r["_c"][wi] != "O"))
         r["_enc"], r["_pos"] = enc, pos
         r["_fold"] = fold_of(str(g.get("dialogue_family_id") or g["source"]["dialogue_id"]), args.folds)
+        if g["id"] in extra_ids:
+            r["_fold"] = -1  # always in training, never held out
         rows.append(r)
     if misses:
         raise SystemExit(f"alignment misses: {misses} (labeled words without a sub-token)")
@@ -200,11 +209,14 @@ def main() -> int:
                           "per_label": {lay: {lab: d.get("f1") for lab, d in rep["layers"][lay].get("per_label", {}).items()}
                                         for lay in ("value_spans", "cue_spans")}})
     best = max(per_epoch, key=lambda x: (x["S"], -x["epoch"]))
-    (out / f"oof_epoch{best['epoch']}.jsonl").write_text(
-        "".join(json.dumps(oof[best["epoch"]][g["id"]], ensure_ascii=False) + "\n" for g in gold_scored), encoding="utf-8")
+    for e in sorted({best["epoch"], *args.save_epoch}):
+        (out / f"oof_epoch{e}.jsonl").write_text(
+            "".join(json.dumps(oof[e][g["id"]], ensure_ascii=False) + "\n" for g in gold_scored), encoding="utf-8")
     result = {"config": {"model": args.model, "history": args.history, "loss": args.loss, "epochs": args.epochs,
                          "folds": args.folds, "fold_salt": FOLD_SALT, "seed": args.seed, "max_len": max_len,
-                         "lr": 2e-5, "batch": 16, "weight_decay": 0.01, "scored_folds": folds},
+                         "lr": 2e-5, "batch": 16, "weight_decay": 0.01, "scored_folds": folds,
+                         "extra_train": str(args.extra_train) if args.extra_train else None,
+                         "extra_train_records": len(extra)},
               "alignment": {"misses": misses, "labeled_words_sharing_a_subtoken": collisions},
               "records_scored": len(gold_scored), "per_epoch": per_epoch, "best": best,
               "gold_sha256": hashlib.sha256(args.gold.read_bytes()).hexdigest(),
