@@ -321,6 +321,7 @@
             <div class="head"><div class="num">02</div><div><h2 data-i="c2_t"></h2><p data-i="c2_s"></p></div><span class="count" id="count">0 / 300</span></div>
             <textarea id="utt" maxlength="300" spellcheck="false" data-iph="utt_ph"></textarea>
             <div class="err" id="err" role="alert"></div>
+            <div class="ctxnote" id="staticnote" data-ih="static_note" hidden></div>
             <div class="toggle">
               <button class="switch" id="hist" role="switch" aria-checked="false"></button>
               <div><b data-i="hist_b"></b> <span style="color:var(--muted);font-size:12px" data-i="hist_tag"></span><small data-ih="hist_small"></small></div>
@@ -484,6 +485,9 @@ const I18N = {
     b_t: "Locked test, 363 turns — strict exact-span F1", b_sys: "System",
     b_note: "Read from <code>reports/d6_test/</code>. The selected model was fixed before the test was opened; the history model is the pre-registered comparison.",
     err_empty: "Write the new user message first.", err_server: "The model server returned an error.",
+    dev_static: "Precomputed",
+    static_miss: "The online version cannot run the model on a new sentence. Pick an example or a dataset turn, or run the demo locally (see README) to type anything.",
+    static_note: "<b>Online version.</b> The model is too large for this host, so the page holds the ensemble's real answers for the 8 examples and every dataset turn (history off and on). To type any sentence, run the demo locally: <a href=\"https://github.com/eneserman/OVERRIDE#web-demo\" target=\"_blank\" rel=\"noopener\">README</a>.",
     about: `<div class="head"><div><h2>About OVERRIDE</h2><p>NLP Project 2 · token classification · Team Developers</p></div></div>
       <p>When users change their minds mid-conversation (<i>"Actually, make it 7 pm at the same place"</i>), an assistant has to find which words signal the change, what the new value is, and what points back to an earlier turn. OVERRIDE labels every word of the user's turn with that revision role, in two BIO layers.</p>
       <h3>Data</h3><p>1,220 user turns selected from Google's Schema-Guided Dialogue corpus and labeled by two annotators, blind to each other (34,522 word-level labels, agreement 0.86 / 0.81). 363 turns from other SGD splits were locked as a test set before any model existed.</p>
@@ -535,6 +539,9 @@ const I18N = {
     b_t: "Kilitli test, 363 cümle — sıkı tam-span F1", b_sys: "Sistem",
     b_note: "<code>reports/d6_test/</code> dosyalarından okunur. Seçili model test açılmadan önce sabitlendi; geçmişi okuyan model önceden kaydedilmiş karşılaştırmadır.",
     err_empty: "Önce yeni kullanıcı mesajını yaz.", err_server: "Model sunucusu hata döndürdü.",
+    dev_static: "Önceden hesaplandı",
+    static_miss: "Çevrim içi sürüm modeli yeni bir cümlede çalıştıramaz. Bir örnek ya da veri setinden bir tur seç; istediğin cümleyi yazmak için demoyu yerelde çalıştır (README).",
+    static_note: "<b>Çevrim içi sürüm.</b> Model bu sunucu için çok büyük; sayfa, 8 örnek ve veri setindeki her tur için modelin gerçek cevaplarını (geçmiş kapalı ve açık) içerir. İstediğin cümleyi yazmak için demoyu yerelde çalıştır: <a href=\"https://github.com/eneserman/OVERRIDE#web-demo\" target=\"_blank\" rel=\"noopener\">README</a>.",
     about: `<div class="head"><div><h2>OVERRIDE hakkında</h2><p>NLP Proje 2 · token sınıflandırma · Team Developers</p></div></div>
       <p>Kullanıcılar konuşmanın ortasında fikir değiştirir (<i>"Actually, make it 7 pm at the same place"</i>). Bir asistanın şunları bulması gerekir: hangi kelimeler değişikliği söylüyor, yeni değer ne, ve hangi kelimeler önceki bir tura gönderme yapıyor. OVERRIDE, kullanıcının cümlesindeki her kelimeye bu rolü iki BIO katmanında verir.</p>
       <h3>Veri</h3><p>Google'ın Schema-Guided Dialogue derleminden seçilen 1.220 kullanıcı cümlesi, birbirini görmeyen iki etiketleyici tarafından etiketlendi (34.522 kelime etiketi, uyum 0.86 / 0.81). SGD'nin başka bölümlerinden 363 cümle, hiçbir model yokken test seti olarak kilitlendi.</p>
@@ -562,6 +569,18 @@ let FAST = false;
 const wait = (ms) => FAST ? Promise.resolve() : new Promise((r) => setTimeout(r, ms * SLOW));
 const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
 const pct = (p) => p == null ? "–" : Math.round(p * 100) + "%";
+/* online (static) version: answers are the exported server responses (app/export_static.py), looked up by request */
+const STATIC_SITE = !!window.OVERRIDE_STATIC;
+async function api(path, body) {
+  if (!STATIC_SITE) return fetch("api/" + path, body ? { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) } : undefined);
+  if (path !== "analyze") return fetch(`api/${path}.json`);
+  const hist = body.use_history ? body.history.map((t) => [t.speaker.toUpperCase(), t.utterance.trim()]).filter((t) => t[1]).slice(-8) : [];
+  const key = JSON.stringify([body.use_history ? 1 : 0, body.utterance.trim(), hist]);
+  const h = [...new Uint8Array(await crypto.subtle.digest("SHA-256", new TextEncoder().encode(key)))].map((b) => b.toString(16).padStart(2, "0")).join("");
+  const shard = await fetch(`api/a/${h.slice(0, 2)}.json`).then((r) => r.ok ? r.json() : {}).catch(() => ({}));
+  if (shard[h]) return new Response(JSON.stringify(shard[h]), { status: 200, headers: { "Content-Type": "application/json" } });
+  return new Response(JSON.stringify({ detail: T("static_miss") }), { status: 404, headers: { "Content-Type": "application/json" } });
+}
 const store = { get: (k) => { try { return localStorage.getItem(k); } catch (e) { return null; } }, set: (k, v) => { try { localStorage.setItem(k, v); } catch (e) {} } };
 let lang = params.get("lang") || store.get("override-lang") || ((navigator.language || "").startsWith("tr") ? "tr" : "en");
 if (!I18N[lang]) lang = "en";
@@ -713,8 +732,7 @@ $("runall").onclick = async () => {
   try {
     for (let i = 0; i < EXAMPLES.length; i++) {
       $("runlabel").textContent = T("running", { i: i + 1, n: EXAMPLES.length });
-      const ex = EXAMPLES[i], res = await fetch("api/analyze", { method: "POST", headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ utterance: ex.utt, history: ex.hist.map(([s, u]) => ({ speaker: s, utterance: u })), use_history: false }) });
+      const ex = EXAMPLES[i], res = await api("analyze", { utterance: ex.utt, history: ex.hist.map(([s, u]) => ({ speaker: s, utterance: u })), use_history: false });
       if (!res.ok) throw new Error("server");
       exResults[i] = await res.json(); buildExamples();
     }
@@ -723,10 +741,11 @@ $("runall").onclick = async () => {
   finally { $("runall").disabled = false; }
 };
 
-fetch("api/info").then((r) => r.json()).then((i) => {
+api("info").then((r) => r.json()).then((i) => {
   info = i;
-  $("st-seeds").textContent = T("seeds_n", { n: i.seeds }); $("st-dev").textContent = i.device;
-  $("mi-model").textContent = i.model; $("mi-seeds").textContent = T("mi_seeds", { n: i.seeds, r: i.train_records }); $("mi-dev").textContent = i.device;
+  const dev = i.device === "static" ? T("dev_static") : i.device;
+  $("st-seeds").textContent = T("seeds_n", { n: i.seeds }); $("st-dev").textContent = dev;
+  $("mi-model").textContent = i.model; $("mi-seeds").textContent = T("mi_seeds", { n: i.seeds, r: i.train_records }); $("mi-dev").textContent = dev;
   if (!i.history_available) $("hist").disabled = true;
   $("benchbody").innerHTML = i.test.map((t) => `<tr class="${t.system.includes("selected") ? "me" : ""}"><td>${esc(t.system)}</td><td>${t.value.toFixed(3)}</td><td>${t.cue.toFixed(3)}</td><td>${t.S.toFixed(3)}</td></tr>`).join("");
 }).catch(() => { $("st-seeds").textContent = T("unreach"); });
@@ -740,10 +759,10 @@ async function analyze() {
   busy = true; $("go").disabled = true; $("golabel").textContent = T("going");
   setStage("visual"); resetVisual();
   try {
-    const res = await fetch("api/analyze", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ utterance, history, use_history: histOn() }) });
+    const res = await api("analyze", { utterance, history, use_history: histOn() });
     if (!res.ok) { const e = await res.json().catch(() => ({})); throw new Error(e.detail || T("err_server")); }
     last = await res.json(); last.utt = utterance; selSpan = 0;
-    $("st-ms").textContent = last.ms + " ms"; $("mi-ms").textContent = last.ms + " ms";
+    if (!STATIC_SITE) { $("st-ms").textContent = last.ms + " ms"; $("mi-ms").textContent = last.ms + " ms"; }
     $("mi-hist").textContent = last.history_mode === "no" ? T("hist_off") : T("hist_on");
     buildTable(); buildSpans();
     await playVisual();
@@ -890,7 +909,7 @@ const DS = { rows: null, part: "human", label: null, page: 0, per: 20 };
 const LABELS = ["UPDATE_CUE", "NEW_VALUE", "REFERENCE", "OLD_VALUE", "KEPT_VALUE", "CANCEL_CUE", "KEEP_CUE", "RESTORE_CUE"];
 async function loadData() {
   if (DS.rows) return renderData();
-  try { DS.rows = (await (await fetch("api/data")).json()).records; } catch (e) { $("ds-list").innerHTML = `<p class="pending">${T("unreach")}</p>`; return; }
+  try { DS.rows = (await (await api("data")).json()).records; } catch (e) { $("ds-list").innerHTML = `<p class="pending">${T("unreach")}</p>`; return; }
   renderData(true);
 }
 function renderData(fresh) {
@@ -944,6 +963,7 @@ document.querySelectorAll("#ds-part button").forEach((b) => b.onclick = () => {
 
 /* ---------- start ---------- */
 if (params.has("demo")) load(EXAMPLES[0]); else { addTurn("USER"); addTurn("SYSTEM"); updCount(); }
+$("staticnote").hidden = !STATIC_SITE;
 applyLang();
 </script>
 </body>
