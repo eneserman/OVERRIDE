@@ -40,8 +40,12 @@ is never mixed into the human gold or the test.
 lower than the human data. What these numbers cannot show is whether the turns are *natural* and the labels *right*:
 that is the human check below.
 
-**Human check (open):** reviewers A and B each judge a fixed random sample of 50 synthetic records
-(`data/synthetic/HUMAN_CHECK_50.md`): natural yes/no, labels correct yes/no. The rates are reported here when done.
+**Human check:** reviewers A and B judged a fixed random sample of 50 synthetic records
+(`data/synthetic/HUMAN_CHECK_50.md`): natural yes/no, labels correct yes/no. Both reported all 50 natural and
+correctly labeled (50/50 on both questions); the marks were entered from reviewer B's report, not separately by each
+reviewer. A later consistency read flagged 5 of the 50 (#20, #37, #39, #41, #44) where similar cases are labeled
+differently (for example, a value the system offered is REFERENCE in some records and NEW_VALUE in others). The
+synthetic set does not feed any reported result.
 
 ## 4. Experiment (fixed before running)
 
