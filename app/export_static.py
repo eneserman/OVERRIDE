@@ -77,8 +77,14 @@ def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--url", default="http://localhost:8000")
     ap.add_argument("--out", default="web")
+    ap.add_argument("--live-api", default="", help="base URL of a running demo server for sentences outside the stored set")
+    ap.add_argument("--page-only", action="store_true", help="rewrite only the page and its assets in an existing export")
     args = ap.parse_args()
     out = Path(args.out)
+    if args.page_only:
+        write_page(out, args.live_api)
+        print(f"page -> {out}")
+        return 0
     if out.exists():
         shutil.rmtree(out)
     (out / "api" / "a").mkdir(parents=True)
@@ -112,14 +118,21 @@ def main() -> int:
     for name, entries in shards.items():
         (out / "api" / "a" / f"{name}.json").write_text(json.dumps(entries, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
 
+    write_page(out, args.live_api)
+    print(f"{len(done)} answers in {len(shards)} shards -> {out}")
+    return 0
+
+
+def write_page(out: Path, live_api: str) -> None:
+    """The page in static mode; with a live API, sentences outside the stored set are sent there."""
+    flags = "window.OVERRIDE_STATIC = true;" + (f" window.OVERRIDE_LIVE_API = {json.dumps(live_api)};" if live_api else "")
     page = (STATIC / "index.html").read_text(encoding="utf-8")
-    page = page.replace("<head>", "<head>\n<script>window.OVERRIDE_STATIC = true;</script>", 1)
+    page = page.replace("<head>", f"<head>\n<script>{flags}</script>", 1)
     (out / "index.html").write_text(page, encoding="utf-8")
+    (out / "static").mkdir(exist_ok=True)
     for f in STATIC.iterdir():
         if f.name != "index.html":
             shutil.copy(f, out / "static" / f.name)
-    print(f"{len(done)} answers in {len(shards)} shards -> {out}")
-    return 0
 
 
 if __name__ == "__main__":

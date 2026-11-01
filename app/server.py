@@ -21,6 +21,7 @@ from pathlib import Path
 import torch
 import uvicorn
 from fastapi import FastAPI, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse
 from pydantic import BaseModel
 from transformers import AutoTokenizer
@@ -145,6 +146,10 @@ def build_app(no_paths: list[str], hist_paths: list[str]) -> FastAPI:
     if hist_paths:
         ensembles[True] = Ensemble(hist_paths, device)
     app = FastAPI(title="OVERRIDE demo")
+    # the static online version (Vercel) sends new sentences here when it runs on a public host (Hugging Face Space)
+    origins = [o for o in os.environ.get("OVERRIDE_CORS_ORIGINS", "").split(",") if o]
+    if origins:
+        app.add_middleware(CORSMiddleware, allow_origins=origins, allow_methods=["GET", "POST"], allow_headers=["Content-Type"])
 
     @app.get("/")
     def index():

@@ -13,9 +13,9 @@ cross-validation and evaluated **once** on a test set that was hash-locked befor
 
 [![OVERRIDE web demo: the model marks the change cue, the new value and the reference](docs/demo.jpg)](https://override-demo.vercel.app)
 
-Pick an example or any of the 2,220 dataset turns and see how the model labels every word, with per-seed confidence,
-the token table, the spans and the locked-test benchmark (English / Türkçe, day / night). [How the online version
-works](#web-demo).
+Type any sentence, or pick an example or any of the 2,220 dataset turns, and see how the model labels every word, with
+per-seed confidence, the token table, the spans and the locked-test benchmark (English / Türkçe, day / night).
+[How the online version works](#web-demo).
 
 ## Results (locked prospective test, 363 turns, strict exact-span micro-F1)
 
@@ -60,10 +60,15 @@ end and label all match (`scripts/evaluate_spans.py`).
 
 ## Web demo
 
-- **Online:** [override-demo.vercel.app](https://override-demo.vercel.app). The ensemble (6 checkpoints × 0.7 GB) does
-  not fit a static host, so `app/export_static.py` asked the running demo server for the model's real answers on the 8
-  examples and every dataset turn, with history off and on (4,452 answers), and wrote them to `web/`. The page looks a
-  request up there and says so on screen; a sentence that is not in that set needs the local server.
+- **Online:** [override-demo.vercel.app](https://override-demo.vercel.app), type any sentence. Two parts:
+  - The 8 examples and every dataset turn, with history off and on (4,452 answers), are the model's real answers
+    stored by `app/export_static.py` in `web/` (static, Vercel), so they load instantly.
+  - Any other sentence goes to the same frozen ensembles running live on a Hugging Face Space
+    ([enes123erman/override-demo](https://huggingface.co/spaces/enes123erman/override-demo), CPU; files in
+    `deploy/hf_space/`). The seeds are stored there in half precision
+    ([enes123erman/override-checkpoints](https://huggingface.co/enes123erman/override-checkpoints)); on 300 dataset
+    requests the live spans matched the stored full-precision answers exactly (largest probability difference 0.001).
+    The Space sleeps after an hour without visitors, so the first answer after that takes a minute or two.
 - **Local, any sentence:** `python app/server.py` with the checkpoints (commands under [Reproduce](#reproduce)), then
   open http://localhost:8000. `python app/e2e_check.py` drives every page and control in a real browser (59 checks).
 
@@ -78,6 +83,7 @@ end and label all match (`scripts/evaluate_spans.py`).
 ├── app/                      live web demo: server.py (FastAPI around the frozen ensembles), static/ page, e2e_check.py,
 │                             export_static.py (builds web/)
 ├── web/                      the online version deployed on Vercel (page + precomputed ensemble answers)
+├── deploy/hf_space/          Docker files of the Hugging Face Space that runs the model for new sentences
 ├── contributions/            one file per team member
 ├── data/
 │   ├── raw/                  1,220 selected SGD turns without labels + how to fetch the pinned SGD source
@@ -185,7 +191,8 @@ python scripts/demo.py --text "Actually, make it 7 pm at the same place." --chec
 python app/server.py --checkpoints-no "reports/train_runs/d5v2_final/no/*.pt" \
   --checkpoints-history "reports/train_runs/d5v2_final/tail60/*.pt"
 python app/e2e_check.py --url http://localhost:8000   # 59 browser checks of every page and control (Playwright)
-python app/export_static.py --url http://localhost:8000 --out web   # rebuild the online version
+python app/export_static.py --url http://localhost:8000 --out web \
+  --live-api https://enes123erman-override-demo.hf.space   # rebuild the online version
 ```
 
 Checkpoints (6 × 0.7 GB) are not in the repository; their SHA-256 hashes are in `reports/D5V2_RESULTS.md`, and the

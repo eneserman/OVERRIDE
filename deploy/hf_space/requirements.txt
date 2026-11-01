@@ -1,0 +1,8 @@
+transformers==5.22.0
+tokenizers==0.23.1
+sentencepiece==0.2.2
+protobuf==4.25.9
+numpy
+fastapi==0.129.0
+uvicorn==0.34.0
+pydantic==2.12.5

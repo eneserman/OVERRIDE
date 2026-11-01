@@ -322,6 +322,7 @@
             <textarea id="utt" maxlength="300" spellcheck="false" data-iph="utt_ph"></textarea>
             <div class="err" id="err" role="alert"></div>
             <div class="ctxnote" id="staticnote" data-ih="static_note" hidden></div>
+            <script>if (window.OVERRIDE_LIVE_API) document.getElementById("staticnote").dataset.ih = "live_note";</script>
             <div class="toggle">
               <button class="switch" id="hist" role="switch" aria-checked="false"></button>
               <div><b data-i="hist_b"></b> <span style="color:var(--muted);font-size:12px" data-i="hist_tag"></span><small data-ih="hist_small"></small></div>
@@ -485,7 +486,10 @@ const I18N = {
     b_t: "Locked test, 363 turns — strict exact-span F1", b_sys: "System",
     b_note: "Read from <code>reports/d6_test/</code>. The selected model was fixed before the test was opened; the history model is the pre-registered comparison.",
     err_empty: "Write the new user message first.", err_server: "The model server returned an error.",
-    dev_static: "Precomputed",
+    dev_static: "Precomputed", dev_live: "Live CPU",
+    live_wait: "Waking the live model…",
+    live_miss: "The live model did not answer (it may still be waking up). Try again in a minute, or pick an example.",
+    live_note: "<b>Online version.</b> The 8 examples and every dataset turn load instantly from the model's stored answers. Any other sentence goes to the same frozen model running live on a CPU host; if nobody used it in the last hour, the first answer takes a minute or two. <a href=\"https://github.com/eneserman/OVERRIDE#web-demo\" target=\"_blank\" rel=\"noopener\">How it works</a>.",
     static_miss: "The online version cannot run the model on a new sentence. Pick an example or a dataset turn, or run the demo locally (see README) to type anything.",
     static_note: "<b>Online version.</b> The model is too large for this host, so the page holds the ensemble's real answers for the 8 examples and every dataset turn (history off and on). To type any sentence, run the demo locally: <a href=\"https://github.com/eneserman/OVERRIDE#web-demo\" target=\"_blank\" rel=\"noopener\">README</a>.",
     about: `<div class="head"><div><h2>About OVERRIDE</h2><p>NLP Project 2 · token classification · Team Developers</p></div></div>
@@ -539,7 +543,10 @@ const I18N = {
     b_t: "Kilitli test, 363 cümle — sıkı tam-span F1", b_sys: "Sistem",
     b_note: "<code>reports/d6_test/</code> dosyalarından okunur. Seçili model test açılmadan önce sabitlendi; geçmişi okuyan model önceden kaydedilmiş karşılaştırmadır.",
     err_empty: "Önce yeni kullanıcı mesajını yaz.", err_server: "Model sunucusu hata döndürdü.",
-    dev_static: "Önceden hesaplandı",
+    dev_static: "Önceden hesaplandı", dev_live: "Canlı CPU",
+    live_wait: "Canlı model uyanıyor…",
+    live_miss: "Canlı model cevap vermedi (hâlâ uyanıyor olabilir). Bir dakika sonra tekrar dene ya da bir örnek seç.",
+    live_note: "<b>Çevrim içi sürüm.</b> 8 örnek ve veri setindeki her tur, modelin kayıtlı cevaplarından anında gelir. Başka her cümle aynı dondurulmuş modele, bir CPU sunucusunda canlı gider; son bir saatte kimse kullanmadıysa ilk cevap bir iki dakika sürer. <a href=\"https://github.com/eneserman/OVERRIDE#web-demo\" target=\"_blank\" rel=\"noopener\">Nasıl çalışır</a>.",
     static_miss: "Çevrim içi sürüm modeli yeni bir cümlede çalıştıramaz. Bir örnek ya da veri setinden bir tur seç; istediğin cümleyi yazmak için demoyu yerelde çalıştır (README).",
     static_note: "<b>Çevrim içi sürüm.</b> Model bu sunucu için çok büyük; sayfa, 8 örnek ve veri setindeki her tur için modelin gerçek cevaplarını (geçmiş kapalı ve açık) içerir. İstediğin cümleyi yazmak için demoyu yerelde çalıştır: <a href=\"https://github.com/eneserman/OVERRIDE#web-demo\" target=\"_blank\" rel=\"noopener\">README</a>.",
     about: `<div class="head"><div><h2>OVERRIDE hakkında</h2><p>NLP Proje 2 · token sınıflandırma · Team Developers</p></div></div>
@@ -579,8 +586,18 @@ async function api(path, body) {
   const h = [...new Uint8Array(await crypto.subtle.digest("SHA-256", new TextEncoder().encode(key)))].map((b) => b.toString(16).padStart(2, "0")).join("");
   const shard = await fetch(`api/a/${h.slice(0, 2)}.json`).then((r) => r.ok ? r.json() : {}).catch(() => ({}));
   if (shard[h]) return new Response(JSON.stringify(shard[h]), { status: 200, headers: { "Content-Type": "application/json" } });
-  return new Response(JSON.stringify({ detail: T("static_miss") }), { status: 404, headers: { "Content-Type": "application/json" } });
+  // any other sentence: the same frozen model, running on a free CPU host (Hugging Face Space)
+  if (window.OVERRIDE_LIVE_API) {
+    const slow = setTimeout(() => { $("golabel").textContent = T("live_wait"); }, 3000);
+    try {
+      const res = await fetch(window.OVERRIDE_LIVE_API + "/api/analyze", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) });
+      if (res.ok) { liveUsed = true; return res; }
+    } catch (e) { /* asleep or unreachable: fall through to the message */ }
+    finally { clearTimeout(slow); }
+  }
+  return new Response(JSON.stringify({ detail: T(window.OVERRIDE_LIVE_API ? "live_miss" : "static_miss") }), { status: 404, headers: { "Content-Type": "application/json" } });
 }
+let liveUsed = false;
 const store = { get: (k) => { try { return localStorage.getItem(k); } catch (e) { return null; } }, set: (k, v) => { try { localStorage.setItem(k, v); } catch (e) {} } };
 let lang = params.get("lang") || store.get("override-lang") || ((navigator.language || "").startsWith("tr") ? "tr" : "en");
 if (!I18N[lang]) lang = "en";
@@ -762,7 +779,8 @@ async function analyze() {
     const res = await api("analyze", { utterance, history, use_history: histOn() });
     if (!res.ok) { const e = await res.json().catch(() => ({})); throw new Error(e.detail || T("err_server")); }
     last = await res.json(); last.utt = utterance; selSpan = 0;
-    if (!STATIC_SITE) { $("st-ms").textContent = last.ms + " ms"; $("mi-ms").textContent = last.ms + " ms"; }
+    if (!STATIC_SITE || liveUsed) { $("st-ms").textContent = last.ms + " ms"; $("mi-ms").textContent = last.ms + " ms"; }
+    if (STATIC_SITE) { $("st-dev").textContent = T(liveUsed ? "dev_live" : "dev_static"); if (!liveUsed) $("st-ms").textContent = "—"; liveUsed = false; }
     $("mi-hist").textContent = last.history_mode === "no" ? T("hist_off") : T("hist_on");
     buildTable(); buildSpans();
     await playVisual();
