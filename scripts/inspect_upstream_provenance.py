@@ -4,7 +4,6 @@
 Not a substitute for OVERRIDE annotation. Requires locally cloned source.
 """
 import argparse
-from collections import Counter
 import hashlib
 import json
 from pathlib import Path

@@ -1,9 +1,11 @@
-# 14 — Data Contracts and File Formats
+# Data format
 
-## Sources
-- `data/upstream/sgd/{train,dev,test}/dialogues_*.json` only if available and unchanged; actual files/commit hashes must be recorded.
-- `data/annotations/pilot_v0.1/annotator_A_UNLABELED.jsonl`, B: independent packets; not gold.
-- `data/gold/override_gold_vX.jsonl`: **does not exist until real adjudication**.
+## Files
+- `data/upstream/sgd/{train,dev,test}/dialogues_*.json`: the SGD source at the pinned commit (fetched locally, not
+  redistributed; see `data/raw/README.md`).
+- Annotator packets (one per reviewer, blind): working files, kept local; they are not gold.
+- `data/gold/train_dev_gold_v1_3.jsonl` (857), `data/gold/test_reference_v1.jsonl` (363) and
+  `data/gold/full_gold_v1_3_plus_test.jsonl` (1,220): the released, adjudicated gold in the schema below.
 
 ## Pilot reviewer packets versus canonical records
 Sampler emits `example_id`, `current_user_utterance` and an `annotation` object whose `value_spans` and `cue_spans` start as `null`. Actual reviewers fill **both** nested lists (empty list means reviewed negative) and set `annotation.status=ANNOTATED`. The `normalize_review_packet.py` command maps these into canonical `id`, `value_spans`, `cue_spans` root keys as *non-gold independent reviewer outputs*. The `annotation_agreement.py` helper compares A and B. Only **human adjudication** can set `ADJUDICATED` and create gold.

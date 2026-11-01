@@ -28,7 +28,7 @@ import argparse
 import json
 from pathlib import Path
 
-from validate_annotations import read_jsonl, validate_rows, validate_record, VALUE_LABELS, CUE_LABELS
+from validate_annotations import read_jsonl, validate_rows, VALUE_LABELS, CUE_LABELS
 
 
 def load_side(path: Path, name: str) -> dict:

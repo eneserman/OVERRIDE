@@ -7,7 +7,8 @@ B0 empty          : predicts nothing (documents the record-level accuracy trap:
 B1 lexicon-copy   : memorizes train span texts (lowercased) -> label; matches
                     longest known texts in the utterance.
 B2 rules          : hand-written surface rules (cue phrase list + value
-                    patterns + history-match for REFERENCE).
+                    patterns + REFERENCE phrase list) plus exact copies of
+                    train value texts.
 
 All predictions go through the same evaluator: scripts/evaluate_spans.py.
 """
@@ -119,15 +120,12 @@ REF_PHRASES = [r"\bthat one\b", r"\bthe same\b", r"\bthat date\b", r"\bthere\b(?
 
 def b2(row: dict, lex: set[str]) -> dict:
     utt = row["current_user_utterance"]
-    hist = " ".join(str(h.get("utterance", "")) for h in row.get("history") or [])
 
     cue = []
     for pat, lab in CUE_PHRASES:
         for m in re.finditer(pat, utt, re.IGNORECASE):
             cue.append((m.start(), m.end(), lab))
-    # history-match: utterance fragment that reproduces an earlier user turn span
-    for m in re.finditer(r"\b(?:it|that|them|there)\b", utt, re.IGNORECASE):
-        pass  # bare pronouns are excluded by C3; deliberately not labeled
+    # bare pronouns (it, that, them) are excluded by guideline rule C3 and deliberately not labeled
 
     val = []
     for pat, lab in VALUE_PATTERNS:

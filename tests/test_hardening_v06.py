@@ -1,6 +1,5 @@
 """Regression tests for OVERRIDE handoff safety invariants (synthetic only)."""
 import copy
-import json
 import subprocess
 import sys
 import tempfile

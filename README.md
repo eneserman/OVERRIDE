@@ -165,7 +165,7 @@ Python 3.13, an 8 GB GPU for the transformers (CPU works, slowly).
 
 ```bash
 pip install -r requirements.txt
-python -m unittest discover -s tests            # 100+ tests, standard library only
+python -m unittest discover -s tests            # 110 tests, standard library only
 
 # data (optional: re-verify the released turns against SGD)
 git clone https://github.com/google-research-datasets/dstc8-schema-guided-dialogue.git data/upstream/sgd
