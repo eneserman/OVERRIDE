@@ -327,6 +327,11 @@
               <button class="switch" id="hist" role="switch" aria-checked="false"></button>
               <div><b data-i="hist_b"></b> <span style="color:var(--muted);font-size:12px" data-i="hist_tag"></span><small data-ih="hist_small"></small></div>
             </div>
+            <div class="toggle" style="margin-top:12px">
+              <button class="switch" id="spell" role="switch" aria-checked="true"></button>
+              <div><b data-i="spell_b"></b><small data-i="spell_small"></small></div>
+            </div>
+            <div class="ctxnote" id="spellnote" hidden style="margin-top:12px"></div>
             <button class="go" id="go" type="button" style="margin-top:18px"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M7 4v16l13-8z"/></svg><span id="golabel"></span><kbd>Enter ↵</kbd></button>
             <div class="sub" style="margin-top:22px"><h3 data-i="try"></h3><button class="ghost" style="margin-left:auto" data-goto="examples" type="button" data-i="seeall"></button></div>
             <div class="ex-row" id="ex-row"></div>
@@ -487,6 +492,8 @@ const I18N = {
     b_note: "Read from <code>reports/d6_test/</code>. The selected model was fixed before the test was opened; the history model is the pre-registered comparison.",
     err_empty: "Write the new user message first.", err_server: "The model server returned an error.",
     dev_static: "Precomputed", dev_live: "Live CPU",
+    spell_b: "Fix spelling", spell_small: "Typos are corrected before the model reads the message; every change is shown.",
+    spell_fixed: "Spelling fixed:",
     live_wait: "Waking the live model…",
     live_miss: "The live model did not answer (it may still be waking up). Try again in a minute, or pick an example.",
     live_note: "<b>Online version.</b> The 8 examples and every dataset turn load instantly from the model's stored answers. Any other sentence goes to the same frozen model running live on a CPU host; if nobody used it in the last hour, the first answer takes a minute or two. <a href=\"https://github.com/eneserman/OVERRIDE#web-demo\" target=\"_blank\" rel=\"noopener\">How it works</a>.",
@@ -544,6 +551,8 @@ const I18N = {
     b_note: "<code>reports/d6_test/</code> dosyalarından okunur. Seçili model test açılmadan önce sabitlendi; geçmişi okuyan model önceden kaydedilmiş karşılaştırmadır.",
     err_empty: "Önce yeni kullanıcı mesajını yaz.", err_server: "Model sunucusu hata döndürdü.",
     dev_static: "Önceden hesaplandı", dev_live: "Canlı CPU",
+    spell_b: "Yazımı düzelt", spell_small: "Yazım hataları model mesajı okumadan önce düzeltilir; her değişiklik gösterilir.",
+    spell_fixed: "Yazım düzeltildi:",
     live_wait: "Canlı model uyanıyor…",
     live_miss: "Canlı model cevap vermedi (hâlâ uyanıyor olabilir). Bir dakika sonra tekrar dene ya da bir örnek seç.",
     live_note: "<b>Çevrim içi sürüm.</b> 8 örnek ve veri setindeki her tur, modelin kayıtlı cevaplarından anında gelir. Başka her cümle aynı dondurulmuş modele, bir CPU sunucusunda canlı gider; son bir saatte kimse kullanmadıysa ilk cevap bir iki dakika sürer. <a href=\"https://github.com/eneserman/OVERRIDE#web-demo\" target=\"_blank\" rel=\"noopener\">Nasıl çalışır</a>.",
@@ -708,11 +717,13 @@ function load(ex) {
 }
 function updCount() { $("count").textContent = `${$("utt").value.length} / 300`; }
 function histOn() { return $("hist").getAttribute("aria-checked") === "true"; }
+function spellOn() { return $("spell").getAttribute("aria-checked") === "true"; }
+$("spell").onclick = () => $("spell").setAttribute("aria-checked", !spellOn());
 function updCtxNote() { const on = histOn(); $("ctxnote").innerHTML = T(on ? "ctx_on" : "ctx_off"); $("ctxnote").classList.toggle("on", on); }
 $("utt").addEventListener("input", () => { updCount(); $("err").textContent = ""; });
 $("utt").addEventListener("keydown", (e) => { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); analyze(); } });
 $("addturn").onclick = () => addTurn(document.querySelectorAll(".turn").length % 2 ? "SYSTEM" : "USER");
-$("clear").onclick = () => { $("turns").innerHTML = ""; addTurn("USER"); addTurn("SYSTEM"); $("utt").value = ""; updCount(); $("utt").focus(); };
+$("clear").onclick = () => { $("turns").innerHTML = ""; $("spellnote").hidden = true; addTurn("USER"); addTurn("SYSTEM"); $("utt").value = ""; updCount(); $("utt").focus(); };
 $("hist").onclick = () => { $("hist").setAttribute("aria-checked", !histOn()); updCtxNote(); };
 $("go").onclick = analyze;
 function buildExRow() {
@@ -776,9 +787,12 @@ async function analyze() {
   busy = true; $("go").disabled = true; $("golabel").textContent = T("going");
   setStage("visual"); resetVisual();
   try {
-    const res = await api("analyze", { utterance, history, use_history: histOn() });
+    const res = await api("analyze", { utterance, history, use_history: histOn(), fix_spelling: spellOn() });
     if (!res.ok) { const e = await res.json().catch(() => ({})); throw new Error(e.detail || T("err_server")); }
-    last = await res.json(); last.utt = utterance; selSpan = 0;
+    last = await res.json(); last.utt = last.corrected || utterance; selSpan = 0;
+    // the model read the corrected text; say exactly what was changed
+    $("spellnote").hidden = !(last.changes && last.changes.length);
+    if (last.changes && last.changes.length) $("spellnote").innerHTML = `<b>${T("spell_fixed")}</b> ` + last.changes.map(([a, b]) => `${esc(a)} → <b>${esc(b)}</b>`).join(" · ");
     if (!STATIC_SITE || liveUsed) { $("st-ms").textContent = last.ms + " ms"; $("mi-ms").textContent = last.ms + " ms"; }
     if (STATIC_SITE) { $("st-dev").textContent = T(liveUsed ? "dev_live" : "dev_static"); if (!liveUsed) $("st-ms").textContent = "—"; liveUsed = false; }
     $("mi-hist").textContent = last.history_mode === "no" ? T("hist_off") : T("hist_on");

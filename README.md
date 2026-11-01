@@ -69,8 +69,13 @@ end and label all match (`scripts/evaluate_spans.py`).
     ([enes123erman/override-checkpoints](https://huggingface.co/enes123erman/override-checkpoints)); on 300 dataset
     requests the live spans matched the stored full-precision answers exactly (largest probability difference 0.001).
     The Space sleeps after an hour without visitors, so the first answer after that takes a minute or two.
+- **Spelling fix (demo only, on by default, switchable):** the model was trained on well-spelled turns and misses
+  misspelled cue words ("insted", "chnge"). Before a typed sentence reaches the model, words of 4+ letters that are in
+  neither an English dictionary nor our data are corrected (first letter kept, names in the data left alone, a few chat
+  shorthands such as "u" and "plz"), and the page lists every change. It changes none of the 2,220 dataset turns or
+  the 8 examples, and no reported result passes through it.
 - **Local, any sentence:** `python app/server.py` with the checkpoints (commands under [Reproduce](#reproduce)), then
-  open http://localhost:8000. `python app/e2e_check.py` drives every page and control in a real browser (59 checks).
+  open http://localhost:8000. `python app/e2e_check.py` drives every page and control in a real browser (62 checks).
 
 ## Repository layout
 
@@ -190,7 +195,7 @@ python scripts/demo.py --text "Actually, make it 7 pm at the same place." --chec
 # demo (web app, http://localhost:8000): words, model tokens, per-seed confidence, spans, locked-test benchmark
 python app/server.py --checkpoints-no "reports/train_runs/d5v2_final/no/*.pt" \
   --checkpoints-history "reports/train_runs/d5v2_final/tail60/*.pt"
-python app/e2e_check.py --url http://localhost:8000   # 59 browser checks of every page and control (Playwright)
+python app/e2e_check.py --url http://localhost:8000   # 62 browser checks of every page and control (Playwright)
 python app/export_static.py --url http://localhost:8000 --out web \
   --live-api https://enes123erman-override-demo.hf.space   # rebuild the online version
 ```

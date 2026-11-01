@@ -14,6 +14,7 @@ import argparse
 import glob
 import json
 import os
+import re
 import sys
 import time
 from pathlib import Path
@@ -24,6 +25,7 @@ from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse
 from pydantic import BaseModel
+from spellchecker import SpellChecker
 from transformers import AutoTokenizer
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "scripts"))
@@ -55,6 +57,57 @@ def dataset_rows() -> list[dict]:
                         "spans": [[s["start"], s["end"], s["label"]] for s in r["value_spans"] + r["cue_spans"]]})
     return out
 MAX_CHARS = 300
+# chat shorthand the spelling dictionary does not cover
+SHORTHAND = {"u": "you", "ur": "your", "r": "are", "pls": "please", "plz": "please", "thx": "thanks", "tmrw": "tomorrow",
+             "tmr": "tomorrow", "bc": "because", "msg": "message"}
+
+
+class Speller:
+    """Demo-only input clean-up: the model was trained on well-spelled turns and misses misspelled cue words
+    ("insted", "chnge"). Fixes words of 4+ letters that are in neither an English dictionary nor our data (so names in
+    the data stay), keeps the first letter, leaves capitalised words inside a sentence alone, and reports every change.
+    The reported results never pass through this."""
+
+    def __init__(self, extra_words: set[str]):
+        self.sp = SpellChecker(distance=2)
+        self.sp.word_frequency.load_words(sorted(extra_words))
+
+    def fix(self, text: str) -> tuple[str, list[list[str]]]:
+        out, changes, last = [], [], 0
+        for m in re.finditer(r"[A-Za-z]+(?:'[A-Za-z]+)?", text):
+            w, low = m.group(), m.group().lower()
+            before = text[:m.start()].rstrip()
+            sentence_start = not before or before[-1] in ".!?"
+            if "'" in w or (w[0].isupper() and not sentence_start):
+                continue
+            if low in SHORTHAND:
+                new = SHORTHAND[low]
+            elif len(low) < 4 or self.sp.known([low]):
+                continue
+            else:
+                cands = [c for c in (self.sp.candidates(low) or []) if c[0] == low[0] and c != low]
+                if not cands:
+                    continue
+                new = max(cands, key=self.sp.word_usage_frequency)
+            if w[0].isupper():
+                new = new[0].upper() + new[1:]
+            out.append(text[last:m.start()] + new)
+            last = m.end()
+            changes.append([w, new])
+        out.append(text[last:])
+        return "".join(out), changes
+
+
+def data_words() -> set[str]:
+    words = set()
+    for _, path in DATASETS:
+        if path.exists():
+            for line in path.read_text(encoding="utf-8").splitlines():
+                if line.strip():
+                    r = json.loads(line)
+                    for t in [r["current_user_utterance"]] + [h.get("utterance", "") for h in r.get("history") or []]:
+                        words.update(w.lower() for w in re.findall(r"[A-Za-z]+", t))
+    return words
 
 
 class Turn(BaseModel):
@@ -66,6 +119,7 @@ class Request(BaseModel):
     utterance: str
     history: list[Turn] = []
     use_history: bool = False
+    fix_spelling: bool = True
 
 
 class Ensemble:
@@ -162,6 +216,7 @@ def build_app(no_paths: list[str], hist_paths: list[str]) -> FastAPI:
                 "train_records": ensembles[False].meta["records"], "test": test_scores()}
 
     data = dataset_rows()
+    speller = Speller(data_words())
 
     @app.get("/api/data")
     def dataset():
@@ -181,8 +236,10 @@ def build_app(no_paths: list[str], hist_paths: list[str]) -> FastAPI:
             raise HTTPException(400, f"Enter a user turn of 1 to {MAX_CHARS} characters")
         ens = ensembles.get(req.use_history and True in ensembles, ensembles[False])
         t0 = time.perf_counter()
-        out = ens.analyze(utt, [{"speaker": t.speaker.upper(), "utterance": t.utterance} for t in req.history[-8:]])
+        fixed, changes = speller.fix(utt) if req.fix_spelling else (utt, [])
+        out = ens.analyze(fixed, [{"speaker": t.speaker.upper(), "utterance": t.utterance} for t in req.history[-8:]])
         out["ms"] = round((time.perf_counter() - t0) * 1000)
+        out["corrected"], out["changes"] = (fixed if changes else None), changes
         return out
 
     return app

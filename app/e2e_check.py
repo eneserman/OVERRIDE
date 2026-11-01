@@ -95,6 +95,18 @@ def main() -> int:
         status = page.evaluate("fetch('api/analyze', {method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({utterance:'  '})}).then(r => r.status)")
         check(status == 400, "server rejects an empty message (400)")
 
+        # spelling: typos in cue words are fixed before the model, the change is shown, and the switch turns it off
+        page.fill("#utt", "actully can u chnge it to sunday at 8pm")
+        page.click("#go")
+        page.wait_for_function("!busy && last.utt.startsWith('actually can you change')", timeout=60000)
+        check(page.is_visible("#spellnote") and "chnge" in page.inner_text("#spellnote"), "spelling fix is shown")
+        check(page.evaluate("last.spans.some(s => s.label === 'UPDATE_CUE')"), "corrected cue words are found")
+        page.click("#spell")
+        page.click("#go")
+        page.wait_for_function("!busy && last.utt.startsWith('actully')", timeout=60000)
+        check(not page.is_visible("#spellnote"), "spelling switch off sends the text as typed")
+        page.click("#spell")
+
         # a long message still fits on one line
         page.fill("#utt", "Actually, could you please change the reservation to next Saturday at half past seven in the evening for six people at the same Italian place we talked about?")
         page.click("#go")

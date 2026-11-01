@@ -6,3 +6,4 @@ numpy
 fastapi==0.129.0
 uvicorn==0.34.0
 pydantic==2.12.5
+pyspellchecker==0.9.1
