@@ -11,6 +11,10 @@ cross-validation and evaluated **once** on a test set that was hash-locked befor
 
 ### ▶ Live demo: **[override-demo.vercel.app](https://override-demo.vercel.app)**
 
+On Hugging Face: **[model](https://huggingface.co/enes123erman/override-checkpoints)** (frozen seeds + model card) ·
+**[dataset](https://huggingface.co/datasets/enes123erman/override-dataset)** (1,220 gold turns, plus the 1,000 synthetic
+turns as a separate config) · **[live model Space](https://huggingface.co/spaces/enes123erman/override-demo)**
+
 [![OVERRIDE web demo: the model marks the change cue, the new value and the reference](docs/demo.jpg)](https://override-demo.vercel.app)
 
 Type any sentence, or pick an example or any of the 2,220 dataset turns, and see how the model labels every word, with
