@@ -6,7 +6,9 @@ Adnan Burak Özbay (2309111073) · Enes Erman (2309111066) · Mohammed Firas (23
 Users change their minds mid-conversation: *"Actually, make it 7 pm at the same place."* OVERRIDE labels, token by
 token, **which words signal the change** (UPDATE_CUE), **what the new value is** (NEW_VALUE) and **what refers back**
 to an earlier turn (REFERENCE). The labels do not exist in any public dataset: we selected 1,220 user turns from Google's
-Schema-Guided Dialogue corpus and annotated them ourselves, double-blind. The model is chosen by pre-registered
+Schema-Guided Dialogue corpus and annotated them ourselves: 863 turns (all 363 test turns and 500 train turns) by both
+annotators independently and blind, the other 357 train turns by one annotator and fully checked by the other. The model
+is chosen by pre-registered
 cross-validation and evaluated **once** on a test set that was hash-locked before any model existed.
 
 ### ▶ Live demo: **[override-demo.vercel.app](https://override-demo.vercel.app)**
